@@ -5,38 +5,50 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     public Camera mainCam;
-    public float dragAmountToChangeCamera;
-    public float cameraSpeed;
-    Vector2 touchPos;
+    public float rotateTime;
+    private IEnumerator rotateCoroutine;
+    private bool isRotating;
 
     private void Update()
     {
-        if(Input.touchCount > 0)
+        if (Input.GetKeyDown(KeyCode.LeftArrow) && !isRotating)
         {
-            Touch touch = Input.GetTouch(0);
-            if (touch.phase == TouchPhase.Began)
-            {
-                touchPos = touch.position;
-            }
-            if (touch.phase == TouchPhase.Moved)
-            {
-                Vector2 dragPos = touch.position;
-                if(Vector2.Distance(touchPos,dragPos) > dragAmountToChangeCamera)
-                {
-                    ChangeCamera(touchPos - dragPos);
-                }
-            }
+            rotateCoroutine = RotateCamera(new Vector2(-1, 0));
+            StartCoroutine(rotateCoroutine);
+        }
+        if (Input.GetKeyDown(KeyCode.RightArrow) && !isRotating)
+        {
+            rotateCoroutine = RotateCamera(new Vector2(1, 0));
+            StartCoroutine(rotateCoroutine);
+        }
+        if (Input.GetKeyDown(KeyCode.UpArrow) && !isRotating)
+        {
+            rotateCoroutine = RotateCamera(new Vector2(0, 1));
+            StartCoroutine(rotateCoroutine);
+        }
+        if (Input.GetKeyDown(KeyCode.DownArrow) && !isRotating)
+        {
+            rotateCoroutine = RotateCamera(new Vector2(0, -1));
+            StartCoroutine(rotateCoroutine);
         }
     }
-    private void ChangeCamera(Vector2 dragVector)
+    IEnumerator RotateCamera(Vector2 cameraChange)
     {
-        if(dragVector.x < 0)
+        isRotating = true;
+        for (float t = 0; t  <= rotateTime; t+= Time.deltaTime)
         {
-            mainCam.transform.RotateAround(Vector3.zero, Vector3.up,cameraSpeed * Time.deltaTime);
+            if (cameraChange.x == 0)
+            {
+                mainCam.transform.RotateAround(Vector3.zero, -Vector3.forward * cameraChange.y, Time.deltaTime * 90 / rotateTime);
+            }
+            else if (cameraChange.y == 0)
+            {
+                mainCam.transform.RotateAround(Vector3.zero, Vector3.down * cameraChange.x, Time.deltaTime * 90 / rotateTime);
+            }
+            
+            yield return null;
         }
-        else if (dragVector.x > 0)
-        {
-            mainCam.transform.RotateAround(Vector3.zero, Vector3.down, cameraSpeed * Time.deltaTime);
-        }
+        isRotating = false;
+        
     }
 }
