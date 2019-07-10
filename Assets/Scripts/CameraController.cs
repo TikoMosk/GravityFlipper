@@ -11,43 +11,27 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftArrow) && !isRotating)
-        {
-            rotateCoroutine = RotateCamera(new Vector2(-1, 0));
-            StartCoroutine(rotateCoroutine);
-        }
-        if (Input.GetKeyDown(KeyCode.RightArrow) && !isRotating)
-        {
-            rotateCoroutine = RotateCamera(new Vector2(1, 0));
-            StartCoroutine(rotateCoroutine);
-        }
-        if (Input.GetKeyDown(KeyCode.UpArrow) && !isRotating)
-        {
-            rotateCoroutine = RotateCamera(new Vector2(0, 1));
-            StartCoroutine(rotateCoroutine);
-        }
-        if (Input.GetKeyDown(KeyCode.DownArrow) && !isRotating)
-        {
-            rotateCoroutine = RotateCamera(new Vector2(0, -1));
-            StartCoroutine(rotateCoroutine);
-        }
+        
     }
-    IEnumerator RotateCamera(Vector2 cameraChange)
+    IEnumerator RotateCamera(float x)
     {
         isRotating = true;
-        for (float t = 0; t  <= rotateTime; t+= Time.deltaTime)
+        float angleRotated = 0;
+        float t = 0;
+        do
         {
-            if (cameraChange.x == 0)
+            t += Time.deltaTime;
+            float amountToRotate = Time.deltaTime * 90 / rotateTime;
+            if (t >= rotateTime)
             {
-                mainCam.transform.RotateAround(Vector3.zero, -Vector3.forward * cameraChange.y, Time.deltaTime * 90 / rotateTime);
-            }
-            else if (cameraChange.y == 0)
-            {
-                mainCam.transform.RotateAround(Vector3.zero, Vector3.down * cameraChange.x, Time.deltaTime * 90 / rotateTime);
-            }
-            
+                amountToRotate = 90 - angleRotated;
+            }    
+            mainCam.transform.RotateAround(Vector3.zero, Vector3.down * x, amountToRotate);
+            angleRotated += amountToRotate;
+
             yield return null;
-        }
+        } while (t < rotateTime);
+
         isRotating = false;
         
     }
@@ -56,7 +40,7 @@ public class CameraController : MonoBehaviour
     {
         if (!isRotating)
         {
-            rotateCoroutine = RotateCamera(new Vector2(-1, 0));
+            rotateCoroutine = RotateCamera(-1);
             StartCoroutine(rotateCoroutine);
         }
     }
@@ -64,24 +48,9 @@ public class CameraController : MonoBehaviour
     {
         if (!isRotating)
         {
-            rotateCoroutine = RotateCamera(new Vector2(1, 0));
+            rotateCoroutine = RotateCamera(1);
             StartCoroutine(rotateCoroutine);
         }
     }
-    public void OnClick_Up()
-    {
-        if (!isRotating)
-        {
-            rotateCoroutine = RotateCamera(new Vector2(0, 1));
-            StartCoroutine(rotateCoroutine);
-        }
-    }
-    public void OnClick_Down()
-    {
-        if (!isRotating)
-        {
-            rotateCoroutine = RotateCamera(new Vector2(0, -1));
-            StartCoroutine(rotateCoroutine);
-        }
-    }
+   
 }
