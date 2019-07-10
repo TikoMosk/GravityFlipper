@@ -51,4 +51,37 @@ public class CameraController : MonoBehaviour
         isRotating = false;
         
     }
+
+    public void OnClick_Left()
+    {
+        if (!isRotating)
+        {
+            rotateCoroutine = RotateCamera(new Vector2(-1, 0));
+            StartCoroutine(rotateCoroutine);
+        }
+    }
+    public void OnClick_Right()
+    {
+        if (!isRotating)
+        {
+            rotateCoroutine = RotateCamera(new Vector2(1, 0));
+            StartCoroutine(rotateCoroutine);
+        }
+    }
+    public void OnClick_Up()
+    {
+        if (!isRotating)
+        {
+            rotateCoroutine = RotateCamera(new Vector2(0, 1));
+            StartCoroutine(rotateCoroutine);
+        }
+    }
+    public void OnClick_Down()
+    {
+        if (!isRotating)
+        {
+            rotateCoroutine = RotateCamera(new Vector2(0, -1));
+            StartCoroutine(rotateCoroutine);
+        }
+    }
 }
