@@ -9,10 +9,6 @@ public class CameraController : MonoBehaviour
     private IEnumerator rotateCoroutine;
     private bool isRotating;
 
-    private void Update()
-    {
-        
-    }
     IEnumerator RotateCamera(float x)
     {
         isRotating = true;
