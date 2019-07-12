@@ -14,8 +14,7 @@ public class NodeControl : MonoBehaviour
     void Start()
     {
         GenerateNodeMap();
-
-        InstantiateGroundMap();
+        InstantiateNodeMap();
     }
 
     private void GenerateNodeMap()
@@ -36,6 +35,7 @@ public class NodeControl : MonoBehaviour
     {
         foreach (Node node in nodesArray)
         {
+            node.AddObject(cubeObj.GetComponent<INodeHolder>());
             node.InstantiateNode();
         }
     }
@@ -46,7 +46,7 @@ public class NodeControl : MonoBehaviour
         {
             for (int z = 0; z < 10; z++)
             {
-                nodesArray[x, 0, z].AddObject(cubeObj);
+                nodesArray[x, 0, z].AddObject(cubeObj.GetComponent<INodeHolder>());
                 nodesArray[x, 0, z].InstantiateNode();
             }
         }
@@ -54,6 +54,6 @@ public class NodeControl : MonoBehaviour
 
     void Update()
     {
-        
+
     }
 }

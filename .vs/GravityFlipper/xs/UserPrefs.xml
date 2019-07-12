@@ -1,8 +1,9 @@
 ﻿<Properties StartupConfiguration="{A68B90C9-CA90-425A-D01F-92D9315656C4}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/NodeControl.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/CubeObject.cs">
     <Files>
-      <File FileName="Assets/Scripts/Node.cs" Line="62" Column="31" />
-      <File FileName="Assets/Scripts/NodeControl.cs" Line="2" Column="34" />
+      <File FileName="Assets/Scripts/Node.cs" Line="37" Column="5" />
+      <File FileName="Assets/Scripts/NodeControl.cs" Line="57" Column="1" />
+      <File FileName="Assets/Scripts/CubeObject.cs" Line="10" Column="57" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -10,7 +11,7 @@
           <Node name="GravityFlipper" expanded="True">
             <Node name="Assets" expanded="True">
               <Node name="Scripts" expanded="True">
-                <Node name="NodeControl.cs" selected="True" />
+                <Node name="CubeObject.cs" selected="True" />
               </Node>
             </Node>
           </Node>
@@ -20,7 +21,7 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="e86e9199-45be-4898-9f12-689c2028a62d" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="c15c0b63-3803-48d6-9351-e0a3a51ec83e" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

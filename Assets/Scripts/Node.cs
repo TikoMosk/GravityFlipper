@@ -9,7 +9,7 @@ public class Node : MonoBehaviour
 
     private readonly int nodeID;
     private readonly int pointX, pointY, pointZ;
-    internal GameObject nodeObject;
+    internal INodeHolder nodeObject;
 
     #endregion
 
@@ -17,16 +17,16 @@ public class Node : MonoBehaviour
 
     public Node(int x, int y, int z)
     {
-        nodeID = this.GetHashCode();
+        this.nodeID = this.GetHashCode();
         this.pointX = x;
         this.pointY = y;
         this.pointZ = z;
     }
 
-    public Node(GameObject obj, int x, int y, int z)
+    public Node(INodeHolder obj, int x, int y, int z)
     {
-        nodeID = this.GetHashCode();
-        nodeObject = obj;
+        this.nodeID = this.GetHashCode();
+        this.nodeObject = obj;
         this.pointX = x;
         this.pointY = y;
         this.pointZ = z;
@@ -56,7 +56,7 @@ public class Node : MonoBehaviour
         node.nodeObject = null;
     }
 
-    public void ChangeObject(GameObject obj)
+    public void ChangeObject(INodeHolder obj)
     {
         this.nodeObject = obj;
     }
@@ -65,18 +65,22 @@ public class Node : MonoBehaviour
     {
         if (nodeObject != null)
         {
-            Instantiate(nodeObject, GetNodePosition(), Quaternion.identity);
+            Instantiate(nodeObject.GetGameObject(), GetNodePosition(), Quaternion.identity);
         }
 
         //ToDo
         //Debug.Log("nodeObject is null");
     }
 
-    public void AddObject(GameObject obj)
+    public void AddObject(INodeHolder obj)
     {
         if (nodeObject == null)
         {
             this.nodeObject = obj;
+        }
+        else
+        {
+            //todo
         }
     }
 
