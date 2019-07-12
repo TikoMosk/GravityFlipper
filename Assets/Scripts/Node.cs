@@ -5,9 +5,18 @@ using UnityEngine;
 
 public class Node : MonoBehaviour
 {
+    public readonly int nodeID;
     private int pointX, pointY, pointZ;
+    public Node(int x, int y, int z)
+    {
+        nodeID = this.GetHashCode();
+        this.pointX = x;
+        this.pointY = y;
+        this.pointZ = z;
+    }
     public Node(GameObject obj, int x, int y, int z)
 	{
+        nodeID = this.GetHashCode();
         nodeObject = obj;
 		this.pointX = x;
 		this.pointY = y;
@@ -30,6 +39,30 @@ public class Node : MonoBehaviour
     {
         Debug.Log("MouseDown");
     }
+
+    #region Transform Methods
+
+    internal void ChangeX(int x)
+    {
+        this.pointX = x;
+    }
+    internal void ChangeY(int y)
+    {
+        this.pointY = y;
+    }
+    internal void ChangeZ(int z)
+    {
+        this.pointZ = z;
+    }
+
+    internal void ChangePosition(int x, int y, int z)
+    {
+        this.pointX = x;
+        this.pointY = y;
+        this.pointZ = z;
+    }
+
+    #endregion
 
     void Start()
     {
