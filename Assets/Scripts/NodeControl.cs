@@ -4,27 +4,54 @@ using UnityEngine;
 
 public class NodeControl : MonoBehaviour
 {
-    internal List<Node> nodeArray = new List<Node>(1000);
+    internal Node[,,] nodesArray = new Node[10, 10, 10];
     public GameObject playerObject;
-    public GameObject obj;
-    //ToDo //public GameObject staticLaserObject;
+    public GameObject cubeObj;
+
+    //ToDo
+    //public GameObject staticLaserObject;
 
     void Start()
     {
-        Node n = new Node(playerObject, 1, 1, 1);
-        n.InstantiateNode();
-        Node node;
-        for (int i = 4; i > -4; i--)
+        GenerateNodeMap();
+
+        InstantiateGroundMap();
+    }
+
+    private void GenerateNodeMap()
+    {
+        for (int x = 0; x < 10; x++)
         {
-            for (int j = -4; j < 4; j++)
+            for (int y = 0; y < 10; y++)
             {
-                node = new Node(obj, i, 0, j);
-                node.InstantiateNode();
+                for (int z = 0; z < 10; z++)
+                {
+                    nodesArray[x, y, z] = new Node(x, y, z);
+                }
             }
         }
     }
 
-    // Update is called once per frame
+    private void InstantiateNodeMap()
+    {
+        foreach (Node node in nodesArray)
+        {
+            node.InstantiateNode();
+        }
+    }
+
+    private void InstantiateGroundMap()
+    {
+        for (int x = 0; x < 10; x++)
+        {
+            for (int z = 0; z < 10; z++)
+            {
+                nodesArray[x, 0, z].AddObject(cubeObj);
+                nodesArray[x, 0, z].InstantiateNode();
+            }
+        }
+    }
+
     void Update()
     {
         

@@ -1,9 +1,8 @@
 ﻿<Properties StartupConfiguration="{A68B90C9-CA90-425A-D01F-92D9315656C4}|">
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/NodeControl.cs">
     <Files>
-      <File FileName="Assets/Scripts/CameraController.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Node.cs" Line="25" Column="8" />
-      <File FileName="Assets/Scripts/NodeControl.cs" Line="10" Column="28" />
+      <File FileName="Assets/Scripts/Node.cs" Line="62" Column="31" />
+      <File FileName="Assets/Scripts/NodeControl.cs" Line="2" Column="34" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
