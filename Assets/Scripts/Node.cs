@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Node : MonoBehaviour
+public class Node
 {
     #region Variables
 
@@ -18,6 +18,7 @@ public class Node : MonoBehaviour
     public Node(int x, int y, int z)
     {
         this.nodeID = this.GetHashCode();
+        this.nodeObject = null;
         this.pointX = x;
         this.pointY = y;
         this.pointZ = z;
@@ -52,6 +53,7 @@ public class Node : MonoBehaviour
 
     public void ChangeObjectByNode(Node node)
     {
+        //ADD A TEMPORARY OBJECT
         this.nodeObject = node.nodeObject;
         node.nodeObject = null;
     }
@@ -61,16 +63,6 @@ public class Node : MonoBehaviour
         this.nodeObject = obj;
     }
 
-    public void InstantiateNode()
-    {
-        if (nodeObject != null)
-        {
-            Instantiate(nodeObject.GetGameObject(), GetNodePosition(), Quaternion.identity);
-        }
-
-        //ToDo
-        //Debug.Log("nodeObject is null");
-    }
 
     public void AddObject(INodeHolder obj)
     {
