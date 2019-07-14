@@ -13,7 +13,7 @@ public class CubeObject : MonoBehaviour, INodeHolder
     private void OnMouseOver()
     {
         //transform.GetComponent<Renderer>().material.color = Color.blue;
-        //Instantiate(new Light(), gameObject.transform.position, Quaternion.identity);
+        Instantiate(new Light(), gameObject.transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 
