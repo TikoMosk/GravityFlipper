@@ -11,7 +11,6 @@ public class Level : MonoBehaviour
     private Node playerNode;
     public GameObject playerObject;
     public GameObject cubeObj;
-    public GameObject worldObject;
 
     //TODO: Click on a block and player moves there.
     //TODO: Static Laser
@@ -87,7 +86,7 @@ public class Level : MonoBehaviour
             if(node.nodeObject != null)
             {
                 GameObject nodeGameObject = Instantiate(node.nodeObject.GetGameObject(), node.GetNodePosition(), Quaternion.identity);
-                nodeGameObject.transform.parent = worldObject.transform;
+                nodeGameObject.transform.parent = this.transform;
             }
         }
 
