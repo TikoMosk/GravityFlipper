@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CubeNodeObject : MonoBehaviour, ISolidNodeObject
+public class CubeNodeObject : MonoBehaviour, INodeObject
 {
 
     public GameObject GetGameObject()

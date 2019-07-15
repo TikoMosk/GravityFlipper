@@ -1,16 +1,22 @@
 ﻿<Properties StartupConfiguration="{A68B90C9-CA90-425A-D01F-92D9315656C4}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/TacticalMovement.cs">
-    <Files>
-      <File FileName="Assets/Scripts/Node.cs" Line="37" Column="1" />
-      <File FileName="Assets/Scripts/Level.cs" Line="16" Column="25" />
-      <File FileName="Assets/Scripts/GravityView.cs" Line="99" Column="86" />
-      <File FileName="Assets/Scripts/CubeNodeObject.cs" Line="103" Column="17" />
-      <File FileName="Assets/Scripts/TacticalMovement.cs" Line="8" Column="6" />
-    </Files>
+  <MonoDevelop.Ide.Workbench>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="GravityFlipper" expanded="True">
+            <Node name="Assets" expanded="True">
+              <Node name="Scripts" expanded="True">
+                <Node name="PlayerNodeObject.cs" selected="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="f05f9701-a933-4cc5-84c7-eb583f073a67" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
