@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class GravityView : MonoBehaviour
 {
@@ -17,24 +18,28 @@ public class GravityView : MonoBehaviour
 
     private void Update()
     {
-        //Calculates the mousePress/touch drag vector
-        if (Input.GetMouseButtonDown(0))
+        if (!EventSystem.current.IsPointerOverGameObject())
         {
-            touchStart = Input.mousePosition;
-        }
-        if(Input.GetMouseButton(0))
-        {
-            touchPos = Input.mousePosition;
-            touchDragVector = touchPos - touchStart;
-        }
+            //Calculates the mousePress/touch drag vector
+            if (Input.GetMouseButtonDown(0))
+            {
+                touchStart = Input.mousePosition;
+            }
+            if (Input.GetMouseButton(0))
+            {
+                touchPos = Input.mousePosition;
+                touchDragVector = touchPos - touchStart;
+            }
 
-        // If drag ends, rotates the level.
-        // This should work differently, when we add player movement. Instead of just rotating the world, it should move the player 
-        // and rotate the world accordingly 
-        if (Input.GetMouseButtonUp(0))
-        {
-            StartCoroutine(RotateSmoothly(worldParent.transform, playerPosition, CheckDragDirection(touchDragVector), 90, rotateTime));
+            // If drag ends, rotates the level.
+            // This should work differently, when we add player movement. Instead of just rotating the world, it should move the player 
+            // and rotate the world accordingly 
+            if (Input.GetMouseButtonUp(0))
+            {
+                StartCoroutine(RotateSmoothly(worldParent.transform, playerPosition, CheckDragDirection(touchDragVector), 90, rotateTime));
+            }
         }
+        
         
     }
 
