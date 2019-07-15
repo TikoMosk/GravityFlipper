@@ -57,10 +57,10 @@ public class Level : MonoBehaviour
             {
                 for (int z = 0; z < 10; z++)
                 {
-                    if (y == 2 && x > 3 && x < 5)
+                    /*if (y == 2 && x > 3 && x < 5)
                     {
                         nodesArray[x, y, z].AddObject(cubeObj.GetComponent<INodeHolder>());
-                    }
+                    }*/
                     if (y == 2 && x == 3 && z == 6)
                     {
 
@@ -69,10 +69,18 @@ public class Level : MonoBehaviour
                         //TEMPORARY SOLUTION TO REFERANCE THE PLAYER TO THE GRAVITYVIEW
                         FindObjectOfType<GravityView>().playerPosition = playerNode.GetNodePosition();
                     }
-                    if (y == 1 && x <= 3 && z > 4)
+                    if (y == 1 && x == 3 && z == 6)
                     {
                         nodesArray[x, y, z].AddObject(cubeObj.GetComponent<INodeHolder>());
                     }
+                    if (y == 2 && x == 2 && z == 6)
+                    {
+                        nodesArray[x, y, z].AddObject(cubeObj.GetComponent<INodeHolder>());
+                    }
+                    /*if (y == 1 && x <= 3 && z > 4)
+                    {
+                        nodesArray[x, y, z].AddObject(cubeObj.GetComponent<INodeHolder>());
+                    }*/
                 }
             }
         }

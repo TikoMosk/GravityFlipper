@@ -36,7 +36,7 @@ public class GravityView : MonoBehaviour
             // and rotate the world accordingly 
             if (Input.GetMouseButtonUp(0))
             {
-                StartCoroutine(RotateSmoothly(worldParent.transform, playerPosition, CheckDragDirection(touchDragVector), 90, rotateTime));
+                //StartCoroutine(RotateSmoothly(worldParent.transform, playerPosition, CheckDragDirection(touchDragVector), 90, rotateTime));
             }
         }
         
