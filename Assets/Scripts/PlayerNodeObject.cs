@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerNodeObject : MonoBehaviour, INodeHolder
+public class PlayerNodeObject : MonoBehaviour, INodeObject
 {
     public GameObject GetGameObject()
     {

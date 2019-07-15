@@ -64,18 +64,18 @@ public class Level : MonoBehaviour
                     if (y == 2 && x == 3 && z == 6)
                     {
 
-                        nodesArray[x, y, z].AddObject(playerObject.GetComponent<INodeHolder>());
+                        nodesArray[x, y, z].AddObject(playerObject.GetComponent<INodeObject>());
                         playerNode = nodesArray[x, y, z];
                         //TEMPORARY SOLUTION TO REFERANCE THE PLAYER TO THE GRAVITYVIEW
                         FindObjectOfType<GravityView>().playerPosition = playerNode.GetNodePosition();
                     }
                     if (y == 1 && x == 3 && z == 6)
                     {
-                        nodesArray[x, y, z].AddObject(cubeObj.GetComponent<INodeHolder>());
+                        nodesArray[x, y, z].AddObject(cubeObj.GetComponent<INodeObject>());
                     }
                     if (y == 2 && x == 2 && z == 6)
                     {
-                        nodesArray[x, y, z].AddObject(cubeObj.GetComponent<INodeHolder>());
+                        nodesArray[x, y, z].AddObject(cubeObj.GetComponent<INodeObject>());
                     }
                     /*if (y == 1 && x <= 3 && z > 4)
                     {

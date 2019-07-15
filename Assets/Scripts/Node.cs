@@ -9,7 +9,7 @@ public class Node
 
     private readonly int nodeID;
     private readonly int pointX, pointY, pointZ;
-    internal INodeHolder nodeObject;
+    internal INodeObject nodeObject;
 
     #endregion
 
@@ -24,7 +24,7 @@ public class Node
         this.pointZ = z;
     }
 
-    public Node(INodeHolder obj, int x, int y, int z)
+    public Node(INodeObject obj, int x, int y, int z)
     {
         this.nodeID = this.GetHashCode();
         this.nodeObject = obj;
@@ -58,13 +58,13 @@ public class Node
         node.nodeObject = null;
     }
 
-    public void ChangeObject(INodeHolder obj)
+    public void ChangeObject(INodeObject obj)
     {
         this.nodeObject = obj;
     }
 
 
-    public void AddObject(INodeHolder obj)
+    public void AddObject(INodeObject obj)
     {
         if (nodeObject == null)
         {
