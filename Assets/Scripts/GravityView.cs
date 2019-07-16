@@ -14,6 +14,7 @@ public class GravityView : MonoBehaviour
     private Vector2 touchPos;
     private Vector2 touchDragVector;
     private bool isRotatingSmoothly;
+    private bool isMovingSmoothly;
     private bool isDragging;
 
     private void Update()
@@ -42,7 +43,32 @@ public class GravityView : MonoBehaviour
         
         
     }
+    IEnumerator MoveSmoothly(Transform transformToMove, Vector3 currentPos, Vector3 destPos, float secondsToComplete)
+    {
+        if (!isMovingSmoothly)
+        {
+            isMovingSmoothly = true;
+            Vector3 movementVector = destPos - currentPos;
+            float t = 0;
+            do
+            {
+                t += Time.deltaTime;
+                float moveAmount = Time.deltaTime / secondsToComplete;
+                Vector3 moveVector = moveAmount * (destPos - currentPos);
+                if (t >= secondsToComplete)
+                {
+                    transformToMove.position = destPos;
+                    break;
+                }
+                transformToMove.Translate(moveVector);
 
+                yield return null;
+            } while (t < secondsToComplete);
+
+            isMovingSmoothly = false;
+        }
+        
+    }
     //This coroutine rotates an object, around a point and axis at some angle, during the given time
     IEnumerator RotateSmoothly(Transform transformToRotate, Vector3 point, Vector3 axis, float angle, float secondsToComplete)
     {
@@ -101,11 +127,12 @@ public class GravityView : MonoBehaviour
 
     public void OnClick_Left()
     {
+        playerPosition = Level.Controller.playerNode.GetNodePosition();
         StartCoroutine(RotateSmoothly(mainCam.transform, playerPosition, Vector3.down, -90, rotateTime));
     }
     public void OnClick_Right()
     {
-
+        playerPosition = Level.Controller.playerNode.GetNodePosition();
         StartCoroutine(RotateSmoothly(mainCam.transform, playerPosition, Vector3.down, 90, rotateTime));
     }
 
