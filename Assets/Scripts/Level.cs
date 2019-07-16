@@ -8,11 +8,18 @@ public class Level : MonoBehaviour
     public static Level Controller { get {return _controller; } }
 
     internal Node[,,] nodesArray = new Node[10, 10, 10];
-    private Node playerNode;
+    internal Node playerNode;
     public GameObject playerObject;
     public GameObject cubeObj;
 
     //TODO: Click on a block and player moves there.
+    #region Player Movement
+
+
+
+    #endregion
+
+
     //TODO: Static Laser
 
     private void Awake()
@@ -27,10 +34,25 @@ public class Level : MonoBehaviour
             _controller = this;
         }
     }
+
     void Start()
     {
         GenerateNodeMap();
-        FillNodeMap();
+        //FillNodeMap();
+
+        nodesArray[0, 0, 0].AddObject(cubeObj.GetComponent<INodeObject>());
+        nodesArray[0, 0, 1].AddObject(cubeObj.GetComponent<INodeObject>());
+        nodesArray[0, 0, 2].AddObject(cubeObj.GetComponent<INodeObject>());
+        nodesArray[1, 0, 1].AddObject(cubeObj.GetComponent<INodeObject>());
+        nodesArray[1, 0, 2].AddObject(cubeObj.GetComponent<INodeObject>());
+        nodesArray[1, 0, 0].AddObject(cubeObj.GetComponent<INodeObject>());
+        nodesArray[2, 0, 0].AddObject(cubeObj.GetComponent<INodeObject>());
+        nodesArray[2, 0, 1].AddObject(cubeObj.GetComponent<INodeObject>());
+        nodesArray[2, 0, 2].AddObject(cubeObj.GetComponent<INodeObject>());
+        nodesArray[0, 1, 1].AddObject(cubeObj.GetComponent<INodeObject>());
+        nodesArray[1, 1, 1].AddObject(playerObject.GetComponent<INodeObject>());
+        playerNode = nodesArray[1, 1, 1];
+
         InstantiateNodeMap();
     }
 
@@ -48,7 +70,8 @@ public class Level : MonoBehaviour
             }
         }
     }
-    //FILLS THE NODEMAP WITH OBJECTS( THIS IS WHERE THE LEVEL GENERATION LOGIC IS)
+
+    //FILLS THE NODEMAP WITH OBJECTS (THIS IS WHERE THE LEVEL GENERATION LOGIC IS)
     private void FillNodeMap()
     {
         for (int x = 0; x < 10; x++)
@@ -63,8 +86,7 @@ public class Level : MonoBehaviour
                     }*/
                     if (y == 2 && x == 3 && z == 6)
                     {
-
-                        nodesArray[x, y, z].AddObject(playerObject.GetComponent<INodeObject>());
+                        nodesArray[x, y, z].ChangeObject(playerObject.GetComponent<INodeObject>());
                         playerNode = nodesArray[x, y, z];
                         //TEMPORARY SOLUTION TO REFERANCE THE PLAYER TO THE GRAVITYVIEW
                         FindObjectOfType<GravityView>().playerPosition = playerNode.GetNodePosition();
@@ -100,6 +122,11 @@ public class Level : MonoBehaviour
 
     }
 
+
+    public Node GetObjectNode(GameObject obj)
+    {
+        return nodesArray[(int)obj.transform.position.x, (int)obj.transform.position.y, (int)obj.transform.position.z];
+    }
 
     void Update()
     {

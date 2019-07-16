@@ -5,4 +5,5 @@ using UnityEngine;
 public interface INodeObject
 {
     GameObject GetGameObject();
+    Node FindNode();
 }
