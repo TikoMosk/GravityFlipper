@@ -452,6 +452,7 @@ GameObject:
   m_Component:
   - component: {fileID: 324359333}
   - component: {fileID: 324359334}
+  - component: {fileID: 324359335}
   m_Layer: 0
   m_Name: Level
   m_TagString: Untagged
@@ -485,9 +486,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bda2603caa46b46a884bf8f2f90840d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerObject: {fileID: 5238763070401807191, guid: 773308f6431a344f0b80e4f1a9691fed,
-    type: 3}
-  cubeObj: {fileID: 4694279471156317093, guid: 6d0b56d0988074787bfc0b897879d984, type: 3}
+  worldWidth: 10
+  worldHeight: 5
+  worldLength: 10
+--- !u!114 &324359335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 324359332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9768d466f76cf984a8205785879f627c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blockPrefabs:
+  - id: Empty
+    blockPrefab: {fileID: 0}
+  - id: Block
+    blockPrefab: {fileID: 4694279471156317093, guid: 6d0b56d0988074787bfc0b897879d984,
+      type: 3}
+  - id: Player
+    blockPrefab: {fileID: 5238763070401807191, guid: 773308f6431a344f0b80e4f1a9691fed,
+      type: 3}
+  - id: Laser
+    blockPrefab: {fileID: 5238763070401807191, guid: 773308f6431a344f0b80e4f1a9691fed,
+      type: 3}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0

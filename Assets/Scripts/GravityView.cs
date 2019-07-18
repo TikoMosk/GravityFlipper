@@ -127,12 +127,10 @@ public class GravityView : MonoBehaviour
 
     public void OnClick_Left()
     {
-        playerPosition = Level.Controller.playerNode.GetNodePosition();
         StartCoroutine(RotateSmoothly(mainCam.transform, playerPosition, Vector3.down, -90, rotateTime));
     }
     public void OnClick_Right()
     {
-        playerPosition = Level.Controller.playerNode.GetNodePosition();
         StartCoroutine(RotateSmoothly(mainCam.transform, playerPosition, Vector3.down, 90, rotateTime));
     }
 

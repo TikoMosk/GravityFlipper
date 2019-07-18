@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface INodeObject
+public class Player : NodeObject
 {
-    GameObject GetGameObject();
-    Node FindNode();
+    
 }
