@@ -5,6 +5,11 @@ using UnityEngine;
 public class LevelController : MonoBehaviour
 {
     private Level level;
+    public Level Level { get => level; set => level = value; }
+    private static LevelController _instance;
+    public static LevelController Instance { get { return _instance; } }
+
+
     public List<NodeData> nodeDataList = new List<NodeData>();
     public List<NodeData> moveableObjectDataList = new List<NodeData>();
     [System.Serializable]
@@ -23,13 +28,20 @@ public class LevelController : MonoBehaviour
         CreateLevel();
         CreateLevelGraphics();
     }
-    private void Update()
+    private void Awake()
     {
-        
+        if(_instance != null && _instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            _instance = this;
+        }
     }
     private void CreateLevel()
     {
-        level = new Level(worldWidth, worldHeight, worldLength);
+        Level = new Level(worldWidth, worldHeight, worldLength);
         for (int x = 0; x < worldWidth; x++)
         {
             for (int y = 0; y < worldHeight; y++)
@@ -38,7 +50,7 @@ public class LevelController : MonoBehaviour
                 {
                     if(x == 0 || y == 0 || z == worldLength - 1)
                     {
-                        level.SetNode(x, y, z, 1);
+                        Level.SetNode(x, y, z, 1);
                     }
                 }
             }
@@ -47,8 +59,28 @@ public class LevelController : MonoBehaviour
     }
     private void PlacePlayer(int x, int y, int z)
     {
-        level.AddMoveableObject(x, y, z, MoveableObject.CreateMoveableObject(1));
-        playerNode = level.GetNode(x, y, z);
+        Level.AddMoveableObject(x, y, z, new MoveableObject(1));
+        playerNode = Level.GetNode(x, y, z);
+    }
+    public void MovePlayer(Node dest)
+    {
+        playerNode.MoveObjectTo(dest);
+        playerNode = dest;
+    }
+    public void MovePlayer(int x, int y, int z)
+    {
+        Node destNode = Level.GetNode(playerNode.X + x, playerNode.Y + y, playerNode.Z + z);
+        if(destNode != null)
+        {
+            playerNode.MoveObjectTo(destNode);
+            playerNode = destNode;
+        }
+        
+
+    }
+    public Node GetPlayerNode()
+    {
+        return playerNode;
     }
     private void CreateLevelGraphics()
     {
@@ -66,19 +98,20 @@ public class LevelController : MonoBehaviour
     }
     private void CreateNodeGraphics(int x, int y, int z)
     {
-        if (GetPrefabByNodeId(level.GetNode(x, y, z).Type) != null)
+        if (GetPrefabByNodeId(Level.GetNode(x, y, z).Type) != null)
         {
-            GameObject moveable_go = Instantiate(GetPrefabByNodeId(level.GetNode(x, y, z).Type), new Vector3(x, y, z), Quaternion.identity);
-            moveable_go.transform.parent = this.transform;
+            GameObject node_go = Instantiate(GetPrefabByNodeId(Level.GetNode(x, y, z).Type), Level.GetNode(x, y, z).GetPosition(), Quaternion.identity);
+            Level.GetNode(x, y, z).CreateGraphic(node_go);
+            Level.GetNode(x, y, z).NodeGraphic.transform.parent = this.transform;
         }
     }
     private void CreateMoveableObjectGraphics(int x, int y, int z)
     {
-        if (level.GetNode(x, y, z).MoveableObject != null)
+        if (Level.GetNode(x, y, z).MoveableObject != null)
         {
-            if (GetPrefabByMoveableObjectId(level.GetNode(x, y, z).MoveableObject.Id))
+            if (GetPrefabByMoveableObjectId(Level.GetNode(x, y, z).MoveableObject.Id))
             {
-                MoveableObject moveable = level.GetNode(x, y, z).MoveableObject;
+                MoveableObject moveable = Level.GetNode(x, y, z).MoveableObject;
                 GameObject moveable_go = Instantiate(GetPrefabByMoveableObjectId(moveable.Id), new Vector3(x, y, z), Quaternion.identity);
                 moveable_go.transform.parent = this.transform;
                 moveable.SubscribeToMoveableObjectMoved((node) => { OnObjectMoved(node, moveable_go, x, y, z); });

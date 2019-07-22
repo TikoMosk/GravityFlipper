@@ -15,15 +15,6 @@ public class MoveableObject
     {
         this.id = id;
     }
-    //FACTORY PATTERN
-    public static MoveableObject CreateMoveableObject(int id)
-    {
-        if(id == 1)
-        {
-            return new MoveableObject(1);
-        }
-        return null;
-    }
     public void SubscribeToMoveableObjectMoved(Action<Node> objectMoved)
     {
         this.objectMoved += objectMoved;
