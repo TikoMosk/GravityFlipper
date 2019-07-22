@@ -13,20 +13,11 @@ public class Node
     public int Y { get => y; }
     public int Z { get => z; }
     private int type;
-    public int Type { get { return type; }
-        set
-        {
-            type = value;
-            if(nodeTypeChanged != null)
-            {
-                nodeTypeChanged(this);
-            }
-        }
-    }
+    public int Type { get { return type; } set { type = value; } }
 
     private MoveableObject moveableObject;
     public MoveableObject MoveableObject { get { return moveableObject; } set { moveableObject = value; } }
-    Action<Node> nodeTypeChanged;
+
 
     public Node(Level level, int x, int y, int z)
     {
@@ -46,9 +37,19 @@ public class Node
         this.type = type;
         this.moveableObject = moveAbleObject;
     }
-    public void SubscribeToNodeTypeChanged(Action<Node> nodeTypeChanged)
+    public void MoveObjectTo(Node destination)
     {
-        this.nodeTypeChanged += nodeTypeChanged;
+        if (moveableObject.objectMoved != null)
+        {
+            moveableObject.objectMoved(destination);
+        }
+        destination.moveableObject = this.moveableObject;
+        this.moveableObject = null;
     }
+    public Vector3 GetPosition()
+    {
+        return new Vector3(x, y, z);
+    }
+
 
 }

@@ -16,11 +16,16 @@ public class LevelController : MonoBehaviour
     public int worldWidth;
     public int worldHeight;
     public int worldLength;
+    private Node playerNode;
 
     private void Start()
     {
         CreateLevel();
         CreateLevelGraphics();
+    }
+    private void Update()
+    {
+        
     }
     private void CreateLevel()
     {
@@ -43,6 +48,7 @@ public class LevelController : MonoBehaviour
     private void PlacePlayer(int x, int y, int z)
     {
         level.AddMoveableObject(x, y, z, MoveableObject.CreateMoveableObject(1));
+        playerNode = level.GetNode(x, y, z);
     }
     private void CreateLevelGraphics()
     {
@@ -70,12 +76,19 @@ public class LevelController : MonoBehaviour
     {
         if (level.GetNode(x, y, z).MoveableObject != null)
         {
-            if (GetPrefabByMoveableObjectId(level.GetNode(x, y, z).MoveableObject.Id) != null)
+            if (GetPrefabByMoveableObjectId(level.GetNode(x, y, z).MoveableObject.Id))
             {
-                GameObject moveable_go = Instantiate(GetPrefabByMoveableObjectId(level.GetNode(x, y, z).MoveableObject.Id), new Vector3(x, y, z), Quaternion.identity);
+                MoveableObject moveable = level.GetNode(x, y, z).MoveableObject;
+                GameObject moveable_go = Instantiate(GetPrefabByMoveableObjectId(moveable.Id), new Vector3(x, y, z), Quaternion.identity);
                 moveable_go.transform.parent = this.transform;
+                moveable.SubscribeToMoveableObjectMoved((node) => { OnObjectMoved(node, moveable_go, x, y, z); });
             }
         }
+    }
+    private void OnObjectMoved(Node dest, GameObject moveable_go, int x, int y, int z)
+    {
+        moveable_go.transform.position = dest.GetPosition();
+        
     }
     private GameObject GetPrefabByNodeId(int nodeId)
     {
