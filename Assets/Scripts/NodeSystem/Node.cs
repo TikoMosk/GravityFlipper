@@ -19,6 +19,20 @@ public class Node
     public MoveableObject MoveableObject { get { return moveableObject; } set { moveableObject = value; } }
 
 
+    private NodeGraphic nodeGraphic;
+    public NodeGraphic NodeGraphic { get => nodeGraphic; set => nodeGraphic = value; }
+
+    public void CreateGraphic(GameObject node_go)
+    {
+        NodeGraphic = node_go.AddComponent<NodeGraphic>();
+        node_go.transform.position = GetPosition();
+        NodeGraphic.onClick += OnClickNode;
+    }
+
+    private void OnClickNode()
+    {
+        MovementController.Controller.OnClick(this);
+    }
     public Node(Level level, int x, int y, int z)
     {
         this.level = level;
