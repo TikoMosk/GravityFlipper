@@ -31,7 +31,7 @@ public class Node
 
     private void OnClickNode()
     {
-        MovementController.Controller.OnClick(this);
+        GameController.Game.movementController.OnClick(this);
     }
     public Node(Level level, int x, int y, int z)
     {

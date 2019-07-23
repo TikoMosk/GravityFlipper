@@ -7,10 +7,6 @@ public class LevelController : MonoBehaviour
     private Level level;
     public Level Level { get => level; set => level = value; }
     public LevelSerializer levelSerializer;
-    private static LevelController _instance;
-    public static LevelController Instance { get { return _instance; } }
-
-
     public List<NodeData> nodeDataList = new List<NodeData>();
     public List<NodeData> moveableObjectDataList = new List<NodeData>();
     [System.Serializable]
@@ -23,17 +19,6 @@ public class LevelController : MonoBehaviour
     public int levelHeight;
     public int levelLength;
     private Node playerNode;
-    private void Awake()
-    {
-        if (_instance != null && _instance != this)
-        {
-            Destroy(this);
-        }
-        else
-        {
-            _instance = this;
-        }
-    }
     private void Start()
     {
 
@@ -121,15 +106,10 @@ public class LevelController : MonoBehaviour
             {
                 for (int z = 0; z < levelLength; z++)
                 {
-                    if( x== 0 || y == 0 || z == levelLength-1)
+                    if(x == levelWidth/2 && y == levelHeight/2 && z == levelLength / 2)
                     {
                         level.SetNode(x, y, z, 1);
                     }
-                    if( x == 2 && y == 1 && z == 3)
-                    {
-                        level.AddMoveableObject(x, y, z, new MoveableObject(1));
-                    }
-                    
                 }
             }
         }

@@ -71,12 +71,14 @@ public class LevelSerializer : MonoBehaviour
             string content = File.ReadAllText(Application.persistentDataPath + "/" + levelFileName);
             char[] charSeperators = new char[] { '{'};
             string[] contents = content.Split(charSeperators, System.StringSplitOptions.RemoveEmptyEntries);
-
             for (int i = 0; i < contents.Length; i++)
             {
                 contents[i] = "{" + contents[i];
             }
-
+            levelData = JsonUtility.FromJson<LevelData>(contents[0]);
+            Queue<string> contentQueue = new Queue<string>(contents);
+            contentQueue.Dequeue();
+            contents = contentQueue.ToArray();
             levelData.nodeDataMap = new NodeData[levelData.levelLength, levelData.levelHeight, levelData.levelLength];
             for (int x = 0; x < levelData.levelLength; x++)
             {
