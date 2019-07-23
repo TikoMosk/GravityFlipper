@@ -6,6 +6,7 @@ public class LevelController : MonoBehaviour
 {
     private Level level;
     public Level Level { get => level; set => level = value; }
+    public LevelSerializer levelData;
     private static LevelController _instance;
     public static LevelController Instance { get { return _instance; } }
 
@@ -18,19 +19,13 @@ public class LevelController : MonoBehaviour
         public int id;
         public GameObject nodePrefab;
     }
-    public int worldWidth;
-    public int worldHeight;
-    public int worldLength;
+    public int levelWidth;
+    public int levelHeight;
+    public int levelLength;
     private Node playerNode;
-
-    private void Start()
-    {
-        CreateLevel();
-        CreateLevelGraphics();
-    }
     private void Awake()
     {
-        if(_instance != null && _instance != this)
+        if (_instance != null && _instance != this)
         {
             Destroy(this);
         }
@@ -39,16 +34,53 @@ public class LevelController : MonoBehaviour
             _instance = this;
         }
     }
+    private void Start()
+    {
+        CreateLevel();
+        PopulateLevel();
+        CreateLevelGraphics();
+    }
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.S))
+        {
+            SaveLevel();
+        }
+    }
+    private void SaveLevel()
+    {
+        levelData.CreateLevelData(levelWidth, levelHeight, levelLength, level);
+        
+    }
+    private void LoadLevel()
+    {
+
+    }
     private void CreateLevel()
     {
-        Level = new Level(worldWidth, worldHeight, worldLength);
-        for (int x = 0; x < worldWidth; x++)
+        Node[,,] nodeMap = new Node[levelWidth, levelHeight, levelLength];
+        for (int x = 0; x < levelWidth; x++)
         {
-            for (int y = 0; y < worldHeight; y++)
+            for (int y = 0; y < levelHeight; y++)
             {
-                for (int z = 0; z < worldLength; z++)
+                for (int z = 0; z < levelLength; z++)
                 {
-                    if(x == 0 || y == 0 || z == worldLength - 1)
+                    nodeMap[x, y, z] = new Node(level, x, y, z);
+                }
+            }
+        }
+        Level = new Level(levelWidth, levelHeight, levelLength,nodeMap);
+    }
+    private void PopulateLevel()
+    {
+        
+        for (int x = 0; x < levelWidth; x++)
+        {
+            for (int y = 0; y < levelHeight; y++)
+            {
+                for (int z = 0; z < levelLength; z++)
+                {
+                    if(x == 0 || y == 0 || z == levelLength - 1)
                     {
                         Level.SetNode(x, y, z, 1);
                     }
@@ -84,11 +116,11 @@ public class LevelController : MonoBehaviour
     }
     private void CreateLevelGraphics()
     {
-        for (int x = 0; x < worldWidth; x++)
+        for (int x = 0; x < levelWidth; x++)
         {
-            for (int y = 0; y < worldHeight; y++)
+            for (int y = 0; y < levelHeight; y++)
             {
-                for (int z = 0; z < worldLength; z++)
+                for (int z = 0; z < levelLength; z++)
                 {
                     CreateNodeGraphics(x, y, z);
                     CreateMoveableObjectGraphics(x, y, z);
