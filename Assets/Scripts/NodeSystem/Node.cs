@@ -57,8 +57,12 @@ public class Node
         {
             moveableObject.objectMoved(destination);
         }
-        destination.moveableObject = this.moveableObject;
-        this.moveableObject = null;
+        if(destination != this)
+        {
+            destination.moveableObject = this.moveableObject;
+            this.moveableObject = null;
+        }
+        
     }
     public Vector3 GetPosition()
     {
