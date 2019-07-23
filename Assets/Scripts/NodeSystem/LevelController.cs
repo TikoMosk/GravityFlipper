@@ -121,10 +121,13 @@ public class LevelController : MonoBehaviour
             {
                 for (int z = 0; z < levelLength; z++)
                 {
-                    float randomNum = Random.Range(0, 10);
-                    if(randomNum < 9)
+                    if( x== 0 || y == 0 || z == levelLength-1)
                     {
                         level.SetNode(x, y, z, 1);
+                    }
+                    if( x == 2 && y == 1 && z == 3)
+                    {
+                        level.AddMoveableObject(x, y, z, new MoveableObject(1));
                     }
                     
                 }
