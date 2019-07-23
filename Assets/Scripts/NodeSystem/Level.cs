@@ -2,34 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class Level
 {
     private int levelWidth;
     private int levelHeight;
     private int levelLength;
-    private Node[,,] nodeMap;
-
-    public Level(int levelWidth, int levelHeight, int levelLength)
+    public Node[,,] nodeMap;
+    public Level(int levelWidth, int levelHeight, int levelLength, Node[,,] nodeMap)
     {
         this.levelWidth = levelWidth;
         this.levelHeight = levelHeight;
         this.levelLength = levelLength;
-        CreateNodeMap();
+        this.nodeMap = nodeMap;
     }
-    private void CreateNodeMap()
-    {
-        nodeMap = new Node[levelWidth, levelHeight, levelLength];
-        for (int x = 0; x < levelWidth; x++)
-        {
-            for (int y = 0; y < levelHeight; y++)
-            {
-                for (int z = 0; z < levelLength; z++)
-                {
-                    nodeMap[x, y, z] = new Node(this, x, y, z);
-                }
-            }
-        }
-    }
+    
     public bool AddMoveableObject(int x, int y, int z, MoveableObject moveableObject)
     {
         if(IsInLevelBounds(x,y,z))
@@ -55,7 +42,7 @@ public class Level
     }
     public Node GetNode(int x, int y, int z)
     {
-        if(IsInLevelBounds(x,y,z))
+        if (IsInLevelBounds(x, y, z))
         {
             return nodeMap[x, y, z];
         }
@@ -64,6 +51,11 @@ public class Level
             Debug.LogError("Trying to get a Node that is out of level bounds");
             return null;
         }
+    }
+    public int GetNodeDistance(Node a, Node b)
+    {
+        int distance = Mathf.Abs(b.X - a.X) + Mathf.Abs(b.Y - a.Y) + Mathf.Abs(b.Z - a.Z);
+        return distance;
     }
     
     private bool IsInLevelBounds(int x, int y, int z)
