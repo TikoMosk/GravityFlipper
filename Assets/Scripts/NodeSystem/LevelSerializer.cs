@@ -79,15 +79,16 @@ public class LevelSerializer : MonoBehaviour
             Queue<string> contentQueue = new Queue<string>(contents);
             contentQueue.Dequeue();
             contents = contentQueue.ToArray();
-            levelData.nodeDataMap = new NodeData[levelData.levelLength, levelData.levelHeight, levelData.levelLength];
-            for (int x = 0; x < levelData.levelLength; x++)
+            levelData.nodeDataMap = new NodeData[levelData.levelWidth, levelData.levelHeight, levelData.levelLength];
+            for (int x = 0; x < levelData.levelWidth; x++)
             {
                 for (int y = 0; y < levelData.levelHeight; y++)
                 {
                     for (int z = 0; z < levelData.levelLength; z++)
                     {
                         NodeData n = new NodeData();
-                        n = JsonUtility.FromJson<NodeData>(contents[x * (levelData.levelWidth * levelData.levelLength) + y * levelData.levelLength + z]);
+                        
+                        n = JsonUtility.FromJson<NodeData>(contents[x * levelData.levelHeight * levelData.levelLength + y * levelData.levelLength + z ]);
                         levelData.nodeDataMap[x, y, z] = n;
                     }
                 }

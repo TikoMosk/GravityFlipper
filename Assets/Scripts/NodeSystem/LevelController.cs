@@ -112,7 +112,7 @@ public class LevelController : MonoBehaviour
                     }
                     if(x == 3 && y == 1 && z == 4)
                     {
-                        level.AddMoveableObject(x,y,z,new MoveableObject(1));
+                        level.AddMoveableObject(x, y, z, new MoveableObject(1));
                     }
                 }
             }
