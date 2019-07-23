@@ -6,9 +6,13 @@ using UnityEngine;
 public class Level
 {
     private int levelWidth;
+    public int LevelWidth { get { return levelWidth; } }
     private int levelHeight;
+    public int LevelHeight { get { return levelHeight; } }
     private int levelLength;
+    public int LevelLength { get { return levelLength; } }
     public Node[,,] nodeMap;
+    private Node playerNode;
     public Level(int levelWidth, int levelHeight, int levelLength, Node[,,] nodeMap)
     {
         this.levelWidth = levelWidth;
@@ -24,10 +28,19 @@ public class Level
             if(nodeMap[x,y,z].MoveableObject == null)
             {
                 nodeMap[x, y, z].MoveableObject = moveableObject;
+                if(moveableObject.Id == 1)
+                {
+                    playerNode = nodeMap[x, y, z];
+                }
                 return true;
             }
         }
         return false;
+    }
+    public void MovePlayer(Node dest)
+    {
+        playerNode.MoveObjectTo(dest);
+        playerNode = dest;
     }
     public void SetNode(int x, int y, int z, int type)
     {

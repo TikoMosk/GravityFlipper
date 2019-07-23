@@ -6,7 +6,7 @@ public class LevelController : MonoBehaviour
 {
     private Level level;
     public Level Level { get => level; set => level = value; }
-    public LevelSerializer levelData;
+    public LevelSerializer levelSerializer;
     private static LevelController _instance;
     public static LevelController Instance { get { return _instance; } }
 
@@ -36,25 +36,25 @@ public class LevelController : MonoBehaviour
     }
     private void Start()
     {
-        CreateLevel();
-        PopulateLevel();
-        CreateLevelGraphics();
+
     }
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.S))
         {
-            SaveLevel();
+            levelSerializer.SaveLevel(level, "level1");
         }
-    }
-    private void SaveLevel()
-    {
-        levelData.CreateLevelData(levelWidth, levelHeight, levelLength, level);
-        
-    }
-    private void LoadLevel()
-    {
-
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            DestroyLevelGraphics();
+            CreateLevel();
+            PopulateLevel(levelSerializer.LoadLevel("level1"));
+            CreateLevelGraphics();
+        }
+        if(Input.GetKeyDown(KeyCode.A))
+        {
+            level.AddMoveableObject(5, 1, 4, new MoveableObject(1));
+        }
     }
     private void CreateLevel()
     {
@@ -71,7 +71,14 @@ public class LevelController : MonoBehaviour
         }
         Level = new Level(levelWidth, levelHeight, levelLength,nodeMap);
     }
-    private void PopulateLevel()
+    private void DestroyLevelGraphics()
+    {
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            Destroy(transform.GetChild(i).gameObject);
+        }
+    }
+    private void PopulateLevel(LevelData levelData)
     {
         
         for (int x = 0; x < levelWidth; x++)
@@ -80,36 +87,17 @@ public class LevelController : MonoBehaviour
             {
                 for (int z = 0; z < levelLength; z++)
                 {
-                    if(x == 0 || y == 0 || z == levelLength - 1)
+                    level.SetNode(x, y, z, levelData.nodeDataMap[x, y, z].blockId);
+                    if(levelData.nodeDataMap[x,y,z].moveableId != 0)
                     {
-                        Level.SetNode(x, y, z, 1);
+                        level.AddMoveableObject(x, y, z, new MoveableObject(levelData.nodeDataMap[x, y, z].moveableId));
                     }
                 }
             }
         }
-        PlacePlayer(2, 1, 2);
-    }
-    private void PlacePlayer(int x, int y, int z)
-    {
-        Level.AddMoveableObject(x, y, z, new MoveableObject(1));
-        playerNode = Level.GetNode(x, y, z);
-    }
-    public void MovePlayer(Node dest)
-    {
-        playerNode.MoveObjectTo(dest);
-        playerNode = dest;
-    }
-    public void MovePlayer(int x, int y, int z)
-    {
-        Node destNode = Level.GetNode(playerNode.X + x, playerNode.Y + y, playerNode.Z + z);
-        if(destNode != null)
-        {
-            playerNode.MoveObjectTo(destNode);
-            playerNode = destNode;
-        }
         
-
     }
+  
     public Node GetPlayerNode()
     {
         return playerNode;
