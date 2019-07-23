@@ -22,8 +22,19 @@ public class MovementController : MonoBehaviour
     }
     public void OnClick(Node n)
     {
-        Node destinationNode = LevelController.Instance.Level.GetNode(n.X, n.Y + 1, n.Z);
-        playerNode = LevelController.Instance.Level.GetPlayerNode();
-        LevelController.Instance.Level.MovePlayer(destinationNode);
+
+        Node destinationNode = GameController.Game.levelController.Level.GetNode(n.X, n.Y + 1, n.Z);
+        playerNode = GameController.Game.levelController.Level.GetPlayerNode();
+        if (GameController.Game.levelController.Level.GetNodeDistance(playerNode,destinationNode) == 1)
+        {
+            GameController.Game.levelController.Level.MovePlayer(destinationNode);
+        }
+
+        else
+        {
+            return;
+        }
+        //Debug.Log(LevelController.Instance.Level.GetNodeDistance(playerNode, destinationNode));
+
     }
 }

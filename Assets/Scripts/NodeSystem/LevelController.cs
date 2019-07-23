@@ -106,9 +106,13 @@ public class LevelController : MonoBehaviour
             {
                 for (int z = 0; z < levelLength; z++)
                 {
-                    if(x == levelWidth/2 && y == levelHeight/2 && z == levelLength / 2)
+                    if(x == 0 || y == 0 || z == levelLength - 1)
                     {
                         level.SetNode(x, y, z, 1);
+                    }
+                    if(x == 3 && y == 1 && z == 4)
+                    {
+                        level.AddMoveableObject(x,y,z,new MoveableObject(1));
                     }
                 }
             }
