@@ -488,11 +488,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8b575fe23c2ccd40883f64cd6718b49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelData: {fileID: 324359337}
+  levelSerializer: {fileID: 324359337}
   nodeDataList:
   - id: 0
     nodePrefab: {fileID: 0}
   - id: 1
+    nodePrefab: {fileID: 4694279471156317093, guid: 6d0b56d0988074787bfc0b897879d984,
+      type: 3}
+  - id: 2
     nodePrefab: {fileID: 4694279471156317093, guid: 6d0b56d0988074787bfc0b897879d984,
       type: 3}
   moveableObjectDataList:
@@ -501,7 +504,7 @@ MonoBehaviour:
   - id: 1
     nodePrefab: {fileID: 5238763070401807191, guid: 773308f6431a344f0b80e4f1a9691fed,
       type: 3}
-  levelWidth: 11
+  levelWidth: 10
   levelHeight: 10
   levelLength: 10
 --- !u!114 &324359335

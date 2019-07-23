@@ -37,11 +37,33 @@ public class Level
         }
         return false;
     }
+    /// <summary>
+    /// Moves the player to the given Node
+    /// </summary>
+    /// <param name="dest"></param>
     public void MovePlayer(Node dest)
     {
-        playerNode.MoveObjectTo(dest);
-        playerNode = dest;
+        if(playerNode != null)
+        {
+            playerNode.MoveObjectTo(dest);
+            playerNode = dest;
+        }
+        else
+        {
+            Debug.LogError("No player found in the level");
+        }
     }
+    public Node GetPlayerNode()
+    {
+        return playerNode;
+    }
+    /// <summary>
+    /// Sets the Node Type
+    /// </summary>
+    /// <param name="x"></param>
+    /// <param name="y"></param>
+    /// <param name="z"></param>
+    /// <param name="type"></param>
     public void SetNode(int x, int y, int z, int type)
     {
         if(IsInLevelBounds(x,y,z))
@@ -53,6 +75,13 @@ public class Level
             Debug.LogError("Trying to set a Node that is out of level bounds");
         }
     }
+    /// <summary>
+    /// Gets the Node Type
+    /// </summary>
+    /// <param name="x"></param>
+    /// <param name="y"></param>
+    /// <param name="z"></param>
+    /// <returns></returns>
     public Node GetNode(int x, int y, int z)
     {
         if (IsInLevelBounds(x, y, z))
@@ -65,12 +94,25 @@ public class Level
             return null;
         }
     }
+    /// <summary>
+    /// Gets the distance between 2 Nodes
+    /// </summary>
+    /// <param name="a"></param>
+    /// <param name="b"></param>
+    /// <returns></returns>
     public int GetNodeDistance(Node a, Node b)
     {
         int distance = Mathf.Abs(b.X - a.X) + Mathf.Abs(b.Y - a.Y) + Mathf.Abs(b.Z - a.Z);
         return distance;
     }
     
+    /// <summary>
+    /// Checks if the given x, y and z are within the level bounds
+    /// </summary>
+    /// <param name="x"></param>
+    /// <param name="y"></param>
+    /// <param name="z"></param>
+    /// <returns></returns>
     private bool IsInLevelBounds(int x, int y, int z)
     {
         if(x >= 0 && x < levelWidth && y >= 0 && y < levelHeight && z >= 0 && z < levelLength)

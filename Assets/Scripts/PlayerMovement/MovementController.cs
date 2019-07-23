@@ -23,7 +23,7 @@ public class MovementController : MonoBehaviour
     public void OnClick(Node n)
     {
         Node destinationNode = LevelController.Instance.Level.GetNode(n.X, n.Y + 1, n.Z);
-        playerNode = LevelController.Instance.GetPlayerNode();
+        playerNode = LevelController.Instance.Level.GetPlayerNode();
         LevelController.Instance.Level.MovePlayer(destinationNode);
     }
 }

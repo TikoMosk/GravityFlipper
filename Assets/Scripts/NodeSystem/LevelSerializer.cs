@@ -5,24 +5,24 @@ using UnityEngine;
 
 public class LevelSerializer : MonoBehaviour
 {
-    private int levelWidth = 10;
-    private int levelHeight = 10;
-    private int levelLength = 10;
     private LevelData levelData;
     private string path;
-    public void CreateLevelData(int levelWidth, int levelHeight, int levelLength, Level level)
+
+    //Turns a level into leveldata
+    public void CreateLevelData(Level level)
     {
-        this.levelWidth = levelWidth;
-        this.levelHeight = levelHeight;
-        this.levelLength = levelLength;
+        
         Node[,,] nodeMap = level.nodeMap;
         levelData = new LevelData();
-        levelData.nodeDataMap = new NodeData[levelWidth, levelHeight, levelLength];
-        for (int x = 0; x < levelWidth; x++)
+        levelData.levelWidth = level.LevelWidth;
+        levelData.levelHeight = level.LevelHeight;
+        levelData.levelLength = level.LevelLength;
+        levelData.nodeDataMap = new NodeData[levelData.levelWidth, levelData.levelHeight, levelData.levelLength];
+        for (int x = 0; x < levelData.levelWidth; x++)
         {
-            for (int y = 0; y < levelHeight; y++)
+            for (int y = 0; y < levelData.levelHeight; y++)
             {
-                for (int z = 0; z < levelLength; z++)
+                for (int z = 0; z < levelData.levelLength; z++)
                 {
                     levelData.nodeDataMap[x, y, z] = new NodeData();
                     levelData.nodeDataMap[x, y, z].blockId = nodeMap[x, y, z].Type;
@@ -36,16 +36,22 @@ public class LevelSerializer : MonoBehaviour
         }
         
     }
+    /// <summary>
+    /// Saves the level to the given file
+    /// </summary>
+    /// <param name="level"></param>
+    /// <param name="filename"></param>
     public void SaveLevel(Level level, string filename)
     {
         string contents = "";
         path = Application.persistentDataPath + "/" + filename;
-        CreateLevelData(level.LevelWidth, level.LevelHeight, level.LevelLength,level);
-        for (int x = 0; x < levelWidth; x++)
+        CreateLevelData(level);
+        contents += JsonUtility.ToJson(levelData, false);
+        for (int x = 0; x < levelData.levelWidth; x++)
         {
-            for (int y = 0; y < levelHeight; y++)
+            for (int y = 0; y < levelData.levelHeight; y++)
             {
-                for (int z = 0; z < levelLength; z++)
+                for (int z = 0; z < levelData.levelLength; z++)
                 {
                     contents += JsonUtility.ToJson(levelData.nodeDataMap[x,y,z], false);
                 }
@@ -54,27 +60,32 @@ public class LevelSerializer : MonoBehaviour
         System.IO.File.WriteAllText(path, contents);
         Debug.Log("SAVED FILE TO " + path);
     }
+    /// <summary>
+    /// Loads the level from the fileName
+    /// </summary>
+    /// <param name="levelFileName"></param>
+    /// <returns></returns>
     public LevelData LoadLevel(string levelFileName)
     {
         if (File.Exists(Application.persistentDataPath + "/" + levelFileName)){
             string content = File.ReadAllText(Application.persistentDataPath + "/" + levelFileName);
             char[] charSeperators = new char[] { '{'};
             string[] contents = content.Split(charSeperators, System.StringSplitOptions.RemoveEmptyEntries);
+
             for (int i = 0; i < contents.Length; i++)
             {
                 contents[i] = "{" + contents[i];
-                
             }
-            levelData = new LevelData();
-            levelData.nodeDataMap = new NodeData[levelWidth, levelHeight, levelLength];
-            for (int x = 0; x < levelWidth; x++)
+
+            levelData.nodeDataMap = new NodeData[levelData.levelLength, levelData.levelHeight, levelData.levelLength];
+            for (int x = 0; x < levelData.levelLength; x++)
             {
-                for (int y = 0; y < levelHeight; y++)
+                for (int y = 0; y < levelData.levelHeight; y++)
                 {
-                    for (int z = 0; z < levelLength; z++)
+                    for (int z = 0; z < levelData.levelLength; z++)
                     {
                         NodeData n = new NodeData();
-                        n = JsonUtility.FromJson<NodeData>(contents[x * (levelWidth * levelLength) + y * levelLength + z]);
+                        n = JsonUtility.FromJson<NodeData>(contents[x * (levelData.levelWidth * levelData.levelLength) + y * levelData.levelLength + z]);
                         levelData.nodeDataMap[x, y, z] = n;
                     }
                 }
@@ -102,5 +113,12 @@ public class NodeData
 [System.Serializable]
 public class LevelData
 {
+    public int levelWidth = 0;
+    public int levelHeight = 0;
+    public int levelLength = 0;
     public NodeData[,,] nodeDataMap;
+    public LevelData()
+    {
+
+    }
 }

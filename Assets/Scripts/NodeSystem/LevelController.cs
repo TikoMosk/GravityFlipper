@@ -47,15 +47,19 @@ public class LevelController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.L))
         {
             DestroyLevelGraphics();
-            CreateLevel();
-            PopulateLevel(levelSerializer.LoadLevel("level1"));
+            BuildLevel(levelSerializer.LoadLevel("level1"));
             CreateLevelGraphics();
         }
-        if(Input.GetKeyDown(KeyCode.A))
+        if(Input.GetKeyDown(KeyCode.C))
         {
-            level.AddMoveableObject(5, 1, 4, new MoveableObject(1));
+            DestroyLevelGraphics();
+            BuildTestLevel();
+            CreateLevelGraphics();
         }
     }
+    /// <summary>
+    /// Fills in the level with empty Nodes
+    /// </summary>
     private void CreateLevel()
     {
         Node[,,] nodeMap = new Node[levelWidth, levelHeight, levelLength];
@@ -71,6 +75,9 @@ public class LevelController : MonoBehaviour
         }
         Level = new Level(levelWidth, levelHeight, levelLength,nodeMap);
     }
+    /// <summary>
+    /// Destroys the level graphics (this is called when a new level is loaded to remove the old level graphics)
+    /// </summary>
     private void DestroyLevelGraphics()
     {
         for (int i = 0; i < transform.childCount; i++)
@@ -78,9 +85,16 @@ public class LevelController : MonoBehaviour
             Destroy(transform.GetChild(i).gameObject);
         }
     }
-    private void PopulateLevel(LevelData levelData)
+    /// <summary>
+    /// Sets the Nodes to their IDs given the level data
+    /// </summary>
+    /// <param name="levelData"></param>
+    private void BuildLevel(LevelData levelData)
     {
-        
+        levelWidth = levelData.levelWidth;
+        levelHeight = levelData.levelHeight;
+        levelLength = levelData.levelLength;
+        CreateLevel();
         for (int x = 0; x < levelWidth; x++)
         {
             for (int y = 0; y < levelHeight; y++)
@@ -97,11 +111,30 @@ public class LevelController : MonoBehaviour
         }
         
     }
-  
-    public Node GetPlayerNode()
+
+    private void BuildTestLevel()
     {
-        return playerNode;
+        CreateLevel();
+        for (int x = 0; x < levelWidth; x++)
+        {
+            for (int y = 0; y < levelHeight; y++)
+            {
+                for (int z = 0; z < levelLength; z++)
+                {
+                    float randomNum = Random.Range(0, 10);
+                    if(randomNum < 9)
+                    {
+                        level.SetNode(x, y, z, 1);
+                    }
+                    
+                }
+            }
+        }
     }
+ 
+    /// <summary>
+    /// Creates the Level Graphics
+    /// </summary>
     private void CreateLevelGraphics()
     {
         for (int x = 0; x < levelWidth; x++)
@@ -116,6 +149,12 @@ public class LevelController : MonoBehaviour
             }
         }
     }
+    /// <summary>
+    /// Creates the NodeGraphic for the node at x,y,z
+    /// </summary>
+    /// <param name="x"></param>
+    /// <param name="y"></param>
+    /// <param name="z"></param>
     private void CreateNodeGraphics(int x, int y, int z)
     {
         if (GetPrefabByNodeId(Level.GetNode(x, y, z).Type) != null)
@@ -125,6 +164,12 @@ public class LevelController : MonoBehaviour
             Level.GetNode(x, y, z).NodeGraphic.transform.parent = this.transform;
         }
     }
+    /// <summary>
+    /// Creates the moveableObject graphic for the node at x,y,z
+    /// </summary>
+    /// <param name="x"></param>
+    /// <param name="y"></param>
+    /// <param name="z"></param>
     private void CreateMoveableObjectGraphics(int x, int y, int z)
     {
         if (Level.GetNode(x, y, z).MoveableObject != null)
@@ -143,6 +188,11 @@ public class LevelController : MonoBehaviour
         moveable_go.transform.position = dest.GetPosition();
         
     }
+    /// <summary>
+    /// Gets the block prefab by the given ID from the list
+    /// </summary>
+    /// <param name="nodeId"></param>
+    /// <returns></returns>
     private GameObject GetPrefabByNodeId(int nodeId)
     {
         if(nodeId >= 0 && nodeId < nodeDataList.Count)
@@ -153,6 +203,11 @@ public class LevelController : MonoBehaviour
         Debug.LogError("No Prefab specified for the given node ID");
         return null;
     }
+    /// <summary>
+    /// Gets the moveableObject prefab by given ID from the list
+    /// </summary>
+    /// <param name="moveableObjectId"></param>
+    /// <returns></returns>
     private GameObject GetPrefabByMoveableObjectId(int moveableObjectId)
     {
         if (moveableObjectId >= 0 && moveableObjectId < nodeDataList.Count)
