@@ -4,19 +4,32 @@ using UnityEngine;
 
 public class StaticLaserEventController : MonoBehaviour
 {
-    private bool isEnable;
+    public bool isActive;
+    private bool isEnabled;
     private void Start()
     {
+        gameObject.SetActive(isActive);
+        isEnabled = isActive;
         TurnEventSystem.currentInstance.RegisterOnEvent(Foo);
     }
 
     private void Foo()
     {
-        if (!isEnable)
-            transform.localScale = transform.localScale * 2;
-        else
-            transform.localScale = transform.localScale / 2;
+        isEnabled = !isEnabled;
+        gameObject.SetActive(isEnabled);
+    }
 
-        isEnable = !isEnable;
+    void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("Collision");
+        if (collision.gameObject.tag == "Enemy")
+        {
+            Destroy(collision.gameObject);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        TurnEventSystem.currentInstance.RemoveFromEvent(Foo);
     }
 }

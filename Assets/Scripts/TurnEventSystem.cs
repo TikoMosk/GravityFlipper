@@ -14,22 +14,21 @@ public class TurnEventSystem : MonoBehaviour
 
     #region Events
 
-    private event Action onPlayerMove;
+    private event Action onPlayerMoveEvent;
 
     public void RegisterOnEvent(Action action)
     {
-        onPlayerMove += action;
+        onPlayerMoveEvent += action;
     }
 
     public void RemoveFromEvent(Action action)
     {
-        onPlayerMove += action;
+        onPlayerMoveEvent -= action;
     }
 
     public void NextTurn()
     {
-        onPlayerMove?.Invoke(); //Invoke if event is not empty;
-
+        onPlayerMoveEvent?.Invoke(); //Invoke if event is not empty;
     }
 
     #endregion
