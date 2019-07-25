@@ -90,8 +90,8 @@ public class Level
         }
         else
         {
-            Debug.LogError("Trying to get a Node that is out of level bounds");
-            return null;
+            Debug.Log("Trying to get a Node that is out of level bounds");
+            return nodeMap[0,0,0];
         }
     }
     /// <summary>
@@ -120,6 +120,17 @@ public class Level
             return true;
         }
         return false;
+    }
+
+    public Node GetNodeInTheDirection(Node n, Node.Direction dir)
+    {
+        if (dir == Node.Direction.RIGHT) return GetNode(n.X + 1, n.Y, n.Z);
+        else if (dir == Node.Direction.LEFT) return GetNode(n.X - 1, n.Y, n.Z);
+        else if (dir == Node.Direction.UP) return GetNode(n.X, n.Y + 1, n.Z);
+        else if (dir == Node.Direction.DOWN) return GetNode(n.X, n.Y - 1, n.Z);
+        else if (dir == Node.Direction.FORWARD) return GetNode(n.X, n.Y, n.Z + 1);
+        else if (dir == Node.Direction.BACK) return GetNode(n.X, n.Y, n.Z - 1);
+        else return n;
     }
     
    

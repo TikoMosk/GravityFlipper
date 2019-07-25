@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 25129824}
   - component: {fileID: 25129823}
   - component: {fileID: 25129825}
+  - component: {fileID: 25129826}
   m_Layer: 0
   m_Name: '*GameController'
   m_TagString: Untagged
@@ -177,6 +178,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2d6a88066d8fa0c4aa05ec19986db54a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &25129826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 25129822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 746fb499bb9b7cd439ccf3bdac07299a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &49451538
@@ -1119,21 +1132,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 5467440157396823638, guid: 545ce7cef392a454cb9ca51e629f2820,
-        type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5467440157396823638, guid: 545ce7cef392a454cb9ca51e629f2820,
-        type: 3}
-      propertyPath: m_Color.g
-      value: 0.87872
-      objectReference: {fileID: 0}
-    - target: {fileID: 5467440157396823638, guid: 545ce7cef392a454cb9ca51e629f2820,
-        type: 3}
-      propertyPath: m_Color.b
-      value: 0.5330188
-      objectReference: {fileID: 0}
     - target: {fileID: 5467440157396823639, guid: 545ce7cef392a454cb9ca51e629f2820,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -1158,6 +1156,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Text
       value: Level Designer Mode
+      objectReference: {fileID: 0}
+    - target: {fileID: 5467440157396823638, guid: 545ce7cef392a454cb9ca51e629f2820,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5467440157396823638, guid: 545ce7cef392a454cb9ca51e629f2820,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.87872
+      objectReference: {fileID: 0}
+    - target: {fileID: 5467440157396823638, guid: 545ce7cef392a454cb9ca51e629f2820,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.5330188
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 545ce7cef392a454cb9ca51e629f2820, type: 3}

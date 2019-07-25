@@ -15,6 +15,8 @@ public class Node
     private int type;
     public int Type { get { return type; } set { type = value; } }
 
+    public enum Direction { UP, DOWN , LEFT, RIGHT , FORWARD, BACK };
+
     private MoveableObject moveableObject;
     public MoveableObject MoveableObject { get { return moveableObject; } set { moveableObject = value; } }
     private Action nodeTypeChanged;
@@ -29,9 +31,9 @@ public class Node
         NodeGraphic.onClick += OnClickNode;
     }
 
-    private void OnClickNode()
+    private void OnClickNode(Direction dir)
     {
-        GameController.Game.OnClick(this);
+        GameController.Game.OnClick(this, dir);
     }
     public Node(Level level, int x, int y, int z)
     {

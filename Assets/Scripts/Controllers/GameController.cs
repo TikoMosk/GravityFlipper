@@ -42,9 +42,9 @@ public class GameController : MonoBehaviour
         }
         SceneManager.LoadScene(s);
     }
-    public void OnClick(Node n)
+    public void OnClick(Node n, Node.Direction dir)
     {
-        gameMode.OnNodeClick(n);
+        gameMode.OnNodeClick(n, dir);
     }
     private void SetUpSingleton()
     {

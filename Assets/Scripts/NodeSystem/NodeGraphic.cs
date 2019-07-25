@@ -5,11 +5,10 @@ using System;
 
 public class NodeGraphic : MonoBehaviour
 {
-    public event Action onClick;
+    public event Action<Node.Direction> onClick;
 
-    private void OnMouseDown()
+    public void GetClicked(Node.Direction dir)
     {
-        if (onClick != null)
-            onClick();
+        onClick?.Invoke(dir);
     }
 }
