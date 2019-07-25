@@ -42,9 +42,7 @@ public class LevelController : MonoBehaviour
             CreateLevelGraphics();
         }
     }
-    /// <summary>
-    /// Fills in the level with empty Nodes
-    /// </summary>
+    // Fills in the level with empty Nodes
     private void CreateLevel()
     {
         Node[,,] nodeMap = new Node[levelWidth, levelHeight, levelLength];
@@ -60,9 +58,7 @@ public class LevelController : MonoBehaviour
         }
         Level = new Level(levelWidth, levelHeight, levelLength,nodeMap);
     }
-    /// <summary>
-    /// Destroys the level graphics (this is called when a new level is loaded to remove the old level graphics)
-    /// </summary>
+    // Destroys the level graphics (this is called when a new level is loaded to remove the old level graphics)
     private void DestroyLevelGraphics()
     {
         for (int i = 0; i < transform.childCount; i++)
@@ -70,10 +66,8 @@ public class LevelController : MonoBehaviour
             Destroy(transform.GetChild(i).gameObject);
         }
     }
-    /// <summary>
-    /// Sets the Nodes to their IDs given the level data
-    /// </summary>
-    /// <param name="levelData"></param>
+    // Sets the Nodes to their IDs given the level data
+
     private void BuildLevel(LevelData levelData)
     {
         levelWidth = levelData.levelWidth;
@@ -119,9 +113,9 @@ public class LevelController : MonoBehaviour
         }
     }
  
-    /// <summary>
-    /// Creates the Level Graphics
-    /// </summary>
+
+    // Creates the Level Graphics
+
     private void CreateLevelGraphics()
     {
         for (int x = 0; x < levelWidth; x++)
@@ -136,27 +130,26 @@ public class LevelController : MonoBehaviour
             }
         }
     }
-    /// <summary>
-    /// Creates the NodeGraphic for the node at x,y,z
-    /// </summary>
-    /// <param name="x"></param>
-    /// <param name="y"></param>
-    /// <param name="z"></param>
+
+    // Creates the NodeGraphic for the node at x,y,z
     private void CreateNodeGraphics(int x, int y, int z)
     {
         if (GetPrefabByNodeId(Level.GetNode(x, y, z).Type) != null)
         {
-            GameObject node_go = Instantiate(GetPrefabByNodeId(Level.GetNode(x, y, z).Type), Level.GetNode(x, y, z).GetPosition(), Quaternion.identity);
+            GameObject node_go = Instantiate(GetPrefabByNodeId(Level.GetNode(x, y, z).Type), Level.GetNode(x, y, z).GetPosition(), transform.rotation);
             Level.GetNode(x, y, z).CreateGraphic(node_go);
             Level.GetNode(x, y, z).NodeGraphic.transform.parent = this.transform;
+            Level.GetNode(x, y, z).SubscribeToNodeTypeChanged(() => { OnNodeTypeChanged(level.GetNode(x, y, z),node_go); });
+
         }
+        else
+        {
+            Level.GetNode(x, y, z).SubscribeToNodeTypeChanged(() => { OnNodeTypeChanged(level.GetNode(x, y, z)); });
+        }
+        
     }
-    /// <summary>
-    /// Creates the moveableObject graphic for the node at x,y,z
-    /// </summary>
-    /// <param name="x"></param>
-    /// <param name="y"></param>
-    /// <param name="z"></param>
+
+    // Creates the moveableObject graphic for the node at x,y,z
     private void CreateMoveableObjectGraphics(int x, int y, int z)
     {
         if (Level.GetNode(x, y, z).MoveableObject != null)
@@ -164,7 +157,7 @@ public class LevelController : MonoBehaviour
             if (GetPrefabByMoveableObjectId(Level.GetNode(x, y, z).MoveableObject.Id))
             {
                 MoveableObject moveable = Level.GetNode(x, y, z).MoveableObject;
-                GameObject moveable_go = Instantiate(GetPrefabByMoveableObjectId(moveable.Id), new Vector3(x, y, z), Quaternion.identity);
+                GameObject moveable_go = Instantiate(GetPrefabByMoveableObjectId(moveable.Id), Level.GetNode(x,y,z).GetPosition(), transform.rotation);
                 moveable_go.transform.parent = this.transform;
                 moveable.Moveable_go = moveable_go;
                 moveable.SubscribeToMoveableObjectMoved((node) => { OnObjectMoved(node, moveable_go, x, y, z); });
@@ -174,13 +167,27 @@ public class LevelController : MonoBehaviour
     private void OnObjectMoved(Node dest, GameObject moveable_go, int x, int y, int z)
     {
         moveable_go.transform.position = dest.GetPosition();
+       
         
     }
-    /// <summary>
-    /// Gets the block prefab by the given ID from the list
-    /// </summary>
-    /// <param name="nodeId"></param>
-    /// <returns></returns>
+    private void OnNodeTypeChanged(Node n, GameObject node_go)
+    {
+        Debug.Log("CHANGE");
+        Destroy(node_go);
+        node_go = Instantiate(GetPrefabByNodeId(n.Type), n.GetPosition(), transform.rotation);
+        n.CreateGraphic(node_go);
+        n.NodeGraphic.transform.parent = this.transform;
+    }
+    private void OnNodeTypeChanged(Node n)
+    {
+        Debug.Log("CREATE");
+        GameObject node_go = Instantiate(GetPrefabByNodeId(n.Type), n.GetPosition(), transform.rotation);
+        n.CreateGraphic(node_go);
+        n.NodeGraphic.transform.parent = this.transform;
+    }
+
+    //Gets the block prefab by the given ID from the list
+
     private GameObject GetPrefabByNodeId(int nodeId)
     {
         if(nodeId >= 0 && nodeId < nodeDataList.Count)
@@ -191,11 +198,9 @@ public class LevelController : MonoBehaviour
         Debug.LogError("No Prefab specified for the given node ID");
         return null;
     }
-    /// <summary>
-    /// Gets the moveableObject prefab by given ID from the list
-    /// </summary>
-    /// <param name="moveableObjectId"></param>
-    /// <returns></returns>
+
+    // Gets the moveableObject prefab by given ID from the list
+
     private GameObject GetPrefabByMoveableObjectId(int moveableObjectId)
     {
         if (moveableObjectId >= 0 && moveableObjectId < nodeDataList.Count)

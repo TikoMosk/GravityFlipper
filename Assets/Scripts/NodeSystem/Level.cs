@@ -68,7 +68,7 @@ public class Level
     {
         if(IsInLevelBounds(x,y,z))
         {
-            nodeMap[x, y, z].Type = type;
+            nodeMap[x, y, z].SetNodeType(type);
         }
         else
         {

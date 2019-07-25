@@ -17,7 +17,7 @@ public class Node
 
     private MoveableObject moveableObject;
     public MoveableObject MoveableObject { get { return moveableObject; } set { moveableObject = value; } }
-
+    private Action nodeTypeChanged;
 
     private NodeGraphic nodeGraphic;
     public NodeGraphic NodeGraphic { get => nodeGraphic; set => nodeGraphic = value; }
@@ -31,7 +31,7 @@ public class Node
 
     private void OnClickNode()
     {
-        GameController.Game.movementController.OnClick(this);
+        GameController.Game.OnClick(this);
     }
     public Node(Level level, int x, int y, int z)
     {
@@ -51,6 +51,14 @@ public class Node
         this.type = type;
         this.moveableObject = moveAbleObject;
     }
+    public void SetNodeType(int id)
+    {
+        type = id;
+        if(nodeTypeChanged != null)
+        {
+            nodeTypeChanged();
+        }
+    }
     public void MoveObjectTo(Node destination)
     {
         if (moveableObject.objectMoved != null)
@@ -66,8 +74,13 @@ public class Node
     }
     public Vector3 GetPosition()
     {
-        return new Vector3(x, y, z);
+        Vector3 pos = GameController.Game.levelController.transform.TransformPoint(new Vector3(x, y, z));
+        return pos;
+        
     }
-
+    public void SubscribeToNodeTypeChanged(Action nodeTypeChanged)
+    {
+        this.nodeTypeChanged += nodeTypeChanged;
+    }
 
 }
