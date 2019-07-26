@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class PlayerEventController : MonoBehaviour
 {
-    private void OnMouseDown()
+    private Node currentNode;
+
+    void Start()
     {
-        TurnEventSystem.currentInstance.NextTurn();
+        
     }
 
     void Update()

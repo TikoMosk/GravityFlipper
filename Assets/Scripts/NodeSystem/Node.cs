@@ -15,23 +15,26 @@ public class Node
     private int type;
     public int Type { get { return type; } set { type = value; } }
 
+    public enum Direction { UP, DOWN , LEFT, RIGHT , FORWARD, BACK };
+
     private MoveableObject moveableObject;
     public MoveableObject MoveableObject { get { return moveableObject; } set { moveableObject = value; } }
-
+    private Action nodeTypeChanged;
 
     private NodeGraphic nodeGraphic;
     public NodeGraphic NodeGraphic { get => nodeGraphic; set => nodeGraphic = value; }
 
     public void CreateGraphic(GameObject node_go)
     {
-        NodeGraphic = node_go.AddComponent<NodeGraphic>();
+        nodeGraphic = node_go.AddComponent<NodeGraphic>();
         node_go.transform.position = GetPosition();
-        NodeGraphic.onClick += OnClickNode;
+        nodeGraphic.Node = this;
+        nodeGraphic.onClick += OnClickNode;
     }
 
-    private void OnClickNode()
+    private void OnClickNode(Direction dir)
     {
-        MovementController.Controller.OnClick(this);
+        GameController.Game.OnClick(this, dir);
     }
     public Node(Level level, int x, int y, int z)
     {
@@ -51,19 +54,56 @@ public class Node
         this.type = type;
         this.moveableObject = moveAbleObject;
     }
+    public void SetNodeType(int id)
+    {
+        type = id;
+        if(nodeTypeChanged != null)
+        {
+            nodeTypeChanged();
+        }
+    }
     public void MoveObjectTo(Node destination)
     {
         if (moveableObject.objectMoved != null)
         {
             moveableObject.objectMoved(destination);
         }
-        destination.moveableObject = this.moveableObject;
-        this.moveableObject = null;
+        if(destination != this)
+        {
+            destination.moveableObject = this.moveableObject;
+            this.moveableObject = null;
+        }
+        
     }
     public Vector3 GetPosition()
     {
-        return new Vector3(x, y, z);
+<<<<<<< HEAD
+        Debug.Log(GameController.Game.levelController.transform.TransformPoint(new Vector3(x, y, z)));
+=======
+>>>>>>> nodeSystem
+        Vector3 pos = GameController.Game.levelController.transform.TransformPoint(new Vector3(x, y, z));
+        return pos;
+        
     }
-
+    public Vector3 GetNodePosition()
+    {
+        Vector3 pos = new Vector3(x, y, z);
+        return pos;
+    }
+    public void SubscribeToNodeTypeChanged(Action nodeTypeChanged)
+    {
+        this.nodeTypeChanged += nodeTypeChanged;
+<<<<<<< HEAD
+=======
+    }
+    public bool HasSamePosition(Node a)
+    {
+        if(x == a.X && y == a.Y && z == a.Z)
+        {
+            return true;
+        }
+        return false;
+>>>>>>> nodeSystem
+    }
 
 }

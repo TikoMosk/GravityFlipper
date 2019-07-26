@@ -6,18 +6,25 @@ public class EnemyEventController : MonoBehaviour
 {
     private bool isEnabled;
     private byte flag = 1;
+    private Node CurrentNode { get; set; }
+
     Vector3 dest;
 
     private void Start()
     {
-        TurnEventSystem.currentInstance.RegisterOnEvent(Foo);
+        TurnEventSystem.currentInstance.RegisterOnEvent(Check);
     }
 
-    public void Foo()
+    public void Check()
     {
         dest = transform.position;
-
         dest.z -= flag;
+
+        //todo
+        if (true)
+        {
+
+        }
 
         isEnabled = !isEnabled;
     }
@@ -38,10 +45,11 @@ public class EnemyEventController : MonoBehaviour
     private void Move()
     {
         transform.position = Vector3.MoveTowards(transform.position, dest, Time.deltaTime * 5);
+
     }
 
     private void OnDestroy()
     {
-        TurnEventSystem.currentInstance.RemoveFromEvent(Foo);
+        TurnEventSystem.currentInstance.RemoveFromEvent(Check);
     }
 }
