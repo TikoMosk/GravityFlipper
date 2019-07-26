@@ -28,6 +28,7 @@ public class Level
             if(nodeMap[x,y,z].MoveableObject == null)
             {
                 nodeMap[x, y, z].MoveableObject = moveableObject;
+                
                 if(moveableObject.Id == 1)
                 {
                     playerNode = nodeMap[x, y, z];

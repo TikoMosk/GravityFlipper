@@ -89,5 +89,13 @@ public class Node
     {
         this.nodeTypeChanged += nodeTypeChanged;
     }
+    public bool HasSamePosition(Node a)
+    {
+        if(x == a.X && y == a.Y && z == a.Z)
+        {
+            return true;
+        }
+        return false;
+    }
 
 }
