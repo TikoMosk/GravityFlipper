@@ -14,11 +14,19 @@ public class TurnEventSystem : MonoBehaviour
 
 <<<<<<< HEAD
     private event Action onPlayerMoveEvent;
+<<<<<<< HEAD:Assets/Scripts/TurnEventSystem.cs
 =======
     #region Events
 
     private event Action onPlayerMove;
 >>>>>>> parent of b4c594b... //test// laser, enemy
+=======
+    public GameObject[] lasers;
+    public GameObject[] GetLasers()
+    {
+        return lasers;
+    }
+>>>>>>> parent of e580fef... Merge branch 'nodeSystem' into Turn-System:Assets/Scripts/TurnSystem/TurnEventSystem.cs
 
     #region Public Methods
 

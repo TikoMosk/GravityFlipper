@@ -1,4 +1,5 @@
 ﻿<Properties StartupConfiguration="{A68B90C9-CA90-425A-D01F-92D9315656C4}|">
+<<<<<<< HEAD
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/EnemyEventController.cs">
     <Files>
       <File FileName="Assets/Scripts/TurnSystem/EnemyEventController.cs" Line="56" Column="1" />
@@ -6,6 +7,15 @@
       <File FileName="Assets/Scripts/NodeSystem/LevelController.cs" Line="255" Column="1" />
       <File FileName="Assets/Scripts/NodeSystem/Node.cs" Line="128" Column="1" />
       <File FileName="Assets/Scripts/EnemyEventController.cs" Line="72" Column="1" />
+=======
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/NodeSystem/LevelController.cs">
+    <Files>
+      <File FileName="Assets/Scripts/StaticLaserEventController.cs" Line="10" Column="1" />
+      <File FileName="Assets/Scripts/EnemyEventController.cs" Line="18" Column="35" />
+      <File FileName="Assets/Scripts/TurnEventSystem.cs" Line="17" Column="36" />
+      <File FileName="Assets/Scripts/PressurePlateScript.cs" Line="18" Column="22" />
+      <File FileName="Assets/Scripts/NodeSystem/LevelController.cs" Line="1" Column="1" />
+>>>>>>> parent of e580fef... Merge branch 'nodeSystem' into Turn-System
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -13,8 +23,14 @@
           <Node name="GravityFlipper" expanded="True">
             <Node name="Assets" expanded="True">
               <Node name="Scripts" expanded="True">
+<<<<<<< HEAD
                 <Node name="NodeSystem" expanded="True" />
                 <Node name="EnemyEventController.cs" selected="True" />
+=======
+                <Node name="NodeSystem" expanded="True">
+                  <Node name="LevelController.cs" selected="True" />
+                </Node>
+>>>>>>> parent of e580fef... Merge branch 'nodeSystem' into Turn-System
               </Node>
             </Node>
           </Node>
@@ -24,7 +40,11 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+<<<<<<< HEAD
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="0a556a45-0015-454d-9e5a-a4c617281c17" />
+=======
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="3bf8d86b-8176-41a9-bf20-75d9841483a0" />
+>>>>>>> parent of e580fef... Merge branch 'nodeSystem' into Turn-System
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -15,26 +15,23 @@ public class Node
     private int type;
     public int Type { get { return type; } set { type = value; } }
 
-    public enum Direction { UP, DOWN , LEFT, RIGHT , FORWARD, BACK };
-
     private MoveableObject moveableObject;
     public MoveableObject MoveableObject { get { return moveableObject; } set { moveableObject = value; } }
-    private Action nodeTypeChanged;
+
 
     private NodeGraphic nodeGraphic;
     public NodeGraphic NodeGraphic { get => nodeGraphic; set => nodeGraphic = value; }
 
     public void CreateGraphic(GameObject node_go)
     {
-        nodeGraphic = node_go.AddComponent<NodeGraphic>();
+        NodeGraphic = node_go.AddComponent<NodeGraphic>();
         node_go.transform.position = GetPosition();
-        nodeGraphic.Node = this;
-        nodeGraphic.onClick += OnClickNode;
+        NodeGraphic.onClick += OnClickNode;
     }
 
-    private void OnClickNode(Direction dir)
+    private void OnClickNode()
     {
-        GameController.Game.OnClick(this, dir);
+        MovementController.Controller.OnClick(this);
     }
     public Node(Level level, int x, int y, int z)
     {
@@ -54,29 +51,18 @@ public class Node
         this.type = type;
         this.moveableObject = moveAbleObject;
     }
-    public void SetNodeType(int id)
-    {
-        type = id;
-        if(nodeTypeChanged != null)
-        {
-            nodeTypeChanged();
-        }
-    }
     public void MoveObjectTo(Node destination)
     {
         if (moveableObject.objectMoved != null)
         {
             moveableObject.objectMoved(destination);
         }
-        if(destination != this)
-        {
-            destination.moveableObject = this.moveableObject;
-            this.moveableObject = null;
-        }
-        
+        destination.moveableObject = this.moveableObject;
+        this.moveableObject = null;
     }
     public Vector3 GetPosition()
     {
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -122,6 +108,10 @@ public class Node
 >>>>>>> nodeSystem
 =======
 >>>>>>> nodeSystem
+=======
+        return new Vector3(x, y, z);
+>>>>>>> parent of e580fef... Merge branch 'nodeSystem' into Turn-System
     }
+
 
 }

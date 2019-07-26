@@ -8,6 +8,7 @@ public class MovementController : MonoBehaviour
     private static MovementController _controller;
     public static MovementController Controller { get { return _controller; } }
 
+<<<<<<< HEAD
     Node previousClickedNode;
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -22,6 +23,8 @@ public class MovementController : MonoBehaviour
     Node.Direction previousDirection;
 >>>>>>> nodeSystem
 
+=======
+>>>>>>> parent of e580fef... Merge branch 'nodeSystem' into Turn-System
     Node playerNode;
     private void Awake()
     {
@@ -34,9 +37,9 @@ public class MovementController : MonoBehaviour
             _controller = this;
         }
     }
-
-    public void OnClick(Node n, Node.Direction direction)
+    public void OnClick(Node n)
     {
+<<<<<<< HEAD
         //Debug.Log(n.GetNodePosition());
         Node destinationNode = GameController.Game.levelController.Level.GetNodeInTheDirection(n, direction);
         //Debug.Log(destinationNode.GetNodePosition());
@@ -125,5 +128,10 @@ public class MovementController : MonoBehaviour
 >>>>>>> nodeSystem
         //Debug.Log(LevelController.Instance.Level.GetNodeDistance(playerNode, destinationNode));
 
+=======
+        Node destinationNode = LevelController.Instance.Level.GetNode(n.X, n.Y + 1, n.Z);
+        playerNode = LevelController.Instance.GetPlayerNode();
+        LevelController.Instance.MovePlayer(destinationNode);
+>>>>>>> parent of e580fef... Merge branch 'nodeSystem' into Turn-System
     }
 }

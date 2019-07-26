@@ -7,12 +7,11 @@ public class EnemyEventController : MonoBehaviour
 <<<<<<< HEAD
     private bool isEnabled;
     private byte flag = 1;
-    private Node CurrentNode { get; set; }
-
     Vector3 dest;
 
     private void Start()
     {
+<<<<<<< HEAD:Assets/Scripts/EnemyEventController.cs
         TurnEventSystem.currentInstance.RegisterOnEvent(Check);
 =======
 	private bool isEnable;
@@ -20,19 +19,17 @@ public class EnemyEventController : MonoBehaviour
     {
 		TurnEventSystem.currentInstance.RegisterOnEvent(Foo);
 >>>>>>> parent of b4c594b... //test// laser, enemy
+=======
+        TurnEventSystem.currentInstance.RegisterOnEvent(Foo);
+>>>>>>> parent of e580fef... Merge branch 'nodeSystem' into Turn-System:Assets/Scripts/TurnSystem/EnemyEventController.cs
     }
 
-    public void Check()
+    public void Foo()
     {
 <<<<<<< HEAD
         dest = transform.position;
+
         dest.z -= flag;
-
-        //todo
-        if (true)
-        {
-
-        }
 
         isEnabled = !isEnabled;
     }
@@ -53,11 +50,11 @@ public class EnemyEventController : MonoBehaviour
     private void Move()
     {
         transform.position = Vector3.MoveTowards(transform.position, dest, Time.deltaTime * 5);
-
     }
 
     private void OnDestroy()
     {
+<<<<<<< HEAD:Assets/Scripts/EnemyEventController.cs
         TurnEventSystem.currentInstance.RemoveFromEvent(Check);
 =======
 		if (!isEnable)
@@ -67,5 +64,8 @@ public class EnemyEventController : MonoBehaviour
 
         isEnable = !isEnable;
 >>>>>>> parent of b4c594b... //test// laser, enemy
+=======
+        TurnEventSystem.currentInstance.RemoveFromEvent(Foo);
+>>>>>>> parent of e580fef... Merge branch 'nodeSystem' into Turn-System:Assets/Scripts/TurnSystem/EnemyEventController.cs
     }
 }

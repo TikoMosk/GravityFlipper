@@ -5,6 +5,7 @@ using System;
 
 public class NodeGraphic : MonoBehaviour
 {
+<<<<<<< HEAD
     public event Action<Node.Direction> onClick;
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -20,9 +21,13 @@ public class NodeGraphic : MonoBehaviour
     private Node node;
 
     public Node Node { get => node; set => node = value; }
+=======
+    public event Action onClick;
+>>>>>>> parent of e580fef... Merge branch 'nodeSystem' into Turn-System
 
-    public void GetClicked(Node.Direction dir)
+    private void OnMouseDown()
     {
+<<<<<<< HEAD
         onClick?.Invoke(dir);
     }
     public void RotateGraphicToDirection(Node.Direction dir)
@@ -53,5 +58,9 @@ public class NodeGraphic : MonoBehaviour
     {
 >>>>>>> nodeSystem
 
+=======
+        if (onClick != null)
+            onClick();
+>>>>>>> parent of e580fef... Merge branch 'nodeSystem' into Turn-System
     }
 }
