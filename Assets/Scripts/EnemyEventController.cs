@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyEventController : MonoBehaviour
 {
     private bool isEnabled;
+    private byte flag = 1;
     Vector3 dest;
 
     private void Start()
@@ -15,7 +16,8 @@ public class EnemyEventController : MonoBehaviour
     public void Foo()
     {
         dest = transform.position;
-        dest.z -= 1;
+
+        dest.z -= flag;
 
         isEnabled = !isEnabled;
     }

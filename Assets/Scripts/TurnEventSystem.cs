@@ -12,9 +12,14 @@ public class TurnEventSystem : MonoBehaviour
 
     #endregion
 
-    #region Events
-
     private event Action onPlayerMoveEvent;
+    public GameObject[] lasers;
+    public GameObject[] GetLasers()
+    {
+        return lasers;
+    }
+
+    #region Public Methods
 
     public void RegisterOnEvent(Action action)
     {
