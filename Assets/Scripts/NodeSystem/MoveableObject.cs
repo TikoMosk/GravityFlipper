@@ -13,6 +13,9 @@ public class MoveableObject
 
     private Action<Node> moveableObjectMoved;
     public Action<Node> objectMoved { get => moveableObjectMoved; set => moveableObjectMoved = value; }
+    public MoveableObjectGraphic MoveableObjectGraphic { get => moveableObjectGraphic; set => moveableObjectGraphic = value; }
+
+    private MoveableObjectGraphic moveableObjectGraphic;
 
     public MoveableObject(int id)
     {
@@ -21,5 +24,9 @@ public class MoveableObject
     public void SubscribeToMoveableObjectMoved(Action<Node> objectMoved)
     {
         this.objectMoved += objectMoved;
+    }
+    public void CreateMoveableObjectGraphic(GameObject moveable_go)
+    {
+        moveableObjectGraphic = moveable_go.AddComponent<MoveableObjectGraphic>();
     }
 }

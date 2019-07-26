@@ -26,9 +26,10 @@ public class Node
 
     public void CreateGraphic(GameObject node_go)
     {
-        NodeGraphic = node_go.AddComponent<NodeGraphic>();
+        nodeGraphic = node_go.AddComponent<NodeGraphic>();
         node_go.transform.position = GetPosition();
-        NodeGraphic.onClick += OnClickNode;
+        nodeGraphic.Node = this;
+        nodeGraphic.onClick += OnClickNode;
     }
 
     private void OnClickNode(Direction dir)

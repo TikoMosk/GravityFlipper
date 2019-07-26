@@ -6,6 +6,9 @@ using System;
 public class NodeGraphic : MonoBehaviour
 {
     public event Action<Node.Direction> onClick;
+    private Node node;
+
+    public Node Node { get => node; set => node = value; }
 
     public void GetClicked(Node.Direction dir)
     {
