@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class StaticLaserEventController : MonoBehaviour
 {
+<<<<<<< HEAD
     public bool Static;
     public bool isActive;
     public bool flag;
@@ -18,10 +19,17 @@ public class StaticLaserEventController : MonoBehaviour
             TurnEventSystem.currentInstance.RegisterOnEvent(Foo);
         }
         gameObject.SetActive(true);
+=======
+    private bool isEnable;
+    private void Start()
+    {
+        TurnEventSystem.currentInstance.RegisterOnEvent(Foo);
+>>>>>>> parent of b4c594b... //test// laser, enemy
     }
 
     private void Foo()
     {
+<<<<<<< HEAD
         if (isActive)
         {
             if (flag)
@@ -47,18 +55,13 @@ public class StaticLaserEventController : MonoBehaviour
         }
 
     }
+=======
+        if (!isEnable)
+            transform.localScale = transform.localScale * 2;
+        else
+            transform.localScale = transform.localScale / 2;
+>>>>>>> parent of b4c594b... //test// laser, enemy
 
-    void OnCollisionEnter(Collision collision)
-    {
-        Debug.Log("Collision");
-        if (collision.gameObject.tag == "Enemy")
-        {
-            Destroy(collision.gameObject);
-        }
-    }
-
-    private void OnDestroy()
-    {
-        TurnEventSystem.currentInstance.RemoveFromEvent(Foo);
+        isEnable = !isEnable;
     }
 }

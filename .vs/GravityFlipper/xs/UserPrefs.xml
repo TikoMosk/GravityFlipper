@@ -1,10 +1,11 @@
 ﻿<Properties StartupConfiguration="{A68B90C9-CA90-425A-D01F-92D9315656C4}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/NodeSystem/Level.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/EnemyEventController.cs">
     <Files>
       <File FileName="Assets/Scripts/TurnSystem/EnemyEventController.cs" Line="56" Column="1" />
-      <File FileName="Assets/Scripts/NodeSystem/Level.cs" Line="65" Column="1" />
+      <File FileName="Assets/Scripts/NodeSystem/Level.cs" Line="69" Column="1" />
       <File FileName="Assets/Scripts/NodeSystem/LevelController.cs" Line="255" Column="1" />
       <File FileName="Assets/Scripts/NodeSystem/Node.cs" Line="128" Column="1" />
+      <File FileName="Assets/Scripts/EnemyEventController.cs" Line="72" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -12,9 +13,8 @@
           <Node name="GravityFlipper" expanded="True">
             <Node name="Assets" expanded="True">
               <Node name="Scripts" expanded="True">
-                <Node name="NodeSystem" expanded="True">
-                  <Node name="Level.cs" selected="True" />
-                </Node>
+                <Node name="NodeSystem" expanded="True" />
+                <Node name="EnemyEventController.cs" selected="True" />
               </Node>
             </Node>
           </Node>

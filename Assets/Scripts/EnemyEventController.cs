@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyEventController : MonoBehaviour
 {
+<<<<<<< HEAD
     private bool isEnabled;
     private byte flag = 1;
     private Node CurrentNode { get; set; }
@@ -13,10 +14,17 @@ public class EnemyEventController : MonoBehaviour
     private void Start()
     {
         TurnEventSystem.currentInstance.RegisterOnEvent(Check);
+=======
+	private bool isEnable;
+    private void Start()
+    {
+		TurnEventSystem.currentInstance.RegisterOnEvent(Foo);
+>>>>>>> parent of b4c594b... //test// laser, enemy
     }
 
     public void Check()
     {
+<<<<<<< HEAD
         dest = transform.position;
         dest.z -= flag;
 
@@ -51,5 +59,13 @@ public class EnemyEventController : MonoBehaviour
     private void OnDestroy()
     {
         TurnEventSystem.currentInstance.RemoveFromEvent(Check);
+=======
+		if (!isEnable)
+			transform.localScale = transform.localScale * 2;
+		else
+			transform.localScale = transform.localScale / 2;
+
+        isEnable = !isEnable;
+>>>>>>> parent of b4c594b... //test// laser, enemy
     }
 }

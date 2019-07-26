@@ -12,23 +12,30 @@ public class TurnEventSystem : MonoBehaviour
 
     #endregion
 
+<<<<<<< HEAD
     private event Action onPlayerMoveEvent;
+=======
+    #region Events
+
+    private event Action onPlayerMove;
+>>>>>>> parent of b4c594b... //test// laser, enemy
 
     #region Public Methods
 
     public void RegisterOnEvent(Action action)
     {
-        onPlayerMoveEvent += action;
+        onPlayerMove += action;
     }
 
     public void RemoveFromEvent(Action action)
     {
-        onPlayerMoveEvent -= action;
+        onPlayerMove += action;
     }
 
     public void NextTurn()
     {
-        onPlayerMoveEvent?.Invoke(); //Invoke if event is not empty;
+        onPlayerMove?.Invoke(); //Invoke if event is not empty;
+
     }
 
     #endregion
