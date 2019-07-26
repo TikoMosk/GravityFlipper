@@ -159,7 +159,7 @@ public class LevelController : MonoBehaviour
                 MoveableObject moveable = Level.GetNode(x, y, z).MoveableObject;
                 GameObject moveable_go = Instantiate(GetPrefabByMoveableObjectId(moveable.Id), Level.GetNode(x,y,z).GetPosition(), transform.rotation);
                 moveable_go.transform.parent = this.transform;
-                moveable.Moveable_go = moveable_go;
+                moveable.MoveableGameObject = moveable_go;
                 moveable.SubscribeToMoveableObjectMoved((node) => { OnObjectMoved(node, moveable_go, x, y, z); });
             }
         }

@@ -46,6 +46,7 @@ public class Level
         if(playerNode != null)
         {
             playerNode.MoveObjectTo(dest);
+            //playerNode.NodeGraphic
             playerNode = dest;
         }
         else
@@ -132,6 +133,38 @@ public class Level
         else if (dir == Node.Direction.BACK) return GetNode(n.X, n.Y, n.Z - 1);
         else return n;
     }
-    
-   
+    public static Vector3 GetVectorByDirection(Node.Direction dir)
+    {
+        if (dir == Node.Direction.RIGHT)
+        {
+            return new Vector3(1, 0, 0);
+        }
+        else if (dir == Node.Direction.LEFT)
+        {
+            return new Vector3(-1, 0, 0);
+        }
+        else if (dir == Node.Direction.UP)
+        {
+            return new Vector3(0, 1, 0);
+        }
+        else if (dir == Node.Direction.DOWN)
+        {
+            return new Vector3(0, -1, 0);
+        }
+        else if (dir == Node.Direction.FORWARD)
+        {
+            return new Vector3(0, 0, 1);
+        }
+        else if (dir == Node.Direction.BACK)
+        {
+            return new Vector3(0, 0, -1);
+        }
+        else
+        {
+            Debug.Log("ERROR");
+            return Vector3.zero;
+        }
+    }
+
+
 }

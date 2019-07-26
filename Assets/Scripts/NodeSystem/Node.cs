@@ -80,6 +80,11 @@ public class Node
         return pos;
         
     }
+    public Vector3 GetNodePosition()
+    {
+        Vector3 pos = new Vector3(x, y, z);
+        return pos;
+    }
     public void SubscribeToNodeTypeChanged(Action nodeTypeChanged)
     {
         this.nodeTypeChanged += nodeTypeChanged;

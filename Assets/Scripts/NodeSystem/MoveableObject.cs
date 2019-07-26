@@ -8,8 +8,8 @@ public class MoveableObject
     private int id;
     public int Id { get => id; set => id = value; }
 
-    private GameObject moveable_go;
-    public GameObject Moveable_go { get => moveable_go; set => moveable_go = value; }
+    private GameObject moveableGameObject;
+    public GameObject MoveableGameObject { get => moveableGameObject; set => moveableGameObject = value; }
 
     private Action<Node> moveableObjectMoved;
     public Action<Node> objectMoved { get => moveableObjectMoved; set => moveableObjectMoved = value; }

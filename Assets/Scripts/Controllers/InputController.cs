@@ -25,16 +25,17 @@ public class InputController : MonoBehaviour
     }
     private Node.Direction GetDirectionByNormal(Vector3 normal)
     {
-        Vector3 localNormal = GameController.Game.levelController.transform.TransformPoint(normal);
-        Node.Direction dir = Node.Direction.UP;
-        if (normal.Equals(new Vector3(1, 0, 0))) dir = Node.Direction.RIGHT;
-        else if (normal.Equals(new Vector3(-1, 0, 0))) dir = Node.Direction.LEFT;
-        else if (normal.Equals(new Vector3(0, 1, 0))) dir = Node.Direction.UP;
-        else if (normal.Equals(new Vector3(0, -1, 0))) dir = Node.Direction.DOWN;
-        else if (normal.Equals(new Vector3(0, 0, 1))) dir = Node.Direction.FORWARD;
-        else if (normal.Equals(new Vector3(0, 0, -1))) dir = Node.Direction.BACK;
+        Vector3 localNormal = GameController.Game.levelController.transform.InverseTransformPoint(normal);
 
+        Node.Direction dir = Node.Direction.UP;
+        if (Vector3.SqrMagnitude(localNormal - new Vector3(1, 0, 0)) < 0.1f) dir = Node.Direction.RIGHT;
+        else if (Vector3.SqrMagnitude(localNormal -new Vector3(-1, 0, 0)) < 0.1f) dir = Node.Direction.LEFT;
+        else if (Vector3.SqrMagnitude(localNormal - new Vector3(0, 1, 0)) < 0.1f) dir = Node.Direction.UP;
+        else if (Vector3.SqrMagnitude(localNormal - new Vector3(0, -1, 0)) < 0.1f) dir = Node.Direction.DOWN;
+        else if (Vector3.SqrMagnitude(localNormal - new Vector3(0, 0, 1)) < 0.1f) dir = Node.Direction.FORWARD;
+        else if (Vector3.SqrMagnitude(localNormal - new Vector3(0, 0, -1)) < 0.1f) dir = Node.Direction.BACK;
         return dir;
 
     }
+    
 }

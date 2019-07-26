@@ -11,4 +11,8 @@ public class NodeGraphic : MonoBehaviour
     {
         onClick?.Invoke(dir);
     }
+    public void RotateGraphicToDirection(Node.Direction dir)
+    {
+
+    }
 }
