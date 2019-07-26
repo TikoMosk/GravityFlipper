@@ -10,6 +10,14 @@ public class MovementController : MonoBehaviour
 
     Node previousClickedNode;
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    Node.Direction previousDirection;
+>>>>>>> nodeSystem
+=======
+    Node.Direction previousDirection;
+>>>>>>> nodeSystem
 =======
     Node.Direction previousDirection;
 >>>>>>> nodeSystem
@@ -34,6 +42,8 @@ public class MovementController : MonoBehaviour
         //Debug.Log(destinationNode.GetNodePosition());
         playerNode = GameController.Game.levelController.Level.GetPlayerNode();
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
         if (GameController.Game.levelController.Level.GetNodeDistance(playerNode,destinationNode) <= 1 )
         {
             if(previousClickedNode != null && GameController.Game.levelController.Level.GetNodeDistance(previousClickedNode, n) < 3)
@@ -42,6 +52,10 @@ public class MovementController : MonoBehaviour
                 Quaternion rotation = Quaternion.LookRotation(Vector3.forward, Level.GetVectorByDirection(direction));
                 playerNode.MoveableObject.MoveableGameObject.transform.rotation = rotation;
 =======
+=======
+>>>>>>> nodeSystem
+=======
+>>>>>>> nodeSystem
         Vector3 forwardDirection = Vector3.zero;
 
         if (GameController.Game.levelController.Level.GetNodeDistance(playerNode,destinationNode) <= 1)
@@ -64,6 +78,12 @@ public class MovementController : MonoBehaviour
             if(previousClickedNode != null && GameController.Game.levelController.Level.GetNodeDistance(previousClickedNode, n) < 3)
             {
                 
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> nodeSystem
+=======
+>>>>>>> nodeSystem
+=======
 >>>>>>> nodeSystem
                 GameController.Game.levelController.Level.MovePlayer(destinationNode);
                 previousClickedNode = n;
@@ -71,9 +91,15 @@ public class MovementController : MonoBehaviour
             else if(previousClickedNode == null)
             {
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
                 Debug.Log(Level.GetVectorByDirection(direction));
                 Quaternion rotation = Quaternion.LookRotation(Vector3.forward, Level.GetVectorByDirection(direction));
                 playerNode.MoveableObject.MoveableGameObject.transform.rotation = rotation;
+=======
+>>>>>>> nodeSystem
+=======
+>>>>>>> nodeSystem
 =======
 >>>>>>> nodeSystem
                 GameController.Game.levelController.Level.MovePlayer(destinationNode);
@@ -86,6 +112,14 @@ public class MovementController : MonoBehaviour
             return;
         }
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+        previousDirection = direction;
+>>>>>>> nodeSystem
+=======
+        previousDirection = direction;
+>>>>>>> nodeSystem
 =======
         previousDirection = direction;
 >>>>>>> nodeSystem

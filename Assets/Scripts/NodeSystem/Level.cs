@@ -29,6 +29,14 @@ public class Level
             {
                 nodeMap[x, y, z].MoveableObject = moveableObject;
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+                
+>>>>>>> nodeSystem
+=======
+                
+>>>>>>> nodeSystem
 =======
                 
 >>>>>>> nodeSystem
@@ -53,7 +61,13 @@ public class Level
             //playerNode.NodeGraphic
             playerNode = dest;
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
             TurnEventSystem.currentInstance.NextTurn();
+=======
+>>>>>>> nodeSystem
+=======
+>>>>>>> nodeSystem
 =======
 >>>>>>> nodeSystem
         }

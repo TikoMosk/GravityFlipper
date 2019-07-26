@@ -112,10 +112,16 @@ public class LevelController : MonoBehaviour
             }
         }
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
 
         level.AddMoveableObject(3, 1, 5, new MoveableObject(2));
         level.AddMoveableObject(8, 1, 4, new MoveableObject(2));
         level.AddMoveableObject(5, 1, 4, new MoveableObject(2));
+=======
+>>>>>>> nodeSystem
+=======
+>>>>>>> nodeSystem
 =======
 >>>>>>> nodeSystem
     }
@@ -166,6 +172,16 @@ public class LevelController : MonoBehaviour
                 MoveableObject moveable = Level.GetNode(x, y, z).MoveableObject;
                 GameObject moveable_go = Instantiate(GetPrefabByMoveableObjectId(moveable.Id), Level.GetNode(x,y,z).GetPosition(), transform.rotation);
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+                moveable.CreateMoveableObjectGraphic(moveable_go);
+                moveable.MoveableObjectGraphic.Node = Level.GetNode(x,y,z);
+>>>>>>> nodeSystem
+=======
+                moveable.CreateMoveableObjectGraphic(moveable_go);
+                moveable.MoveableObjectGraphic.Node = Level.GetNode(x,y,z);
+>>>>>>> nodeSystem
 =======
                 moveable.CreateMoveableObjectGraphic(moveable_go);
                 moveable.MoveableObjectGraphic.Node = Level.GetNode(x,y,z);
@@ -180,7 +196,15 @@ public class LevelController : MonoBehaviour
     {
         moveable_go.transform.position = dest.GetPosition();
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
        
+=======
+        moveable_go.GetComponent<MoveableObjectGraphic>().Node = dest;
+>>>>>>> nodeSystem
+=======
+        moveable_go.GetComponent<MoveableObjectGraphic>().Node = dest;
+>>>>>>> nodeSystem
 =======
         moveable_go.GetComponent<MoveableObjectGraphic>().Node = dest;
 >>>>>>> nodeSystem

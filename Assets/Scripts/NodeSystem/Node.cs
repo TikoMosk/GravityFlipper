@@ -78,7 +78,13 @@ public class Node
     public Vector3 GetPosition()
     {
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
         Debug.Log(GameController.Game.levelController.transform.TransformPoint(new Vector3(x, y, z)));
+=======
+>>>>>>> nodeSystem
+=======
+>>>>>>> nodeSystem
 =======
 >>>>>>> nodeSystem
         Vector3 pos = GameController.Game.levelController.transform.TransformPoint(new Vector3(x, y, z));
@@ -94,7 +100,13 @@ public class Node
     {
         this.nodeTypeChanged += nodeTypeChanged;
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> nodeSystem
+=======
+>>>>>>> nodeSystem
     }
     public bool HasSamePosition(Node a)
     {
@@ -103,6 +115,12 @@ public class Node
             return true;
         }
         return false;
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> nodeSystem
+=======
+>>>>>>> nodeSystem
+=======
 >>>>>>> nodeSystem
     }
 

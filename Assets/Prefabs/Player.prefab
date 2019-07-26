@@ -187,7 +187,13 @@ CapsuleCollider:
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> nodeSystem
+=======
+>>>>>>> nodeSystem
 --- !u!114 &-2864862836520077798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,6 +206,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7087d13b3c820ce47bd975bacd50d379, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> nodeSystem
+=======
+>>>>>>> nodeSystem
+=======
 >>>>>>> nodeSystem
 --- !u!1 &8182954320911454859
 GameObject:
