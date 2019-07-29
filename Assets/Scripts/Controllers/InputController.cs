@@ -17,6 +17,7 @@ public class InputController : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if(Physics.Raycast(ray, out hit))
         {
+            
             if(hit.collider.gameObject.GetComponent<NodeGraphic>() != null)
             {
                 hit.collider.gameObject.GetComponent<NodeGraphic>().GetClicked(GetDirectionByNormal(hit.normal));

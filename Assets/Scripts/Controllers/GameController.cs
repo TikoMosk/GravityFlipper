@@ -40,6 +40,7 @@ public class GameController : MonoBehaviour
             Debug.LogError("Scene by the name " + s + " does not exist");
             return;
         }
+        
         SceneManager.LoadScene(s);
     }
     public void OnClick(Node n, Node.Direction dir)

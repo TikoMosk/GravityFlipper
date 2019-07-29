@@ -42,6 +42,12 @@ public class LevelController : MonoBehaviour
             CreateLevelGraphics();
         }
     }
+    public void TestLevel()
+    {
+        DestroyLevelGraphics();
+        BuildTestLevel();
+        CreateLevelGraphics();
+    }
     // Fills in the level with empty Nodes
     private void CreateLevel()
     {
@@ -63,7 +69,15 @@ public class LevelController : MonoBehaviour
     {
         for (int i = 0; i < transform.childCount; i++)
         {
-            Destroy(transform.GetChild(i).gameObject);
+            if (transform.GetChild(i).tag == "Light")
+            {
+
+            }
+            else
+            {
+                Destroy(transform.GetChild(i).gameObject);
+            }
+                
         }
     }
     // Sets the Nodes to their IDs given the level data
@@ -182,7 +196,6 @@ public class LevelController : MonoBehaviour
     }
     private void OnNodeTypeChanged(Node n)
     {
-        Debug.Log("CREATE");
         GameObject node_go = Instantiate(GetPrefabByNodeId(n.Type), n.GetPosition(), transform.rotation);
         n.CreateGraphic(node_go);
         n.NodeGraphic.transform.parent = this.transform;

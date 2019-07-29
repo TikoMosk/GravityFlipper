@@ -6,8 +6,9 @@ public class LevelDesignController : MonoBehaviour
 {
     public GameObject block;
 
-    public void OnNodeClick(Node n)
+    public void OnNodeClick(Node n, Node.Direction dir)
     {
-        GameController.Game.levelController.Level.SetNode(n.X, n.Y + 1, n.Z, 1);
+        Node placeNode = GameController.Game.levelController.Level.GetNodeInTheDirection(n, dir);
+        GameController.Game.levelController.Level.SetNode(placeNode.X,placeNode.Y,placeNode.Z, 1);
     }
 }

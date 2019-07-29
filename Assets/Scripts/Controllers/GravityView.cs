@@ -6,42 +6,32 @@ using UnityEngine.EventSystems;
 public class GravityView : MonoBehaviour
 {
     public GameObject worldParent;
-    public Vector3 playerPosition;
     public Camera mainCam;
+    public GameObject cameraObject;
     public float rotateTime;
 
-    private Vector2 touchStart;
-    private Vector2 touchPos;
-    private Vector2 touchDragVector;
+    private Vector3 startPos;
     private bool isRotatingSmoothly;
     private bool isMovingSmoothly;
     private bool isDragging;
+    private Vector3 playerPos;
 
+    private void Awake()
+    {
+        startPos = mainCam.transform.position;
+    }
     private void Update()
     {
-        if (!EventSystem.current.IsPointerOverGameObject())
+        if(GameController.Game.levelController.Level != null)
         {
-            //Calculates the mousePress/touch drag vector
-            if (Input.GetMouseButtonDown(0))
-            {
-                touchStart = Input.mousePosition;
-            }
-            if (Input.GetMouseButton(0))
-            {
-                touchPos = Input.mousePosition;
-                touchDragVector = touchPos - touchStart;
-            }
-
-            // If drag ends, rotates the level.
-            // This should work differently, when we add player movement. Instead of just rotating the world, it should move the player 
-            // and rotate the world accordingly 
-            if (Input.GetMouseButtonUp(0))
-            {
-                //StartCoroutine(RotateSmoothly(worldParent.transform, playerPosition, CheckDragDirection(touchDragVector), 90, rotateTime));
-            }
+            playerPos = GameController.Game.levelController.Level.GetPlayerNode().GetPosition();
+            cameraObject.transform.position = playerPos;
         }
-        
-        
+    }
+
+    public void RotateWorld(Vector3 up,Vector3 forward)
+    {
+
     }
     IEnumerator MoveSmoothly(Transform transformToMove, Vector3 currentPos, Vector3 destPos, float secondsToComplete)
     {
@@ -127,11 +117,13 @@ public class GravityView : MonoBehaviour
 
     public void OnClick_Left()
     {
-        StartCoroutine(RotateSmoothly(mainCam.transform, playerPosition, Vector3.down, -90, rotateTime));
+        Debug.Log(playerPos);
+        StartCoroutine(RotateSmoothly(cameraObject.transform, playerPos, Vector3.down, -90, rotateTime));
     }
     public void OnClick_Right()
     {
-        StartCoroutine(RotateSmoothly(mainCam.transform, playerPosition, Vector3.down, 90, rotateTime));
+        Debug.Log(playerPos);
+        StartCoroutine(RotateSmoothly(cameraObject.transform, playerPos, Vector3.down, 90, rotateTime));
     }
 
 
