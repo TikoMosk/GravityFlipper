@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayMode : GameMode
 {
-    public void OnNodeClick(Node n, Node.Direction dir)
+    public void OnNodeClick(Node n, Node.Direction dir, int button)
     {
         GameController.Game.movementController.OnClick(n, dir);
     }

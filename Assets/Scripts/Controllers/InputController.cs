@@ -8,10 +8,14 @@ public class InputController : MonoBehaviour
     {
         if(Input.GetMouseButtonDown(0))
         {
-            Click();
+            Click(0);
+        }
+        if (Input.GetMouseButtonDown(1))
+        {
+            Click(1);
         }
     }
-    private void Click()
+    private void Click(int button)
     {
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -20,7 +24,7 @@ public class InputController : MonoBehaviour
             
             if(hit.collider.gameObject.GetComponent<NodeGraphic>() != null)
             {
-                hit.collider.gameObject.GetComponent<NodeGraphic>().GetClicked(GetDirectionByNormal(hit.normal));
+                hit.collider.gameObject.GetComponent<NodeGraphic>().GetClicked(GetDirectionByNormal(hit.normal), button);
             }
         }
     }

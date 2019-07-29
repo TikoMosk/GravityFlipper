@@ -528,15 +528,11 @@ MonoBehaviour:
   - id: 2
     nodePrefab: {fileID: 4694279471156317093, guid: 6d0b56d0988074787bfc0b897879d984,
       type: 3}
-  moveableObjectDataList:
+  nodeObjectDataList:
   - id: 0
     nodePrefab: {fileID: 0}
   - id: 1
-    nodePrefab: {fileID: 5238763070401807191, guid: 773308f6431a344f0b80e4f1a9691fed,
-      type: 3}
-  levelWidth: 10
-  levelHeight: 10
-  levelLength: 10
+    nodePrefab: {fileID: 0}
 --- !u!114 &324359336
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -13,6 +13,8 @@ public class GameController : MonoBehaviour
     public LevelDesignController levelDesignController;
     public MovementController movementController;
 
+    private Action onNextTurn;
+
     private GameMode gameMode;
 
     private void Awake()
@@ -57,9 +59,9 @@ public class GameController : MonoBehaviour
         
         SceneManager.LoadScene(s);
     }
-    public void ClickNode(Node n, Node.Direction dir)
+    public void ClickNode(Node n, Node.Direction dir, int button)
     {
-        gameMode.OnNodeClick(n, dir);
+        gameMode.OnNodeClick(n, dir, button);
     }
     
     private void SetUpControllers()
@@ -79,6 +81,10 @@ public class GameController : MonoBehaviour
     public void NextTurn()
     {
         Debug.Log("NEXT TURN");
+    }
+    public void RegisterForNextTurn(Action onNextTurn)
+    {
+        this.onNextTurn += onNextTurn;
     }
 
 

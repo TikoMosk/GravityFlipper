@@ -33,9 +33,9 @@ public class Node
         nodeGraphic.onClick += OnClickNode;
     }
 
-    private void OnClickNode(Direction dir)
+    private void OnClickNode(Direction dir, int button)
     {
-        GameController.Game.ClickNode (this, dir);
+        GameController.Game.ClickNode (this, dir, button);
     }
     public Node(Level level, int x, int y, int z)
     {
@@ -46,14 +46,9 @@ public class Node
         this.type = 0;
         this.nodeObject = null;
     }
-    public Node(Level level, int x, int y, int z, int type, NodeObject nodeObject)
+    public Node()
     {
-        this.level = level;
-        this.x = x;
-        this.y = y;
-        this.z = z;
-        this.type = type;
-        this.nodeObject = nodeObject;
+        
     }
     public void SetNodeType(int id)
     {
@@ -79,6 +74,12 @@ public class Node
             return true;
         }
         return false;
+    }
+    public static Node CreatePrototype(int id)
+    {
+        Node n = new Node();
+        n.Type = id;
+        return n;
     }
 
 }

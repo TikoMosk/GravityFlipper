@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class LevelEditorMode : GameMode
 {
-    public void OnNodeClick(Node n, Node.Direction dir)
+    public void OnNodeClick(Node n, Node.Direction dir, int button)
     {
-        GameController.Game.levelDesignController.OnNodeClick(n,dir);
+        GameController.Game.levelDesignController.OnNodeClick(n,dir, button);
     }
 }

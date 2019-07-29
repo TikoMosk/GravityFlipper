@@ -25,9 +25,10 @@ public class GravityView : MonoBehaviour
 
     }
 
-    public void RotateWorld(Vector3 up,Vector3 forward)
+    public void RotateWorld(Vector3 axis)
     {
-
+        Vector3 worldCenter = new Vector3(GameController.Game.currentLevel.Width / 2, GameController.Game.currentLevel.Height / 2, GameController.Game.currentLevel.Length / 2);
+        StartCoroutine(RotateSmoothly(worldParent.transform, Vector3.zero,axis,-90,rotateTime));
     }
     IEnumerator MoveSmoothly(Transform transformToMove, Vector3 currentPos, Vector3 destPos, float secondsToComplete)
     {
@@ -113,12 +114,10 @@ public class GravityView : MonoBehaviour
 
     public void OnClick_Left()
     {
-        Debug.Log(playerPos);
         StartCoroutine(RotateSmoothly(cameraObject.transform, playerPos, Vector3.down, -90, rotateTime));
     }
     public void OnClick_Right()
     {
-        Debug.Log(playerPos);
         StartCoroutine(RotateSmoothly(cameraObject.transform, playerPos, Vector3.down, 90, rotateTime));
     }
 

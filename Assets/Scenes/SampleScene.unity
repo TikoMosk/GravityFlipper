@@ -727,7 +727,7 @@ MonoBehaviour:
   - id: 2
     nodePrefab: {fileID: 4694279471156317093, guid: 64cd717f8e9c21d4d838ac00217f04f4,
       type: 3}
-  moveableObjectDataList:
+  nodeObjectDataList:
   - id: 0
     nodePrefab: {fileID: 0}
   - id: 1

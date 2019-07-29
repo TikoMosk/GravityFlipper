@@ -11,8 +11,10 @@ public class LevelController : MonoBehaviour
     public Node PlayerNode { get => playerNode; }
 
     public LevelSerializer levelSerializer;
-    public List<NodeData> nodeDataList = new List<NodeData>();
-    public List<NodeData> moveableObjectDataList = new List<NodeData>();
+    public List<NodeData> nodeDataList;
+    public List<NodeData> nodeObjectDataList;
+    private Dictionary<string, Node> nodePrototypes;
+    private Dictionary<string, NodeObject> nodeObjectPrototypes;
     private Action onLevelCreated;
 
     private GameController gameController;
@@ -26,6 +28,7 @@ public class LevelController : MonoBehaviour
     {
         gameController = FindObjectOfType<GameController>();
     }
+    
     private void InitializeLevel(LevelData levelData)
     {
         level = new Level(levelData.levelWidth, levelData.levelHeight, levelData.levelLength);
@@ -120,9 +123,9 @@ public class LevelController : MonoBehaviour
             {
                 NodeObject nodeObject = Level.GetNode(x, y, z).NodeObject;
                 GameObject nodeObject_GameObject = Instantiate(GetPrefabByMoveableObjectId(nodeObject.Id), Level.GetNode(x,y,z).GetPosition(), transform.rotation);
+                nodeObject_GameObject.transform.parent = this.transform;
                 NodeObjectGraphic nodeObjectGraphic= nodeObject.CreateMoveableObjectGraphic(nodeObject_GameObject);
                 nodeObject.NodeObjectGraphic.Node = Level.GetNode(x,y,z);
-                nodeObject_GameObject.transform.parent = this.transform;
                 nodeObject.SubscribeToMoveableObjectMoved((node) => { OnObjectMoved(node, nodeObjectGraphic); });
             }
         }
@@ -134,7 +137,6 @@ public class LevelController : MonoBehaviour
     }
     private void OnNodeTypeChanged(Node n, GameObject node_go)
     {
-        Debug.Log("CHANGE");
         Destroy(node_go);
         node_go = Instantiate(GetPrefabByNodeId(n.Type), n.GetPosition(), transform.rotation);
         n.CreateGraphic(node_go);
@@ -142,9 +144,12 @@ public class LevelController : MonoBehaviour
     }
     private void OnNodeTypeChanged(Node n)
     {
+       
         GameObject node_GameObject = Instantiate(GetPrefabByNodeId(n.Type), n.GetPosition(), transform.rotation);
         n.CreateGraphic(node_GameObject);
         n.NodeGraphic.transform.parent = this.transform;
+  
+        
     }
 
     //Gets the block prefab by the given ID from the list
@@ -162,11 +167,11 @@ public class LevelController : MonoBehaviour
 
     // Gets the moveableObject prefab by given ID from the list
 
-    private GameObject GetPrefabByMoveableObjectId(int moveableObjectId)
+    private GameObject GetPrefabByMoveableObjectId(int nodeObjectId)
     {
-        if (moveableObjectId >= 0 && moveableObjectId < nodeDataList.Count)
+        if (nodeObjectId >= 0 && nodeObjectId < nodeDataList.Count)
         {
-            return moveableObjectDataList[moveableObjectId].nodePrefab;
+            return nodeObjectDataList[nodeObjectId].nodePrefab;
         }
 
         Debug.LogError("No Prefab specified for the given moveableObject ID");
@@ -182,4 +187,17 @@ public class LevelController : MonoBehaviour
     {
         this.onLevelCreated += onLevelCreated;
     }
+
+    /*private void CreateNodePrototypes()
+    {
+        nodePrototypes = new Dictionary<string, Node>();
+        nodePrototypes.Add("Block",Node.CreatePrototype(1));
+        nodePrototypes.Add("Laser", Node.CreatePrototype(2));
+    }
+    private void CreateNodeObjectPrototypes()
+    {
+        nodeObjectPrototypes = new Dictionary<string, NodeObject>();
+
+       // nodeObjectPrototypes.Add("Player" , )
+    }*/
 }

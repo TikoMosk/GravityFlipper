@@ -4,6 +4,6 @@ using UnityEngine;
 
 public interface GameMode 
 {
-    void OnNodeClick(Node n, Node.Direction dir);
+    void OnNodeClick(Node n, Node.Direction dir, int button);
     
 }
