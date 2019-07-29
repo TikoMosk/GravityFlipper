@@ -34,7 +34,7 @@ public class Node
 
     private void OnClickNode(Direction dir)
     {
-        GameController.Game.OnClick(this, dir);
+        GameController.Game.ClickNode (this, dir);
     }
     public Node(Level level, int x, int y, int z)
     {

@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour
     private static GameController _game;
     public static GameController Game{ get { return _game; } }
     public LevelController levelController;
+    public Level currentLevel;
     public LevelDesignController levelDesignController;
     public MovementController movementController;
     private GameMode gameMode;
@@ -17,6 +18,17 @@ public class GameController : MonoBehaviour
         SetUpSingleton();
         SetUpControllers();
         SetGameModeBasedOnScene();
+    }
+    private void SetUpSingleton()
+    {
+        if (_game != null && _game != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            _game = this;
+        }
     }
     public void SetGameModeBasedOnScene()
     {
@@ -43,26 +55,21 @@ public class GameController : MonoBehaviour
         
         SceneManager.LoadScene(s);
     }
-    public void OnClick(Node n, Node.Direction dir)
+    public void ClickNode(Node n, Node.Direction dir)
     {
         gameMode.OnNodeClick(n, dir);
     }
-    private void SetUpSingleton()
-    {
-        if (_game != null && _game != this)
-        {
-            Destroy(this);
-        }
-        else
-        {
-            _game = this;
-        }
-    }
+    
     private void SetUpControllers()
     {
         levelController = FindObjectOfType<LevelController>();
+        if(levelController != null)
+        {
+            currentLevel = levelController.Level;
+        }
         movementController = FindObjectOfType<MovementController>();
         levelDesignController = FindObjectOfType<LevelDesignController>();
     }
-    
+
+
 }

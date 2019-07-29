@@ -27,7 +27,7 @@ public class MovementController : MonoBehaviour
     public void OnClick(Node n, Node.Direction direction)
     {
         //Debug.Log(n.GetNodePosition());
-        Node destinationNode = GameController.Game.levelController.Level.GetNodeInTheDirection(n, direction);
+        Node destinationNode = GameController.Game.currentLevel.GetNodeInTheDirection(n, direction);
         //Debug.Log(destinationNode.GetNodePosition());
         playerNode = GameController.Game.levelController.Level.GetPlayerNode();
         Vector3 forwardDirection = Vector3.zero;
@@ -64,15 +64,15 @@ public class MovementController : MonoBehaviour
             }
 
 
-            if (previousClickedNode != null && GameController.Game.levelController.Level.GetNodeDistance(previousClickedNode, n) < 3)
+            if (previousClickedNode != null && GameController.Game.currentLevel.GetNodeDistance(previousClickedNode, n) < 3)
             {
-                GameController.Game.levelController.Level.MovePlayer(destinationNode);
+                GameController.Game.currentLevel.MovePlayer(destinationNode);
                 previousClickedNode = n;
                 previousDirection = direction;
             }
             else if(previousClickedNode == null)
             {
-                GameController.Game.levelController.Level.MovePlayer(destinationNode);
+                GameController.Game.currentLevel.MovePlayer(destinationNode);
                 previousClickedNode = n;
             }
             

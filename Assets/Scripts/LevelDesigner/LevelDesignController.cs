@@ -8,7 +8,7 @@ public class LevelDesignController : MonoBehaviour
 
     public void OnNodeClick(Node n, Node.Direction dir)
     {
-        Node placeNode = GameController.Game.levelController.Level.GetNodeInTheDirection(n, dir);
+        Node placeNode = GameController.Game.currentLevel.GetNodeInTheDirection(n, dir);
         GameController.Game.levelController.Level.SetNode(placeNode.X,placeNode.Y,placeNode.Z, 1);
     }
 }
