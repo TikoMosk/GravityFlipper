@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -8,9 +9,10 @@ public class GameController : MonoBehaviour
     private static GameController _game;
     public static GameController Game{ get { return _game; } }
     public LevelController levelController;
-    public Level currentLevel;
+    public Level currentLevel = null;
     public LevelDesignController levelDesignController;
     public MovementController movementController;
+
     private GameMode gameMode;
 
     private void Awake()
@@ -65,11 +67,21 @@ public class GameController : MonoBehaviour
         levelController = FindObjectOfType<LevelController>();
         if(levelController != null)
         {
-            currentLevel = levelController.Level;
+            levelController.RegisterToLevelCreated(CurrentLevelActive);
         }
         movementController = FindObjectOfType<MovementController>();
         levelDesignController = FindObjectOfType<LevelDesignController>();
     }
+    private void CurrentLevelActive()
+    {
+        currentLevel = levelController.Level;
+    }
+    public void NextTurn()
+    {
+        Debug.Log("NEXT TURN");
+    }
+
+
 
 
 }

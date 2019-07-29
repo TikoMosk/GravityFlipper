@@ -22,11 +22,7 @@ public class GravityView : MonoBehaviour
     }
     private void Update()
     {
-        if(GameController.Game.currentLevel != null)
-        {
-            playerPos = GameController.Game.currentLevel.GetPlayerNode().GetPosition();
-            cameraObject.transform.position = playerPos;
-        }
+
     }
 
     public void RotateWorld(Vector3 up,Vector3 forward)

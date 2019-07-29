@@ -12,11 +12,11 @@ public class LevelSerializer : MonoBehaviour
     public void CreateLevelData(Level level)
     {
         
-        Node[,,] nodeMap = level.nodeMap;
+        Node[,,] nodeMap = level.NodeMap;
         levelData = new LevelData();
-        levelData.levelWidth = level.LevelWidth;
-        levelData.levelHeight = level.LevelHeight;
-        levelData.levelLength = level.LevelLength;
+        levelData.levelWidth = level.Width;
+        levelData.levelHeight = level.Height;
+        levelData.levelLength = level.Length;
         levelData.nodeDataMap = new NodeData[levelData.levelWidth, levelData.levelHeight, levelData.levelLength];
         for (int x = 0; x < levelData.levelWidth; x++)
         {
@@ -26,9 +26,9 @@ public class LevelSerializer : MonoBehaviour
                 {
                     levelData.nodeDataMap[x, y, z] = new NodeData();
                     levelData.nodeDataMap[x, y, z].blockId = nodeMap[x, y, z].Type;
-                    if (nodeMap[x, y, z].MoveableObject != null)
+                    if (nodeMap[x, y, z].NodeObject != null)
                     {
-                        levelData.nodeDataMap[x, y, z].moveableId = nodeMap[x, y, z].MoveableObject.Id;
+                        levelData.nodeDataMap[x, y, z].moveableId = nodeMap[x, y, z].NodeObject.Id;
                     }
                     
                 }

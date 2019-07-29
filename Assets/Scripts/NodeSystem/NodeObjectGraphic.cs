@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveableObjectGraphic : MonoBehaviour
+public class NodeObjectGraphic : MonoBehaviour
 {
     private Node node;
 

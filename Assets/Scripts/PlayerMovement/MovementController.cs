@@ -10,8 +10,8 @@ public class MovementController : MonoBehaviour
 
     Node previousClickedNode;
     Node.Direction previousDirection;
-
     Node playerNode;
+
     private void Awake()
     {
         if(_controller != null & _controller != this)
@@ -28,8 +28,7 @@ public class MovementController : MonoBehaviour
     {
         //Debug.Log(n.GetNodePosition());
         Node destinationNode = GameController.Game.currentLevel.GetNodeInTheDirection(n, direction);
-        //Debug.Log(destinationNode.GetNodePosition());
-        playerNode = GameController.Game.levelController.Level.GetPlayerNode();
+        playerNode = GameController.Game.levelController.PlayerNode;
         Vector3 forwardDirection = Vector3.zero;
         Vector3 upDirection = Vector3.zero;
         Quaternion rotation;
@@ -43,36 +42,31 @@ public class MovementController : MonoBehaviour
             }
             if(playerNode.HasSamePosition(destinationNode) && !previousClickedNode.HasSamePosition(n) && GameController.Game.levelController.Level.GetNodeDistance(previousClickedNode, n) < 3)
             {
-                Debug.Log("1");
                 forwardDirection = GameController.Game.levelController.transform.TransformVector( Level.GetVectorByDirection(previousDirection));
                 upDirection = GameController.Game.levelController.transform.TransformVector(Level.GetVectorByDirection(direction));
-                Debug.Log("FORWARD DIRECTION IS " + forwardDirection + " UP DIRECTION IS " + upDirection);
                 rotation = Quaternion.LookRotation(forwardDirection, upDirection);
-                playerNode.MoveableObject.MoveableGameObject.transform.rotation = rotation;
+                playerNode.NodeObject.NodeObjectGraphic.transform.rotation = rotation;
                 Quaternion worldRotation = Quaternion.LookRotation(Vector3.Cross(upDirection,Vector3.right), forwardDirection);
-                //GameController.Game.levelController.transform.rotation = worldRotation;
                 GameController.Game.levelController.transform.position = Vector3.zero;
             }
             else if(!playerNode.HasSamePosition(destinationNode) && GameController.Game.levelController.Level.GetNodeDistance(previousClickedNode, n) < 3)
             {
-                Debug.Log("2");
                 forwardDirection = destinationNode.GetPosition() - playerNode.GetPosition();
                 upDirection = GameController.Game.levelController.transform.TransformVector(Level.GetVectorByDirection(direction));
                 rotation = Quaternion.LookRotation(forwardDirection, upDirection);
-                playerNode.MoveableObject.MoveableGameObject.transform.rotation = rotation;
-               // GameController.Game.levelController.transform.rotation = Quaternion.LookRotation(GameController.Game.levelController.transform.forward, upDirection);
+                playerNode.NodeObject.NodeObjectGraphic.transform.rotation = rotation;
             }
 
 
             if (previousClickedNode != null && GameController.Game.currentLevel.GetNodeDistance(previousClickedNode, n) < 3)
             {
-                GameController.Game.currentLevel.MovePlayer(destinationNode);
+                GameController.Game.currentLevel.MoveObject(playerNode,destinationNode);
                 previousClickedNode = n;
                 previousDirection = direction;
             }
             else if(previousClickedNode == null)
             {
-                GameController.Game.currentLevel.MovePlayer(destinationNode);
+                GameController.Game.currentLevel.MoveObject(playerNode,destinationNode);
                 previousClickedNode = n;
             }
             
@@ -81,8 +75,7 @@ public class MovementController : MonoBehaviour
         {
             return;
         }
-       
-        //Debug.Log(LevelController.Instance.Level.GetNodeDistance(playerNode, destinationNode));
+      
 
     }
 }

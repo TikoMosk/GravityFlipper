@@ -17,8 +17,9 @@ public class Node
 
     public enum Direction { UP, DOWN , LEFT, RIGHT , FORWARD, BACK };
 
-    private MoveableObject moveableObject;
-    public MoveableObject MoveableObject { get { return moveableObject; } set { moveableObject = value; } }
+    private NodeObject nodeObject;
+    public NodeObject NodeObject { get { return nodeObject; } set { nodeObject = value; } }
+
     private Action nodeTypeChanged;
 
     private NodeGraphic nodeGraphic;
@@ -43,16 +44,16 @@ public class Node
         this.y = y;
         this.z = z;
         this.type = 0;
-        this.moveableObject = null;
+        this.nodeObject = null;
     }
-    public Node(Level level, int x, int y, int z, int type, MoveableObject moveAbleObject)
+    public Node(Level level, int x, int y, int z, int type, NodeObject nodeObject)
     {
         this.level = level;
         this.x = x;
         this.y = y;
         this.z = z;
         this.type = type;
-        this.moveableObject = moveAbleObject;
+        this.nodeObject = nodeObject;
     }
     public void SetNodeType(int id)
     {
@@ -62,28 +63,9 @@ public class Node
             nodeTypeChanged();
         }
     }
-    public void MoveObjectTo(Node destination)
-    {
-        if (moveableObject.objectMoved != null)
-        {
-            moveableObject.objectMoved(destination);
-        }
-        if(destination != this)
-        {
-            destination.moveableObject = this.moveableObject;
-            this.moveableObject = null;
-        }
-        
-    }
     public Vector3 GetPosition()
     {
         Vector3 pos = GameController.Game.levelController.transform.TransformPoint(new Vector3(x, y, z));
-        return pos;
-        
-    }
-    public Vector3 GetNodePosition()
-    {
-        Vector3 pos = new Vector3(x, y, z);
         return pos;
     }
     public void SubscribeToNodeTypeChanged(Action nodeTypeChanged)

@@ -1,71 +1,62 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
 public class Level
 {
-    private int levelWidth;
-    public int LevelWidth { get { return levelWidth; } }
-    private int levelHeight;
-    public int LevelHeight { get { return levelHeight; } }
-    private int levelLength;
-    public int LevelLength { get { return levelLength; } }
-    public Node[,,] nodeMap;
-    private Node playerNode;
-    public Level(int levelWidth, int levelHeight, int levelLength, Node[,,] nodeMap)
+    public int Width { get { return width; } }
+    public int Height { get { return height; } }
+    public int Length { get { return length; } }
+    public Node[,,] NodeMap { get => nodeMap;}
+
+
+    private Node[,,] nodeMap;
+    private int width;
+    private int height;
+    private int length;
+    private Node startNode;
+    private Node exitNode;
+    private Action<Node> playerMoved;
+
+    public Level(int width,int height, int length)
     {
-        this.levelWidth = levelWidth;
-        this.levelHeight = levelHeight;
-        this.levelLength = levelLength;
-        this.nodeMap = nodeMap;
+        this.width = width;
+        this.height = height;
+        this.length = length;
+        nodeMap = new Node[width, length, height];
     }
-    
-    public bool AddMoveableObject(int x, int y, int z, MoveableObject moveableObject)
+
+    public bool AddMoveableObject(int x, int y, int z, NodeObject moveableObject)
     {
         if(IsInLevelBounds(x,y,z))
         {
-            if(nodeMap[x,y,z].MoveableObject == null)
+            if(nodeMap[x,y,z].NodeObject == null)
             {
-                nodeMap[x, y, z].MoveableObject = moveableObject;
-                
-                if(moveableObject.Id == 1)
-                {
-                    playerNode = nodeMap[x, y, z];
-                }
+                nodeMap[x, y, z].NodeObject = moveableObject;
                 return true;
             }
         }
         return false;
     }
-    /// <summary>
-    /// Moves the player to the given Node
-    /// </summary>
-    /// <param name="dest"></param>
-    public void MovePlayer(Node dest)
+
+    public void MoveObject(Node node, Node dest)
     {
-        if(playerNode != null)
+        if(!node.HasSamePosition(dest))
         {
-            playerNode.MoveObjectTo(dest);
-            //playerNode.NodeGraphic
-            playerNode = dest;
+            if (node.NodeObject.Id == 1)
+            {
+
+                playerMoved.Invoke(dest);
+            }
+            dest.NodeObject = node.NodeObject;
+            dest.NodeObject.NodeObjectMoved(dest);
+            node.NodeObject = null;
         }
-        else
-        {
-            Debug.LogError("No player found in the level");
-        }
+        
     }
-    public Node GetPlayerNode()
-    {
-        return playerNode;
-    }
-    /// <summary>
-    /// Sets the Node Type
-    /// </summary>
-    /// <param name="x"></param>
-    /// <param name="y"></param>
-    /// <param name="z"></param>
-    /// <param name="type"></param>
+
     public void SetNode(int x, int y, int z, int type)
     {
         if(IsInLevelBounds(x,y,z))
@@ -77,13 +68,7 @@ public class Level
             Debug.LogError("Trying to set a Node that is out of level bounds");
         }
     }
-    /// <summary>
-    /// Gets the Node Type
-    /// </summary>
-    /// <param name="x"></param>
-    /// <param name="y"></param>
-    /// <param name="z"></param>
-    /// <returns></returns>
+
     public Node GetNode(int x, int y, int z)
     {
         if (IsInLevelBounds(x, y, z))
@@ -96,28 +81,16 @@ public class Level
             return nodeMap[0,0,0];
         }
     }
-    /// <summary>
-    /// Gets the distance between 2 Nodes
-    /// </summary>
-    /// <param name="a"></param>
-    /// <param name="b"></param>
-    /// <returns></returns>
+
     public int GetNodeDistance(Node a, Node b)
     {
         int distance = Mathf.Abs(b.X - a.X) + Mathf.Abs(b.Y - a.Y) + Mathf.Abs(b.Z - a.Z);
         return distance;
     }
     
-    /// <summary>
-    /// Checks if the given x, y and z are within the level bounds
-    /// </summary>
-    /// <param name="x"></param>
-    /// <param name="y"></param>
-    /// <param name="z"></param>
-    /// <returns></returns>
     private bool IsInLevelBounds(int x, int y, int z)
     {
-        if(x >= 0 && x < levelWidth && y >= 0 && y < levelHeight && z >= 0 && z < levelLength)
+        if(x >= 0 && x < width && y >= 0 && y < height && z >= 0 && z < length)
         {
             return true;
         }
@@ -165,6 +138,10 @@ public class Level
             Debug.Log("ERROR");
             return Vector3.zero;
         }
+    }
+    public void RegisterToPlayerMoved(Action<Node> playerMovedListener)
+    {
+        this.playerMoved += playerMovedListener;
     }
 
 
