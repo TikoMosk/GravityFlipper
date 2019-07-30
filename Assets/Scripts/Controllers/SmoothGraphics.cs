@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class GravityView : MonoBehaviour
+public class SmoothGraphics : MonoBehaviour
 {
     public GameObject worldParent;
     public Camera mainCam;
@@ -12,9 +12,9 @@ public class GravityView : MonoBehaviour
 
     private Vector3 startPos;
     private bool isRotatingSmoothly;
-    private bool isMovingSmoothly;
+    public bool isMovingSmoothly;
     private bool isDragging;
-    private Vector3 playerPos;
+    private Node playerNode;
 
     private void Awake()
     {
@@ -22,13 +22,32 @@ public class GravityView : MonoBehaviour
     }
     private void Update()
     {
-
+        if(playerNode != null)
+        {
+            playerNode = GameController.Game.LevelController.PlayerNode;
+            //MoveSmoothly(cameraObject.transform, cameraObject.transform.position, playerNode.NodeObject.NodeObjectGraphic.transform.position, rotateTime);
+            cameraObject.transform.position = playerNode.NodeObject.NodeObjectGraphic.transform.position;
+        }
+        
     }
+    /*public void Rotate(Transform transformToRotate, Vector3 point, Vector3 axis, float angle, float secondsToComplete)
+    {
+        bool isRotating = false;
+        if(!isRotating)
+        {
+            StartCoroutine(RotateSmoothly(transformToRotate, point, axis, angle, secondsToComplete));
+        }
+    }*/
 
     public void RotateWorld(Vector3 axis)
     {
-        Vector3 worldCenter = new Vector3(GameController.Game.currentLevel.Width / 2, GameController.Game.currentLevel.Height / 2, GameController.Game.currentLevel.Length / 2);
+        Vector3 worldCenter = new Vector3(GameController.Game.CurrentLevel.Width / 2, GameController.Game.CurrentLevel.Height / 2, GameController.Game.CurrentLevel.Length / 2);
+        GameController.Game.LevelController.transform.position = Vector3.zero;
         StartCoroutine(RotateSmoothly(worldParent.transform, Vector3.zero,axis,-90,rotateTime));
+    }
+    public void MovePlayer(Transform playerTransform, Vector3 start, Vector3 dest)
+    {
+        StartCoroutine(MoveSmoothly(playerTransform, playerTransform.position, dest, rotateTime));
     }
     IEnumerator MoveSmoothly(Transform transformToMove, Vector3 currentPos, Vector3 destPos, float secondsToComplete)
     {
@@ -41,13 +60,13 @@ public class GravityView : MonoBehaviour
             {
                 t += Time.deltaTime;
                 float moveAmount = Time.deltaTime / secondsToComplete;
-                Vector3 moveVector = moveAmount * (destPos - currentPos);
+                Vector3 moveVector = moveAmount * (movementVector);
                 if (t >= secondsToComplete)
                 {
                     transformToMove.position = destPos;
                     break;
                 }
-                transformToMove.Translate(moveVector);
+                transformToMove.transform.position += moveVector;
 
                 yield return null;
             } while (t < secondsToComplete);
@@ -82,44 +101,21 @@ public class GravityView : MonoBehaviour
         }
     }
 
-    // Checks which direction, the world should rotate, given the drag position
-    // THIS IS TEMPORARY AND IS GOING TO BE CHANGED
-    private Vector3 CheckDragDirection(Vector2 dragVector)
-    {
-        if(dragVector.y <= 0)
-        {
-            if(dragVector.x >= 0)
-            {
-                return new Vector3(0,0,1);
-            }
-            if (dragVector.x < 0)
-            {
-                return new Vector3(1,0,0);
-            }
-        }
-        else
-        {
-            if (dragVector.x >= 0)
-            {
-                return new Vector3(-1, 0,0 );
-            }
-            if (dragVector.x < 0)
-            {
-                return new Vector3(0, 0, -1);
-            }
-        }
-        return Vector2.zero;
-    }
-
-
     public void OnClick_Left()
     {
-        StartCoroutine(RotateSmoothly(cameraObject.transform, playerPos, Vector3.down, -90, rotateTime));
+        playerNode = GameController.Game.LevelController.PlayerNode;
+        StartCoroutine(RotateSmoothly(cameraObject.transform, playerNode.GetPosition(), Vector3.down, -90, rotateTime));
     }
     public void OnClick_Right()
     {
-        StartCoroutine(RotateSmoothly(cameraObject.transform, playerPos, Vector3.down, 90, rotateTime));
+        playerNode = GameController.Game.LevelController.PlayerNode;
+        StartCoroutine(RotateSmoothly(cameraObject.transform, playerNode.GetPosition(), Vector3.down, 90, rotateTime));
     }
 
+
+}
+
+public class Rotation
+{
 
 }

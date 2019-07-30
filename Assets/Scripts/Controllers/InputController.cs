@@ -30,7 +30,7 @@ public class InputController : MonoBehaviour
     }
     private Node.Direction GetDirectionByNormal(Vector3 normal)
     {
-        Vector3 localNormal = GameController.Game.levelController.transform.InverseTransformPoint(normal);
+        Vector3 localNormal = GameController.Game.LevelController.transform.InverseTransformPoint(normal);
 
         Node.Direction dir = Node.Direction.UP;
         if (Vector3.SqrMagnitude(localNormal - new Vector3(1, 0, 0)) < 0.1f) dir = Node.Direction.RIGHT;

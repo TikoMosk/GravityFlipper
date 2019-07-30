@@ -532,7 +532,8 @@ MonoBehaviour:
   - id: 0
     nodePrefab: {fileID: 0}
   - id: 1
-    nodePrefab: {fileID: 0}
+    nodePrefab: {fileID: 5238763070401807191, guid: 773308f6431a344f0b80e4f1a9691fed,
+      type: 3}
 --- !u!114 &324359336
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1110,6 +1111,7 @@ MonoBehaviour:
   mainCam: {fileID: 963194227}
   cameraObject: {fileID: 125038227}
   rotateTime: 0.2
+  isMovingSmoothly: 0
 --- !u!1 &1320366460
 GameObject:
   m_ObjectHideFlags: 0
@@ -1245,9 +1247,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 161f7a2e87569124dadc554406a202b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelController: {fileID: 0}
-  levelDesignController: {fileID: 0}
-  movementController: {fileID: 0}
 --- !u!4 &1399402166
 Transform:
   m_ObjectHideFlags: 0

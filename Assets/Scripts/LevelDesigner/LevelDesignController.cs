@@ -10,8 +10,8 @@ public class LevelDesignController : MonoBehaviour
     {
         if(button == 0)
         {
-            Node placeNode = GameController.Game.currentLevel.GetNodeInTheDirection(n, dir);
-            GameController.Game.levelController.Level.SetNode(placeNode.X, placeNode.Y, placeNode.Z, 1);
+            Node placeNode = GameController.Game.CurrentLevel.GetNodeInTheDirection(n, dir);
+            GameController.Game.LevelController.Level.SetNode(placeNode.X, placeNode.Y, placeNode.Z, 1);
         }
         if (button == 1)
         {

@@ -8,10 +8,20 @@ public class GameController : MonoBehaviour
 {
     private static GameController _game;
     public static GameController Game{ get { return _game; } }
-    public LevelController levelController;
-    public Level currentLevel = null;
-    public LevelDesignController levelDesignController;
-    public MovementController movementController;
+   
+    private Level currentLevel = null;
+    public Level CurrentLevel { get { return currentLevel; } }
+
+    private LevelDesignController levelDesignController;
+    private MovementController movementController;
+    private SmoothGraphics smoothGraphics;
+    private LevelController levelController;
+
+    public LevelController LevelController { get { return levelController; } }
+    public LevelDesignController LevelDesignController { get { return levelDesignController; } }
+    public MovementController MovementController { get { return movementController; } }
+    public SmoothGraphics SmoothGraphics { get { return smoothGraphics; } }
+
 
     private Action onNextTurn;
 
@@ -73,6 +83,7 @@ public class GameController : MonoBehaviour
         }
         movementController = FindObjectOfType<MovementController>();
         levelDesignController = FindObjectOfType<LevelDesignController>();
+        smoothGraphics = FindObjectOfType<SmoothGraphics>();
     }
     private void CurrentLevelActive()
     {

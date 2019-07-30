@@ -28,7 +28,7 @@ public class LevelSerializer : MonoBehaviour
                     levelData.nodeDataMap[x, y, z].blockId = nodeMap[x, y, z].Type;
                     if (nodeMap[x, y, z].NodeObject != null)
                     {
-                        levelData.nodeDataMap[x, y, z].moveableId = nodeMap[x, y, z].NodeObject.Id;
+                        levelData.nodeDataMap[x, y, z].nodeMemberId = nodeMap[x, y, z].NodeObject.Id;
                     }
                     
                 }
@@ -53,7 +53,7 @@ public class LevelSerializer : MonoBehaviour
             {
                 for (int z = 0; z < levelData.levelLength; z++)
                 {
-                    contents += JsonUtility.ToJson(levelData.nodeDataMap[x,y,z], false);
+                    contents += JsonUtility.ToJson(levelData.nodeDataMap[x,y,z], true);
                 }
             }
         }
@@ -105,7 +105,7 @@ public class LevelSerializer : MonoBehaviour
 public class NodeData
 {
     public int blockId = 0;
-    public int moveableId = 0;
+    public int nodeMemberId = 0;
 
     public NodeData()
     {

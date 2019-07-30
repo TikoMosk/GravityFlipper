@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 25129824}
   - component: {fileID: 25129823}
   - component: {fileID: 25129826}
+  - component: {fileID: 25129825}
   m_Layer: 0
   m_Name: '*GameController'
   m_TagString: Untagged
@@ -151,8 +152,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelController: {fileID: 0}
-  levelDesignController: {fileID: 0}
-  movementController: {fileID: 0}
 --- !u!4 &25129824
 Transform:
   m_ObjectHideFlags: 0
@@ -161,12 +160,29 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 25129822}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.169508, y: -4.2493744, z: 9.905013}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &25129825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 25129822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de3bba32b2d57f24faa606a3df088516, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  worldParent: {fileID: 324359332}
+  mainCam: {fileID: 963194227}
+  cameraObject: {fileID: 1885976768}
+  rotateTime: 0.2
+  isMovingSmoothly: 0
 --- !u!114 &25129826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -745,6 +761,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55ff956bff080a749a20fa9e5fe672a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraObject: {fileID: 1885976768}
 --- !u!114 &324359336
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -869,6 +886,7 @@ MonoBehaviour:
   mainCam: {fileID: 963194227}
   cameraObject: {fileID: 1885976768}
   rotateTime: 0.2
+  isMovingSmoothly: 0
 --- !u!1 &1239307162
 GameObject:
   m_ObjectHideFlags: 0

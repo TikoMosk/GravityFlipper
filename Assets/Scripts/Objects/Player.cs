@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : NodeObject
+public class Player : NodeMember
 {
-    public Player(int id) : base(id)
+    public Player(int id) : base (id)
+    {
+        Debug.Log("PLAYER CREATED");
+    }
+    public void Move()
     {
 
     }
-    /*public override void Move()
-    {
-
-    }*/
 }

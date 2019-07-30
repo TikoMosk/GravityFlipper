@@ -17,8 +17,8 @@ public class Node
 
     public enum Direction { UP, DOWN , LEFT, RIGHT , FORWARD, BACK };
 
-    private NodeObject nodeObject;
-    public NodeObject NodeObject { get { return nodeObject; } set { nodeObject = value; } }
+    private NodeMember nodeObject;
+    public NodeMember NodeObject { get { return nodeObject; } set { nodeObject = value; } }
 
     private Action nodeTypeChanged;
 
@@ -60,7 +60,7 @@ public class Node
     }
     public Vector3 GetPosition()
     {
-        Vector3 pos = GameController.Game.levelController.transform.TransformPoint(new Vector3(x, y, z));
+        Vector3 pos = GameController.Game.LevelController.transform.TransformPoint(new Vector3(x, y, z));
         return pos;
     }
     public void SubscribeToNodeTypeChanged(Action nodeTypeChanged)

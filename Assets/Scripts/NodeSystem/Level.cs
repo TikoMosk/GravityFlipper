@@ -28,7 +28,7 @@ public class Level
         nodeMap = new Node[width, length, height];
     }
 
-    public bool AddMoveableObject(int x, int y, int z, NodeObject moveableObject)
+    public bool AddNodeMember(int x, int y, int z, NodeMember moveableObject)
     {
         if(IsInLevelBounds(x,y,z))
         {
