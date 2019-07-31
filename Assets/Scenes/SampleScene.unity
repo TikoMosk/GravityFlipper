@@ -151,7 +151,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 161f7a2e87569124dadc554406a202b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelController: {fileID: 0}
 --- !u!4 &25129824
 Transform:
   m_ObjectHideFlags: 0
@@ -181,8 +180,9 @@ MonoBehaviour:
   worldParent: {fileID: 324359332}
   mainCam: {fileID: 963194227}
   cameraObject: {fileID: 1885976768}
-  rotateTime: 0.2
+  rotateTime: 0.8
   isMovingSmoothly: 0
+  isCameraMovingSmoothly: 0
 --- !u!114 &25129826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -545,7 +545,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 963194229}
+      - m_Target: {fileID: 25129825}
         m_MethodName: OnClick_Right
         m_Mode: 1
         m_Arguments:
@@ -840,7 +840,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 2.5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -864,7 +864,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.35355338, y: -0.35355338, z: 0.1464466, w: 0.8535535}
-  m_LocalPosition: {x: 25, y: 35, z: -22}
+  m_LocalPosition: {x: 20, y: 30, z: -20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1885976769}
@@ -887,6 +887,7 @@ MonoBehaviour:
   cameraObject: {fileID: 1885976768}
   rotateTime: 0.2
   isMovingSmoothly: 0
+  isCameraMovingSmoothly: 0
 --- !u!1 &1239307162
 GameObject:
   m_ObjectHideFlags: 0
@@ -968,7 +969,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 963194229}
+      - m_Target: {fileID: 25129825}
         m_MethodName: OnClick_Left
         m_Mode: 1
         m_Arguments:

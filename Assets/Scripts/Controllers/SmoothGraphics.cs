@@ -13,6 +13,7 @@ public class SmoothGraphics : MonoBehaviour
     private Vector3 startPos;
     private bool isRotatingSmoothly;
     public bool isMovingSmoothly;
+    public bool isCameraMovingSmoothly;
     private bool isDragging;
     private Node playerNode;
 
@@ -25,8 +26,10 @@ public class SmoothGraphics : MonoBehaviour
         if(playerNode != null)
         {
             playerNode = GameController.Game.LevelController.PlayerNode;
-            //MoveSmoothly(cameraObject.transform, cameraObject.transform.position, playerNode.NodeObject.NodeObjectGraphic.transform.position, rotateTime);
-            cameraObject.transform.position = playerNode.NodeObject.NodeObjectGraphic.transform.position;
+            StartCoroutine(MoveCameraSmoothly(cameraObject.transform, cameraObject.transform.position, playerNode.GetPosition(), rotateTime));
+               
+           
+           // cameraObject.transform.position = playerNode.NodeObject.NodeObjectGraphic.transform.position;
         }
         
     }
@@ -42,7 +45,6 @@ public class SmoothGraphics : MonoBehaviour
     public void RotateWorld(Vector3 axis)
     {
         Vector3 worldCenter = new Vector3(GameController.Game.CurrentLevel.Width / 2, GameController.Game.CurrentLevel.Height / 2, GameController.Game.CurrentLevel.Length / 2);
-        GameController.Game.LevelController.transform.position = Vector3.zero;
         StartCoroutine(RotateSmoothly(worldParent.transform, Vector3.zero,axis,-90,rotateTime));
     }
     public void MovePlayer(Transform playerTransform, Vector3 start, Vector3 dest)
@@ -74,6 +76,32 @@ public class SmoothGraphics : MonoBehaviour
             isMovingSmoothly = false;
         }
         
+    }
+    IEnumerator MoveCameraSmoothly(Transform transformToMove, Vector3 currentPos, Vector3 destPos, float secondsToComplete)
+    {
+        if (!isCameraMovingSmoothly)
+        {
+            isCameraMovingSmoothly = true;
+            Vector3 movementVector = destPos - currentPos;
+            float t = 0;
+            do
+            {
+                t += Time.deltaTime;
+                float moveAmount = Time.deltaTime / secondsToComplete;
+                Vector3 moveVector = moveAmount * (movementVector);
+                if (t >= secondsToComplete)
+                {
+                    transformToMove.position = destPos;
+                    break;
+                }
+                transformToMove.transform.position += moveVector;
+
+                yield return null;
+            } while (t < secondsToComplete);
+
+            isCameraMovingSmoothly = false;
+        }
+
     }
     //This coroutine rotates an object, around a point and axis at some angle, during the given time
     IEnumerator RotateSmoothly(Transform transformToRotate, Vector3 point, Vector3 axis, float angle, float secondsToComplete)
