@@ -45,7 +45,7 @@ public class SmoothGraphics : MonoBehaviour
     public void RotateWorld(Vector3 axis)
     {
         Vector3 worldCenter = new Vector3(GameController.Game.CurrentLevel.Width / 2, GameController.Game.CurrentLevel.Height / 2, GameController.Game.CurrentLevel.Length / 2);
-        StartCoroutine(RotateSmoothly(worldParent.transform, Vector3.zero,axis,-90,rotateTime));
+        StartCoroutine(RotateSmoothly(worldParent.transform, worldCenter,axis,-90,rotateTime));
     }
     public void MovePlayer(Transform playerTransform, Vector3 start, Vector3 dest)
     {
