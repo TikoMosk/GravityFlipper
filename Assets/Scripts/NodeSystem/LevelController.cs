@@ -29,10 +29,6 @@ public class LevelController : MonoBehaviour
         gameController = FindObjectOfType<GameController>();
     }
     
-    private void InitializeLevel(Level level)
-    {
-       
-    }
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.S))
@@ -43,13 +39,31 @@ public class LevelController : MonoBehaviour
         {
             level = levelSerializer.LoadLevelLocal("level1");
             DestroyLevelGraphics();
+            SetPlayerNode();
             CreateLevelGraphics();
             onLevelCreated.Invoke();
         }
         if (Input.GetKeyDown(KeyCode.C)) {
             BuildTestLevel();
+            SetPlayerNode();
             CreateLevelGraphics();
+
             onLevelCreated.Invoke();
+        }
+    }
+    private void SetPlayerNode() {
+        for (int x = 0; x < level.Width; x++) {
+            for (int y = 0; y < level.Height; y++) {
+                for (int z = 0; z < level.Length; z++) {
+                    if(level.GetNode(x,y,z).NodeMember != null) {
+                        if (level.GetNode(x, y, z).NodeMember.Id == 1) {
+                            playerNode = level.GetNode(x, y, z);
+                            level.RegisterToPlayerMoved((node) => PlayerMoved(node));
+                        }
+                    }
+                    
+                }
+            }
         }
     }
     private void BuildTestLevel() {
@@ -172,14 +186,16 @@ public class LevelController : MonoBehaviour
         Debug.LogError("No Prefab specified for the given moveableObject ID");
         return null;
     }
-    private void PlayerMoved(Node playerNode)
+    private Node PlayerMoved(Node playerNode)
     {
         this.playerNode = playerNode;
         GameController.Game.NextTurn();
+        return playerNode;
     }
 
     public void RegisterToLevelCreated(Action onLevelCreated)
     {
+
         this.onLevelCreated += onLevelCreated;
     }
 

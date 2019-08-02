@@ -38,13 +38,13 @@ public class Level
         }
     }
 
-    public bool AddNodeMember(int x, int y, int z, NodeMember moveableObject)
+    public bool AddNodeMember(int x, int y, int z, NodeMember nodeMember)
     {
         if(IsInLevelBounds(x,y,z))
         {
             if(nodeMap[x,y,z].NodeMember == null)
             {
-                nodeMap[x, y, z].NodeMember = moveableObject;
+                nodeMap[x, y, z].NodeMember = nodeMember;
                 return true;
             }
         }
@@ -77,6 +77,10 @@ public class Level
         {
             Debug.LogError("Trying to set a Node that is out of level bounds");
         }
+    }
+
+    internal void RegisterToPlayerMoved(Node node) {
+        throw new NotImplementedException();
     }
 
     public Node GetNode(int x, int y, int z)

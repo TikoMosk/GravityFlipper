@@ -16,14 +16,17 @@ public class SmoothGraphics : MonoBehaviour
     public bool isCameraMovingSmoothly;
     private bool isDragging;
     private Node playerNode;
+    private bool playerExists;
 
     private void Awake()
     {
         startPos = mainCam.transform.position;
+        GameController.Game.LevelController.RegisterToLevelCreated(OnPlayerSetUp);
+
     }
     private void Update()
     {
-        if(playerNode != null)
+        if(playerExists)
         {
             playerNode = GameController.Game.LevelController.PlayerNode;
             StartCoroutine(MoveCameraSmoothly(cameraObject.transform, cameraObject.transform.position, playerNode.GetPosition(), rotateTime));
@@ -32,6 +35,9 @@ public class SmoothGraphics : MonoBehaviour
            // cameraObject.transform.position = playerNode.NodeObject.NodeObjectGraphic.transform.position;
         }
         
+    }
+    private void OnPlayerSetUp() {
+        playerExists = true;
     }
     /*public void Rotate(Transform transformToRotate, Vector3 point, Vector3 axis, float angle, float secondsToComplete)
     {
@@ -44,8 +50,8 @@ public class SmoothGraphics : MonoBehaviour
 
     public void RotateWorld(Vector3 axis)
     {
-        Vector3 worldCenter = new Vector3(GameController.Game.CurrentLevel.Width / 2, GameController.Game.CurrentLevel.Height / 2, GameController.Game.CurrentLevel.Length / 2);
-        StartCoroutine(RotateSmoothly(worldParent.transform, worldCenter,axis,-90,rotateTime));
+       /* Vector3 worldCenter = new Vector3(GameController.Game.CurrentLevel.Width / 2, GameController.Game.CurrentLevel.Height / 2, GameController.Game.CurrentLevel.Length / 2);*/
+        StartCoroutine(RotateSmoothly(worldParent.transform, Vector3.zero,axis,-90,rotateTime));
     }
     public void MovePlayer(Transform playerTransform, Vector3 start, Vector3 dest)
     {
