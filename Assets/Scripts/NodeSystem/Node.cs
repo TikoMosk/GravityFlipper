@@ -17,8 +17,8 @@ public class Node
 
     public enum Direction { UP, DOWN , LEFT, RIGHT , FORWARD, BACK };
 
-    private NodeMember nodeObject;
-    public NodeMember NodeObject { get { return nodeObject; } set { nodeObject = value; } }
+    private NodeMember nodeMember;
+    public NodeMember NodeMember { get { return nodeMember; } set { nodeMember = value; } }
 
     private Action nodeTypeChanged;
 
@@ -37,17 +37,15 @@ public class Node
     {
         GameController.Game.ClickNode (this, dir, button);
     }
-    public Node(Level level, int x, int y, int z)
-    {
+    public Node(Level level, int x, int y, int z, int type) {
         this.level = level;
         this.x = x;
         this.y = y;
         this.z = z;
         this.type = 0;
-        this.nodeObject = null;
+        this.nodeMember = null;
     }
-    public Node()
-    {
+    public Node() {
         
     }
     public void SetNodeType(int id)
@@ -66,6 +64,12 @@ public class Node
     public void SubscribeToNodeTypeChanged(Action nodeTypeChanged)
     {
         this.nodeTypeChanged += nodeTypeChanged;
+    }
+    public void ResetNodeTypeChanged() {
+        if(this.nodeTypeChanged != null) {
+            this.nodeTypeChanged = null;
+        }
+        
     }
     public bool HasSamePosition(Node a)
     {

@@ -29,48 +29,45 @@ public class LevelController : MonoBehaviour
         gameController = FindObjectOfType<GameController>();
     }
     
-    private void InitializeLevel(LevelData levelData)
+    private void InitializeLevel(Level level)
     {
-        level = new Level(levelData.levelWidth, levelData.levelHeight, levelData.levelLength);
-        NodeMemberFactory nodeMemberFactory = new NodeMemberFactory();
-
-        for (int x = 0; x < levelData.levelWidth; x++)
-        {
-            for (int y = 0; y < levelData.levelHeight; y++)
-            {
-                for (int z = 0; z < levelData.levelLength; z++)
-                {
-                    level.NodeMap[x, y, z] = new Node(level, x, y, z);
-                    level.SetNode(x, y, z, levelData.nodeDataMap[x, y, z].blockId);
-                    if (levelData.nodeDataMap[x, y, z].nodeMemberId != 0)
-                    {
-                        level.AddNodeMember(x, y, z, nodeMemberFactory.CreateNodeMember(levelData.nodeDataMap[x, y, z].nodeMemberId));
-                    }
-                    if(levelData.nodeDataMap[x, y, z].nodeMemberId == 1)
-                    {
-                        playerNode = level.GetNode(x, y, z);
-                    }
-                }
-            }
-        }
-        level.RegisterToPlayerMoved(PlayerMoved);
-
+       
     }
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.S))
         {
-            levelSerializer.SaveLevel(level, "level1");
+            levelSerializer.SaveLevelLocal(level);
         }
         if (Input.GetKeyDown(KeyCode.L))
         {
-            InitializeLevel(levelSerializer.LoadLevel("level1"));
+            level = levelSerializer.LoadLevelLocal("level1");
             DestroyLevelGraphics();
             CreateLevelGraphics();
             onLevelCreated.Invoke();
         }
+        if (Input.GetKeyDown(KeyCode.C)) {
+            BuildTestLevel();
+            CreateLevelGraphics();
+            onLevelCreated.Invoke();
+        }
     }
-
+    private void BuildTestLevel() {
+        level = new Level(10, 10, 10);
+        level.InitializeLevel();
+        for (int x = 0; x < level.Width; x++) {
+            for (int y = 0; y < level.Height; y++) {
+                for (int z = 0; z < level.Length; z++) {
+                    if(x == 0 || y == 0 || z == level.Length -1) {
+                        level.SetNode(x, y, z, 1);
+                    }
+                    if (x == 5 && y == 1 && z == 3) {
+                        level.AddNodeMember(x, y, z, new NodeMemberFactory().CreateNodeMember(1));
+                    }
+                }
+            }
+        }
+    }
     // Destroys the level graphics (this is called when a new level is loaded to remove the old level graphics)
     private void DestroyLevelGraphics()
     {
@@ -112,7 +109,7 @@ public class LevelController : MonoBehaviour
         }
         else
         {
-            Level.GetNode(x, y, z).SubscribeToNodeTypeChanged(() => { OnNodeTypeChanged(level.GetNode(x, y, z)); });
+            Level.GetNode(x, y, z).SubscribeToNodeTypeChanged(() => { OnNodeTypeChanged(level.GetNode(x, y, z), null); });
         }
         
     }
@@ -120,11 +117,11 @@ public class LevelController : MonoBehaviour
     // Creates the moveableObject graphic for the node at x,y,z
     private void CreateNodeMemberGraphic(int x, int y, int z)
     {
-        if (Level.GetNode(x, y, z).NodeObject != null)
+        if (Level.GetNode(x, y, z).NodeMember != null)
         {
-            if (GetPrefabByNodeMemberId(Level.GetNode(x, y, z).NodeObject.Id))
+            if (GetPrefabByNodeMemberId(Level.GetNode(x, y, z).NodeMember.Id))
             {
-                NodeMember nodeObject = Level.GetNode(x, y, z).NodeObject;
+                NodeMember nodeObject = Level.GetNode(x, y, z).NodeMember;
                 GameObject nodeObject_GameObject = Instantiate(GetPrefabByNodeMemberId(nodeObject.Id), Level.GetNode(x,y,z).GetPosition(), transform.rotation);
                 nodeObject_GameObject.transform.parent = this.transform;
                 NodeObjectGraphic nodeObjectGraphic= nodeObject.CreateMoveableObjectGraphic(nodeObject_GameObject);
@@ -141,19 +138,13 @@ public class LevelController : MonoBehaviour
     }
     private void OnNodeTypeChanged(Node n, GameObject node_go)
     {
-        Destroy(node_go);
-        node_go = Instantiate(GetPrefabByNodeId(n.Type), n.GetPosition(), transform.rotation);
-        n.CreateGraphic(node_go);
-        n.NodeGraphic.transform.parent = this.transform;
-    }
-    private void OnNodeTypeChanged(Node n)
-    {
-       
-        GameObject node_GameObject = Instantiate(GetPrefabByNodeId(n.Type), n.GetPosition(), transform.rotation);
-        n.CreateGraphic(node_GameObject);
-        n.NodeGraphic.transform.parent = this.transform;
-  
-        
+        if(n.Type == 0 ) {
+            Destroy(node_go);
+        }
+        else {
+            n.ResetNodeTypeChanged();
+            CreateNodeGraphics(n.X, n.Y, n.Z);
+        }
     }
 
     //Gets the block prefab by the given ID from the list

@@ -52,7 +52,7 @@ public class MovementController : MonoBehaviour
                     forwardDirection = GameController.Game.LevelController.transform.TransformVector(Level.GetVectorByDirection(previousDirection));
                     upDirection = GameController.Game.LevelController.transform.TransformVector(Level.GetVectorByDirection(direction));
                     rotation = Quaternion.LookRotation(forwardDirection, upDirection);
-                    playerNode.NodeObject.NodeObjectGraphic.transform.rotation = rotation;
+                    playerNode.NodeMember.NodeObjectGraphic.transform.rotation = rotation;
                     GameController.Game.SmoothGraphics.RotateWorld(Vector3.Cross(forwardDirection, upDirection));
 
                 }
@@ -61,7 +61,7 @@ public class MovementController : MonoBehaviour
                     forwardDirection = destinationNode.GetPosition() - playerNode.GetPosition();
                     upDirection = GameController.Game.LevelController.transform.TransformVector(Level.GetVectorByDirection(direction));
                     rotation = Quaternion.LookRotation(forwardDirection, upDirection);
-                    playerNode.NodeObject.NodeObjectGraphic.transform.rotation = rotation;
+                    playerNode.NodeMember.NodeObjectGraphic.transform.rotation = rotation;
                 }
 
 

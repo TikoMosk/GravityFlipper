@@ -25,16 +25,26 @@ public class Level
         this.width = width;
         this.height = height;
         this.length = length;
+    }
+    public void InitializeLevel() {
         nodeMap = new Node[width, length, height];
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                for (int z = 0; z < length; z++) {
+                    Node n = new Node(this, x, y, z, 0);
+                    nodeMap[x, y, z] = n;
+                }
+            }
+        }
     }
 
     public bool AddNodeMember(int x, int y, int z, NodeMember moveableObject)
     {
         if(IsInLevelBounds(x,y,z))
         {
-            if(nodeMap[x,y,z].NodeObject == null)
+            if(nodeMap[x,y,z].NodeMember == null)
             {
-                nodeMap[x, y, z].NodeObject = moveableObject;
+                nodeMap[x, y, z].NodeMember = moveableObject;
                 return true;
             }
         }
@@ -45,14 +55,14 @@ public class Level
     {
         if(!node.HasSamePosition(dest))
         {
-            if (node.NodeObject.Id == 1)
+            if (node.NodeMember.Id == 1)
             {
 
                 playerMoved.Invoke(dest);
             }
-            dest.NodeObject = node.NodeObject;
-            dest.NodeObject.NodeObjectMoved(dest);
-            node.NodeObject = null;
+            dest.NodeMember = node.NodeMember;
+            dest.NodeMember.NodeObjectMoved(dest);
+            node.NodeMember = null;
         }
         
     }

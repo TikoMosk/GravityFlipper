@@ -6,7 +6,7 @@ public class NodeObject : NodeMember
 {
     public NodeObject(int id) : base (id)
     {
-
+        
     }
 
 }
