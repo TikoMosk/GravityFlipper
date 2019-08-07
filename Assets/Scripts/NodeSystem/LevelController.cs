@@ -35,11 +35,12 @@ public class LevelController : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.L))
         {
-            level = levelSerializer.LoadLevelLocal("level1");
+            level = levelSerializer.LoadLevelLocal(Application.persistentDataPath + "/level1");
             DestroyLevelGraphics();
             CreateLevelGraphics();
             onLevelCreated.Invoke();
         }
+        
     }
     public void BuildTestLevel() {
         level = levelSerializer.LoadLevelLocal(Application.streamingAssetsPath + "/level1");

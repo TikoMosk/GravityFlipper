@@ -29,9 +29,23 @@ public class CameraController : MonoBehaviour
         }
         cameraObject.transform.rotation = Quaternion.Lerp(cameraObject.transform.rotation, cameraRotation, 0.1f);
         forwardDirection = GetForwardDirection(cameraObject.transform.forward);
+        Debug.Log(forwardDirection);
     }
     public void UpdateCamera(Vector3 playerForward, Vector3 playerUp) {
-        cameraRotation = Quaternion.Euler(new Vector3(90, 0, -90) );
+        cameraRotation = Quaternion.LookRotation(playerForward, playerUp);
+        /*Vector3 forwardVec = Dir.GetVectorByDirection(forwardDirection);
+        //cameraRotation = Quaternion.Euler( Vector3.Cross(playerUp, Vector3.up) * -90);
+        if (forwardDirection == Node.Direction.FORWARD || forwardDirection == Node.Direction.RIGHT) {
+            cameraRotation = Quaternion.LookRotation(-playerForward, playerUp);
+            //cameraRotation = cameraRotation + Quaternion.Euler(Vector3.up * -90);
+        }
+        if (forwardDirection == Node.Direction.FORWARD || forwardDirection == Node.Direction.BACK) {
+            //cameraRotation = Quaternion.LookRotation(Vector3.Cross(playerForward, playerUp) * 180, playerUp);
+            
+            //cameraRotation = cameraRotation + Quaternion.Euler(Vector3.up * -90);
+        }
+        */
+
         upVector = playerUp;
 
     }
