@@ -12,8 +12,10 @@ public class Node
     public int X { get => x;  }
     public int Y { get => y; }
     public int Z { get => z; }
-    private int type;
-    public int Type { get { return type; } set { type = value; } }
+    private int id;
+    public int Id { get { return id; } set { id = value; } }
+    private Direction nodeDirection;
+    public Direction NodeDirection { get { return nodeDirection; } }
 
     public enum Direction { UP, DOWN , LEFT, RIGHT , FORWARD, BACK };
 
@@ -25,6 +27,21 @@ public class Node
     private NodeGraphic nodeGraphic;
     public NodeGraphic NodeGraphic { get => nodeGraphic; set => nodeGraphic = value; }
 
+    public Node(Level level, int x, int y, int z, int type) {
+        this.level = level;
+        this.x = x;
+        this.y = y;
+        this.z = z;
+        this.id = 0;
+        this.nodeMember = null;
+    }
+    public Node(int id) {
+        this.id = id;
+    }
+    public void SetNodeMember(NodeMember nodeMember) {
+        this.nodeMember = nodeMember;
+        this.nodeMember.SetPosition(x, y, z);
+    }
     public void CreateGraphic(GameObject node_go)
     {
         nodeGraphic = node_go.AddComponent<NodeGraphic>();
@@ -37,20 +54,9 @@ public class Node
     {
         GameController.Game.ClickNode (this, dir, button);
     }
-    public Node(Level level, int x, int y, int z, int type) {
-        this.level = level;
-        this.x = x;
-        this.y = y;
-        this.z = z;
-        this.type = 0;
-        this.nodeMember = null;
-    }
-    public Node() {
-        
-    }
     public void SetNodeType(int id)
     {
-        type = id;
+        this.id = id;
         if(nodeTypeChanged != null)
         {
             nodeTypeChanged();
@@ -79,11 +85,5 @@ public class Node
         }
         return false;
     }
-    public static Node CreatePrototype(int id)
-    {
-        Node n = new Node();
-        n.Type = id;
-        return n;
-    }
-
+    
 }

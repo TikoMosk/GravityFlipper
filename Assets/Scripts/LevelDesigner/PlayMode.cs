@@ -6,6 +6,6 @@ public class PlayMode : GameMode
 {
     public void OnNodeClick(Node n, Node.Direction dir, int button)
     {
-        GameController.Game.MovementController.OnClick(n, dir);
+        GameController.Game.CurrentLevel.Player.Move(n,dir);
     }
 }

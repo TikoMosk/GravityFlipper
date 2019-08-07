@@ -523,7 +523,7 @@ MonoBehaviour:
   - id: 0
     nodePrefab: {fileID: 0}
   - id: 1
-    nodePrefab: {fileID: 4694279471156317093, guid: 6d0b56d0988074787bfc0b897879d984,
+    nodePrefab: {fileID: 1262887121042734, guid: 89843090f5c38c24c9500fe9490ba5c4,
       type: 3}
   - id: 2
     nodePrefab: {fileID: 4694279471156317093, guid: 6d0b56d0988074787bfc0b897879d984,
@@ -1107,11 +1107,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de3bba32b2d57f24faa606a3df088516, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  worldParent: {fileID: 324359332}
-  mainCam: {fileID: 963194227}
-  cameraObject: {fileID: 125038227}
-  rotateTime: 0.2
-  isMovingSmoothly: 0
 --- !u!1 &1320366460
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,6 +10,8 @@ public class Level
     public int Height { get { return height; } }
     public int Length { get { return length; } }
     public Node[,,] NodeMap { get => nodeMap;}
+    public Player Player { get => player; }
+
 
 
     private Node[,,] nodeMap;
@@ -18,7 +20,8 @@ public class Level
     private int length;
     private Node startNode;
     private Node exitNode;
-    private Action<Node> playerMoved;
+    private Player player;
+    private List<NodeMember> enemies;
 
     public Level(int width,int height, int length)
     {
@@ -44,7 +47,11 @@ public class Level
         {
             if(nodeMap[x,y,z].NodeMember == null)
             {
-                nodeMap[x, y, z].NodeMember = nodeMember;
+                nodeMap[x, y, z].SetNodeMember(nodeMember);
+                if(nodeMember.Id == 1) {
+                    player = (Player)nodeMember;
+                    player.Facing = Node.Direction.BACK;
+                }
                 return true;
             }
         }
@@ -55,14 +62,11 @@ public class Level
     {
         if(!node.HasSamePosition(dest))
         {
-            if (node.NodeMember.Id == 1)
-            {
-
-                playerMoved.Invoke(dest);
-            }
             dest.NodeMember = node.NodeMember;
-            dest.NodeMember.NodeObjectMoved(dest);
+            dest.NodeMember.SetPosition(dest.X,dest.Y,dest.Z);
             node.NodeMember = null;
+            dest.NodeMember.NodeObjectMoved(dest);
+            
         }
         
     }
@@ -79,9 +83,6 @@ public class Level
         }
     }
 
-    internal void RegisterToPlayerMoved(Node node) {
-        throw new NotImplementedException();
-    }
 
     public Node GetNode(int x, int y, int z)
     {
@@ -121,41 +122,9 @@ public class Level
         else if (dir == Node.Direction.BACK) return GetNode(n.X, n.Y, n.Z - 1);
         else return n;
     }
-    public static Vector3 GetVectorByDirection(Node.Direction dir)
-    {
-        if (dir == Node.Direction.RIGHT)
-        {
-            return new Vector3(1, 0, 0);
-        }
-        else if (dir == Node.Direction.LEFT)
-        {
-            return new Vector3(-1, 0, 0);
-        }
-        else if (dir == Node.Direction.UP)
-        {
-            return new Vector3(0, 1, 0);
-        }
-        else if (dir == Node.Direction.DOWN)
-        {
-            return new Vector3(0, -1, 0);
-        }
-        else if (dir == Node.Direction.FORWARD)
-        {
-            return new Vector3(0, 0, 1);
-        }
-        else if (dir == Node.Direction.BACK)
-        {
-            return new Vector3(0, 0, -1);
-        }
-        else
-        {
-            Debug.Log("ERROR");
-            return Vector3.zero;
-        }
-    }
-    public void RegisterToPlayerMoved(Action<Node> playerMovedListener)
-    {
-        this.playerMoved += playerMovedListener;
+    
+    public void PlayerMoved() {
+        GameController.Game.NextTurn();
     }
 
 

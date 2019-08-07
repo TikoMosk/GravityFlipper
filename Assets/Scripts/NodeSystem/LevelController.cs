@@ -7,8 +7,6 @@ public class LevelController : MonoBehaviour
 {
     private Level level;
     public Level Level { get => level; set => level = value; }
-    private Node playerNode;
-    public Node PlayerNode { get => playerNode; }
 
     public LevelSerializer levelSerializer;
     public List<NodeData> nodeDataList;
@@ -39,48 +37,17 @@ public class LevelController : MonoBehaviour
         {
             level = levelSerializer.LoadLevelLocal("level1");
             DestroyLevelGraphics();
-            SetPlayerNode();
             CreateLevelGraphics();
             onLevelCreated.Invoke();
         }
-        if (Input.GetKeyDown(KeyCode.C)) {
-            BuildTestLevel();
-            SetPlayerNode();
-            CreateLevelGraphics();
+    }
+    public void BuildTestLevel() {
+        level = levelSerializer.LoadLevelLocal(Application.streamingAssetsPath + "/level1");
+        DestroyLevelGraphics();
+        CreateLevelGraphics();
 
-            onLevelCreated.Invoke();
-        }
-    }
-    private void SetPlayerNode() {
-        for (int x = 0; x < level.Width; x++) {
-            for (int y = 0; y < level.Height; y++) {
-                for (int z = 0; z < level.Length; z++) {
-                    if(level.GetNode(x,y,z).NodeMember != null) {
-                        if (level.GetNode(x, y, z).NodeMember.Id == 1) {
-                            playerNode = level.GetNode(x, y, z);
-                            level.RegisterToPlayerMoved((node) => PlayerMoved(node));
-                        }
-                    }
-                    
-                }
-            }
-        }
-    }
-    private void BuildTestLevel() {
-        level = new Level(10, 10, 10);
-        level.InitializeLevel();
-        for (int x = 0; x < level.Width; x++) {
-            for (int y = 0; y < level.Height; y++) {
-                for (int z = 0; z < level.Length; z++) {
-                    if(x == 0 || y == 0 || z == level.Length -1) {
-                        level.SetNode(x, y, z, 1);
-                    }
-                    if (x == 5 && y == 1 && z == 3) {
-                        level.AddNodeMember(x, y, z, new NodeMemberFactory().CreateNodeMember(1));
-                    }
-                }
-            }
-        }
+        onLevelCreated.Invoke();
+
     }
     // Destroys the level graphics (this is called when a new level is loaded to remove the old level graphics)
     private void DestroyLevelGraphics()
@@ -113,9 +80,9 @@ public class LevelController : MonoBehaviour
     // Creates the NodeGraphic for the node at x,y,z
     private void CreateNodeGraphics(int x, int y, int z)
     {
-        if (GetPrefabByNodeId(Level.GetNode(x, y, z).Type) != null)
+        if (GetPrefabByNodeId(Level.GetNode(x, y, z).Id) != null)
         {
-            GameObject node_go = Instantiate(GetPrefabByNodeId(Level.GetNode(x, y, z).Type), Level.GetNode(x, y, z).GetPosition(), transform.rotation);
+            GameObject node_go = Instantiate(GetPrefabByNodeId(Level.GetNode(x, y, z).Id), Level.GetNode(x, y, z).GetPosition(), transform.rotation);
             Level.GetNode(x, y, z).CreateGraphic(node_go);
             Level.GetNode(x, y, z).NodeGraphic.transform.parent = this.transform;
             Level.GetNode(x, y, z).SubscribeToNodeTypeChanged(() => { OnNodeTypeChanged(level.GetNode(x, y, z),node_go); });
@@ -135,24 +102,26 @@ public class LevelController : MonoBehaviour
         {
             if (GetPrefabByNodeMemberId(Level.GetNode(x, y, z).NodeMember.Id))
             {
+                
                 NodeMember nodeObject = Level.GetNode(x, y, z).NodeMember;
-                GameObject nodeObject_GameObject = Instantiate(GetPrefabByNodeMemberId(nodeObject.Id), Level.GetNode(x,y,z).GetPosition(), transform.rotation);
+                GameObject nodeObject_GameObject = Instantiate(GetPrefabByNodeMemberId(nodeObject.Id), Level.GetNode(x,y,z).GetPosition(), Quaternion.identity);
+                nodeObject_GameObject.transform.LookAt(nodeObject_GameObject.transform.position + Dir.GetVectorByDirection(nodeObject.Facing));
                 nodeObject_GameObject.transform.parent = this.transform;
-                NodeObjectGraphic nodeObjectGraphic= nodeObject.CreateMoveableObjectGraphic(nodeObject_GameObject);
+                NodeMemberGraphic nodeObjectGraphic= nodeObject.CreateMoveableObjectGraphic(nodeObject_GameObject);
                 nodeObject.NodeObjectGraphic.Node = Level.GetNode(x,y,z);
                 nodeObject.SubscribeToMoveableObjectMoved((node) => { OnNodeMemberMoved(node, nodeObjectGraphic); });
             }
         }
     }
-    private void OnNodeMemberMoved(Node dest, NodeObjectGraphic nodeObjectGraphic)
+    private void OnNodeMemberMoved(Node dest, NodeMemberGraphic nodeObjectGraphic)
     {
-        GameController.Game.SmoothGraphics.MovePlayer(nodeObjectGraphic.transform, nodeObjectGraphic.Node.GetPosition(), dest.GetPosition());
-        //nodeObjectGraphic.transform.position = dest.GetPosition();
+        nodeObjectGraphic.transform.rotation = Quaternion.LookRotation(Dir.GetVectorByDirection(dest.NodeMember.Facing), Dir.GetVectorByDirection(dest.NodeMember.UpDirection));
+        nodeObjectGraphic.transform.position = dest.GetPosition();
         nodeObjectGraphic.Node = dest;
     }
     private void OnNodeTypeChanged(Node n, GameObject node_go)
     {
-        if(n.Type == 0 ) {
+        if(n.Id == 0 ) {
             Destroy(node_go);
         }
         else {
@@ -185,12 +154,6 @@ public class LevelController : MonoBehaviour
 
         Debug.LogError("No Prefab specified for the given moveableObject ID");
         return null;
-    }
-    private Node PlayerMoved(Node playerNode)
-    {
-        this.playerNode = playerNode;
-        GameController.Game.NextTurn();
-        return playerNode;
     }
 
     public void RegisterToLevelCreated(Action onLevelCreated)

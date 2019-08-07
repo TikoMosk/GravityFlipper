@@ -16,11 +16,13 @@ public class GameController : MonoBehaviour
     private MovementController movementController;
     private SmoothGraphics smoothGraphics;
     private LevelController levelController;
+    private CameraController cameraController;
 
     public LevelController LevelController { get { return levelController; } }
     public LevelDesignController LevelDesignController { get { return levelDesignController; } }
     public MovementController MovementController { get { return movementController; } }
     public SmoothGraphics SmoothGraphics { get { return smoothGraphics; } }
+    public CameraController CameraController { get { return cameraController; } }
 
 
     private Action onNextTurn;
@@ -84,6 +86,7 @@ public class GameController : MonoBehaviour
         movementController = FindObjectOfType<MovementController>();
         levelDesignController = FindObjectOfType<LevelDesignController>();
         smoothGraphics = FindObjectOfType<SmoothGraphics>();
+        cameraController = FindObjectOfType<CameraController>();
     }
     private void CurrentLevelActive()
     {

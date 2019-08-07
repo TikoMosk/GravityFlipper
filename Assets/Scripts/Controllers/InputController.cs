@@ -6,11 +6,11 @@ public class InputController : MonoBehaviour
 {
     private void Update()
     {
-        if(Input.GetMouseButtonDown(0))
+        if(Input.GetMouseButtonUp(0))
         {
             Click(0);
         }
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonUp(1))
         {
             Click(1);
         }
@@ -24,23 +24,10 @@ public class InputController : MonoBehaviour
             
             if(hit.collider.gameObject.GetComponent<NodeGraphic>() != null)
             {
-                hit.collider.gameObject.GetComponent<NodeGraphic>().GetClicked(GetDirectionByNormal(hit.normal), button);
+                hit.collider.gameObject.GetComponent<NodeGraphic>().GetClicked(Dir.GetDirectionByVector(hit.normal), button);
             }
         }
     }
-    private Node.Direction GetDirectionByNormal(Vector3 normal)
-    {
-        Vector3 localNormal = GameController.Game.LevelController.transform.InverseTransformPoint(normal);
-
-        Node.Direction dir = Node.Direction.UP;
-        if (Vector3.SqrMagnitude(localNormal - new Vector3(1, 0, 0)) < 0.1f) dir = Node.Direction.RIGHT;
-        else if (Vector3.SqrMagnitude(localNormal -new Vector3(-1, 0, 0)) < 0.1f) dir = Node.Direction.LEFT;
-        else if (Vector3.SqrMagnitude(localNormal - new Vector3(0, 1, 0)) < 0.1f) dir = Node.Direction.UP;
-        else if (Vector3.SqrMagnitude(localNormal - new Vector3(0, -1, 0)) < 0.1f) dir = Node.Direction.DOWN;
-        else if (Vector3.SqrMagnitude(localNormal - new Vector3(0, 0, 1)) < 0.1f) dir = Node.Direction.FORWARD;
-        else if (Vector3.SqrMagnitude(localNormal - new Vector3(0, 0, -1)) < 0.1f) dir = Node.Direction.BACK;
-        return dir;
-
-    }
+    
     
 }

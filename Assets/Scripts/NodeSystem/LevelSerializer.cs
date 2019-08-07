@@ -27,10 +27,10 @@ public class LevelSerializer : MonoBehaviour
             }
         }
     }
-    public Level LoadLevelLocal(string levelFilename) {
-
-        if (File.Exists(Application.persistentDataPath + "/" + levelFilename)) {
-            string s = File.ReadAllText(Application.persistentDataPath + "/" + levelFilename);
+    public Level LoadLevelLocal(string path) {
+        Debug.Log(path);
+        if (File.Exists(path)) {
+            string s = File.ReadAllText(path);
             LevelData levelData = JsonUtility.FromJson<LevelData>(s);
             Level level = DeserializeLevel(levelData);
             return level;
@@ -53,7 +53,7 @@ public class LevelSerializer : MonoBehaviour
         for (int x = 0; x < level.Width; x++) {
             for (int y = 0; y < level.Height; y++) {
                 for (int z = 0; z < level.Length; z++) {
-                    if(level.NodeMap[x,y,z].Type != 0) {
+                    if(level.NodeMap[x,y,z].Id != 0) {
                         NodeData nodeData = new NodeData(level.NodeMap[x, y, z]);
                         levelData.nodeDataList.Add(nodeData);
                     }
@@ -112,7 +112,7 @@ public class NodeData{
         x = n.X;
         y = n.Y;
         z = n.Z;
-        id = n.Type;
+        id = n.Id;
         //TODO: DIRECTIONS
         //direction = n.direction;
     }
