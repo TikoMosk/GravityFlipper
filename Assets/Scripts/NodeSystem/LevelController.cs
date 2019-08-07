@@ -117,8 +117,17 @@ public class LevelController : MonoBehaviour
     private void OnNodeMemberMoved(Node dest, NodeMemberGraphic nodeObjectGraphic)
     {
         nodeObjectGraphic.transform.rotation = Quaternion.LookRotation(Dir.GetVectorByDirection(dest.NodeMember.Facing), Dir.GetVectorByDirection(dest.NodeMember.UpDirection));
-        nodeObjectGraphic.transform.position = dest.GetPosition();
+        StartCoroutine(MoveSmoothly(nodeObjectGraphic.transform, dest.GetPosition(), 0.3f));
+        //nodeObjectGraphic.transform.position = dest.GetPosition();
         nodeObjectGraphic.Node = dest;
+    }
+    IEnumerator MoveSmoothly(Transform obj, Vector3 target, float overTime) {
+        float startTime = Time.time;
+        while (Time.time < startTime + overTime) {
+            obj.transform.position = Vector3.Lerp(obj.transform.position, target, (Time.time - startTime) / overTime);
+            yield return null;
+        }
+        obj.transform.position = target;
     }
     private void OnNodeTypeChanged(Node n, GameObject node_go)
     {

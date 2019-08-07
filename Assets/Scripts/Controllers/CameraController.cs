@@ -32,20 +32,30 @@ public class CameraController : MonoBehaviour
         Debug.Log(forwardDirection);
     }
     public void UpdateCamera(Vector3 playerForward, Vector3 playerUp) {
-        cameraRotation = Quaternion.LookRotation(playerForward, playerUp);
-        /*Vector3 forwardVec = Dir.GetVectorByDirection(forwardDirection);
-        //cameraRotation = Quaternion.Euler( Vector3.Cross(playerUp, Vector3.up) * -90);
-        if (forwardDirection == Node.Direction.FORWARD || forwardDirection == Node.Direction.RIGHT) {
-            cameraRotation = Quaternion.LookRotation(-playerForward, playerUp);
-            //cameraRotation = cameraRotation + Quaternion.Euler(Vector3.up * -90);
-        }
-        if (forwardDirection == Node.Direction.FORWARD || forwardDirection == Node.Direction.BACK) {
-            //cameraRotation = Quaternion.LookRotation(Vector3.Cross(playerForward, playerUp) * 180, playerUp);
-            
-            //cameraRotation = cameraRotation + Quaternion.Euler(Vector3.up * -90);
-        }
-        */
+        
+        Vector3 forwardVec = Dir.GetVectorByDirection(forwardDirection);
+        bool minus = false;
+        bool cross = false;
+        Debug.Log("PLAYER FORWARD DIRECTION IS " + Dir.GetDirectionByVector(-playerUp));
 
+        if(forwardDirection == Dir.GetDirectionByVector(-playerUp)) {
+            cross = true;
+            minus = false;
+        }
+        else {
+            cross = false;
+            minus = true;
+        }
+        
+        if (minus == true) {
+            playerForward = -playerForward;
+            Debug.Log("Minus");
+        }
+        if (cross == true) {
+            playerForward = Vector3.Cross(playerForward, playerUp);
+            Debug.Log("X");
+        }
+        cameraRotation = Quaternion.LookRotation(playerForward, playerUp);
         upVector = playerUp;
 
     }
