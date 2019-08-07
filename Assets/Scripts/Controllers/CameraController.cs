@@ -29,10 +29,9 @@ public class CameraController : MonoBehaviour
         }
         cameraObject.transform.rotation = Quaternion.Lerp(cameraObject.transform.rotation, cameraRotation, 0.1f);
         forwardDirection = GetForwardDirection(cameraObject.transform.forward);
-        Debug.Log(forwardDirection);
+        cameraObject.transform.position = Vector3.MoveTowards(cameraObject.transform.position,GameController.Game.CurrentLevel.Player.NodeObjectGraphic.Node.GetPosition(),0.1f);
     }
     public void UpdateCamera(Vector3 playerForward, Vector3 playerUp) {
-        
         Vector3 forwardVec = Dir.GetVectorByDirection(forwardDirection);
         bool minus = false;
         bool cross = false;
