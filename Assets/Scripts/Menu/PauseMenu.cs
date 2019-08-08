@@ -38,6 +38,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Resume()
     {
+      
         GameController.Game.gameObject.SetActive(true);
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
@@ -54,7 +55,9 @@ public class PauseMenu : MonoBehaviour
 
     public void Restart()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        GameController.Game.LevelController.BuildTestLevel();
+        Resume();
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void MainMenu()
