@@ -5,37 +5,50 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     public GameObject cameraObject;
+    public float speed;
     Quaternion cameraRotation;
-    Vector2 dragStartPos;
-    Vector2 dragEndPos;
     Vector3 upVector = Vector3.up;
     Vector3 axis;
-    public float speed;
+
     Node.Direction forwardDirection;
+    private bool playerExists;
 
-
-    private void Update() {
-        
-        if(Input.GetMouseButtonDown(0)) {
-            dragStartPos = Input.mousePosition;
-
-        }
-        if (Input.GetMouseButton(0)) {
-            dragEndPos = Input.mousePosition;
-            if(Vector2.Distance(dragEndPos,dragStartPos) > 30) {
-                cameraObject.transform.RotateAround(cameraObject.transform.position, upVector, Input.GetAxis("Mouse X") * speed);
-                cameraRotation = cameraObject.transform.rotation;
-            }
-        }
-        cameraObject.transform.rotation = Quaternion.Lerp(cameraObject.transform.rotation, cameraRotation, 0.1f);
-        forwardDirection = GetForwardDirection(cameraObject.transform.forward);
-        cameraObject.transform.position = Vector3.MoveTowards(cameraObject.transform.position,GameController.Game.CurrentLevel.Player.NodeObjectGraphic.Node.GetPosition(),0.1f);
+    private void Start() {
+        GameController.Game.LevelController.RegisterToLevelCreated(PlayerExists);
     }
-    public void UpdateCamera(Vector3 playerForward, Vector3 playerUp) {
+    private void Update() {
+
+        
+        if (playerExists) {
+            cameraObject.transform.position = GameController.Game.CurrentLevel.Player.NodeObjectGraphic.transform.position;
+        }
+        forwardDirection = GetForwardDirection(cameraObject.transform.forward);
+        
+    }
+    public void RotateAround(float dragDist) {
+        cameraObject.transform.RotateAround(cameraObject.transform.position, upVector, dragDist * speed);
+        cameraRotation = cameraObject.transform.rotation;
+    }
+    private void PlayerExists() {
+        playerExists = true;
+    }
+
+    public void Zoom(float amount) {
+        float currentSize = Camera.main.orthographicSize;
+        Camera.main.orthographicSize = Mathf.Clamp(currentSize + amount, 2, 8);
+    }
+    IEnumerator RotateSmoothly(Transform obj, Quaternion targetRotation, float overTime) {
+        float startTime = Time.time;
+        while (Time.time < startTime + overTime) {
+            obj.transform.rotation = Quaternion.Lerp(obj.transform.rotation, targetRotation, (Time.time - startTime) / overTime);
+            yield return null;
+        }
+        obj.transform.rotation = targetRotation;
+    }
+    public void UpdateGravity(Vector3 playerForward, Vector3 playerUp) {
         Vector3 forwardVec = Dir.GetVectorByDirection(forwardDirection);
         bool minus = false;
         bool cross = false;
-        Debug.Log("PLAYER FORWARD DIRECTION IS " + Dir.GetDirectionByVector(-playerUp));
 
         if(forwardDirection == Dir.GetDirectionByVector(-playerUp)) {
             cross = true;
@@ -45,17 +58,15 @@ public class CameraController : MonoBehaviour
             cross = false;
             minus = true;
         }
-        
         if (minus == true) {
             playerForward = -playerForward;
-            Debug.Log("Minus");
         }
         if (cross == true) {
             playerForward = Vector3.Cross(playerForward, playerUp);
-            Debug.Log("X");
         }
         cameraRotation = Quaternion.LookRotation(playerForward, playerUp);
         upVector = playerUp;
+        StartCoroutine(GameController.Game.SmoothGraphics.RotateSmoothly(cameraObject.transform, cameraRotation, 0.5f));
 
     }
     private Node.Direction GetForwardDirection(Vector3 vector) {

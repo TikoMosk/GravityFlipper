@@ -94,7 +94,7 @@ public class GameController : MonoBehaviour
     }
     public void NextTurn()
     {
-        Debug.Log("NEXT TURN");
+        
     }
     public void RegisterForNextTurn(Action onNextTurn)
     {

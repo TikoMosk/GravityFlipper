@@ -31,7 +31,7 @@ public class Player : NodeMember
                 }
                 else if(GameController.Game.LevelController.Level.GetNodeDistance(previousClickedNode, n) != 0){
                     facing = previousDirection;
-                    GameController.Game.CameraController.UpdateCamera(Dir.GetVectorByDirection(facing), Dir.GetVectorByDirection(dir));
+                    GameController.Game.CameraController.UpdateGravity(Dir.GetVectorByDirection(facing), Dir.GetVectorByDirection(dir));
                     NodeObjectMoved.Invoke(playerNode);
                 }
                 previousClickedNode = n;

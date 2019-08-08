@@ -43,7 +43,28 @@ public class LevelController : MonoBehaviour
         
     }
     public void BuildTestLevel() {
-        level = levelSerializer.LoadLevelLocal(Application.streamingAssetsPath + "/level1");
+        //level = levelSerializer.LoadLevelLocal(Application.streamingAssetsPath + "/level1");
+
+        level = new Level(10, 10, 10);
+        level.InitializeLevel();
+        for (int x = 0; x < 10; x++) {
+            for (int y = 0; y < 10; y++) {
+                for (int z = 0; z < 10; z++) {
+                    if((x == 0 || y == 0 || z == 9) && y <= 4) {
+                        level.SetNode(x, y, z, 1);
+                    }
+                    if(x == 3 && y < 2 && z <= 4 && z >= 2) {
+                        level.SetNode(x, y, z, 1);
+                    }
+                    if (x == 6 && y <= 8 && z <= 6 && z >= 5) {
+                        level.SetNode(x, y, z, 1);
+                    }
+                    if (x == 5 && y == 1 && z == 5) {
+                        level.AddNodeMember(x, y, z, new NodeMemberFactory().CreateNodeMember(1));
+                    }
+                }
+            }
+        }
         DestroyLevelGraphics();
         CreateLevelGraphics();
 
@@ -117,18 +138,10 @@ public class LevelController : MonoBehaviour
     private void OnNodeMemberMoved(Node dest, NodeMemberGraphic nodeObjectGraphic)
     {
         nodeObjectGraphic.transform.rotation = Quaternion.LookRotation(Dir.GetVectorByDirection(dest.NodeMember.Facing), Dir.GetVectorByDirection(dest.NodeMember.UpDirection));
-        StartCoroutine(MoveSmoothly(nodeObjectGraphic.transform, dest.GetPosition(), 0.3f));
-        //nodeObjectGraphic.transform.position = dest.GetPosition();
+        StartCoroutine(GameController.Game.SmoothGraphics.MoveSmoothly(nodeObjectGraphic.transform, dest.GetPosition(), 0.3f));
         nodeObjectGraphic.Node = dest;
     }
-    IEnumerator MoveSmoothly(Transform obj, Vector3 target, float overTime) {
-        float startTime = Time.time;
-        while (Time.time < startTime + overTime) {
-            obj.transform.position = Vector3.Lerp(obj.transform.position, target, (Time.time - startTime) / overTime);
-            yield return null;
-        }
-        obj.transform.position = target;
-    }
+
     private void OnNodeTypeChanged(Node n, GameObject node_go)
     {
         if(n.Id == 0 ) {
