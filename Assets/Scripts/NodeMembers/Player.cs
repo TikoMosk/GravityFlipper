@@ -34,10 +34,16 @@ public class Player : NodeMember
                     GameController.Game.CameraController.UpdateGravity(Dir.GetVectorByDirection(facing), Dir.GetVectorByDirection(dir));
                     NodeObjectMoved.Invoke(playerNode);
                 }
+                if (GameController.Game.LevelController.Level.GetNodeDistance(previousClickedNode, n) != 0)
+                {
+                    TurnEventSystem.currentInstance.NextTurn();
+                }
+                
                 previousClickedNode = n;
                 previousDirection = dir;
             }
             
         }
+        
     }
 }

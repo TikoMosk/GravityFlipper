@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Laser : Node {
-    public Laser(int id) : base(id) {
+public class LaserN : Node {
+    public LaserN(int id) : base(id) {
 
     }
 }

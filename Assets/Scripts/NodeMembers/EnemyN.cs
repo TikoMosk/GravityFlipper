@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : NodeMember
+public class EnemyN : NodeMember
 {
-    public Enemy(int id) : base(id)
+    public EnemyN(int id) : base(id)
     {
 
     }
