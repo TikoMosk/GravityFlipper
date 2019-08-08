@@ -1,17 +1,13 @@
 ﻿using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : NodeMember
 {
-    private void OnCollisionEnter(Collision collision)
-	{
-		if (collision.gameObject.tag == "Player")
-		{
-			Destroy(collision.gameObject);
-		}
-	}
+    public Enemy(int id) : base(id) {
+        
+    }
 
-    private void OnDestroy()
+   /* private void OnDestroy()
     {
         EventController.currentInstance.Remove(GetComponent<PatrolScript>().Check);
-    }
+    }*/
 }

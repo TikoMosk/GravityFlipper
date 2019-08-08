@@ -29,10 +29,12 @@ public class TurnEventSystem : MonoBehaviour
 
     public void NextTurn()
     {
-        //Invokes, when event is not empty;
+
         OnPlayerMoveEvent?.Invoke();
         turnCount++;
+
     }
+    
 
     #endregion
 }

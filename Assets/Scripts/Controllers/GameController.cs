@@ -24,6 +24,7 @@ public class GameController : MonoBehaviour
     public SmoothGraphics SmoothGraphics { get { return smoothGraphics; } }
     public CameraController CameraController { get { return cameraController; } }
 
+    public GameMode GameMode { get => gameMode; set => gameMode = value; }
 
     private Action onNextTurn;
 
@@ -50,11 +51,12 @@ public class GameController : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == "SampleScene")
         {
-            gameMode = new PlayMode();
+            GameMode = new PlayMode();
+            levelController.BuildTestLevel();
         }
         else if (SceneManager.GetActiveScene().name == "LevelEditor")
         {
-            gameMode = new LevelEditorMode();
+            GameMode = new LevelEditorMode();
         }
     }
     public void ChangeScene(string s)
@@ -73,7 +75,7 @@ public class GameController : MonoBehaviour
     }
     public void ClickNode(Node n, Node.Direction dir, int button)
     {
-        gameMode.OnNodeClick(n, dir, button);
+        GameMode.OnNodeClick(n, dir, button);
     }
     
     private void SetUpControllers()

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311947, g: 0.38074005, b: 0.35872722, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -133,6 +133,7 @@ GameObject:
   - component: {fileID: 25129826}
   - component: {fileID: 25129825}
   - component: {fileID: 25129827}
+  - component: {fileID: 25129828}
   m_Layer: 0
   m_Name: '*GameController'
   m_TagString: Untagged
@@ -204,6 +205,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraObject: {fileID: 1233989263}
   speed: 5
+--- !u!114 &25129828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 25129822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88a64bda5dc9146fba633dade5c30c8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &82394094
 GameObject:
   m_ObjectHideFlags: 0
@@ -389,17 +402,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 324359334}
-        m_MethodName: BuildTestLevel
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &101548617
@@ -512,14 +514,20 @@ MonoBehaviour:
   - id: 1
     nodePrefab: {fileID: 1262887121042734, guid: 89843090f5c38c24c9500fe9490ba5c4,
       type: 3}
-  - id: 2
-    nodePrefab: {fileID: 4694279471156317093, guid: 64cd717f8e9c21d4d838ac00217f04f4,
-      type: 3}
   nodeObjectDataList:
   - id: 0
     nodePrefab: {fileID: 0}
   - id: 1
     nodePrefab: {fileID: 5238763070401807191, guid: 773308f6431a344f0b80e4f1a9691fed,
+      type: 3}
+  - id: 2
+    nodePrefab: {fileID: 337943517186285683, guid: 9c76eeb32c6a14ac59e959e33bfe39a0,
+      type: 3}
+  - id: 3
+    nodePrefab: {fileID: 7928255879371980449, guid: 329ca1a8ffe3240128cd20c675919497,
+      type: 3}
+  - id: 3
+    nodePrefab: {fileID: 7928255879371980449, guid: f8bb82b84767045d2902876f14d062ff,
       type: 3}
 --- !u!114 &324359335
 MonoBehaviour:
@@ -1666,7 +1674,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 1
+  orthographic: 0
   orthographic size: 8
   m_Depth: -1
   m_CullingMask:
@@ -1691,7 +1699,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.35355338, y: -0.35355338, z: 0.1464466, w: 0.8535535}
-  m_LocalPosition: {x: 21, y: 29.6, z: -21}
+  m_LocalPosition: {x: 8.61, y: 12.08, z: -8.61}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1233989264}
@@ -2180,7 +2188,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1732212135
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2368,7 +2376,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1823213760
 MonoBehaviour:
   m_ObjectHideFlags: 0

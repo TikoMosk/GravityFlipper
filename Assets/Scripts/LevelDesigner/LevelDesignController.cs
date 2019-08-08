@@ -19,4 +19,8 @@ public class LevelDesignController : MonoBehaviour
         }
         
     }
+    public void ChangeMode() {
+        Debug.Log("Change Mode, current mode is " + GameController.Game.GameMode);
+        GameController.Game.GameMode = new PlayMode();
+    }
 }

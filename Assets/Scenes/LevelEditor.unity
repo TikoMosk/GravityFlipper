@@ -1468,16 +1468,18 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1399402165}
+      objectReference: {fileID: 1399402167}
     - target: {fileID: 5467440157396823639, guid: 545ce7cef392a454cb9ca51e629f2820,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ChangeScene
+      value: ChangeMode
       objectReference: {fileID: 0}
     - target: {fileID: 5467440156525762050, guid: 545ce7cef392a454cb9ca51e629f2820,
         type: 3}
       propertyPath: m_Text
-      value: Clear
+      value: 'Test
+
+'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 545ce7cef392a454cb9ca51e629f2820, type: 3}

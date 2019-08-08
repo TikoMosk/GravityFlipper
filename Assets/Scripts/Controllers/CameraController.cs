@@ -34,16 +34,9 @@ public class CameraController : MonoBehaviour
     }
 
     public void Zoom(float amount) {
-        float currentSize = Camera.main.orthographicSize;
-        Camera.main.orthographicSize = Mathf.Clamp(currentSize + amount, 2, 8);
-    }
-    IEnumerator RotateSmoothly(Transform obj, Quaternion targetRotation, float overTime) {
-        float startTime = Time.time;
-        while (Time.time < startTime + overTime) {
-            obj.transform.rotation = Quaternion.Lerp(obj.transform.rotation, targetRotation, (Time.time - startTime) / overTime);
-            yield return null;
-        }
-        obj.transform.rotation = targetRotation;
+     
+
+        Camera.main.transform.position += (Camera.main.transform.position - cameraObject.transform.position) * amount * 0.5f;
     }
     public void UpdateGravity(Vector3 playerForward, Vector3 playerUp) {
         Vector3 forwardVec = Dir.GetVectorByDirection(forwardDirection);
