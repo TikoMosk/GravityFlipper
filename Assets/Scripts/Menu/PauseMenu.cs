@@ -54,7 +54,8 @@ public class PauseMenu : MonoBehaviour
 
     public void Restart()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        GameController.Game.LevelController.BuildTestLevel();
+        Resume();
     }
 
     public void MainMenu()
