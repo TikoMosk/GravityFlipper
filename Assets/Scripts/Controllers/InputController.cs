@@ -11,9 +11,11 @@ public class InputController : MonoBehaviour {
     Vector2 touchOnePrevPos;
     Vector3 inputPosDelta;
     Vector3 inputPreviousPos;
+    float tracker = 0;
 
     private void Update() {
         if (GameController.Game.SmoothGraphics.AnimationCount == 0) {
+            Debug.Log("UPDATE" + Time.time);
             if (Input.touchCount > 0) {
                 if (Input.GetTouch(0).phase == TouchPhase.Began) {
                     touchStart = Input.GetTouch(0).position;
@@ -40,7 +42,7 @@ public class InputController : MonoBehaviour {
                     else if (Input.GetTouch(0).phase == TouchPhase.Ended) {
                         inputPosDelta = Input.GetTouch(0).deltaPosition;
                         if (inputPosDelta.magnitude < 1) {
-                            Click(0);
+                            Click();
                         }
 
                     }
@@ -50,15 +52,12 @@ public class InputController : MonoBehaviour {
             else {
                 if (Input.GetMouseButton(0)) {
                     inputPosDelta = Input.mousePosition - inputPreviousPos;
-                    if (inputPosDelta.magnitude > 5) {
+                    if (inputPosDelta.magnitude > 7) {
                         GameController.Game.CameraController.RotateAround(inputPosDelta.x * 0.025f);
                     }
                 }
-                if (Input.GetMouseButtonUp(0)) {
-                    Click(0);
-                }
-                if (Input.GetMouseButtonUp(1)) {
-                    Click(1);
+                else if (Input.GetMouseButtonUp(0)) {
+                    Click();
                 }
                 if (Input.GetAxis("Mouse ScrollWheel") != 0) {
 
@@ -69,13 +68,14 @@ public class InputController : MonoBehaviour {
         }
 
     }
-    private void Click(int button) {
+    private void Click() {
+        
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out hit)) {
 
             if (hit.collider.gameObject.GetComponent<NodeGraphic>() != null) {
-                hit.collider.gameObject.GetComponent<NodeGraphic>().GetClicked(Dir.GetDirectionByVector(hit.normal), button);
+                hit.collider.gameObject.GetComponent<NodeGraphic>().GetClicked(Dir.GetDirectionByVector(hit.normal));
             }
         }
     }

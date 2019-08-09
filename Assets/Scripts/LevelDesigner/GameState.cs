@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface GameMode 
+public interface GameState 
 {
-    void OnNodeClick(Node n, Node.Direction dir, int button);
+    void OnNodeClick(Node n, Node.Direction dir);
     
 }

@@ -6,6 +6,9 @@ public class CameraController : MonoBehaviour
 {
     public GameObject cameraObject;
     public float speed;
+    public float minZoom;
+    public float maxZoom;
+    public float zoomSensitivity;
     Quaternion cameraRotation;
     Vector3 upVector = Vector3.up;
     Vector3 axis;
@@ -15,6 +18,10 @@ public class CameraController : MonoBehaviour
 
     private void Start() {
         GameController.Game.LevelController.RegisterToLevelCreated(PlayerExists);
+    }
+    public void ResetCamera() {
+        cameraObject.transform.rotation = Quaternion.LookRotation(Vector3.forward, Vector3.up);
+        UpdateGravity(Vector3.forward, Vector3.up);
     }
     private void Update() {
 
@@ -34,9 +41,23 @@ public class CameraController : MonoBehaviour
     }
 
     public void Zoom(float amount) {
-     
-
-        Camera.main.transform.position += (Camera.main.transform.position - cameraObject.transform.position) * amount * 0.5f;
+        Vector3 cameraPos = Vector3.zero;
+        if(Camera.main.orthographic) {
+            Camera.main.transform.position = cameraObject.transform.position + (Camera.main.transform.position - cameraObject.transform.position).normalized * maxZoom;
+            Camera.main.orthographicSize += amount * zoomSensitivity;
+            Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize, minZoom, maxZoom);
+        }
+        else {
+            Camera.main.transform.position += (Camera.main.transform.position - cameraObject.transform.position) * amount * 0.5f * zoomSensitivity;
+            if((Camera.main.transform.position - cameraObject.transform.position).magnitude > maxZoom){
+                Camera.main.transform.position = cameraObject.transform.position + (Camera.main.transform.position - cameraObject.transform.position).normalized * maxZoom;
+            }
+            if ((Camera.main.transform.position - cameraObject.transform.position).magnitude < minZoom) {
+                Camera.main.transform.position = cameraObject.transform.position + (Camera.main.transform.position - cameraObject.transform.position).normalized * minZoom;
+            }
+           
+        }
+        
     }
     public void UpdateGravity(Vector3 playerForward, Vector3 playerUp) {
         Vector3 forwardVec = Dir.GetVectorByDirection(forwardDirection);

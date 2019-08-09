@@ -5,14 +5,14 @@ using System;
 
 public class NodeGraphic : MonoBehaviour
 {
-    public event Action<Node.Direction,int> onClick;
+    public event Action<Node.Direction> onClick;
     private Node node;
 
     public Node Node { get => node; set => node = value; }
 
-    public void GetClicked(Node.Direction dir, int button)
+    public void GetClicked(Node.Direction dir)
     {
-        onClick?.Invoke(dir, button);
+        onClick?.Invoke(dir);
     }
     public void RotateGraphicToDirection(Node.Direction dir)
     {
