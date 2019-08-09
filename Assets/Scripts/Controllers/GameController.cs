@@ -46,7 +46,7 @@ public class GameController : MonoBehaviour {
         }
     }
     public void SetGameModeBasedOnScene() {
-        if (SceneManager.GetActiveScene().name == "SampleScene") {
+        if (SceneManager.GetActiveScene().name == "SampleScene" || SceneManager.GetActiveScene().name == "OfficialLevels") {
             CurrentGameState = new PlayMode();
 
         }
