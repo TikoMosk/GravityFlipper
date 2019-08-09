@@ -38,7 +38,6 @@ public class PauseMenu : MonoBehaviour
 
     public void Resume()
     {
-      
         GameController.Game.gameObject.SetActive(true);
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
@@ -55,14 +54,17 @@ public class PauseMenu : MonoBehaviour
 
     public void Restart()
     {
+        GameController.Game.gameObject.SetActive(true);
         GameController.Game.LevelController.BuildTestLevel();
+        GameController.Game.CameraController.ResetCamera();
         Resume();
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void MainMenu()
     {
-        SceneManager.LoadScene(1);
+        GameController.Game.gameObject.SetActive(true);
+        Time.timeScale = 1f;
+        GameController.Game.ChangeScene("LevelEditor");
     }
 
     public void SetMusicVolume()

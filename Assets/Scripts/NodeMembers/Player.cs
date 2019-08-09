@@ -19,9 +19,9 @@ public class Player : NodeMember
             if(previousClickedNode == null) {
                 previousClickedNode = GameController.Game.CurrentLevel.GetNodeInTheDirection(playerNode, Node.Direction.DOWN);
             }
-            if (GameController.Game.LevelController.Level.GetNodeDistance(previousClickedNode, n) < 3 ) {
+            if (GameController.Game.LevelController.Level.GetNodeDistance(previousClickedNode, n) < 3) {
                 upDirection = dir;
-                if (!playerNode.HasSamePosition(destinationNode)) {
+                if (!playerNode.HasSamePosition(destinationNode) && GameController.Game.LevelController.Level.GetNodeDistance(playerNode, destinationNode) <= 1) {
                     if (GameController.Game.LevelController.Level.GetNodeDistance(previousClickedNode, n) < 3) {
                         forwardVector = destinationNode.GetPosition() - playerNode.GetPosition();
                         facing = Dir.GetDirectionByVector(forwardVector);
@@ -29,15 +29,22 @@ public class Player : NodeMember
                     }
 
                 }
-                else if(GameController.Game.LevelController.Level.GetNodeDistance(previousClickedNode, n) != 0){
+                    
+                else if(GameController.Game.LevelController.Level.GetNodeDistance(previousClickedNode, n) !=  0){
                     facing = previousDirection;
                     GameController.Game.CameraController.UpdateGravity(Dir.GetVectorByDirection(facing), Dir.GetVectorByDirection(dir));
                     NodeObjectMoved.Invoke(playerNode);
                 }
+                if (GameController.Game.LevelController.Level.GetNodeDistance(previousClickedNode, n) != 0)
+                {
+                    TurnEventSystem.currentInstance.NextTurn();
+                }
+                
                 previousClickedNode = n;
                 previousDirection = dir;
             }
             
         }
+        
     }
 }

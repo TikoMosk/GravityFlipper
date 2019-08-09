@@ -50,9 +50,9 @@ public class Node
         nodeGraphic.onClick += OnClickNode;
     }
 
-    private void OnClickNode(Direction dir, int button)
+    private void OnClickNode(Direction dir)
     {
-        GameController.Game.ClickNode (this, dir, button);
+        GameController.Game.ClickNode (this, dir);
     }
     public void SetNodeType(int id)
     {

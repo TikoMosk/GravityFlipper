@@ -4,19 +4,37 @@ using UnityEngine;
 
 public class LevelDesignController : MonoBehaviour
 {
-    public GameObject block;
+    public GameObject levelEditorPanel;
+    public GameObject playModePanel;
+    enum Tool { Place, Remove, Rotate };
+    private Tool tool;
 
-    public void OnNodeClick(Node n, Node.Direction dir,int button)
+    public void SetTool(int toolNumber) {
+        tool = (Tool)toolNumber;
+    }
+    public void OnNodeClick(Node n, Node.Direction dir)
     {
-        if(button == 0)
+        if(tool == Tool.Place)
         {
             Node placeNode = GameController.Game.CurrentLevel.GetNodeInTheDirection(n, dir);
             GameController.Game.LevelController.Level.SetNode(placeNode.X, placeNode.Y, placeNode.Z, 1);
         }
-        if (button == 1)
+        if (tool == Tool.Remove)
         {
             n.SetNodeType(0);
         }
         
+    }
+    public void ChangeMode(int mode) {
+        if(mode == 0) {
+            levelEditorPanel.SetActive(true);
+            playModePanel.SetActive(false);
+            GameController.Game.ChangeGameState("LevelEditorMode");
+        }
+        if (mode == 1) {
+            levelEditorPanel.SetActive(false);
+            playModePanel.SetActive(true);
+            GameController.Game.ChangeGameState("PlayMode");
+        }
     }
 }

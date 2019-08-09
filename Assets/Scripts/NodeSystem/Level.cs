@@ -60,7 +60,7 @@ public class Level
 
     public void MoveObject(Node node, Node dest)
     {
-        if(!node.HasSamePosition(dest))
+        if(!node.HasSamePosition(dest) && dest.NodeMember == null)
         {
             dest.NodeMember = node.NodeMember;
             dest.NodeMember.SetPosition(dest.X,dest.Y,dest.Z);

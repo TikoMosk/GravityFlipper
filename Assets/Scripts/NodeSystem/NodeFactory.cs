@@ -10,7 +10,6 @@ public class NodeFactory {
         switch (id) {
             case 0: return null;
             case 1: return new Block(1);
-            case 2: return new Laser(2);
             default: return null;
         }
     }
@@ -28,6 +27,9 @@ public class NodeMemberFactory
             case 0: return null;
             case 1: return new Player(1);
             case 2: return new Enemy(2);
+            case 3: return new LaserN(3);
+            case 4: return new LaserN(4);
+
             default: return null;
         }
     }
