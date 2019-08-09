@@ -15,7 +15,6 @@ public class InputController : MonoBehaviour {
 
     private void Update() {
         if (GameController.Game.SmoothGraphics.AnimationCount == 0) {
-            Debug.Log("UPDATE" + Time.time);
             if (Input.touchCount > 0) {
                 if (Input.GetTouch(0).phase == TouchPhase.Began) {
                     touchStart = Input.GetTouch(0).position;
