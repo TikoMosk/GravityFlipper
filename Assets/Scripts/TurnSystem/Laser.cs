@@ -23,8 +23,6 @@ public class Laser : MonoBehaviour
                 transform.rotation = Quaternion.AngleAxis(90, new Vector3(90, 0, 0));
                 break;
         }
-
-        Debug.Log(rotation);
     }
 
     private void OnCollisionEnter(Collision collision)

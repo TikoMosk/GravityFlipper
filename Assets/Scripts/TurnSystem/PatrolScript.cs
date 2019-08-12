@@ -20,7 +20,6 @@ public class PatrolScript : MonoBehaviour
 
     private void Start()
     {
-
         EventController.currentInstance.Register(Check);
 
         switch (direction)
@@ -52,19 +51,6 @@ public class PatrolScript : MonoBehaviour
         _active = !_active;
 
         Move();
-    }
-
-    private void Update()
-    {
-        //if (_active)
-        //{
-        //    Move();
-        //}
-        //
-        //if (transform.position == destination)
-        //{
-        //    _active = false;
-        //}
     }
 
     private void Move()
