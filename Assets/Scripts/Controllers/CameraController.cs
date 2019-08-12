@@ -9,6 +9,8 @@ public class CameraController : MonoBehaviour
     public float minZoom;
     public float maxZoom;
     public float zoomSensitivity;
+    private enum View { Perspective, Orthographic };
+    private View cameraStyle;
     Quaternion cameraRotation;
     Vector3 upVector = Vector3.up;
     Vector3 axis;
@@ -30,6 +32,9 @@ public class CameraController : MonoBehaviour
             cameraObject.transform.position = GameController.Game.CurrentLevel.Player.NodeObjectGraphic.transform.position;
         }
         forwardDirection = GetForwardDirection(cameraObject.transform.forward);
+        if(Input.GetKeyDown(KeyCode.P)) {
+            ChangeCameraStyle();
+        }
         
     }
     public void RotateAround(float dragDist) {
@@ -38,6 +43,17 @@ public class CameraController : MonoBehaviour
     }
     private void PlayerExists() {
         playerExists = true;
+    }
+    public void ChangeCameraStyle() {
+        if(cameraStyle == View.Orthographic) {
+            cameraStyle = View.Perspective;
+            Camera.main.orthographic = false;
+        }
+        else {
+            cameraStyle = View.Orthographic;
+            Camera.main.orthographic = true;
+            Camera.main.transform.position = cameraObject.transform.position + (Camera.main.transform.position - cameraObject.transform.position).normalized * maxZoom;
+        }
     }
 
     public void Zoom(float amount) {
@@ -80,7 +96,7 @@ public class CameraController : MonoBehaviour
         }
         cameraRotation = Quaternion.LookRotation(playerForward, playerUp);
         upVector = playerUp;
-        StartCoroutine(GameController.Game.SmoothGraphics.RotateSmoothly(cameraObject.transform, cameraRotation, 0.5f));
+        StartCoroutine(GameController.Game.SmoothGraphics.RotateSmoothly(cameraObject.transform, cameraRotation, 1f));
 
     }
     private Node.Direction GetForwardDirection(Vector3 vector) {

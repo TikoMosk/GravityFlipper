@@ -41,4 +41,28 @@ public class Dir
             return Vector3.zero;
         }
     }
+    public static Node.Direction Opposite(Node.Direction dir) {
+        if (dir == Node.Direction.RIGHT) {
+            return Node.Direction.LEFT;
+        }
+        else if (dir == Node.Direction.LEFT) {
+            return Node.Direction.RIGHT;
+        }
+        else if (dir == Node.Direction.UP) {
+            return Node.Direction.DOWN;
+        }
+        else if (dir == Node.Direction.DOWN) {
+            return Node.Direction.UP;
+        }
+        else if (dir == Node.Direction.FORWARD) {
+            return Node.Direction.BACK;
+        }
+        else if (dir == Node.Direction.BACK) {
+            return Node.Direction.FORWARD;
+        }
+        else {
+            Debug.Log("ERROR");
+            return dir;
+        }
+    }
 }
