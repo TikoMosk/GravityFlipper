@@ -54,13 +54,20 @@ public class PauseMenu : MonoBehaviour
 
     public void Restart()
     {
+        GameController.Game.gameObject.SetActive(true);
         GameController.Game.LevelController.BuildTestLevel();
-        Resume();
+        GameController.Game.CameraController.ResetCamera();
+        pauseMenuUI.SetActive(false);
+        Time.timeScale = 1f;
+        isPaused = false;
     }
+   
 
     public void MainMenu()
     {
-        SceneManager.LoadScene(1);
+        GameController.Game.gameObject.SetActive(true);
+        Time.timeScale = 1f;
+        GameController.Game.ChangeScene("Main Menu");
     }
 
     public void SetMusicVolume()

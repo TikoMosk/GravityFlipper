@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelEditorMode : GameMode
+public class LevelEditorMode : GameState
 {
-    public void OnNodeClick(Node n, Node.Direction dir, int button)
+    public void OnNodeClick(Node n, Node.Direction dir)
     {
-        GameController.Game.LevelDesignController.OnNodeClick(n,dir, button);
+        GameController.Game.LevelDesignController.OnNodeClick(n,dir);
     }
 }
