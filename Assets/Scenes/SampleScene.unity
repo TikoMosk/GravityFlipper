@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311947, g: 0.38074005, b: 0.35872722, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -191,6 +191,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 746fb499bb9b7cd439ccf3bdac07299a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ignoreRaycastMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &25129827
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -207,7 +210,7 @@ MonoBehaviour:
   speed: 5
   minZoom: 3
   maxZoom: 15
-  zoomSensitivity: 0.2
+  zoomSensitivity: 1
 --- !u!114 &25129828
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -803,7 +806,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: -3418546296137103249, guid: 3b81b7072e3526041a0921e2f40362cc,
+  m_Sprite: {fileID: -3418546296137103249, guid: 780e6f5acf77e43f9b376983a7dab0a4,
     type: 3}
   m_Type: 0
   m_PreserveAspect: 0
@@ -1378,7 +1381,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: -2079153411887947747, guid: 57bcede0cdf4441de91c545dc6f01687,
+  m_Sprite: {fileID: -2079153411887947747, guid: 9d814461b2b91471aa2b4fa202b1ca0a,
     type: 3}
   m_Type: 0
   m_PreserveAspect: 0
@@ -2204,14 +2207,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3522601ca7844a8597a065bec358256, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MusicOff: {fileID: -7436059540446521961, guid: d8757d5c1be504801af47a779bfd775b,
+  MusicOff: {fileID: -7436059540446521961, guid: 5da761c242fe740cebe029a600005318,
     type: 3}
-  MusicOn: {fileID: -2079153411887947747, guid: 57bcede0cdf4441de91c545dc6f01687,
+  MusicOn: {fileID: -2079153411887947747, guid: 9d814461b2b91471aa2b4fa202b1ca0a,
     type: 3}
   musicButton: {fileID: 794417782}
-  SoundOff: {fileID: 8880217330070124816, guid: f3827e22a5c244454aac115c8bf55fd6,
+  SoundOff: {fileID: 8880217330070124816, guid: 6b1de56a594e54ea49b0212298387acb,
     type: 3}
-  SoundOn: {fileID: -3418546296137103249, guid: 3b81b7072e3526041a0921e2f40362cc,
+  SoundOn: {fileID: -3418546296137103249, guid: 780e6f5acf77e43f9b376983a7dab0a4,
     type: 3}
   soundButton: {fileID: 543180339}
   pauseMenuUI: {fileID: 1823213759}

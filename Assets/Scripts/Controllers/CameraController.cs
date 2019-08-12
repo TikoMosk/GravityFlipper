@@ -21,7 +21,7 @@ public class CameraController : MonoBehaviour
     }
     public void ResetCamera() {
         cameraObject.transform.rotation = Quaternion.LookRotation(Vector3.forward, Vector3.up);
-        UpdateGravity(Vector3.forward, Vector3.up);
+        UpdateGravity(Vector3.back, Vector3.up);
     }
     private void Update() {
 
