@@ -13,20 +13,23 @@ public class InputController : MonoBehaviour {
     Vector3 inputPosDelta;
     Vector3 inputPreviousPos;
     bool isDragging;
+    bool overUI;
     public LayerMask ignoreRaycastMask;
     float tracker = 0;
 
     private void Update() {
-        
+
         if (GameController.Game.SmoothGraphics.AnimationCount == 0) {
-           
+
             if (Input.touchCount > 0) {
-                if (EventSystem.current.IsPointerOverGameObject()) {
-
-                    return;
-
-                }
+                
                 if (Input.GetTouch(0).phase == TouchPhase.Began) {
+                    if (IsPointerOverUI()) {
+                        overUI = true;
+                    }
+                    else {
+                        overUI = false;
+                    }
                     touchStart = Input.GetTouch(0).position;
                 }
 
@@ -51,8 +54,10 @@ public class InputController : MonoBehaviour {
                         GameController.Game.CameraController.RotateAround(inputPosDelta.x * 0.025f);
                         isDragging = true;
                     }
-                    else if (Input.GetTouch(0).phase == TouchPhase.Ended) {
+                    else if (Input.GetTouch(0).phase == TouchPhase.Ended && !overUI) {
+
                         if (!isDragging) {
+                            
                             Click();
 
                         }
@@ -62,10 +67,8 @@ public class InputController : MonoBehaviour {
 
             }
             else {
-                if (EventSystem.current.IsPointerOverGameObject()) {
-
+                if (IsPointerOverUI()) {
                     return;
-
                 }
                 if (Input.GetMouseButton(0)) {
                     inputPosDelta = Input.mousePosition - inputPreviousPos;
@@ -93,17 +96,38 @@ public class InputController : MonoBehaviour {
 
 
     }
-    private void Click() {
+    private bool IsPointerOverUI() {
+        if (Input.touchCount > 0) {
+            for (int i = 0; i < Input.touchCount; i++) {
+                var touch = Input.GetTouch(i);
+                if (EventSystem.current.IsPointerOverGameObject(touch.fingerId)) {
+                    return true;
+                }
+            }
+        }
+        else if (EventSystem.current.IsPointerOverGameObject()) {
 
+            return true;
+
+        }
+        return false;
+    }
+    private void Click() {
         RaycastHit hit;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Ray ray;
+
+        if (Input.touchCount > 0) {
+            ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
+        }
+        else {
+            ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        }
         if (Physics.Raycast(ray, out hit)) {
             if (hit.collider.gameObject.GetComponent<NodeGraphic>() != null) {
                 hit.collider.gameObject.GetComponent<NodeGraphic>().GetClicked(Dir.GetDirectionByVector(hit.normal));
             }
-
         }
-
     }
 
 

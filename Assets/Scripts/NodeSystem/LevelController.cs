@@ -51,7 +51,7 @@ public class LevelController : MonoBehaviour
         for (int x = 0; x < 10; x++) {
             for (int y = 0; y < 10; y++) {
                 for (int z = 0; z < 10; z++) {
-                    if((x == 0 || y == 0 || z == 9) && y <= 4) {
+                    if((x == 0 || y == 0 || z == 9) && y <= 2) {
                         level.SetNode(x, y, z, 1);
                     }
                     if(x == 3 && y < 2 && z <= 4 && z >= 2) {
@@ -64,6 +64,7 @@ public class LevelController : MonoBehaviour
             }
         }
         level.AddNodeMember(5, 1, 5, fac.CreateNodeMember(1));
+        level.AddNodeMember(2, 1, 3, fac.CreateNodeMember(2));
         DestroyLevelGraphics();
         CreateLevelGraphics();
 
@@ -136,8 +137,10 @@ public class LevelController : MonoBehaviour
     }
     private void OnNodeMemberMoved(Node dest, NodeMemberGraphic nodeObjectGraphic)
     {
-        nodeObjectGraphic.transform.rotation = Quaternion.LookRotation(Dir.GetVectorByDirection(dest.NodeMember.Facing), Dir.GetVectorByDirection(dest.NodeMember.UpDirection));
-        StartCoroutine(GameController.Game.SmoothGraphics.MoveSmoothly(nodeObjectGraphic.transform, dest.GetPosition(), 0.3f));
+        Quaternion nodeMemberRotation = Quaternion.LookRotation(Dir.GetVectorByDirection(dest.NodeMember.Facing), Dir.GetVectorByDirection(dest.NodeMember.UpDirection));
+       // nodeObjectGraphic.transform.rotation = nodeMemberRotation;
+        StartCoroutine(GameController.Game.SmoothGraphics.RotateSmoothly(nodeObjectGraphic.transform, nodeMemberRotation, 0.5f));
+        StartCoroutine(GameController.Game.SmoothGraphics.MoveSmoothly(nodeObjectGraphic.transform, dest.GetPosition(),0.5f));
         nodeObjectGraphic.Node = dest;
     }
 
