@@ -15,16 +15,11 @@ public class LevelController : MonoBehaviour
     private Dictionary<string, NodeMember> nodeObjectPrototypes;
     private Action onLevelCreated;
 
-    private GameController gameController;
     [System.Serializable]
     public struct NodeData
     {
         public int id;
         public GameObject nodePrefab;
-    }
-    private void Awake()
-    {
-        gameController = FindObjectOfType<GameController>();
     }
     
     private void Update()
@@ -67,7 +62,7 @@ public class LevelController : MonoBehaviour
         level.AddNodeMember(2, 1, 3, fac.CreateNodeMember(2));
         DestroyLevelGraphics();
         CreateLevelGraphics();
-
+        Debug.Log("A");
         onLevelCreated.Invoke();
 
     }
@@ -135,13 +130,13 @@ public class LevelController : MonoBehaviour
             }
         }
     }
-    private void OnNodeMemberMoved(Node dest, NodeMemberGraphic nodeObjectGraphic)
+    private void OnNodeMemberMoved(Node dest, NodeMemberGraphic nodeMemberGraphic)
     {
         Quaternion nodeMemberRotation = Quaternion.LookRotation(Dir.GetVectorByDirection(dest.NodeMember.Facing), Dir.GetVectorByDirection(dest.NodeMember.UpDirection));
        // nodeObjectGraphic.transform.rotation = nodeMemberRotation;
-        StartCoroutine(GameController.Game.SmoothGraphics.RotateSmoothly(nodeObjectGraphic.transform, nodeMemberRotation, 0.5f));
-        StartCoroutine(GameController.Game.SmoothGraphics.MoveSmoothly(nodeObjectGraphic.transform, dest.GetPosition(),0.5f));
-        nodeObjectGraphic.Node = dest;
+        StartCoroutine(GameController.Game.SmoothGraphics.RotateSmoothly(nodeMemberGraphic.transform, nodeMemberRotation, 0.5f));
+        StartCoroutine(GameController.Game.SmoothGraphics.MoveSmoothly(nodeMemberGraphic.transform, dest.GetPosition(),0.5f, nodeMemberGraphic));
+        nodeMemberGraphic.Node = dest;
     }
 
     private void OnNodeTypeChanged(Node n, GameObject node_go)
