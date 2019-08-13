@@ -20,8 +20,7 @@ public class PursuitScript : MonoBehaviour
 
     public void StartPursuit()
     {
-        GetComponent<PatrolScript>().enabled = false;
-        Debug.Log("StartPusr");
+        Debug.Log("StartPursuit");
     }
 
     public void EndPursuit()
@@ -31,14 +30,19 @@ public class PursuitScript : MonoBehaviour
 
     private void Check()
     {
-        Vector3 vector = transform.position;
+        Vector3 vector = new Vector3();
         foreach (var step in directions)
         {
-            vector += step;
-            if (GameController.Game.CurrentLevel.GetNode((int)vector.x, (int)vector.y, (int)vector.z).Id == 1)
+            vector = transform.position + step;
+            if (GameController.Game.CurrentLevel.GetNode((int)vector.x, (int)vector.y, (int)vector.z).NodeMember != null)
             {
-                StartPursuit();
+                if (GameController.Game.CurrentLevel.GetNode((int)vector.x, (int)vector.y, (int)vector.z).NodeMember.Id == 1)
+                {
+                    Debug.Log(vector);
+                    StartPursuit();
+                }
             }
+
         }
     }
 }
