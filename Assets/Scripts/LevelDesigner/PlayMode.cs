@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayMode : GameState
 {
     public PlayMode() {
+        Time.timeScale = 1f;
         GameController.Game.LevelController.BuildTestLevel();
     }
     public void OnNodeClick(Node n, Node.Direction dir)

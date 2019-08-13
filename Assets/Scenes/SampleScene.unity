@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 25129825}
   - component: {fileID: 25129827}
   - component: {fileID: 25129828}
+  - component: {fileID: 25129829}
   m_Layer: 0
   m_Name: '*GameController'
   m_TagString: Untagged
@@ -223,6 +224,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88a64bda5dc9146fba633dade5c30c8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &25129829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 25129822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc5774a72167e48eb8fbbc61e258efa8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  direction: 0
 --- !u!1 &82394094
 GameObject:
   m_ObjectHideFlags: 0
@@ -477,7 +491,6 @@ GameObject:
   m_Component:
   - component: {fileID: 324359333}
   - component: {fileID: 324359334}
-  - component: {fileID: 324359335}
   - component: {fileID: 324359337}
   m_Layer: 0
   m_Name: Level
@@ -535,23 +548,6 @@ MonoBehaviour:
   - id: 3
     nodePrefab: {fileID: 7928255879371980449, guid: f8bb82b84767045d2902876f14d062ff,
       type: 3}
---- !u!114 &324359335
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 324359332}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cameraObject: {fileID: 0}
-  previousDirection: 0
-  t: 0
-  start: {x: 0, y: 0, z: 0}
-  v: {x: 0, y: 0, z: 0}
 --- !u!114 &324359337
 MonoBehaviour:
   m_ObjectHideFlags: 0

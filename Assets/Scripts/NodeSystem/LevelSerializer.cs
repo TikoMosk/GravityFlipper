@@ -4,43 +4,51 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class LevelSerializer : MonoBehaviour
-{
+public class LevelSerializer : MonoBehaviour {
     private string path;
 
-    IEnumerator GetRequest(string url)
-    {
-        using (UnityWebRequest webRequest = UnityWebRequest.Get(url))
-        {
+    IEnumerator GetRequest(string url) {
+        using (UnityWebRequest webRequest = UnityWebRequest.Get(url)) {
             // Request and wait for the desired page.
             yield return webRequest.SendWebRequest();
 
 
-            if (webRequest.isNetworkError)
-            {
+            if (webRequest.isNetworkError) {
                 Debug.Log("error");
             }
-            else
-            {
+            else {
                 //levelData = JsonUtility.FromJson<LevelData>(webRequest.downloadHandler.text);
                 Debug.Log(webRequest.downloadHandler.text);
             }
         }
     }
     public Level LoadLevelLocal(string path) {
-        Debug.Log(path);
-        if (File.Exists(path)) {
-            string s = File.ReadAllText(path);
-            LevelData levelData = JsonUtility.FromJson<LevelData>(s);
-            Level level = DeserializeLevel(levelData);
-            return level;
+        string result = null;
+
+        string filePath = Path.Combine(Application.streamingAssetsPath, path);
+
+        if (Application.platform == RuntimePlatform.Android) {
+            UnityWebRequest reader = new UnityWebRequest(filePath);
+            while (!reader.isDone) {
+                //yes, as dumb as this code looks, you’re not reading it wrong – this is an empty loop. there’s no other way to run the reader to the end as far as I know
+
+            }
+            result = reader.downloadHandler.text;
         }
         else {
-            Debug.LogError("No such file exists to load from");
-            return null;
+
+            result = File.ReadAllText(filePath);
+
         }
-        
+        LevelData levelData = JsonUtility.FromJson<LevelData>(result);
+        Level level = DeserializeLevel(levelData);
+        return level;
     }
+    public Level LoadLevelFromServer(string path) {
+       //TODO:
+       return null;
+    }
+
     public void SaveLevelLocal(Level level) {
         path = Application.persistentDataPath + "/" + "level1";
         LevelData levelData = SerializeLevel(level);
@@ -49,21 +57,21 @@ public class LevelSerializer : MonoBehaviour
 
     }
     private LevelData SerializeLevel(Level level) {
-        LevelData levelData = new LevelData(level.Width,level.Height,level.Length);
+        LevelData levelData = new LevelData(level.Width, level.Height, level.Length);
         for (int x = 0; x < level.Width; x++) {
             for (int y = 0; y < level.Height; y++) {
                 for (int z = 0; z < level.Length; z++) {
-                    if(level.NodeMap[x,y,z].Id != 0) {
+                    if (level.NodeMap[x, y, z].Id != 0) {
                         NodeData nodeData = new NodeData(level.NodeMap[x, y, z]);
                         levelData.nodeDataList.Add(nodeData);
                     }
-                    if(level.NodeMap[x,y,z].NodeMember != null) {
+                    if (level.NodeMap[x, y, z].NodeMember != null) {
                         if (level.NodeMap[x, y, z].NodeMember.Id != 0) {
-                            NodeMemberData nodeMemberData = new NodeMemberData(level.NodeMap[x, y, z].NodeMember,x,y,z);
+                            NodeMemberData nodeMemberData = new NodeMemberData(level.NodeMap[x, y, z].NodeMember, x, y, z);
                             levelData.nodeMemberDataList.Add(nodeMemberData);
                         }
                     }
-                    
+
 
                 }
             }
@@ -71,66 +79,91 @@ public class LevelSerializer : MonoBehaviour
         return levelData;
     }
     private Level DeserializeLevel(LevelData levelData) {
-        Level level  = new Level(levelData.width, levelData.height,levelData.length);
+        Level level = new Level(levelData.width, levelData.height, levelData.length);
         level.InitializeLevel();
         int x, y, z;
+        Node.Direction facing = Node.Direction.FORWARD;
+        Node.Direction upDirection = Node.Direction.UP;
         for (int i = 0; i < levelData.nodeDataList.Count; i++) {
             NodeData nodeData = levelData.nodeDataList[i];
             x = nodeData.x;
             y = nodeData.y;
             z = nodeData.z;
-            level.SetNode(x, y, z, nodeData.id);
+            if (nodeData.facing != "" && nodeData.upDirection != "") {
+                facing = (Node.Direction)int.Parse(nodeData.facing);
+                upDirection = (Node.Direction)int.Parse(nodeData.upDirection);
+            }
+            level.SetNode(x, y, z, nodeData.id,facing,upDirection);
         }
         for (int i = 0; i < levelData.nodeMemberDataList.Count; i++) {
             NodeMemberData nodeMemberData = levelData.nodeMemberDataList[i];
             x = nodeMemberData.x;
             y = nodeMemberData.y;
             z = nodeMemberData.z;
+            if(nodeMemberData.facing != "" && nodeMemberData.upDirection != "") {
+                facing = (Node.Direction)int.Parse(nodeMemberData.facing);
+                upDirection = (Node.Direction)int.Parse(nodeMemberData.upDirection);
+            }
+            
             NodeMemberFactory factory = new NodeMemberFactory();
-            level.AddNodeMember(x,y,z,factory.CreateNodeMember(nodeMemberData.id));
+            level.AddNodeMember(x, y, z, factory.CreateNodeMember(nodeMemberData.id), facing, upDirection);
         }
-        
+
         return level;
     }
 
-    
+
 }
 [System.Serializable]
 public class Data {
-    
+
 }
 [System.Serializable]
-public class NodeData{
+public class NodeData {
     public int x;
     public int y;
     public int z;
     public int id;
+    public string facing;
+    public string upDirection;
     public NodeData() {
 
     }
-    public NodeData ( Node n) {
+    public NodeData(Node n) {
         x = n.X;
         y = n.Y;
         z = n.Z;
         id = n.Id;
         //TODO: DIRECTIONS
         //direction = n.direction;
+        if (n.Facing != Node.Direction.FORWARD || n.UpDirection != Node.Direction.UP) {
+            facing = ((int)n.Facing).ToString();
+            upDirection = ((int)n.UpDirection).ToString();
+        }
     }
+
 }
 [System.Serializable]
-public class NodeMemberData{
+public class NodeMemberData {
     public int x;
     public int y;
     public int z;
     public int id;
+    public string facing;
+    public string upDirection;
     public NodeMemberData() {
 
     }
-    public NodeMemberData(NodeMember nm,int x, int y, int z) {
+    public NodeMemberData(NodeMember nm, int x, int y, int z) {
         this.x = x;
         this.y = y;
         this.z = z;
         id = nm.Id;
+
+        if (nm.Facing != Node.Direction.FORWARD || nm.UpDirection != Node.Direction.UP) {
+            facing = ((int)nm.Facing).ToString();
+            upDirection = ((int)nm.UpDirection).ToString();
+        }
         //TODO: DIRECTIONS
         //direction = nm.direction;
     }

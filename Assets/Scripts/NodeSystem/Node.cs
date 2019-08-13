@@ -14,10 +14,12 @@ public class Node
     public int Z { get => z; }
     private int id;
     public int Id { get { return id; } set { id = value; } }
-    private Direction nodeDirection;
-    public Direction NodeDirection { get { return nodeDirection; } }
+    private Direction facing = Node.Direction.FORWARD;
+    private Direction upDirection = Node.Direction.UP;
+    public Direction Facing { get { return facing; } }
+    public Direction UpDirection { get { return upDirection; } }
 
-    public enum Direction { UP, DOWN , LEFT, RIGHT , FORWARD, BACK };
+    public enum Direction { UP, FORWARD, DOWN , LEFT, RIGHT , BACK };
 
     private NodeMember nodeMember;
     public NodeMember NodeMember { get { return nodeMember; } set { nodeMember = value; } }
@@ -37,6 +39,10 @@ public class Node
     }
     public Node(int id) {
         this.id = id;
+    }
+    public void SetRotation(Node.Direction forward, Node.Direction up) {
+        facing = forward;
+        upDirection = up;
     }
     public void SetNodeMember(NodeMember nodeMember) {
         this.nodeMember = nodeMember;
