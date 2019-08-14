@@ -39,7 +39,6 @@ public class PatrolScript : MonoBehaviour
     public void Check()
     {
         currentNode = GameController.Game.CurrentLevel.GetNode((int)transform.position.x, (int)transform.position.y, (int)transform.position.z);
-
         destination = transform.position + step;
 
         if (GameController.Game.CurrentLevel.GetNode((int)destination.x, (int)destination.y, (int)destination.z).Id != 0)

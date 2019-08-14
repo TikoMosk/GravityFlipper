@@ -103,7 +103,7 @@ public class Level
         }
         else
         {
-            Debug.Log("Trying to get a Node that is out of level bounds");
+            Debug.Log("Trying to get a Node that is out of level bounds" + x + " : " + y + " : " + z);
             return nodeMap[0,0,0];
         }
     }

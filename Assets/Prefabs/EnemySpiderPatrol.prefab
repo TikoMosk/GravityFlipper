@@ -567,7 +567,7 @@ GameObject:
   - component: {fileID: -7117656414439270466}
   - component: {fileID: -3738759207195618326}
   m_Layer: 0
-  m_Name: EnemySpider
+  m_Name: EnemySpiderPatrol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -634,7 +634,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc5774a72167e48eb8fbbc61e258efa8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  direction: 0
+  direction: 2
 --- !u!1 &2707832398800735150
 GameObject:
   m_ObjectHideFlags: 0

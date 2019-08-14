@@ -1,10 +1,10 @@
 ﻿<Properties StartupConfiguration="{EB2208B8-2EA9-6054-617B-C009E9C4DA96}|">
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/TurnSystem/PursuitScript.cs">
     <Files>
-      <File FileName="Assets/Scripts/TurnSystem/EnemySpider.cs" Line="14" Column="30" />
-      <File FileName="Assets/Scripts/TurnSystem/PursuitScript.cs" Line="64" Column="6" />
-      <File FileName="Assets/Scripts/NodeSystem/LevelController.cs" Line="62" Column="30" />
-      <File FileName="Assets/Scripts/NodeSystem/Level.cs" Line="61" Column="17" />
+      <File FileName="Assets/Scripts/TurnSystem/PursuitScript.cs" Line="63" Column="6" />
+      <File FileName="Assets/Scripts/NodeSystem/LevelController.cs" Line="205" Column="1" />
+      <File FileName="Assets/Scripts/NodeSystem/Level.cs" Line="106" Column="101" />
+      <File FileName="Assets/Scripts/TurnSystem/PatrolScript.cs" Line="44" Column="47" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
