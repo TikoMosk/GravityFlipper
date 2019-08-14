@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class PursuitScript : MonoBehaviour
 {
+    private bool isPursuitOn;
     private Vector3[] directions;
+    private Node destNode;
+    private Node currentNode;
+
     private void Start()
     {
         EventController.currentInstance.Register(Check);
@@ -20,29 +24,47 @@ public class PursuitScript : MonoBehaviour
 
     public void StartPursuit()
     {
-        Debug.Log("StartPursuit");
+        isPursuitOn = true;
+        destNode = GameController.Game.CurrentLevel.Player.NodeObjectGraphic.Node;
+        GetComponent<Animator>().SetBool("Chasing", isPursuitOn);
     }
 
     public void EndPursuit()
     {
-        GetComponent<PatrolScript>().enabled = true;
+        isPursuitOn = false;
+        Debug.Log("EndPursuit");
+        GetComponent<Animator>().SetBool("Chasing", isPursuitOn);
     }
 
     private void Check()
     {
-        Vector3 vector = new Vector3();
-        foreach (var step in directions)
+        if (!isPursuitOn)
         {
-            vector = transform.position + step;
-            if (GameController.Game.CurrentLevel.GetNode((int)vector.x, (int)vector.y, (int)vector.z).NodeMember != null)
+            Vector3 vector = new Vector3();
+            foreach (var step in directions)
             {
-                if (GameController.Game.CurrentLevel.GetNode((int)vector.x, (int)vector.y, (int)vector.z).NodeMember.Id == 1)
+                vector = transform.position + step;
+                if (GameController.Game.CurrentLevel.GetNode((int)vector.x, (int)vector.y, (int)vector.z).NodeMember != null)
                 {
-                    Debug.Log(vector);
-                    StartPursuit();
+                    if (GameController.Game.CurrentLevel.GetNode((int)vector.x, (int)vector.y, (int)vector.z).NodeMember.Id == 1)
+                    {
+                        StartPursuit();
+                    }
                 }
             }
-
         }
+        else
+        {
+            Chase();
+        }
+    }
+
+    private void Chase()
+    {
+        currentNode = GameController.Game.CurrentLevel.GetNode((int)transform.position.x, (int)transform.position.y, (int)transform.position.z);
+        Debug.Log("From" + currentNode.Z + "To" + destNode.Z);
+        Debug.Log("Pursuit");
+        GameController.Game.CurrentLevel.MoveObject(currentNode, destNode);
+        destNode = GameController.Game.CurrentLevel.Player.NodeObjectGraphic.Node;
     }
 }

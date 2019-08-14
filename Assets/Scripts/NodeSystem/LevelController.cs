@@ -59,10 +59,9 @@ public class LevelController : MonoBehaviour
             }
         }
         level.AddNodeMember(5, 1, 5, fac.CreateNodeMember(1));
-        level.AddNodeMember(2, 1, 3, fac.CreateNodeMember(2));
+        level.AddNodeMember(4, 1, 3, fac.CreateNodeMember(2));
         DestroyLevelGraphics();
         CreateLevelGraphics();
-        Debug.Log("A");
         onLevelCreated.Invoke();
 
     }

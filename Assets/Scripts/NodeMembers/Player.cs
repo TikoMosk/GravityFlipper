@@ -6,7 +6,7 @@ public class Player : NodeMember {
     Node previousClickedNode = null;
     Node.Direction previousDirection = Node.Direction.UP;
     public Player(int id) : base(id) {
-        Debug.Log("PLAYER CREATED");
+        
     }
     public void Move(Node n, Node.Direction dir) {
         Node playerNode = GameController.Game.CurrentLevel.GetNode(x, y, z);

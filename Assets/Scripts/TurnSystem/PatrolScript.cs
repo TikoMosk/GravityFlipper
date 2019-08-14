@@ -56,6 +56,5 @@ public class PatrolScript : MonoBehaviour
     private void Move()
     {
         GameController.Game.CurrentLevel.MoveObject(currentNode, destNode);
-        //transform.position = Vector3.MoveTowards(transform.position, destination, Time.deltaTime * 5);
     }
 }
