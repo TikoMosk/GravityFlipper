@@ -41,16 +41,17 @@ public class Level
         }
     }
 
-    public bool AddNodeMember(int x, int y, int z, NodeMember nodeMember)
+    public bool AddNodeMember(int x, int y, int z, NodeMember nodeMember, Node.Direction facing, Node.Direction upDirection)
     {
         if(IsInLevelBounds(x,y,z))
         {
             if(nodeMap[x,y,z].NodeMember == null)
             {
                 nodeMap[x, y, z].SetNodeMember(nodeMember);
+                nodeMember.Facing = facing;
+                nodeMember.UpDirection = upDirection;
                 if(nodeMember.Id == 1) {
                     player = (Player)nodeMember;
-                    player.Facing = Node.Direction.BACK;
                 }
                 return true;
             }
@@ -82,6 +83,16 @@ public class Level
             Debug.LogError("Trying to set a Node that is out of level bounds");
         }
     }
+    public void SetNode(int x, int y, int z, int type, Node.Direction facing, Node.Direction up) {
+        if (IsInLevelBounds(x, y, z)) {
+            nodeMap[x, y, z].SetNodeType(type);
+            nodeMap[x, y, z].SetRotation(facing, up);
+        }
+        else {
+            Debug.LogError("Trying to set a Node that is out of level bounds");
+        }
+    }
+
 
 
     public Node GetNode(int x, int y, int z)

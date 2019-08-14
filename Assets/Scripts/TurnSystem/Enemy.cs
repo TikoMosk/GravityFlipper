@@ -6,8 +6,5 @@ public class Enemy : NodeMember
         
     }
 
-   /* private void OnDestroy()
-    {
-        EventController.currentInstance.Remove(GetComponent<PatrolScript>().Check);
-    }*/
+
 }
