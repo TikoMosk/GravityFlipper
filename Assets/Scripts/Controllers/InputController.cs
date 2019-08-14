@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class InputController : MonoBehaviour {
+
     Vector3 touchStart;
     Vector3 touchEnd;
     Touch touchZero;

@@ -34,8 +34,6 @@ public class GameController : MonoBehaviour {
     }
     private void Start() {
         SetGameModeBasedOnScene();
-        Debug.Log("UP IS " + (int)Node.Direction.UP);
-        Debug.Log("FORWARD IS " + (int)Node.Direction.FORWARD);
     }
     public void TestLevel() {
         Time.timeScale = 1f;

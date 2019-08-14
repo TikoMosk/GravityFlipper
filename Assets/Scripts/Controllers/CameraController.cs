@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    public GameObject swipeIcon;
     public GameObject cameraObject;
     public float speed;
     public float minZoom;
@@ -35,11 +36,12 @@ public class CameraController : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.P)) {
             ChangeCameraStyle();
         }
+        swipeIcon.transform.rotation = Quaternion.LookRotation(Dir.GetVectorByDirection(forwardDirection), upVector);
         
     }
     public void RotateAround(float dragDist) {
         cameraObject.transform.RotateAround(cameraObject.transform.position, upVector, dragDist * speed);
-        cameraRotation = cameraObject.transform.rotation;
+
     }
     private void PlayerExists() {
         Debug.Log("Player Exists");
