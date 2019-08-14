@@ -61,6 +61,7 @@ public class GameController : MonoBehaviour {
         }
     }
     public void ChangeGameState(String stateName) {
+        Time.timeScale = 1f;
         if (stateName == "PlayMode") {
             gameState = new PlayMode();
         }
