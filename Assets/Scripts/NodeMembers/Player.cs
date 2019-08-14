@@ -18,7 +18,6 @@ public class Player : NodeMember {
         }
         if (GameController.Game.LevelController.Level.GetNodeDistance(playerNode, destinationNode) <= 1) {
             if (GameController.Game.LevelController.Level.GetNodeDistance(previousClickedNode, n) < 3) {
-                playerNode.NodeMember.NodeObjectGraphic.transform.rotation = Quaternion.LookRotation(Dir.GetVectorByDirection(facing), Dir.GetVectorByDirection(upDirection));
                 upDirection = dir;
                 if (!playerNode.HasSamePosition(destinationNode) && GameController.Game.LevelController.Level.GetNodeDistance(playerNode, destinationNode) <= 1) {
                     if (GameController.Game.LevelController.Level.GetNodeDistance(previousClickedNode, n) < 3) {
@@ -45,7 +44,6 @@ public class Player : NodeMember {
             
         }
         else if (GameController.Game.LevelController.Level.GetNodeDistance(playerNode, destinationNode) == 2 && GameController.Game.LevelController.Level.GetNodeDistance(previousClickedNode, n) <= 1) {
-            playerNode.NodeMember.NodeObjectGraphic.transform.rotation = Quaternion.LookRotation(Dir.GetVectorByDirection(facing), Dir.GetVectorByDirection(upDirection));
             upDirection = dir;
             facing = Dir.Opposite(previousDirection);
             GameController.Game.CurrentLevel.MoveObject(playerNode, destinationNode);
@@ -58,4 +56,5 @@ public class Player : NodeMember {
 
 
     }
+    
 }

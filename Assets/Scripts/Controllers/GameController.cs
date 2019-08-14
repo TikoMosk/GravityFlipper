@@ -12,14 +12,12 @@ public class GameController : MonoBehaviour {
     public Level CurrentLevel { get { return currentLevel; } }
 
     private LevelDesignController levelDesignController;
-    private MovementController movementController;
     private SmoothGraphics smoothGraphics;
     private LevelController levelController;
     private CameraController cameraController;
 
     public LevelController LevelController { get { return levelController; } }
     public LevelDesignController LevelDesignController { get { return levelDesignController; } }
-    public MovementController MovementController { get { return movementController; } }
     public SmoothGraphics SmoothGraphics { get { return smoothGraphics; } }
     public CameraController CameraController { get { return cameraController; } }
 
@@ -36,6 +34,8 @@ public class GameController : MonoBehaviour {
     }
     private void Start() {
         SetGameModeBasedOnScene();
+        Debug.Log("UP IS " + (int)Node.Direction.UP);
+        Debug.Log("FORWARD IS " + (int)Node.Direction.FORWARD);
     }
     public void TestLevel() {
         Time.timeScale = 1f;
@@ -85,14 +85,13 @@ public class GameController : MonoBehaviour {
     }
 
     private void SetUpControllers() {
+        cameraController = FindObjectOfType<CameraController>();
         levelController = FindObjectOfType<LevelController>();
         if (levelController != null) {
             levelController.RegisterToLevelCreated(CurrentLevelActive);
         }
-        movementController = FindObjectOfType<MovementController>();
         levelDesignController = FindObjectOfType<LevelDesignController>();
         smoothGraphics = FindObjectOfType<SmoothGraphics>();
-        cameraController = FindObjectOfType<CameraController>();
     }
     private void CurrentLevelActive() {
         currentLevel = levelController.Level;

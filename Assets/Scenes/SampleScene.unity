@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 25129825}
   - component: {fileID: 25129827}
   - component: {fileID: 25129828}
+  - component: {fileID: 25129829}
   m_Layer: 0
   m_Name: '*GameController'
   m_TagString: Untagged
@@ -208,7 +209,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraObject: {fileID: 1233989263}
   speed: 5
-  minZoom: 3
+  minZoom: 0.5
   maxZoom: 15
   zoomSensitivity: 1
 --- !u!114 &25129828
@@ -223,6 +224,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88a64bda5dc9146fba633dade5c30c8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &25129829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 25129822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc5774a72167e48eb8fbbc61e258efa8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  direction: 0
 --- !u!1 &82394094
 GameObject:
   m_ObjectHideFlags: 0
@@ -258,10 +272,10 @@ Light:
   m_CookieSize: 10
   m_Shadows:
     m_Type: 2
-    m_Resolution: -1
+    m_Resolution: 2
     m_CustomResolution: -1
     m_Strength: 1
-    m_Bias: 0.05
+    m_Bias: 0
     m_NormalBias: 0.4
     m_NearPlane: 0.2
     m_CullingMatrixOverride:
@@ -477,7 +491,6 @@ GameObject:
   m_Component:
   - component: {fileID: 324359333}
   - component: {fileID: 324359334}
-  - component: {fileID: 324359335}
   - component: {fileID: 324359337}
   m_Layer: 0
   m_Name: Level
@@ -535,19 +548,6 @@ MonoBehaviour:
   - id: 3
     nodePrefab: {fileID: 7928255879371980449, guid: f8bb82b84767045d2902876f14d062ff,
       type: 3}
---- !u!114 &324359335
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 324359332}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 55ff956bff080a749a20fa9e5fe672a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cameraObject: {fileID: 0}
 --- !u!114 &324359337
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1680,7 +1680,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
+  orthographic: 1
   orthographic size: 8
   m_Depth: -1
   m_CullingMask:

@@ -19,7 +19,7 @@ public abstract class NodeMember
     public Action<Node> NodeObjectMoved { get => nodeObjectMoved; set => nodeObjectMoved = value; }
 
     private NodeMemberGraphic nodeObjectGraphic;
-    protected Node.Direction facing;
+    protected Node.Direction facing = Node.Direction.FORWARD;
     protected Node.Direction upDirection = Node.Direction.UP;
     public Node.Direction Facing { get { return facing; } set => facing = value; }
     public Node.Direction UpDirection { get => upDirection; set => upDirection = value; }
