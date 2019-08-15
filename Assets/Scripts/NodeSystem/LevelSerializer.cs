@@ -25,14 +25,11 @@ public class LevelSerializer : MonoBehaviour {
     public Level LoadLevelLocal(string path) {
         string result = null;
 
-        string filePath = Path.Combine(Application.streamingAssetsPath, path);
+        string filePath = Path.Combine(Application.streamingAssetsPath , path);
 
         if (Application.platform == RuntimePlatform.Android) {
             UnityWebRequest reader = new UnityWebRequest(filePath);
-            while (!reader.isDone) {
-                //yes, as dumb as this code looks, you’re not reading it wrong – this is an empty loop. there’s no other way to run the reader to the end as far as I know
-
-            }
+            while (!reader.isDone) {}
             result = reader.downloadHandler.text;
         }
         else {
@@ -49,11 +46,20 @@ public class LevelSerializer : MonoBehaviour {
        return null;
     }
 
-    public void SaveLevelLocal(Level level) {
-        path = Application.persistentDataPath + "/" + "level1";
+    public void SaveLevelLocal(string path,Level level) {
+
+        string filePath = Path.Combine(Application.streamingAssetsPath, path);
         LevelData levelData = SerializeLevel(level);
         string str = JsonUtility.ToJson(levelData);
-        System.IO.File.WriteAllText(path, str);
+        if (Application.platform == RuntimePlatform.Android) {
+            UnityWebRequest reader = new UnityWebRequest(filePath);
+            while (!reader.isDone) {}
+            File.WriteAllText(filePath, str);
+        }
+        else {
+            File.WriteAllText(filePath, str);
+
+        }
 
     }
     private LevelData SerializeLevel(Level level) {
