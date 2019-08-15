@@ -6,7 +6,7 @@ public class PlayMode : GameState
 {
     public PlayMode() {
         Time.timeScale = 1f;
-        GameController.Game.LevelController.BuildTestLevel();
+        
     }
     public void SetInputs(Vector3 camMovementVec) {
     }

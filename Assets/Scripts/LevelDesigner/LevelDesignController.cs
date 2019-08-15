@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LevelDesignController : MonoBehaviour
 {
     public GameObject levelEditorPanel;
     public GameObject playModePanel;
+    public GameObject optionsPanel;
+    public GameObject nodePickerWindow;
     enum Tool { Place, Remove, Rotate };
     private Tool tool;
 
@@ -36,5 +39,11 @@ public class LevelDesignController : MonoBehaviour
             playModePanel.SetActive(true);
             GameController.Game.ChangeGameState("PlayMode");
         }
+    }
+    public void ToggleToolOptions() {
+        optionsPanel.SetActive(!optionsPanel.activeSelf);
+    }
+    public void ToggleNodePicker() {
+        nodePickerWindow.SetActive(!nodePickerWindow.activeSelf);
     }
 }

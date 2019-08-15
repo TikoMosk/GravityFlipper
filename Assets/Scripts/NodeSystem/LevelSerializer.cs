@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 public class LevelSerializer : MonoBehaviour {
     private string path;
@@ -25,12 +26,13 @@ public class LevelSerializer : MonoBehaviour {
     public Level LoadLevelLocal(string path) {
         string result = null;
 
-        string filePath = Path.Combine(Application.streamingAssetsPath , path);
+        string filePath = Path.Combine(Application.streamingAssetsPath ,path);
 
         if (Application.platform == RuntimePlatform.Android) {
-            UnityWebRequest reader = new UnityWebRequest(filePath);
+            WWW reader = new WWW(filePath);
+           
             while (!reader.isDone) {}
-            result = reader.downloadHandler.text;
+            result = reader.text;
         }
         else {
 
@@ -52,7 +54,7 @@ public class LevelSerializer : MonoBehaviour {
         LevelData levelData = SerializeLevel(level);
         string str = JsonUtility.ToJson(levelData);
         if (Application.platform == RuntimePlatform.Android) {
-            UnityWebRequest reader = new UnityWebRequest(filePath);
+            WWW reader = new WWW(filePath);
             while (!reader.isDone) {}
             File.WriteAllText(filePath, str);
         }

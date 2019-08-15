@@ -54,7 +54,7 @@ public class InputController : MonoBehaviour {
                     isDragging = true;
                 }
                 else if (Input.touchCount == 1) {
-                    if (Input.GetTouch(0).phase == TouchPhase.Moved) {
+                    if (Input.GetTouch(0).phase == TouchPhase.Moved && !overUI) {
                         inputPosDelta = Input.GetTouch(0).deltaPosition;
                         GameController.Game.CameraController.RotateAround(inputPosDelta.x * 0.025f);
                         isDragging = true;

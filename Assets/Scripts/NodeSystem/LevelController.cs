@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class LevelController : MonoBehaviour
 {
+
     private Level level;
     public Level Level { get => level; set => level = value; }
 
@@ -24,10 +25,14 @@ public class LevelController : MonoBehaviour
     
     private void Update()
     {
+        if(Input.GetKeyDown(KeyCode.S))
+        {
+            SaveLevelLocal();
+        }
         
     }
     public void SaveLevelLocal() {
-        levelSerializer.SaveLevelLocal("level1.json",level);
+        levelSerializer.SaveLevelLocal("level1.json", level);
     }
     public void BuildTestLevel() {
         //level = levelSerializer.LoadLevelLocal(Application.streamingAssetsPath + "/level1");
