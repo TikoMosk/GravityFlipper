@@ -20,7 +20,10 @@ public class LevelDesignController : MonoBehaviour
         if(tool == Tool.Place)
         {
             Node placeNode = GameController.Game.CurrentLevel.GetNodeInTheDirection(n, dir);
-            GameController.Game.LevelController.Level.SetNode(placeNode.X, placeNode.Y, placeNode.Z, 1);
+            if(placeNode != null) {
+                GameController.Game.LevelController.Level.SetNode(placeNode.X, placeNode.Y, placeNode.Z, 1);
+            }
+            
         }
         if (tool == Tool.Remove)
         {
@@ -39,6 +42,7 @@ public class LevelDesignController : MonoBehaviour
             playModePanel.SetActive(true);
             GameController.Game.ChangeGameState("PlayMode");
         }
+
     }
     public void ToggleToolOptions() {
         optionsPanel.SetActive(!optionsPanel.activeSelf);

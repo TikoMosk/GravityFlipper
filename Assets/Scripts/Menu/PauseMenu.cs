@@ -55,7 +55,7 @@ public class PauseMenu : MonoBehaviour
     public void Restart()
     {
         GameController.Game.gameObject.SetActive(true);
-        GameController.Game.LevelController.BuildTestLevel();
+        GameController.Game.LevelController.LoadLevelFromProject("level1.json");
         GameController.Game.CameraController.ResetCamera();
         if(pauseMenuUI != null) {
             pauseMenuUI.SetActive(false);

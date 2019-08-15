@@ -10,7 +10,11 @@ public class Player : NodeMember {
     }
     public void Move(Node n, Node.Direction dir) {
         Node playerNode = GameController.Game.CurrentLevel.GetNode(x, y, z);
+        if (GameController.Game.CurrentLevel.GetNodeInTheDirection(n, dir) == null) {
+            return;
+        }
         Node destinationNode = GameController.Game.CurrentLevel.GetNodeInTheDirection(n, dir);
+        
 
         Vector3 forwardVector = Vector3.zero;
         if (previousClickedNode == null) {

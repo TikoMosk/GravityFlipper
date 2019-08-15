@@ -34,10 +34,10 @@ public class LevelController : MonoBehaviour
     public void SaveLevelLocal() {
         levelSerializer.SaveLevelLocal("level1.json", level);
     }
-    public void BuildTestLevel() {
+    public void LoadLevelFromProject(string levelName) {
         //level = levelSerializer.LoadLevelLocal(Application.streamingAssetsPath + "/level1");
         
-        level = levelSerializer.LoadLevelLocal("level1.json");
+        level = levelSerializer.LoadLevelLocal(levelName);
         DestroyLevelGraphics();
         CreateLevelGraphics();
         onLevelCreated.Invoke();
