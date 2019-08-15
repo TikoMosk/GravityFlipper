@@ -34,12 +34,17 @@ public class GameController : MonoBehaviour {
     }
     private void Start() {
         SetGameModeBasedOnScene();
+        Time.timeScale = 1f;
     }
     public void TestLevel() {
         Time.timeScale = 1f;
         levelController.BuildTestLevel();
         Debug.Log(cameraController);
         cameraController.ResetCamera();
+    }
+    private void Update() {
+        gameState.Update();
+        Debug.Log(gameState);
     }
     private void SetUpSingleton() {
         if (_game != null && _game != this) {

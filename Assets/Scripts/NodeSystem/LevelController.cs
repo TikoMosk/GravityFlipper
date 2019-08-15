@@ -24,23 +24,15 @@ public class LevelController : MonoBehaviour
     
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.S))
-        {
-            levelSerializer.SaveLevelLocal(level);
-        }
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            level = levelSerializer.LoadLevelLocal(Application.persistentDataPath + "/level1");
-            DestroyLevelGraphics();
-            CreateLevelGraphics();
-            onLevelCreated.Invoke();
-        }
         
+    }
+    public void SaveLevelLocal() {
+        levelSerializer.SaveLevelLocal("level1.json",level);
     }
     public void BuildTestLevel() {
         //level = levelSerializer.LoadLevelLocal(Application.streamingAssetsPath + "/level1");
         
-        level = levelSerializer.LoadLevelLocal("level1");
+        level = levelSerializer.LoadLevelLocal("level1.json");
         DestroyLevelGraphics();
         CreateLevelGraphics();
         onLevelCreated.Invoke();
@@ -133,6 +125,7 @@ public class LevelController : MonoBehaviour
                 nodeObject_GameObject.transform.parent = this.transform;
                 NodeMemberGraphic nodeObjectGraphic= nodeObject.CreateMoveableObjectGraphic(nodeObject_GameObject);
                 nodeObject.NodeObjectGraphic.Node = Level.GetNode(x,y,z);
+                nodeObject.LocationNode = Level.GetNode(x, y, z);
                 nodeObject.SubscribeToMoveableObjectMoved((node) => { OnNodeMemberMoved(node, nodeObjectGraphic); });
             }
         }

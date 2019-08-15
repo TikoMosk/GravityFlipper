@@ -8,8 +8,13 @@ public class PlayMode : GameState
         Time.timeScale = 1f;
         GameController.Game.LevelController.BuildTestLevel();
     }
+    public void SetInputs(Vector3 camMovementVec) {
+    }
     public void OnNodeClick(Node n, Node.Direction dir)
     {
         GameController.Game.CurrentLevel.Player.Move(n,dir);
+    }
+    public void Update() {
+        GameController.Game.CameraController.CameraPositionPlayMode();
     }
 }

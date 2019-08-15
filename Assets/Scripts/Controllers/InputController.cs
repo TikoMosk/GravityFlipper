@@ -20,7 +20,11 @@ public class InputController : MonoBehaviour {
 
     private void Update() {
 
+        Vector3 cameraObjMovementVector = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+        GameController.Game.CurrentGameState.SetInputs(cameraObjMovementVector);
+
         if (GameController.Game.SmoothGraphics.AnimationCount == 0) {
+
 
             if (Input.touchCount > 0) {
                 
@@ -92,8 +96,11 @@ public class InputController : MonoBehaviour {
                     GameController.Game.CameraController.Zoom(-Input.GetAxis("Mouse ScrollWheel") * 5);
                 }
                 inputPreviousPos = Input.mousePosition;
+
             }
         }
+
+       
 
 
     }
