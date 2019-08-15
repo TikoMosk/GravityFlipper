@@ -18,7 +18,7 @@ public class CameraController : MonoBehaviour
     Node.Direction forwardDirection;
     private bool playerExists;
 
-    private void Start() {
+    private void Awake() {
         GameController.Game.LevelController.RegisterToLevelCreated(PlayerExists);
     }
     public void ResetCamera() {
@@ -42,6 +42,7 @@ public class CameraController : MonoBehaviour
         cameraRotation = cameraObject.transform.rotation;
     }
     private void PlayerExists() {
+        Debug.Log("Player Exists");
         playerExists = true;
     }
     public void ChangeCameraStyle() {

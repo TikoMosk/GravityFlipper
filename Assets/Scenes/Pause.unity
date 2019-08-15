@@ -190,6 +190,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 746fb499bb9b7cd439ccf3bdac07299a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ignoreRaycastMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &25129827
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,6 +207,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraObject: {fileID: 1233989263}
   speed: 5
+  minZoom: 0
+  maxZoom: 0
+  zoomSensitivity: 0
 --- !u!1 &49451538
 GameObject:
   m_ObjectHideFlags: 0
