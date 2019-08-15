@@ -6,12 +6,15 @@ public class PursuitScript : MonoBehaviour
 {
     private EnemySpiderState state;
 
-    private Node destNode;
     private Node currentNode;
+    private Node destNode;
 
     private void Start()
     {
+        EventController.currentInstance.Register(Check);
+
         state = new IdleState();
+        currentNode = GameController.Game.CurrentLevel.GetNode((int)transform.position.x, (int)transform.position.y, (int)transform.position.z);
     }
 
     public void StartPursuit()
@@ -33,40 +36,51 @@ public class PursuitScript : MonoBehaviour
 
     private void Check()
     {
-        if (GameController.Game.CurrentLevel.GetNode((int)vector.x, (int)vector.y, (int)vector.z).NodeMember != null)
+        if (state.IsPlayerNear(currentNode))
         {
-            if (GameController.Game.CurrentLevel.GetNode((int)vector.x, (int)vector.y, (int)vector.z).NodeMember.Id == 1)
-            {
-                StartPursuit();
-            }
+            ChangeState(new PursuitState());
         }
-        state.Chase();
-    }
 
-    private bool CheckPlayerPosition()
-    {
-        currentNode = GameController.Game.CurrentLevel.GetNode((int)transform.position.x, (int)transform.position.y, (int)transform.position.z);
-
-        GameController.Game.CurrentLevel.GetNodeInTheDirection(currentNode, Node.Direction.FORWARD);
-        return false;
+        state.Chase(currentNode, ref destNode);
     }
 }
 
 public abstract class EnemySpiderState
 {
-    public abstract void Chase();
+    public abstract void Chase(Node currentNode, ref Node destNode);
+    public abstract bool IsPlayerNear(Node node);
 }
 
 public class PursuitState : EnemySpiderState
 {
-    public override void Chase()
+    public override void Chase(Node currentNode, ref Node destNode)
     {
         GameController.Game.CurrentLevel.MoveObject(currentNode, destNode);
         destNode = GameController.Game.CurrentLevel.Player.NodeObjectGraphic.Node;
     }
+
+    public override bool IsPlayerNear(Node node) { return false; }
 }
 
 public class IdleState : EnemySpiderState
 {
-    public override void Chase() { }
+    public override void Chase(Node currentNode, ref Node destNode) { }
+
+    public override bool IsPlayerNear(Node node)
+    {
+        Node nextNode;
+        for (int i = 0; i < 6; i++)
+        {
+            nextNode = GameController.Game.CurrentLevel.GetNodeInTheDirection(node, (Node.Direction)i);
+            if (nextNode.NodeMember != null)
+            {
+                if (nextNode.NodeMember.Id == 1)
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
 }
