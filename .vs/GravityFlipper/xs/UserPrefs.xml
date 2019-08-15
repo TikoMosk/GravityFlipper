@@ -1,10 +1,10 @@
 ﻿<Properties StartupConfiguration="{EB2208B8-2EA9-6054-617B-C009E9C4DA96}|">
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/TurnSystem/PursuitScript.cs">
     <Files>
-      <File FileName="Assets/Scripts/TurnSystem/PursuitScript.cs" Line="63" Column="6" />
-      <File FileName="Assets/Scripts/NodeSystem/LevelController.cs" Line="205" Column="1" />
-      <File FileName="Assets/Scripts/NodeSystem/Level.cs" Line="106" Column="101" />
-      <File FileName="Assets/Scripts/TurnSystem/PatrolScript.cs" Line="44" Column="47" />
+      <File FileName="Assets/Scripts/TurnSystem/PursuitScript.cs" Line="38" Column="1" />
+      <File FileName="Assets/Scripts/NodeSystem/LevelController.cs" />
+      <File FileName="Assets/Scripts/NodeSystem/Level.cs" />
+      <File FileName="Assets/Scripts/TurnSystem/PatrolScript.cs" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -25,7 +25,7 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="6d42ff2f-c416-4acd-bfad-ce615a555384" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="ee231bef-7140-4d5c-9e83-7cfc13cd3883" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
