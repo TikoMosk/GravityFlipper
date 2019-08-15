@@ -4,6 +4,9 @@ using UnityEngine;
 
 public interface GameState 
 {
+
     void OnNodeClick(Node n, Node.Direction dir);
-    
+
+    void Update();
+    void SetInputs(Vector3 camMovementVec);
 }
