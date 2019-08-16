@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class NodeMember
+public class NodeMember
 {
     protected int x;
     protected int y;

@@ -113,8 +113,7 @@ public class LevelSerializer : MonoBehaviour {
                 upDirection = (Node.Direction)int.Parse(nodeMemberData.upDirection);
             }
             
-            NodeMemberFactory factory = new NodeMemberFactory();
-            level.AddNodeMember(x, y, z, factory.CreateNodeMember(nodeMemberData.id), facing, upDirection);
+            level.AddNodeMember(x, y, z, nodeMemberData.id, facing, upDirection);
         }
 
         return level;

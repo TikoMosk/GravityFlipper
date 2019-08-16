@@ -34,7 +34,7 @@ public class CameraController : MonoBehaviour {
     }
     public void CameraPositionPlayMode() {
         if (playerExists) {
-            cameraObject.transform.position = GameController.Game.CurrentLevel.Player.NodeObjectGraphic.transform.position;
+            cameraObject.transform.position = GameController.Game.CurrentLevel.Player.Graphic.transform.position;
         }
     }
     public void CameraPositionLEMode(Vector3 inputVector) {
@@ -49,7 +49,7 @@ public class CameraController : MonoBehaviour {
 
         Quaternion rot = Quaternion.LookRotation(new Vector3(Camera.main.transform.forward.x * x, Camera.main.transform.forward.y * y, Camera.main.transform.forward.z * z), upVector);
         inputVector = rot * inputVector;
-        cameraObject.transform.position += inputVector.normalized * speed * Time.deltaTime;
+        cameraObject.transform.position += inputVector.normalized * speed * 2 * Time.deltaTime;
     }
     public void RotateAround(float dragDist) {
         cameraObject.transform.RotateAround(cameraObject.transform.position, upVector, dragDist * speed);

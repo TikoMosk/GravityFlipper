@@ -9,7 +9,7 @@ public class Level {
     public int Height { get { return height; } }
     public int Length { get { return length; } }
     public Node[,,] NodeMap { get => nodeMap; }
-    public Player Player { get => player; }
+    public Player Player { get => player; set => player = value; }
 
 
 
@@ -39,15 +39,13 @@ public class Level {
         }
     }
 
-    public bool AddNodeMember(int x, int y, int z, NodeMember nodeMember, Node.Direction facing, Node.Direction upDirection) {
+    public bool AddNodeMember(int x, int y, int z, int id, Node.Direction facing, Node.Direction upDirection) {
         if (IsInLevelBounds(x, y, z)) {
             if (nodeMap[x, y, z].NodeMember == null) {
+                NodeMember nodeMember = new NodeMember(id);
                 nodeMap[x, y, z].SetNodeMember(nodeMember);
                 nodeMember.Facing = facing;
                 nodeMember.UpDirection = upDirection;
-                if (nodeMember.Id == 1) {
-                    player = (Player)nodeMember;
-                }
                 return true;
             }
         }
@@ -94,6 +92,9 @@ public class Level {
             Debug.Log("Trying to get a Node that is out of level bounds");
             return null;
         }
+    }
+    public Node GetNode(Vector3 pos) {
+        return GetNode((int)pos.x, (int)pos.y, (int)pos.z);
     }
 
     public int GetNodeDistance(Node a, Node b) {

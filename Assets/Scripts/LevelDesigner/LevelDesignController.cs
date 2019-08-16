@@ -9,11 +9,17 @@ public class LevelDesignController : MonoBehaviour
     public GameObject playModePanel;
     public GameObject optionsPanel;
     public GameObject nodePickerWindow;
-    enum Tool { Place, Remove, Rotate };
+    enum Tool { None, Place, Remove, Move, Rotate };
     private Tool tool;
 
     public void SetTool(int toolNumber) {
-        tool = (Tool)toolNumber;
+        if(tool == (Tool) toolNumber) {
+            tool = Tool.None;
+        }
+        else {
+            tool = (Tool)toolNumber;
+        }
+        ToggleToolOptions();
     }
     public void OnNodeClick(Node n, Node.Direction dir)
     {
@@ -45,7 +51,7 @@ public class LevelDesignController : MonoBehaviour
 
     }
     public void ToggleToolOptions() {
-        optionsPanel.SetActive(!optionsPanel.activeSelf);
+        optionsPanel.SetActive(tool == Tool.Place);
     }
     public void ToggleNodePicker() {
         nodePickerWindow.SetActive(!nodePickerWindow.activeSelf);
