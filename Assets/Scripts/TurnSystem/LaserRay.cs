@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class LaserRay : MonoBehaviour
 {
-    public int Length;
+    public float startLength;
+    private float Length;
     private Vector3 startPoint;
     private Vector3 endPoint;
     private Node startNode;
@@ -14,9 +15,10 @@ public class LaserRay : MonoBehaviour
     {
         EventController.currentInstance.Register(Check);
 
+        Length = startLength;
         startNode = GameController.Game.CurrentLevel.GetNode(startPoint);
         startPoint = startNode.GetPosition();
-        endPoint = startPoint + new Vector3(0, 0, -Length + 0.5f);
+        endPoint = startPoint + new Vector3(0, 0, -startLength + 0.5f);
         GetComponent<VolumetricLineBehavior>().StartPos = this.startPoint;
         GetComponent<VolumetricLineBehavior>().EndPos = this.endPoint;
     }
@@ -34,11 +36,32 @@ public class LaserRay : MonoBehaviour
 
         if (GameController.Game.CurrentLevel.Player.Graphic.Node.GetPosition() == new Vector3(3, 1, 2))
         {
-            GetComponent<VolumetricLineBehavior>().EndPos = new Vector3(Length - 0.5f, 0, 0);
+            StartCoroutine("LaserOff");
+            GetComponent<VolumetricLineBehavior>().EndPos = new Vector3(0, 0, -startLength + 0.5f);
         }
         else
         {
-            GetComponent<VolumetricLineBehavior>().EndPos = new Vector3(0, 0, -Length + 0.5f);
+            StartCoroutine("LaserOn");
+            GetComponent<VolumetricLineBehavior>().EndPos = new Vector3(startLength - 0.5f, 0, 0);
+        }
+    }
+
+    IEnumerator LaserOff()
+    {
+        while (startLength > 0)
+        {
+            Debug.Log(startLength);
+            yield return null;
+            startLength -= 0.1f;
+        }
+    }
+
+    IEnumerator LaserOn()
+    {
+        while (startLength <= Length)
+        {
+            yield return null;
+            startLength += 0.1f;
         }
     }
 }

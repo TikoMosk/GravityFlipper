@@ -104,6 +104,11 @@ PrefabInstance:
       propertyPath: Length
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: -1554397407036181536, guid: 11530f2b0a0cd2442949827ecbb622f2,
+        type: 3}
+      propertyPath: startLength
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 122648, guid: 11530f2b0a0cd2442949827ecbb622f2, type: 3}
       propertyPath: m_Name
       value: LaserRay
