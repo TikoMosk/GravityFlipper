@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class InputController : MonoBehaviour {
+
     Vector3 touchStart;
     Vector3 touchEnd;
     Touch touchZero;
@@ -19,7 +20,11 @@ public class InputController : MonoBehaviour {
 
     private void Update() {
 
+        Vector3 cameraObjMovementVector = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+        GameController.Game.CurrentGameState.SetInputs(cameraObjMovementVector);
+
         if (GameController.Game.SmoothGraphics.AnimationCount == 0) {
+
 
             if (Input.touchCount > 0) {
                 
@@ -49,7 +54,7 @@ public class InputController : MonoBehaviour {
                     isDragging = true;
                 }
                 else if (Input.touchCount == 1) {
-                    if (Input.GetTouch(0).phase == TouchPhase.Moved) {
+                    if (Input.GetTouch(0).phase == TouchPhase.Moved && !overUI) {
                         inputPosDelta = Input.GetTouch(0).deltaPosition;
                         GameController.Game.CameraController.RotateAround(inputPosDelta.x * 0.025f);
                         isDragging = true;
@@ -91,8 +96,11 @@ public class InputController : MonoBehaviour {
                     GameController.Game.CameraController.Zoom(-Input.GetAxis("Mouse ScrollWheel") * 5);
                 }
                 inputPreviousPos = Input.mousePosition;
+
             }
         }
+
+       
 
 
     }

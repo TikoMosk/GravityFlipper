@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 public class LevelSerializer : MonoBehaviour {
     private string path;
@@ -25,15 +26,13 @@ public class LevelSerializer : MonoBehaviour {
     public Level LoadLevelLocal(string path) {
         string result = null;
 
-        string filePath = Path.Combine(Application.streamingAssetsPath, path);
+        string filePath = Path.Combine(Application.streamingAssetsPath ,path);
 
         if (Application.platform == RuntimePlatform.Android) {
-            UnityWebRequest reader = new UnityWebRequest(filePath);
-            while (!reader.isDone) {
-                //yes, as dumb as this code looks, you’re not reading it wrong – this is an empty loop. there’s no other way to run the reader to the end as far as I know
-
-            }
-            result = reader.downloadHandler.text;
+            WWW reader = new WWW(filePath);
+           
+            while (!reader.isDone) {}
+            result = reader.text;
         }
         else {
 
@@ -49,11 +48,20 @@ public class LevelSerializer : MonoBehaviour {
        return null;
     }
 
-    public void SaveLevelLocal(Level level) {
-        path = Application.persistentDataPath + "/" + "level1";
+    public void SaveLevelLocal(string path,Level level) {
+
+        string filePath = Path.Combine(Application.streamingAssetsPath, path);
         LevelData levelData = SerializeLevel(level);
         string str = JsonUtility.ToJson(levelData);
-        System.IO.File.WriteAllText(path, str);
+        if (Application.platform == RuntimePlatform.Android) {
+            WWW reader = new WWW(filePath);
+            while (!reader.isDone) {}
+            File.WriteAllText(filePath, str);
+        }
+        else {
+            File.WriteAllText(filePath, str);
+
+        }
 
     }
     private LevelData SerializeLevel(Level level) {
@@ -105,8 +113,7 @@ public class LevelSerializer : MonoBehaviour {
                 upDirection = (Node.Direction)int.Parse(nodeMemberData.upDirection);
             }
             
-            NodeMemberFactory factory = new NodeMemberFactory();
-            level.AddNodeMember(x, y, z, factory.CreateNodeMember(nodeMemberData.id), facing, upDirection);
+            level.AddNodeMember(x, y, z, nodeMemberData.id, facing, upDirection);
         }
 
         return level;

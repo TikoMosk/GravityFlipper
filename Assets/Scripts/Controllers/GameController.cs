@@ -34,14 +34,16 @@ public class GameController : MonoBehaviour {
     }
     private void Start() {
         SetGameModeBasedOnScene();
-        Debug.Log("UP IS " + (int)Node.Direction.UP);
-        Debug.Log("FORWARD IS " + (int)Node.Direction.FORWARD);
+        Time.timeScale = 1f;
     }
     public void TestLevel() {
         Time.timeScale = 1f;
-        levelController.BuildTestLevel();
+        levelController.LoadLevelFromProject("level1.json");
         Debug.Log(cameraController);
         cameraController.ResetCamera();
+    }
+    private void Update() {
+        gameState.Update();
     }
     private void SetUpSingleton() {
         if (_game != null && _game != this) {
@@ -61,6 +63,7 @@ public class GameController : MonoBehaviour {
         }
     }
     public void ChangeGameState(String stateName) {
+        Time.timeScale = 1f;
         if (stateName == "PlayMode") {
             gameState = new PlayMode();
         }

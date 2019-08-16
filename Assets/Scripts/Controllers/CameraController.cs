@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraController : MonoBehaviour
-{
+public class CameraController : MonoBehaviour {
+    public GameObject swipeIcon;
     public GameObject cameraObject;
     public float speed;
     public float minZoom;
@@ -27,26 +27,40 @@ public class CameraController : MonoBehaviour
     }
     private void Update() {
 
-        
-        if (playerExists) {
-            cameraObject.transform.position = GameController.Game.CurrentLevel.Player.NodeObjectGraphic.transform.position;
-        }
         forwardDirection = GetForwardDirection(cameraObject.transform.forward);
-        if(Input.GetKeyDown(KeyCode.P)) {
+        if (Input.GetKeyDown(KeyCode.P)) {
             ChangeCameraStyle();
         }
-        
+    }
+    public void CameraPositionPlayMode() {
+        if (playerExists) {
+            cameraObject.transform.position = GameController.Game.CurrentLevel.Player.Graphic.transform.position;
+        }
+    }
+    public void CameraPositionLEMode(Vector3 inputVector) {
+
+        //USE THIS FOR PLAYER MOVEMENT LATER
+        //Quaternion rot = Quaternion.LookRotation(Dir.GetVectorByDirection(forwardDirection), upVector);
+        //inputVector = rot * inputVector;
+        //cameraObject.transform.position += inputVector.normalized * 2 * Time.deltaTime;
+        float x = (upVector.x == 0) ? 1 : 0;
+        float y = (upVector.y == 0) ? 1 : 0;
+        float z = (upVector.z == 0) ? 1 : 0;
+
+        Quaternion rot = Quaternion.LookRotation(new Vector3(Camera.main.transform.forward.x * x, Camera.main.transform.forward.y * y, Camera.main.transform.forward.z * z), upVector);
+        inputVector = rot * inputVector;
+        cameraObject.transform.position += inputVector.normalized * speed * 2 * Time.deltaTime;
     }
     public void RotateAround(float dragDist) {
         cameraObject.transform.RotateAround(cameraObject.transform.position, upVector, dragDist * speed);
-        cameraRotation = cameraObject.transform.rotation;
+
     }
     private void PlayerExists() {
         Debug.Log("Player Exists");
         playerExists = true;
     }
     public void ChangeCameraStyle() {
-        if(cameraStyle == View.Orthographic) {
+        if (cameraStyle == View.Orthographic) {
             cameraStyle = View.Perspective;
             Camera.main.orthographic = false;
         }
@@ -59,29 +73,29 @@ public class CameraController : MonoBehaviour
 
     public void Zoom(float amount) {
         Vector3 cameraPos = Vector3.zero;
-        if(Camera.main.orthographic) {
+        if (Camera.main.orthographic) {
             Camera.main.transform.position = cameraObject.transform.position + (Camera.main.transform.position - cameraObject.transform.position).normalized * maxZoom;
             Camera.main.orthographicSize += amount * zoomSensitivity;
             Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize, minZoom, maxZoom);
         }
         else {
             Camera.main.transform.position += (Camera.main.transform.position - cameraObject.transform.position) * amount * 0.5f * zoomSensitivity;
-            if((Camera.main.transform.position - cameraObject.transform.position).magnitude > maxZoom){
+            if ((Camera.main.transform.position - cameraObject.transform.position).magnitude > maxZoom) {
                 Camera.main.transform.position = cameraObject.transform.position + (Camera.main.transform.position - cameraObject.transform.position).normalized * maxZoom;
             }
             if ((Camera.main.transform.position - cameraObject.transform.position).magnitude < minZoom) {
                 Camera.main.transform.position = cameraObject.transform.position + (Camera.main.transform.position - cameraObject.transform.position).normalized * minZoom;
             }
-           
+
         }
-        
+
     }
     public void UpdateGravity(Vector3 playerForward, Vector3 playerUp) {
         Vector3 forwardVec = Dir.GetVectorByDirection(forwardDirection);
         bool minus = false;
         bool cross = false;
 
-        if(forwardDirection == Dir.GetDirectionByVector(-playerUp)) {
+        if (forwardDirection == Dir.GetDirectionByVector(-playerUp)) {
             cross = true;
             minus = false;
         }
