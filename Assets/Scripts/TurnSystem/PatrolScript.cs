@@ -56,6 +56,7 @@ public class PatrolScript : MonoBehaviour
     {
         GameController.Game.CurrentLevel.MoveObject(currentNode, destNode);
     }
+
     private void OnDestroy() {
         EventController.currentInstance.Remove(Check);
     }

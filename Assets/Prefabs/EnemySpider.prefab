@@ -564,7 +564,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2707832398800246668}
   - component: {fileID: 2707832398793324652}
-  - component: {fileID: -7117656414439270466}
   - component: {fileID: 7902980453684570994}
   m_Layer: 0
   m_Name: EnemySpider
@@ -608,20 +607,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &-7117656414439270466
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2707832398800735148}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b22438d212e74a1c870f83795cce07a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Reverse: 0
-  rotation: 1
 --- !u!114 &7902980453684570994
 MonoBehaviour:
   m_ObjectHideFlags: 0
