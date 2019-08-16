@@ -93,7 +93,8 @@ public class Level {
             return null;
         }
     }
-    public Node GetNode(Vector3 pos) {
+    public Node GetNode(Vector3 pos)
+    {
         return GetNode((int)pos.x, (int)pos.y, (int)pos.z);
     }
 

@@ -38,13 +38,13 @@ public class PursuitScript : MonoBehaviour
         {
             ChangeState(new PursuitState());
             StartPursuit();
-            destNode = GameController.Game.CurrentLevel.Player.NodeObjectGraphic.Node;
+            destNode = GameController.Game.CurrentLevel.Player.Graphic.Node;
         }
         else
         {
             currentNode = GameController.Game.CurrentLevel.GetNode((int)transform.position.x, (int)transform.position.y, (int)transform.position.z);
             state.Chase(currentNode, destNode);
-            destNode = GameController.Game.CurrentLevel.Player.NodeObjectGraphic.Node;
+            destNode = GameController.Game.CurrentLevel.Player.Graphic.Node;
         }
     }
 }

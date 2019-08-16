@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 2397960}
   - component: {fileID: 3305964}
   - component: {fileID: 11475718}
-  - component: {fileID: 5570018141710953494}
+  - component: {fileID: -1554397407036181536}
   m_Layer: 0
-  m_Name: VolumetricLinePrefab
+  m_Name: LaserRay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -94,11 +94,11 @@ MonoBehaviour:
   m_templateMaterial: {fileID: 2100000, guid: 974b33ccbd786464a825203eb88b8dab, type: 2}
   m_doNotOverwriteTemplateMaterialProperties: 0
   m_startPos: {x: 0, y: 0, z: 0}
-  m_endPos: {x: 0, y: 0, z: 55}
-  m_lineColor: {r: 0, g: 1, b: 0.5249331, a: 1}
-  m_lineWidth: 24
-  m_lightSaberFactor: 0.841
---- !u!114 &5570018141710953494
+  m_endPos: {x: 0, y: 0, z: 1}
+  m_lineColor: {r: 1, g: 0, b: 0, a: 1}
+  m_lineWidth: 0.1
+  m_lightSaberFactor: 0.93
+--- !u!114 &-1554397407036181536
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -110,5 +110,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44cabee0b024b4e0089dcc4e6804f5a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startPos: {x: 0, y: 0, z: 0}
-  endPos: {x: 0, y: 0, z: 0}
+  Length: 5
