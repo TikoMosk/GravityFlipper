@@ -11,6 +11,9 @@ public class LevelController : MonoBehaviour
 
     public LevelSerializer levelSerializer;
     private Action onLevelCreated;
+    int width = 20;
+    int height = 20 ;
+    int length = 20;
 
     [System.Serializable]
     public struct NodeData
@@ -38,34 +41,26 @@ public class LevelController : MonoBehaviour
         DestroyLevelGraphics();
         CreateLevelGraphics();
         onLevelCreated.Invoke();
-
-
-       /* level = new Level(10, 10, 10);
+    }
+    public void BuildEmptyLevel() {
+        level = new Level(width, height, length);
         level.InitializeLevel();
-        NodeMemberFactory fac = new NodeMemberFactory();
-        for (int x = 0; x < 10; x++) {
-            for (int y = 0; y < 10; y++) {
-                for (int z = 0; z < 10; z++) {
-                    if((x == 0 || y == 0 || z == 9) && y <= 2) {
-                        level.SetNode(x, y, z, 1);
-                    }
-                    if(x == 3 && y < 2 && z <= 4 && z >= 2) {
-                        level.SetNode(x, y, z, 1);
-                    }
-                    if (x == 6 && y <= 8 && z <= 6 && z >= 5) {
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                for (int z = 0; z < length; z++) {
+                    if(y == 0) {
                         level.SetNode(x, y, z, 1);
                     }
                 }
             }
         }
-        level.AddNodeMember(5, 1, 5, fac.CreateNodeMember(1));
-        level.AddNodeMember(2, 1, 3, fac.CreateNodeMember(2));
+        level.AddNodeMember(5, 1, 5, 1,Node.Direction.FORWARD,Node.Direction.UP);
+        level.AddNodeMember(5, 5, 5, 2, Node.Direction.FORWARD, Node.Direction.UP);
         DestroyLevelGraphics();
         CreateLevelGraphics();
-        Debug.Log("A");
-        onLevelCreated.Invoke();*/
-
-    }
+        onLevelCreated.Invoke();
+    
+}
     // Destroys the level graphics (this is called when a new level is loaded to remove the old level graphics)
     private void DestroyLevelGraphics()
     {
@@ -114,7 +109,7 @@ public class LevelController : MonoBehaviour
     }
 
     // Creates the moveableObject graphic for the node at x,y,z
-    private void CreateNodeMemberGraphic(int x, int y, int z)
+    public void CreateNodeMemberGraphic(int x, int y, int z)
     {
         if (Level.GetNode(x, y, z).NodeMember != null)
         {

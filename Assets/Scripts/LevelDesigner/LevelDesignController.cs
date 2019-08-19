@@ -9,8 +9,15 @@ public class LevelDesignController : MonoBehaviour
     public GameObject playModePanel;
     public GameObject optionsPanel;
     public GameObject nodePickerWindow;
+    int blockId = 1;
+    private bool placeNodeMember;
+
+
     enum Tool { None, Place, Remove, Move, Rotate };
     private Tool tool;
+
+    public int BlockId { get => blockId; set => blockId = value; }
+    public bool PlaceNodeMember { get => placeNodeMember; set => placeNodeMember = value; }
 
     public void SetTool(int toolNumber) {
         if(tool == (Tool) toolNumber) {
@@ -27,7 +34,15 @@ public class LevelDesignController : MonoBehaviour
         {
             Node placeNode = GameController.Game.CurrentLevel.GetNodeInTheDirection(n, dir);
             if(placeNode != null) {
-                GameController.Game.LevelController.Level.SetNode(placeNode.X, placeNode.Y, placeNode.Z, 1);
+                if (placeNodeMember) {
+                    
+                    GameController.Game.LevelController.Level.AddNodeMember(placeNode.X, placeNode.Y, placeNode.Z, blockId,Node.Direction.FORWARD,Node.Direction.UP);
+                    GameController.Game.LevelController.CreateNodeMemberGraphic(placeNode.X, placeNode.Y, placeNode.Z);
+                }
+                else {
+                    GameController.Game.LevelController.Level.SetNode(placeNode.X, placeNode.Y, placeNode.Z, blockId);
+                }
+                
             }
             
         }
@@ -46,7 +61,7 @@ public class LevelDesignController : MonoBehaviour
         if (mode == 1) {
             levelEditorPanel.SetActive(false);
             playModePanel.SetActive(true);
-            GameController.Game.ChangeGameState("PlayMode");
+            GameController.Game.ChangeGameState("TestMode");
         }
 
     }

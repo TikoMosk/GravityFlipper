@@ -6,7 +6,7 @@ public class TestMode : GameState
 {
     public TestMode() {
         Time.timeScale = 1f;
-        GameController.Game.CameraController.ResetCamera();
+        //GameController.Game.CameraController.ResetCamera();
     }
     public void OnNodeClick(Node n, Node.Direction dir) {
         GameController.Game.CurrentLevel.Player.Move(n, dir);

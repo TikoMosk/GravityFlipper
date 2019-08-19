@@ -24,8 +24,11 @@ public class GameController : MonoBehaviour {
     public GameState CurrentGameState { get => gameState; set => gameState = value; }
 
     private Action onNextTurn;
+    private Action onGameStateChanged;
 
     private GameState gameState;
+
+    public GameObject winWindow;
 
     private void Awake() {
         SetUpSingleton();
@@ -64,12 +67,21 @@ public class GameController : MonoBehaviour {
     }
     public void ChangeGameState(String stateName) {
         Time.timeScale = 1f;
+        
         if (stateName == "PlayMode") {
             gameState = new PlayMode();
         }
         if (stateName == "LevelEditorMode") {
             gameState = new LevelEditorMode();
         }
+        if (stateName == "TestMode") {
+            gameState = new TestMode();
+        }
+        if (onGameStateChanged != null) {
+            onGameStateChanged.Invoke();
+        }
+        onGameStateChanged = null;
+
 
     }
     public void ChangeScene(string s) {
@@ -85,6 +97,18 @@ public class GameController : MonoBehaviour {
     }
     public void ClickNode(Node n, Node.Direction dir) {
         CurrentGameState.OnNodeClick(n, dir);
+    }
+    public void Win() {
+        
+        StartCoroutine(WaitForAnimationEnd());
+
+    }
+    IEnumerator WaitForAnimationEnd() {
+       while(smoothGraphics.AnimationCount > 0) {
+            yield return null;
+        }
+        winWindow.SetActive(true);
+        Time.timeScale = 0;
     }
 
     private void SetUpControllers() {
@@ -104,6 +128,9 @@ public class GameController : MonoBehaviour {
     }
     public void RegisterForNextTurn(Action onNextTurn) {
         this.onNextTurn += onNextTurn;
+    }
+    public void RegisterForGameStateChanged(Action gameStateChanged) {
+        this.onGameStateChanged += gameStateChanged;
     }
 
 

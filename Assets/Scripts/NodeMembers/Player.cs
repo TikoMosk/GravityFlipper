@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour {
+    private const int WIN_BLOCK_ID = 3;
     Node previousClickedNode = null;
     Node.Direction previousDirection = Node.Direction.UP;
     Node.Direction facing;
@@ -44,6 +45,7 @@ public class Player : MonoBehaviour {
                         forwardVector = destinationNode.GetPosition() - playerNode.GetPosition();
                         playerMember.Facing = Dir.GetDirectionByVector(forwardVector);
                         GameController.Game.CurrentLevel.MoveObject(playerNode, destinationNode);
+                        CheckIfPlayerWon(destinationNode);
                     }
 
                 }
@@ -70,11 +72,17 @@ public class Player : MonoBehaviour {
             GameController.Game.CameraController.UpdateGravity(-Dir.GetVectorByDirection(playerMember.Facing), Dir.GetVectorByDirection(dir));
             previousClickedNode = n;
             previousDirection = dir;
+            CheckIfPlayerWon(destinationNode);
             TurnEventSystem.currentInstance.NextTurn();
         }
 
 
 
+    }
+    private void CheckIfPlayerWon(Node destNode) {
+        if(destNode.Id == WIN_BLOCK_ID) {
+            GameController.Game.Win();
+        }
     }
     
 }

@@ -56,7 +56,6 @@ public class CameraController : MonoBehaviour {
 
     }
     private void PlayerExists() {
-        Debug.Log("Player Exists");
         playerExists = true;
     }
     public void ChangeCameraStyle() {
