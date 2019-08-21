@@ -88,17 +88,14 @@ public class NodeFactory : MonoBehaviour
     }
     public GameObject GetNodeMemberPrefabById(int id)
     {
-        Debug.Log("3");
         if (id >= 0 && id < nodeMemberDetailsList.Count)
         {
             GameObject prefab = (GameObject)Resources.Load(nodeMemberDetailsList[id].prefab);
-            Debug.Log(nodeMemberDetailsList[id].prefab);
-            Debug.Log(prefab);
+
             return prefab;
         }
         else
         {
-            Debug.Log("No such prefab exists for id " + id);
             return null;
         }
     }

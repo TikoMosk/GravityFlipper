@@ -5,63 +5,45 @@ using UnityEngine;
 
 public class LaserRay : MonoBehaviour
 {
-    public float startLength;
-    private float Length;
-    private Vector3 startPoint;
-    private Vector3 endPoint;
+    public Vector3 endPoint_1;
+    public Vector3 endPoint_2;
+
+    private VolumetricLineBehavior vl;
+    private GameObject currentDirObject;
+    public GameObject endObject_1;
+    public GameObject endObject_2;
     private Node startNode;
 
     private void Start()
     {
         EventController.currentInstance.Register(Check);
 
-        Length = startLength;
-        startNode = GameController.Game.CurrentLevel.GetNode(startPoint);
-        startPoint = startNode.GetPosition();
-        endPoint = startPoint + new Vector3(0, 0, -startLength + 0.5f);
-        GetComponent<VolumetricLineBehavior>().StartPos = this.startPoint;
-        GetComponent<VolumetricLineBehavior>().EndPos = this.endPoint;
+        startNode = GameController.Game.CurrentLevel.GetNode(transform.position);
+        vl = GetComponentInChildren<VolumetricLineBehavior>();
+        endObject_1.transform.position = endPoint_1;
+        endObject_2.transform.position = endPoint_2;
+
+        currentDirObject = endObject_1;
+        UpdateLaser();
     }
 
     private void Check()
     {
-        if (GameController.Game.CurrentLevel.Player.Graphic.Node.GetPosition() == new Vector3(4, 1, 2))
-        {
-            GetComponent<VolumetricLineBehavior>().LineColor = Color.green;
-        }
-        else
-        {
-            GetComponent<VolumetricLineBehavior>().LineColor = Color.red;
-        }
-
-        if (GameController.Game.CurrentLevel.Player.Graphic.Node.GetPosition() == new Vector3(3, 1, 2))
-        {
-            StartCoroutine("LaserOff");
-            GetComponent<VolumetricLineBehavior>().EndPos = new Vector3(0, 0, -startLength + 0.5f);
-        }
-        else
-        {
-            StartCoroutine("LaserOn");
-            GetComponent<VolumetricLineBehavior>().EndPos = new Vector3(startLength - 0.5f, 0, 0);
-        }
+        ChangeDir();
     }
 
-    IEnumerator LaserOff()
+    private void ChangeDir()
     {
-        while (startLength > 0)
-        {
-            Debug.Log(startLength);
-            yield return null;
-            startLength -= 0.1f;
-        }
+        if (currentDirObject == endObject_1)
+            currentDirObject = endObject_2;
+        else
+            currentDirObject = endObject_1;
+
+        UpdateLaser();
     }
 
-    IEnumerator LaserOn()
+    private void UpdateLaser()
     {
-        while (startLength <= Length)
-        {
-            yield return null;
-            startLength += 0.1f;
-        }
+        vl.EndPos = currentDirObject.transform.position;
     }
 }

@@ -14,79 +14,117 @@ public class PursuitScript : MonoBehaviour
         EventController.currentInstance.Register(Check);
 
         state = new IdleState();
-        currentNode = GameController.Game.CurrentLevel.GetNode((int)transform.position.x, (int)transform.position.y, (int)transform.position.z);
-    }
-
-    public void StartPursuit()
-    {
-        GetComponent<Animator>().SetBool("Chasing", true);
-    }
-
-    public void EndPursuit()
-    {
-        GetComponent<Animator>().SetBool("Chasing", false);
+        state.enemy = this.gameObject;
+        UpdateCurrentNode();
     }
 
     public void ChangeState(EnemySpiderState newState)
     {
         this.state = newState;
+        state.enemy = this.gameObject;
+    }
+
+    private void UpdateCurrentNode()
+    {
+        currentNode = GameController.Game.CurrentLevel.GetNode((int)transform.position.x, (int)transform.position.y, (int)transform.position.z);
+    }
+
+    private void UpdateDestNode()
+    {
+        destNode = GameController.Game.CurrentLevel.Player.Graphic.Node;
     }
 
     private void Check()
     {
-        if (state.IsPlayerNear(currentNode))
+        if (state is IdleState)
         {
-            ChangeState(new PursuitState());
-            StartPursuit();
-            destNode = GameController.Game.CurrentLevel.Player.Graphic.Node;
+            if (state.IsPlayerNear())
+            {
+                Debug.Log("Player near");
+                ChangeState(new PursuitState());
+                Debug.Log("Start pursuit");
+                state.StartPursuit();
+                UpdateDestNode();
+            }
         }
         else
         {
-            currentNode = GameController.Game.CurrentLevel.GetNode((int)transform.position.x, (int)transform.position.y, (int)transform.position.z);
-            state.Chase(currentNode, destNode);
-            destNode = GameController.Game.CurrentLevel.Player.Graphic.Node;
+            UpdateCurrentNode();
+            // && !state.IsPlayerNear()
+            if (Vector3.Distance(currentNode.GetPosition(), destNode.GetPosition()) > 1.0f
+                || transform.GetChild(6).position == destNode.GetPosition())
+            {
+                Debug.Log("EndPursuit");
+                state.EndPursuit();
+                ChangeState(new IdleState());
+                return;
+            }
+            else
+            {
+                state.Chase(currentNode, destNode);
+                currentNode = destNode;
+                UpdateDestNode();
+            }
         }
     }
 }
 
 public abstract class EnemySpiderState
 {
+    protected internal GameObject enemy;
+
+    public abstract void StartPursuit();
+
+    public abstract void EndPursuit();
+
     public abstract void Chase(Node currentNode, Node destNode);
-    public abstract bool IsPlayerNear(Node node);
-}
 
-public class PursuitState : EnemySpiderState
-{
-    public override void Chase(Node currentNode, Node destNode)
+    public virtual bool IsPlayerNear()
     {
-        Debug.Log("Chase" + currentNode.GetPosition() + "  " + destNode.GetPosition());
-        GameController.Game.CurrentLevel.MoveObject(currentNode, destNode);
-    }
-
-    public override bool IsPlayerNear(Node node) { return false; }
-}
-
-public class IdleState : EnemySpiderState
-{
-    public override void Chase(Node currentNode, Node destNode) { }
-
-    public override bool IsPlayerNear(Node node)
-    {
+        Transform[] sides = enemy.GetComponentsInChildren<Transform>();
         Node nextNode;
-        for (int i = 0; i < 6; i++)
+        foreach (Transform side in sides)
         {
-            if (i == 2 || i == 0) continue;
-
-            nextNode = GameController.Game.CurrentLevel.GetNodeInTheDirection(node, (Node.Direction)i);
-            if (nextNode.NodeMember != null)
+            if (side.gameObject.tag == "Side")
             {
-                if (nextNode.NodeMember.Id == 1)
+                nextNode = GameController.Game.CurrentLevel.GetNode(side.position);
+                if (nextNode.NodeMember != null)
                 {
-                    return true;
+                    if (nextNode.NodeMember.Id == 1)
+                    {
+                        return true;
+                    }
                 }
             }
         }
 
         return false;
     }
+}
+
+public class PursuitState : EnemySpiderState
+{
+    public override void Chase(Node currentNode, Node destNode)
+    {
+        GameController.Game.CurrentLevel.MoveObject(currentNode, destNode);
+    }
+
+    public override void EndPursuit()
+    {
+        enemy.GetComponent<Animator>().SetBool("Chasing", false);
+    }
+
+    public override void StartPursuit()
+    {
+        enemy.GetComponent<Animator>().SetBool("Chasing", true);
+    }
+}
+
+public class IdleState : EnemySpiderState
+{
+    public override void Chase(Node currentNode, Node destNode) { }
+
+    public override void EndPursuit() { }
+
+    public override void StartPursuit() { }
 }
