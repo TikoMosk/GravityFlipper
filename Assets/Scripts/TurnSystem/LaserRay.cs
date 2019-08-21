@@ -1,13 +1,15 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using VolumetricLines;
 using UnityEngine;
 
 public class LaserRay : MonoBehaviour
 {
+    public Action a;
     public Vector3 endPoint_1;
     public Vector3 endPoint_2;
-
+    
     private VolumetricLineBehavior vl;
     private GameObject currentDirObject;
     public GameObject endObject_1;
@@ -29,10 +31,10 @@ public class LaserRay : MonoBehaviour
 
     private void Check()
     {
-        ChangeDir();
+        ChangeDirection();
     }
 
-    private void ChangeDir()
+    private void ChangeDirection()
     {
         if (currentDirObject == endObject_1)
             currentDirObject = endObject_2;
