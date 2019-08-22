@@ -89,7 +89,7 @@ public abstract class EnemySpiderState
             if (side.gameObject.tag == "Side")
             {
                 nextNode = GameController.Game.CurrentLevel.GetNode(side.position);
-                if (nextNode.NodeMember != null)
+                if (nextNode != null && nextNode.NodeMember != null)
                 {
                     if (nextNode.NodeMember.Id == 1)
                     {

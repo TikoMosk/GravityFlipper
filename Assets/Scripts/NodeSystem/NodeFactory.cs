@@ -48,12 +48,12 @@ public class NodeFactory : MonoBehaviour{
             ));
         nodeDetailsList.Add(new NodeDetails(
             2,
-            false,
+            true,
             "Laser",
             "",
-            "LaserBlock",
+            "LaserCube",
             "",
-            Category.DecorativeBlock
+            Category.FunctioningBlock
             ));
         nodeDetailsList.Add(new NodeDetails(
             3,
@@ -95,7 +95,16 @@ public class NodeFactory : MonoBehaviour{
             Category.Living
             ));
         nodeMemberDetailsList.Add(new NodeDetails(
-            3,
+           3,
+           true,
+           "Patrol Enemy",
+           "",
+           "EnemySpiderPatrol",
+           "",
+           Category.Living
+           ));
+        nodeMemberDetailsList.Add(new NodeDetails(
+            4,
             true,
             "Light",
             "",
@@ -103,15 +112,7 @@ public class NodeFactory : MonoBehaviour{
             "",
             Category.Miscellaneous
             ));
-        nodeMemberDetailsList.Add(new NodeDetails(
-            4,
-            true,
-            "Laser",
-            "",
-            "LaserCube",
-            "",
-            Category.FunctioningBlock
-            ));
+        
     }
 
     public List<NodeDetails> GetNodeDetailsByCategory(Category category) {
