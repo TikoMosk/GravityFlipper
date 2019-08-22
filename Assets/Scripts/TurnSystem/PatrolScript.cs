@@ -20,7 +20,6 @@ public class PatrolScript : MonoBehaviour
 
     private void Start()
     {
-
         EventController.currentInstance.Register(Check);
 
         switch (direction)
@@ -40,7 +39,6 @@ public class PatrolScript : MonoBehaviour
     public void Check()
     {
         currentNode = GameController.Game.CurrentLevel.GetNode((int)transform.position.x, (int)transform.position.y, (int)transform.position.z);
-
         destination = transform.position + step;
 
         if (GameController.Game.CurrentLevel.GetNode((int)destination.x, (int)destination.y, (int)destination.z).Id != 0)
@@ -54,24 +52,11 @@ public class PatrolScript : MonoBehaviour
         Move();
     }
 
-    private void Update()
-    {
-        //if (_active)
-        //{
-        //    Move();
-        //}
-        //
-        //if (transform.position == destination)
-        //{
-        //    _active = false;
-        //}
-    }
-
     private void Move()
     {
         GameController.Game.CurrentLevel.MoveObject(currentNode, destNode);
-        //transform.position = Vector3.MoveTowards(transform.position, destination, Time.deltaTime * 5);
     }
+
     private void OnDestroy() {
         EventController.currentInstance.Remove(Check);
     }

@@ -85,7 +85,8 @@ public class Level {
 
 
 
-    public Node GetNode(int x, int y, int z) {
+    public Node GetNode(int x, int y, int z)
+    {
 
         if (IsInLevelBounds(x, y, z)) {
             return nodeMap[x, y, z];
@@ -95,8 +96,9 @@ public class Level {
             return null;
         }
     }
-    public Node GetNode(Vector3 pos) {
-        return GetNode((int)pos.x, (int)pos.y, (int)pos.z);
+    public Node GetNode(Vector3 pos)
+    {
+        return GetNode(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.y), Mathf.RoundToInt(pos.z));
     }
 
     public int GetNodeDistance(Node a, Node b) {
