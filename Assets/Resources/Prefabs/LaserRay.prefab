@@ -110,7 +110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44cabee0b024b4e0089dcc4e6804f5a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 0
   endPoint_1: {x: 0, y: 0, z: 0}
   endPoint_2: {x: 0, y: 0, z: 0}
-  endObject_1: {fileID: 0}
-  endObject_2: {fileID: 0}
+  endObject: {fileID: 0}
