@@ -88,11 +88,29 @@ public class NodeFactory : MonoBehaviour{
         nodeMemberDetailsList.Add(new NodeDetails(
             2,
             true,
+            "Enemy",
+            "",
+            "EnemySpider",
+            "",
+            Category.Living
+            ));
+        nodeMemberDetailsList.Add(new NodeDetails(
+            3,
+            true,
             "Light",
             "",
             "PointLight",
             "",
             Category.Miscellaneous
+            ));
+        nodeMemberDetailsList.Add(new NodeDetails(
+            4,
+            true,
+            "Laser",
+            "",
+            "LaserCube",
+            "",
+            Category.FunctioningBlock
             ));
     }
 

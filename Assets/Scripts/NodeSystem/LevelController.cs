@@ -55,7 +55,7 @@ public class LevelController : MonoBehaviour
             }
         }
         level.AddNodeMember(5, 1, 5, 1,Node.Direction.FORWARD,Node.Direction.UP);
-        level.AddNodeMember(5, 5, 5, 2, Node.Direction.FORWARD, Node.Direction.UP);
+        level.AddNodeMember(5, 5, 5, 3, Node.Direction.FORWARD, Node.Direction.UP);
         DestroyLevelGraphics();
         CreateLevelGraphics();
         onLevelCreated.Invoke();

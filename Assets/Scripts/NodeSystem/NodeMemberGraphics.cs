@@ -21,6 +21,7 @@ public class NodeMemberGraphic : MonoBehaviour
         ColliderUpdate();
     }
     private void ColliderUpdate() {
+        Debug.Log(gameObject.name);
         if (GetComponent<Collider>() != null) {
             Collider col = GetComponent<Collider>();
             if (GameController.Game.CurrentGameState is LevelEditorMode) {
