@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
-public class NodeFactory : MonoBehaviour
-{
+public class NodeFactory : MonoBehaviour{
 
     List<NodeDetails> nodeDetailsList;
     List<NodeDetails> nodeMemberDetailsList;
@@ -13,107 +13,155 @@ public class NodeFactory : MonoBehaviour
 
     public static NodeFactory Factory { get => factory; set => factory = value; }
     [System.Serializable]
-    public enum Category { DecorativeBlock, Living, FunctioningBlock, Logic, Miscellaneous };
-    private void Awake()
-    {
-        if (factory != null && factory != this)
-        {
+    public enum Category { DecorativeBlock, Living, FunctioningBlock, Logic, Miscellaneous , Technical};
+    private void Awake() {
+        if(factory != null && factory != this) {
             Destroy(this);
         }
-        else
-        {
+        else {
             factory = this;
         }
         nodeDetailsList = new List<NodeDetails>();
         nodeMemberDetailsList = new List<NodeDetails>();
         CreateNodeDetails();
     }
-    private void CreateNodeDetails()
-    {
+    private void CreateNodeDetails() {
 
         //NODES
         nodeDetailsList.Add(new NodeDetails(
+            0,
+            false,
             "Air",
             "",
             "",
-            Category.Living
+            "",
+            Category.Technical
             ));
         nodeDetailsList.Add(new NodeDetails(
-            "Block",
-            "Block",
-            "Block",
+            1,
+            false,
+            "Block", 
+            "This is a block that the player can walk on",
+            "Block", 
+            "Block", 
             Category.DecorativeBlock
+            ));
+        nodeDetailsList.Add(new NodeDetails(
+            2,
+            false,
+            "Laser",
+            "",
+            "LaserBlock",
+            "",
+            Category.DecorativeBlock
+            ));
+        nodeDetailsList.Add(new NodeDetails(
+            3,
+            false,
+            "Win Node",
+            "Place this, wherever you want the player to reach to pass the level",
+            "WinBlock",
+            "winIcon",
+            Category.Miscellaneous
             ));
 
 
         //NODEMEMBERS
         nodeMemberDetailsList.Add(new NodeDetails(
-            "Air",
+            0,
+            true,
+            "Empty",
             "",
             "",
+            "",
+            Category.Technical
+            ));
+        nodeMemberDetailsList.Add(new NodeDetails(
+            1,
+            true,
+            "Player",
+            "",
+            "Player",
+            "Player",
             Category.Living
             ));
         nodeMemberDetailsList.Add(new NodeDetails(
-            "Player",
-            "Player",
-            "Player",
-            Category.Living
-            ));
-        nodeMemberDetailsList.Add(new NodeDetails(
+            2,
+            true,
             "Enemy",
+            "",
             "EnemySpider",
-            "Player",
+            "",
             Category.Living
             ));
         nodeMemberDetailsList.Add(new NodeDetails(
+            3,
+            true,
+            "Light",
+            "",
+            "PointLight",
+            "",
+            Category.Miscellaneous
+            ));
+        nodeMemberDetailsList.Add(new NodeDetails(
+            4,
+            true,
             "Laser",
+            "",
             "LaserCube",
-            "Player",
-            Category.Living
+            "",
+            Category.FunctioningBlock
             ));
     }
 
-    public GameObject GetNodePrefabById(int id)
-    {
-        if (id >= 0 && id < nodeDetailsList.Count)
-        {
+    public List<NodeDetails> GetNodeDetailsByCategory(Category category) {
+        var categorizedNodeList = nodeDetailsList.Where(x => x.category == category);
+        var categorizedNodeMemberList = nodeMemberDetailsList.Where(x => x.category == category);
+        List<NodeDetails> returnList = categorizedNodeList.Union(categorizedNodeMemberList).ToList<NodeDetails>();
+        return returnList;
+    }
+
+    public GameObject GetNodePrefabById(int id) {
+        if (id >= 0 && id < nodeDetailsList.Count) {
             GameObject prefab = (GameObject)Resources.Load(nodeDetailsList[id].prefab);
             return prefab;
         }
-        else
-        {
+        else {
             Debug.Log("No such prefab exists for id " + id);
             return null;
         }
     }
-    public GameObject GetNodeMemberPrefabById(int id)
-    {
-        if (id >= 0 && id < nodeMemberDetailsList.Count)
-        {
+    public GameObject GetNodeMemberPrefabById(int id) {
+        if (id >= 0 && id < nodeMemberDetailsList.Count) {
             GameObject prefab = (GameObject)Resources.Load(nodeMemberDetailsList[id].prefab);
-
             return prefab;
         }
-        else
-        {
+        else {
+            Debug.Log("No such prefab exists for id " + id);
             return null;
         }
     }
 }
 [System.Serializable]
-public class NodeDetails
-{
+public class NodeDetails {
+    public int id;
+    public bool nodeMember;
     public string name;
+    public string description;
     public string prefab;
     public string icon;
     public NodeFactory.Category category;
+    
 
-    public NodeDetails(string name, string prefab, string icon, NodeFactory.Category category)
-    {
+    public NodeDetails(int id, bool nodeMember,string name, string description, string prefab, string icon, NodeFactory.Category category) {
+        this.id = id;
+        this.nodeMember = nodeMember;
         this.name = name;
+        this.description = description;
         this.prefab = "Prefabs/" + prefab;
-        this.icon = "/NodeIcons/" + icon;
+        this.icon = "NodeIcons/" + icon;
         this.category = category;
+        
     }
 }
-
+   
