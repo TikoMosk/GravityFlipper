@@ -61,7 +61,7 @@ public class NodeFactory : MonoBehaviour{
             "Win Node",
             "Place this, wherever you want the player to reach to pass the level",
             "WinBlock",
-            "",
+            "winIcon",
             Category.Miscellaneous
             ));
 

@@ -48,12 +48,18 @@ public class Node
         this.nodeMember = nodeMember;
         this.nodeMember.SetPosition(x, y, z);
     }
+    public void DestroyNodeMember() {
+        if(this.nodeMember != null) {
+            GameObject.Destroy(this.nodeMember.NodeObjectGraphic.gameObject);
+            this.nodeMember = null;
+        }
+    }
     public void CreateGraphic(GameObject node_go)
     {
         nodeGraphic = node_go.AddComponent<NodeGraphic>();
         node_go.transform.position = GetPosition();
         nodeGraphic.Node = this;
-        nodeGraphic.onClick += OnClickNode;
+        nodeGraphic.RegisterToClick(OnClickNode);
     }
 
     private void OnClickNode(Direction dir)

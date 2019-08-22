@@ -1,24 +1,26 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class NodeMemberGraphic : MonoBehaviour
 {
+    private Action<Node.Direction> onClick;
     private Node node;
     private Animator animator;
     public Node Node { get => node; set => node = value; }
     public Animator Animator { get => animator;  }
 
     private void Awake() {
-        GameController.Game.RegisterForGameStateChanged(OnGameStateChange);
     }
     private void Start() {
         if(gameObject.GetComponent<Animator>() != null) {
             animator = gameObject.GetComponent<Animator>();
         }
-        GameController.Game.RegisterForGameStateChanged(OnGameStateChange);
+        GameController.Game.RegisterForGameStateChanged(ColliderUpdate);
+        ColliderUpdate();
     }
-    private void OnGameStateChange() {
+    private void ColliderUpdate() {
         if (GetComponent<Collider>() != null) {
             Collider col = GetComponent<Collider>();
             if (GameController.Game.CurrentGameState is LevelEditorMode) {
@@ -40,5 +42,11 @@ public class NodeMemberGraphic : MonoBehaviour
         if (animator != null) {
             animator.SetBool("isWalking", false);
         }
+    }
+    public void GetClicked(Node.Direction dir) {
+        onClick?.Invoke(dir);
+    }
+    public void RegisterToClick(Action<Node.Direction> onClick) {
+        this.onClick += onClick;
     }
 }

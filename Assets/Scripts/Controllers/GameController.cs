@@ -46,6 +46,7 @@ public class GameController : MonoBehaviour {
         cameraController.ResetCamera();
     }
     private void Update() {
+
         gameState.Update();
     }
     private void SetUpSingleton() {
@@ -64,6 +65,12 @@ public class GameController : MonoBehaviour {
         else if (SceneManager.GetActiveScene().name == "LevelEditor") {
             CurrentGameState = new LevelEditorMode();
         }
+        else {
+            CurrentGameState = new MenuMode();
+        }
+        if (onGameStateChanged != null) {
+            onGameStateChanged.Invoke();
+        }
     }
     public void ChangeGameState(String stateName) {
         Time.timeScale = 1f;
@@ -80,7 +87,6 @@ public class GameController : MonoBehaviour {
         if (onGameStateChanged != null) {
             onGameStateChanged.Invoke();
         }
-        onGameStateChanged = null;
 
 
     }

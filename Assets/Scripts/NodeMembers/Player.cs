@@ -10,8 +10,11 @@ public class Player : MonoBehaviour {
     Node.Direction upDirection;
     private NodeMemberGraphic graphic;
     private NodeMember playerMember;
+    public bool created = false;
 
     public NodeMemberGraphic Graphic { get => graphic; }
+    public Node.Direction Facing { get => facing; }
+    public Node.Direction UpDirection { get => upDirection; }
 
     private void Start() {
         if(GetComponent<NodeMemberGraphic>() != null) {
@@ -20,7 +23,11 @@ public class Player : MonoBehaviour {
         else {
             Debug.LogError("Can not find nodeMemberGraphic attached");
         }
-        
+        facing = graphic.Node.NodeMember.Facing;
+        upDirection = graphic.Node.NodeMember.UpDirection;
+        previousClickedNode = GameController.Game.CurrentLevel.GetNodeInTheDirection(graphic.Node, Dir.Opposite(upDirection));
+        previousDirection = upDirection;
+        created = true;
     }
     public void Move(Node n, Node.Direction dir) {
         Node playerNode = GameController.Game.CurrentLevel.GetNode(transform.position);
@@ -68,6 +75,7 @@ public class Player : MonoBehaviour {
         else if (GameController.Game.LevelController.Level.GetNodeDistance(playerNode, destinationNode) == 2 && GameController.Game.LevelController.Level.GetNodeDistance(previousClickedNode, n) <= 1) {
             playerMember.UpDirection = dir;
             playerMember.Facing = Dir.Opposite(previousDirection);
+            Debug.Log("BEFORE");
             GameController.Game.CurrentLevel.MoveObject(playerNode, destinationNode);
             GameController.Game.CameraController.UpdateGravity(-Dir.GetVectorByDirection(playerMember.Facing), Dir.GetVectorByDirection(dir));
             previousClickedNode = n;
@@ -75,7 +83,7 @@ public class Player : MonoBehaviour {
             CheckIfPlayerWon(destinationNode);
             TurnEventSystem.currentInstance.NextTurn();
         }
-
+        
 
 
     }

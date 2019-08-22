@@ -18,6 +18,7 @@ public class Window : MonoBehaviour {
     }
     public void Disable () {
         //connectedToggle.SetOn(false);
+        Time.timeScale = 1;
         gameObject.SetActive(false);
     }
 }

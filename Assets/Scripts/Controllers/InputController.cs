@@ -135,6 +135,9 @@ public class InputController : MonoBehaviour {
             if (hit.collider.gameObject.GetComponent<NodeGraphic>() != null) {
                 hit.collider.gameObject.GetComponent<NodeGraphic>().GetClicked(Dir.GetDirectionByVector(hit.normal));
             }
+            else if (hit.collider.gameObject.GetComponent<NodeMemberGraphic>() != null) {
+                hit.collider.gameObject.GetComponent<NodeMemberGraphic>().GetClicked(Dir.GetDirectionByVector(hit.normal));
+            }
         }
     }
 

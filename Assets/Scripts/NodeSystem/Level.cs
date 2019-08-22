@@ -58,9 +58,7 @@ public class Level {
             dest.NodeMember.SetPosition(dest.X, dest.Y, dest.Z);
             node.NodeMember = null;
             dest.NodeMember.NodeObjectMoved(dest);
-
         }
-
     }
 
     public void SetNode(int x, int y, int z, int type) {
@@ -79,6 +77,10 @@ public class Level {
         else {
             Debug.LogError("Trying to set a Node that is out of level bounds");
         }
+    }
+
+    public void GetNeighbourNodes(Node n, Node.Direction memberFacing, Node.Direction memberUp) {
+        List<Node> neighbours = new List<Node>();
     }
 
 

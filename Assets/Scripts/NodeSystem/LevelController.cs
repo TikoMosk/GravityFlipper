@@ -11,9 +11,9 @@ public class LevelController : MonoBehaviour
 
     public LevelSerializer levelSerializer;
     private Action onLevelCreated;
-    int width = 20;
-    int height = 20 ;
-    int length = 20;
+    int width = 10;
+    int height = 10 ;
+    int length = 10;
 
     [System.Serializable]
     public struct NodeData
@@ -118,7 +118,7 @@ public class LevelController : MonoBehaviour
                 
                 NodeMember nodeObject = Level.GetNode(x, y, z).NodeMember;
                 GameObject nodeObject_GameObject = Instantiate(NodeFactory.Factory.GetNodeMemberPrefabById(nodeObject.Id), Level.GetNode(x,y,z).GetPosition(), Quaternion.identity);
-                nodeObject_GameObject.transform.LookAt(nodeObject_GameObject.transform.position + Dir.GetVectorByDirection(nodeObject.Facing));
+                nodeObject_GameObject.transform.rotation = Quaternion.LookRotation(Dir.GetVectorByDirection(nodeObject.Facing), Dir.GetVectorByDirection(nodeObject.UpDirection));
                 nodeObject_GameObject.transform.parent = this.transform;
                 NodeMemberGraphic nodeObjectGraphic= nodeObject.CreateMoveableObjectGraphic(nodeObject_GameObject);
                 nodeObject.NodeObjectGraphic.Node = Level.GetNode(x,y,z);

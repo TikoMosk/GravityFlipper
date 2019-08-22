@@ -7,7 +7,8 @@ public class LevelDesignController : MonoBehaviour
 {
     public GameObject levelEditorPanel;
     public GameObject playModePanel;
-    public GameObject optionsPanel;
+    public GameObject placeOptionsPanel;
+    public GameObject rotateOptionsPanel;
     public GameObject nodePickerWindow;
     int blockId = 1;
     private bool placeNodeMember;
@@ -49,6 +50,7 @@ public class LevelDesignController : MonoBehaviour
         if (tool == Tool.Remove)
         {
             n.SetNodeType(0);
+            n.DestroyNodeMember();
         }
         
     }
@@ -66,7 +68,8 @@ public class LevelDesignController : MonoBehaviour
 
     }
     public void ToggleToolOptions() {
-        optionsPanel.SetActive(tool == Tool.Place);
+        placeOptionsPanel.SetActive(tool == Tool.Place);
+        rotateOptionsPanel.SetActive(tool == Tool.Rotate);
     }
     public void ToggleNodePicker() {
         nodePickerWindow.SetActive(!nodePickerWindow.activeSelf);
