@@ -48,7 +48,7 @@ public class NodeFactory : MonoBehaviour{
             ));
         nodeDetailsList.Add(new NodeDetails(
             2,
-            true,
+            false,
             "Laser",
             "",
             "LaserCube",
@@ -57,7 +57,7 @@ public class NodeFactory : MonoBehaviour{
             ));
         nodeDetailsList.Add(new NodeDetails(
             3,
-            false,
+            true,
             "Win Node",
             "Place this, wherever you want the player to reach to pass the level",
             "WinBlock",
