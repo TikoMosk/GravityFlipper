@@ -1,8 +1,7 @@
 ﻿<Properties StartupConfiguration="{A68B90C9-CA90-425A-D01F-92D9315656C4}|">
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Materials/Outline.shader">
     <Files>
-      <File FileName="Assets/Materials/Dissolve.shader" Line="41" Column="48" />
-      <File FileName="Assets/Materials/Wallhack.shader" Line="23" Column="24" />
+      <File FileName="Assets/Materials/Dissolve.shader" Line="36" Column="7" />
       <File FileName="Assets/Scripts/Menu/PauseMenu.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Menu/MainMenu.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Controllers/GameController.cs" Line="1" Column="1" />
@@ -10,7 +9,9 @@
       <File FileName="Assets/Scripts/Controllers/InputController.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/DissolveEffectTrigger.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Controllers/CameraController.cs" Line="1" Column="1" />
-      <File FileName="Assets/Materials/Outline.shader" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/LevelDesigner/LevelDesignController.cs" Line="1" Column="1" />
+      <File FileName="Assets/Materials/Outline.shader" Line="11" Column="13" />
+      <File FileName="Assets/Materials/Wallhack.shader" Line="16" Column="18" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

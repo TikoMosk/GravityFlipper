@@ -32,8 +32,8 @@
   void surf(Input IN, inout SurfaceOutputStandard o)
   {
       // Albedo comes from a texture tinted by color
-      half gradient = tex2D(_MainTex, IN.worldPos).xyz;
-      //half gradient = tex2D(_MainTex, IN.screenPos).xyz;
+      //half gradient = tex2D(_MainTex, IN.worldPos).xyz;
+      half gradient = tex2D(_MainTex, IN.screenPos).xyz;
       clip(gradient - _DissolvePercentage);
       //clip(frac((IN.worldPos.y + IN.worldPos.z*0.1) * 5) - 0.5);
       fixed4 c = lerp(1, gradient, _ShowTexture) * _Color;
