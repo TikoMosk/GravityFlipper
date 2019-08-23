@@ -48,7 +48,7 @@ public class NodeFactory : MonoBehaviour{
             ));
         nodeDetailsList.Add(new NodeDetails(
             2,
-            true,
+            false,
             "Laser",
             "",
             "LaserCube",
