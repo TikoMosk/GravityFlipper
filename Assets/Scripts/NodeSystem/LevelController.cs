@@ -10,11 +10,10 @@ public class LevelController : MonoBehaviour
     public Level Level { get => level; set => level = value; }
 
     public LevelSerializer levelSerializer;
-    public List<NodeData> nodeDataList;
-    public List<NodeData> nodeObjectDataList;
-    private Dictionary<string, Node> nodePrototypes;
-    private Dictionary<string, NodeMember> nodeObjectPrototypes;
     private Action onLevelCreated;
+    int width = 10;
+    int height = 10 ;
+    int length = 10;
 
     [System.Serializable]
     public struct NodeData
@@ -34,41 +33,34 @@ public class LevelController : MonoBehaviour
     public void SaveLevelLocal() {
         levelSerializer.SaveLevelLocal("level1.json", level);
     }
-    public void BuildTestLevel() {
+    
+    public void LoadLevelFromProject(string levelName) {
         //level = levelSerializer.LoadLevelLocal(Application.streamingAssetsPath + "/level1");
         
-        level = levelSerializer.LoadLevelLocal("level1.json");
+        level = levelSerializer.LoadLevelLocal(levelName);
         DestroyLevelGraphics();
         CreateLevelGraphics();
         onLevelCreated.Invoke();
-
-
-       /* level = new Level(10, 10, 10);
+    }
+    public void BuildEmptyLevel() {
+        level = new Level(width, height, length);
         level.InitializeLevel();
-        NodeMemberFactory fac = new NodeMemberFactory();
-        for (int x = 0; x < 10; x++) {
-            for (int y = 0; y < 10; y++) {
-                for (int z = 0; z < 10; z++) {
-                    if((x == 0 || y == 0 || z == 9) && y <= 2) {
-                        level.SetNode(x, y, z, 1);
-                    }
-                    if(x == 3 && y < 2 && z <= 4 && z >= 2) {
-                        level.SetNode(x, y, z, 1);
-                    }
-                    if (x == 6 && y <= 8 && z <= 6 && z >= 5) {
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                for (int z = 0; z < length; z++) {
+                    if(y == 0) {
                         level.SetNode(x, y, z, 1);
                     }
                 }
             }
         }
-        level.AddNodeMember(5, 1, 5, fac.CreateNodeMember(1));
-        level.AddNodeMember(2, 1, 3, fac.CreateNodeMember(2));
+        level.AddNodeMember(5, 1, 5, 1,Node.Direction.FORWARD,Node.Direction.UP);
+        level.AddNodeMember(5, 5, 5, 4, Node.Direction.FORWARD, Node.Direction.UP);
         DestroyLevelGraphics();
         CreateLevelGraphics();
-        Debug.Log("A");
-        onLevelCreated.Invoke();*/
-
-    }
+        onLevelCreated.Invoke();
+    
+}
     // Destroys the level graphics (this is called when a new level is loaded to remove the old level graphics)
     private void DestroyLevelGraphics()
     {
@@ -100,10 +92,10 @@ public class LevelController : MonoBehaviour
     // Creates the NodeGraphic for the node at x,y,z
     private void CreateNodeGraphics(int x, int y, int z)
     {
-        if (GetPrefabByNodeId(Level.GetNode(x, y, z).Id) != null)
+        if (NodeFactory.Factory.GetNodePrefabById(Level.GetNode(x, y, z).Id) != null)
         {
             Quaternion nodeRotation = Quaternion.LookRotation(Dir.GetVectorByDirection(level.GetNode(x, y, z).Facing), Dir.GetVectorByDirection(level.GetNode(x, y, z).UpDirection));
-            GameObject node_go = Instantiate(GetPrefabByNodeId(Level.GetNode(x, y, z).Id), Level.GetNode(x, y, z).GetPosition(), nodeRotation);
+            GameObject node_go = Instantiate(NodeFactory.Factory.GetNodePrefabById(Level.GetNode(x, y, z).Id), Level.GetNode(x, y, z).GetPosition(), nodeRotation);
             Level.GetNode(x, y, z).CreateGraphic(node_go);
             Level.GetNode(x, y, z).NodeGraphic.transform.parent = this.transform;
             Level.GetNode(x, y, z).SubscribeToNodeTypeChanged(() => { OnNodeTypeChanged(level.GetNode(x, y, z),node_go); });
@@ -117,21 +109,24 @@ public class LevelController : MonoBehaviour
     }
 
     // Creates the moveableObject graphic for the node at x,y,z
-    private void CreateNodeMemberGraphic(int x, int y, int z)
+    public void CreateNodeMemberGraphic(int x, int y, int z)
     {
         if (Level.GetNode(x, y, z).NodeMember != null)
         {
-            if (GetPrefabByNodeMemberId(Level.GetNode(x, y, z).NodeMember.Id))
+            if (NodeFactory.Factory.GetNodeMemberPrefabById(Level.GetNode(x, y, z).NodeMember.Id) != null)
             {
                 
                 NodeMember nodeObject = Level.GetNode(x, y, z).NodeMember;
-                GameObject nodeObject_GameObject = Instantiate(GetPrefabByNodeMemberId(nodeObject.Id), Level.GetNode(x,y,z).GetPosition(), Quaternion.identity);
-                nodeObject_GameObject.transform.LookAt(nodeObject_GameObject.transform.position + Dir.GetVectorByDirection(nodeObject.Facing));
+                GameObject nodeObject_GameObject = Instantiate(NodeFactory.Factory.GetNodeMemberPrefabById(nodeObject.Id), Level.GetNode(x,y,z).GetPosition(), Quaternion.identity);
+                nodeObject_GameObject.transform.rotation = Quaternion.LookRotation(Dir.GetVectorByDirection(nodeObject.Facing), Dir.GetVectorByDirection(nodeObject.UpDirection));
                 nodeObject_GameObject.transform.parent = this.transform;
                 NodeMemberGraphic nodeObjectGraphic= nodeObject.CreateMoveableObjectGraphic(nodeObject_GameObject);
                 nodeObject.NodeObjectGraphic.Node = Level.GetNode(x,y,z);
                 nodeObject.LocationNode = Level.GetNode(x, y, z);
                 nodeObject.SubscribeToMoveableObjectMoved((node) => { OnNodeMemberMoved(node, nodeObjectGraphic); });
+                if (Level.GetNode(x, y, z).NodeMember.Id == 1) {
+                    Level.Player = level.GetNode(x, y, z).NodeMember.NodeObjectGraphic.GetComponent<Player>();
+                }
             }
         }
     }
@@ -155,31 +150,7 @@ public class LevelController : MonoBehaviour
         }
     }
 
-    //Gets the block prefab by the given ID from the list
-
-    private GameObject GetPrefabByNodeId(int nodeId)
-    {
-        if(nodeId >= 0 && nodeId < nodeDataList.Count)
-        {
-            return nodeDataList[nodeId].nodePrefab;
-        }
-
-        Debug.LogError("No Prefab specified for the given node ID");
-        return null;
-    }
-
-    // Gets the moveableObject prefab by given ID from the list
-
-    private GameObject GetPrefabByNodeMemberId(int nodeObjectId)
-    {
-        if (nodeObjectId >= 0 && nodeObjectId < nodeObjectDataList.Count)
-        {
-            return nodeObjectDataList[nodeObjectId].nodePrefab;
-        }
-
-        Debug.LogError("No Prefab specified for the given moveableObject ID");
-        return null;
-    }
+   
 
     public void RegisterToLevelCreated(Action onLevelCreated)
     {

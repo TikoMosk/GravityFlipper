@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class NodeMember
+public class NodeMember
 {
     protected int x;
     protected int y;
@@ -45,6 +45,10 @@ public abstract class NodeMember
     public NodeMemberGraphic CreateMoveableObjectGraphic(GameObject nodeObject_GameObject)
     {
         nodeObjectGraphic = nodeObject_GameObject.AddComponent<NodeMemberGraphic>();
+        nodeObjectGraphic.RegisterToClick(OnClickNode);
         return nodeObjectGraphic;
+    }
+    private void OnClickNode(Node.Direction dir) {
+        GameController.Game.ClickNode(locationNode, dir);
     }
 }

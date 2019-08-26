@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PatrolScript : MonoBehaviour
-{
-    public enum Direction
-    {
+public class PatrolScript : MonoBehaviour {
+    public enum Direction {
         X,
         Y,
         Z,
@@ -18,13 +16,10 @@ public class PatrolScript : MonoBehaviour
     private Node currentNode;
     private Node destNode;
 
-    private void Start()
-    {
-
+    private void Start() {
         EventController.currentInstance.Register(Check);
 
-        switch (direction)
-        {
+        switch (direction) {
             case Direction.X:
                 step = new Vector3(1, 0, 0);
                 break;
@@ -37,41 +32,25 @@ public class PatrolScript : MonoBehaviour
         }
     }
 
-    public void Check()
-    {
-        currentNode = GameController.Game.CurrentLevel.GetNode((int)transform.position.x, (int)transform.position.y, (int)transform.position.z);
-
+    public void Check() {
+        currentNode = GameController.Game.CurrentLevel.GetNode(transform.position);
         destination = transform.position + step;
 
-        if (GameController.Game.CurrentLevel.GetNode((int)destination.x, (int)destination.y, (int)destination.z).Id != 0)
-        {
+        if (GameController.Game.CurrentLevel.GetNode(destination) == null
+            || GameController.Game.CurrentLevel.GetNode(destination).Id != 0) {
             step = -step;
             destination = transform.position + step;
         }
-        destNode = GameController.Game.CurrentLevel.GetNode((int)destination.x, (int)destination.y, (int)destination.z);
-        _active = !_active;
 
+        destNode = GameController.Game.CurrentLevel.GetNode(destination);
+        _active = !_active;
         Move();
     }
 
-    private void Update()
-    {
-        //if (_active)
-        //{
-        //    Move();
-        //}
-        //
-        //if (transform.position == destination)
-        //{
-        //    _active = false;
-        //}
+    private void Move() {
+        GameController.Game.CurrentLevel.MoveObject(currentNode, destNode);
     }
 
-    private void Move()
-    {
-        GameController.Game.CurrentLevel.MoveObject(currentNode, destNode);
-        //transform.position = Vector3.MoveTowards(transform.position, destination, Time.deltaTime * 5);
-    }
     private void OnDestroy() {
         EventController.currentInstance.Remove(Check);
     }

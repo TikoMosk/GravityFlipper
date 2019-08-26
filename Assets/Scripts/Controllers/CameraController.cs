@@ -18,12 +18,22 @@ public class CameraController : MonoBehaviour {
     Node.Direction forwardDirection;
     private bool playerExists;
 
+    public Vector3 UpVector { get => upVector; set => upVector = value; }
+
     private void Awake() {
         GameController.Game.LevelController.RegisterToLevelCreated(PlayerExists);
     }
     public void ResetCamera() {
         cameraObject.transform.rotation = Quaternion.LookRotation(Vector3.forward, Vector3.up);
-        UpdateGravity(Vector3.back, Vector3.up);
+        StartCoroutine(ResetCameraToPlayerDirection());
+    }
+    IEnumerator ResetCameraToPlayerDirection() {
+        while (GameController.Game.CurrentLevel.Player.created == false) {
+            yield return null;
+        }
+        UpdateGravity(Dir.GetVectorByDirection(GameController.Game.CurrentLevel.Player.Facing), Dir.GetVectorByDirection(GameController.Game.CurrentLevel.Player.UpDirection));
+
+        
     }
     private void Update() {
 
@@ -34,7 +44,7 @@ public class CameraController : MonoBehaviour {
     }
     public void CameraPositionPlayMode() {
         if (playerExists) {
-            cameraObject.transform.position = GameController.Game.CurrentLevel.Player.NodeObjectGraphic.transform.position;
+            cameraObject.transform.position = GameController.Game.CurrentLevel.Player.Graphic.transform.position;
         }
     }
     public void CameraPositionLEMode(Vector3 inputVector) {
@@ -43,20 +53,19 @@ public class CameraController : MonoBehaviour {
         //Quaternion rot = Quaternion.LookRotation(Dir.GetVectorByDirection(forwardDirection), upVector);
         //inputVector = rot * inputVector;
         //cameraObject.transform.position += inputVector.normalized * 2 * Time.deltaTime;
-        float x = (upVector.x == 0) ? 1 : 0;
-        float y = (upVector.y == 0) ? 1 : 0;
-        float z = (upVector.z == 0) ? 1 : 0;
+        float x = (UpVector.x == 0) ? 1 : 0;
+        float y = (UpVector.y == 0) ? 1 : 0;
+        float z = (UpVector.z == 0) ? 1 : 0;
 
-        Quaternion rot = Quaternion.LookRotation(new Vector3(Camera.main.transform.forward.x * x, Camera.main.transform.forward.y * y, Camera.main.transform.forward.z * z), upVector);
+        Quaternion rot = Quaternion.LookRotation(new Vector3(Camera.main.transform.forward.x * x, Camera.main.transform.forward.y * y, Camera.main.transform.forward.z * z), UpVector);
         inputVector = rot * inputVector;
-        cameraObject.transform.position += inputVector.normalized * speed * Time.deltaTime;
+        cameraObject.transform.position += inputVector.normalized * speed * 2 * Time.deltaTime;
     }
     public void RotateAround(float dragDist) {
-        cameraObject.transform.RotateAround(cameraObject.transform.position, upVector, dragDist * speed);
+        cameraObject.transform.RotateAround(cameraObject.transform.position, UpVector, dragDist * speed);
 
     }
     private void PlayerExists() {
-        Debug.Log("Player Exists");
         playerExists = true;
     }
     public void ChangeCameraStyle() {
@@ -110,7 +119,7 @@ public class CameraController : MonoBehaviour {
             playerForward = Vector3.Cross(playerForward, playerUp);
         }
         cameraRotation = Quaternion.LookRotation(playerForward, playerUp);
-        upVector = playerUp;
+        UpVector = playerUp;
         StartCoroutine(GameController.Game.SmoothGraphics.RotateSmoothly(cameraObject.transform, cameraRotation, 1f));
 
     }

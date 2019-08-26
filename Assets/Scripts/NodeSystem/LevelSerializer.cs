@@ -113,8 +113,7 @@ public class LevelSerializer : MonoBehaviour {
                 upDirection = (Node.Direction)int.Parse(nodeMemberData.upDirection);
             }
             
-            NodeMemberFactory factory = new NodeMemberFactory();
-            level.AddNodeMember(x, y, z, factory.CreateNodeMember(nodeMemberData.id), facing, upDirection);
+            level.AddNodeMember(x, y, z, nodeMemberData.id, facing, upDirection);
         }
 
         return level;
@@ -144,7 +143,7 @@ public class NodeData {
         id = n.Id;
         //TODO: DIRECTIONS
         //direction = n.direction;
-        if (n.Facing != Node.Direction.FORWARD || n.UpDirection != Node.Direction.UP) {
+        if (!(n.Facing == Node.Direction.FORWARD && n.UpDirection == Node.Direction.UP)) {
             facing = ((int)n.Facing).ToString();
             upDirection = ((int)n.UpDirection).ToString();
         }
@@ -168,7 +167,7 @@ public class NodeMemberData {
         this.z = z;
         id = nm.Id;
 
-        if (nm.Facing != Node.Direction.FORWARD || nm.UpDirection != Node.Direction.UP) {
+        if (!(nm.Facing == Node.Direction.FORWARD && nm.UpDirection == Node.Direction.UP)) {
             facing = ((int)nm.Facing).ToString();
             upDirection = ((int)nm.UpDirection).ToString();
         }
