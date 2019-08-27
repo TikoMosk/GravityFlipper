@@ -180,6 +180,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: LaserTrigger
       objectReference: {fileID: 0}
+    - target: {fileID: 1500459586206764, guid: 1e8e1924bb442334c9125455634bb567, type: 3}
+      propertyPath: m_Name
+      value: Cman1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 95879256730774250, guid: 1e8e1924bb442334c9125455634bb567, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1e8e1924bb442334c9125455634bb567, type: 3}

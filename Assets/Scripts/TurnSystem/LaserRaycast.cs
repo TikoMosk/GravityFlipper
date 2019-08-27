@@ -15,12 +15,18 @@ public class LaserRaycast : MonoBehaviour
 
     void FixedUpdate()
     {
+
         RaycastHit hit;
         if(Physics.Raycast(startPos, endPos, out hit))
         {
             if(hit.collider.gameObject.tag == "LaserTrigger")
             {
                 Debug.Log("u dead");
+                if(hit.collider.gameObject.name == "Cman1")
+                {
+                    Debug.Log("Player is dead");
+                    PauseMenu.currentInstance.GameOver();
+                }
             }
         }
 
@@ -33,4 +39,6 @@ public class LaserRaycast : MonoBehaviour
     {
         endPos = GetComponent<LaserRay>().currentPos;
     }
+
+
 }

@@ -7,6 +7,9 @@ using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
+    public static PauseMenu currentInstance;
+    private void Awake() => currentInstance = this;
+
     //public AudioMixer audioMixer;
     public Sprite MusicOff;
     public Sprite MusicOn;
@@ -18,6 +21,7 @@ public class PauseMenu : MonoBehaviour
     public static bool isPaused = false;
 
     public GameObject pauseMenuUI;
+    public GameObject gameOverMenuUI;
 
     void Start()
     {
@@ -58,13 +62,25 @@ public class PauseMenu : MonoBehaviour
         GameController.Game.gameObject.SetActive(true);
         GameController.Game.LevelController.LoadLevelFromProject("level1.json");
         GameController.Game.CameraController.ResetCamera();
-        if(pauseMenuUI != null) {
+        if(gameOverMenuUI != null)
+        {
+            gameOverMenuUI.SetActive(false);
+        }
+        if (pauseMenuUI != null) {
             pauseMenuUI.SetActive(false);
         }
         isPaused = false;
         Time.timeScale = 1f;
     }
-   
+
+    public void GameOver()
+    {
+        GameController.Game.gameObject.SetActive(false);
+        gameOverMenuUI.SetActive(true);
+        Time.timeScale = 0f;
+        isPaused = true;
+    }
+
 
     public void MainMenu()
     {
