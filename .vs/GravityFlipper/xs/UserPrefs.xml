@@ -1,10 +1,6 @@
 ﻿<Properties StartupConfiguration="{A68B90C9-CA90-425A-D01F-92D9315656C4}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Materials/Outline.shader">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/TurnSystem/LaserRaycast.cs">
     <Files>
-      <File FileName="Assets/Scripts/LevelDesigner/LevelDesignController.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/LevelDesigner/LevelEditorMode.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/LevelDesigner/MenuMode.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/LevelDesigner/PlayMode.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/LevelDesigner/GameState.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/NodeSystem/LevelController.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/LevelDesigner/TestMode.cs" Line="1" Column="1" />
@@ -18,6 +14,8 @@
       <File FileName="Assets/Scripts/NodeSystem/LevelSerializer.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/NodeSystem/NodeFactory.cs" Line="51" Column="19" />
       <File FileName="Assets/Materials/Outline.shader" Line="80" Column="2" />
+      <File FileName="Assets/Scripts/TurnSystem/LaserRay.cs" Line="12" Column="11" />
+      <File FileName="Assets/Scripts/TurnSystem/LaserRaycast.cs" Line="34" Column="54" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

@@ -9,6 +9,7 @@ public class LaserRay : MonoBehaviour
     public float speed;
     public Vector3 endPoint_1;
     public Vector3 endPoint_2;
+    public Vector3 currentPos;
 
     private VolumetricLineBehavior vl;
     public GameObject endObject;
@@ -25,7 +26,7 @@ public class LaserRay : MonoBehaviour
 
     private bool isMoving;
     private bool _in = true;
-    private Vector3 currentPos;
+
     private void Check()
     {
         isMoving = true;
