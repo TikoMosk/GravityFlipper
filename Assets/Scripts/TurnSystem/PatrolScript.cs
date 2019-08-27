@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PatrolScript : MonoBehaviour {
-    public enum Direction {
+public class PatrolScript : MonoBehaviour
+{
+    public enum Direction
+    {
         X,
         Y,
         Z,
@@ -13,13 +15,16 @@ public class PatrolScript : MonoBehaviour {
     private bool _active;
     private Vector3 step;
     private Vector3 destination;
+    private Vector3 nextPlatform;
     private Node currentNode;
     private Node destNode;
 
-    private void Start() {
+    private void Start()
+    {
         EventController.currentInstance.Register(Check);
 
-        switch (direction) {
+        switch (direction)
+        {
             case Direction.X:
                 step = new Vector3(1, 0, 0);
                 break;
@@ -32,14 +37,19 @@ public class PatrolScript : MonoBehaviour {
         }
     }
 
-    public void Check() {
+    public void Check()
+    {
         currentNode = GameController.Game.CurrentLevel.GetNode(transform.position);
         destination = transform.position + step;
+        nextPlatform = destination - Vector3.up;
 
         if (GameController.Game.CurrentLevel.GetNode(destination) == null
-            || GameController.Game.CurrentLevel.GetNode(destination).Id != 0) {
+            || GameController.Game.CurrentLevel.GetNode(destination).Id != 0
+            || GameController.Game.CurrentLevel.GetNode(nextPlatform).Id == 0)
+        {
             step = -step;
             destination = transform.position + step;
+            Debug.Log(nextPlatform);
         }
 
         destNode = GameController.Game.CurrentLevel.GetNode(destination);
@@ -47,11 +57,13 @@ public class PatrolScript : MonoBehaviour {
         Move();
     }
 
-    private void Move() {
+    private void Move()
+    {
         GameController.Game.CurrentLevel.MoveObject(currentNode, destNode);
     }
 
-    private void OnDestroy() {
+    private void OnDestroy()
+    {
         EventController.currentInstance.Remove(Check);
     }
 }

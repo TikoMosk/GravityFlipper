@@ -9,10 +9,12 @@ public class LaserRay : MonoBehaviour
     public float speed;
     public Vector3 endPoint_1;
     public Vector3 endPoint_2;
-    public Vector3 currentPos;
+    internal Vector3 currentPos;
+    public GameObject endObject;
 
     private VolumetricLineBehavior vl;
-    public GameObject endObject;
+    private bool flag;
+    private Vector3 rayendPos;
 
     private void Start()
     {
@@ -21,6 +23,7 @@ public class LaserRay : MonoBehaviour
         vl = GetComponentInChildren<VolumetricLineBehavior>();
         endObject.transform.position = endPoint_1;
         currentPos = endPoint_1;
+        rayendPos = endPoint_1;
         UpdateLaser();
     }
 
@@ -39,10 +42,12 @@ public class LaserRay : MonoBehaviour
             if (_in)
             {
                 ChangeDirection(Vector3.zero);
+                rayendPos = Vector3.zero;
             }
             else
             {
                 ChangeDirection(currentPos);
+                rayendPos = currentPos;
             }
         }
 
@@ -51,7 +56,6 @@ public class LaserRay : MonoBehaviour
             isMoving = false;
             _in = false;
             ChangePos();
-            Debug.Log(currentPos);
         }
         else if (isMoving && endObject.transform.position == endPoint_1
             || isMoving && endObject.transform.position == endPoint_2)
@@ -59,6 +63,20 @@ public class LaserRay : MonoBehaviour
             isMoving = false;
             _in = true;
         }
+    }
+
+    private void FixedUpdate()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, rayendPos, out hit))
+        {
+            if (hit.collider.gameObject.tag == "LaserTrigger")
+            {
+                Debug.Log("u dead");
+            }
+        }
+
+        Debug.DrawRay(transform.position, rayendPos, Color.blue);
     }
 
     private void ChangeDirection(Vector3 endpoint)
