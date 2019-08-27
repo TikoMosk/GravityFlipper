@@ -1,11 +1,13 @@
 ﻿<Properties StartupConfiguration="{A68B90C9-CA90-425A-D01F-92D9315656C4}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Controllers/SmoothGraphics.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/VolumetricLines/Shaders/Additive.shader">
     <Files>
       <File FileName="Assets/Scripts/TurnSystem/LaserRay.cs" Line="12" Column="11" />
       <File FileName="Assets/Scripts/TurnSystem/LaserRaycast.cs" Line="28" Column="58" />
       <File FileName="Assets/Scripts/Menu/PauseMenu.cs" Line="67" Column="45" />
       <File FileName="Assets/Scripts/Menu/MainMenu.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Controllers/SmoothGraphics.cs" Line="41" Column="1" />
+      <File FileName="Assets/VolumetricLines/Shaders/Additive.shader" Line="25" Column="16" />
+      <File FileName="Assets/VolumetricLines/Shaders/AlphaBlended.shader" Line="26" Column="4" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

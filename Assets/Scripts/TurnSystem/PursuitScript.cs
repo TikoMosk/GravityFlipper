@@ -68,6 +68,10 @@ public class PursuitScript : MonoBehaviour
             }
         }
     }
+    private void OnDestroy()
+    {
+        EventController.currentInstance.Remove(Check);
+    }
 }
 
 public abstract class EnemySpiderState
