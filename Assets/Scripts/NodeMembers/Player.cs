@@ -17,7 +17,7 @@ public class Player : MonoBehaviour {
     public Node.Direction UpDirection { get => upDirection; }
 
     private void Start() {
-        if(GetComponent<NodeMemberGraphic>() != null) {
+        if (GetComponent<NodeMemberGraphic>() != null) {
             graphic = GetComponent<NodeMemberGraphic>();
         }
         else {
@@ -38,13 +38,13 @@ public class Player : MonoBehaviour {
         Node destinationNode = GameController.Game.CurrentLevel.GetNodeInTheDirection(n, dir);
         facing = playerMember.Facing;
         upDirection = playerMember.UpDirection;
-        
+
 
         Vector3 forwardVector = Vector3.zero;
         if (previousClickedNode == null) {
             previousClickedNode = GameController.Game.CurrentLevel.GetNodeInTheDirection(playerNode, Node.Direction.DOWN);
         }
-        if (GameController.Game.LevelController.Level.GetNodeDistance(playerNode, destinationNode) <= 1) {
+        if (GameController.Game.LevelController.Level.GetNodeDistance(playerNode, destinationNode) <= 1 && GameController.Game.CurrentLevel.CanMoveObject(playerNode, destinationNode)) {
             if (GameController.Game.LevelController.Level.GetNodeDistance(previousClickedNode, n) < 3) {
                 playerMember.UpDirection = dir;
                 if (!playerNode.HasSamePosition(destinationNode) && GameController.Game.LevelController.Level.GetNodeDistance(playerNode, destinationNode) <= 1) {
@@ -61,7 +61,7 @@ public class Player : MonoBehaviour {
                     playerMember.Facing = previousDirection;
                     GameController.Game.CameraController.UpdateGravity(Dir.GetVectorByDirection(playerMember.Facing), Dir.GetVectorByDirection(dir));
                     playerNode.NodeMember.NodeObjectMoved.Invoke(playerNode);
-                    
+
                 }
                 if (GameController.Game.LevelController.Level.GetNodeDistance(previousClickedNode, n) != 0) {
                     TurnEventSystem.currentInstance.NextTurn();
@@ -70,26 +70,26 @@ public class Player : MonoBehaviour {
                 previousDirection = dir;
 
             }
-            
+
         }
         else if (GameController.Game.LevelController.Level.GetNodeDistance(playerNode, destinationNode) == 2 && GameController.Game.LevelController.Level.GetNodeDistance(previousClickedNode, n) <= 1) {
             playerMember.UpDirection = dir;
             playerMember.Facing = Dir.Opposite(previousDirection);
-            GameController.Game.CurrentLevel.MoveObject(playerNode, destinationNode);
             GameController.Game.CameraController.UpdateGravity(-Dir.GetVectorByDirection(playerMember.Facing), Dir.GetVectorByDirection(dir));
             previousClickedNode = n;
             previousDirection = dir;
             CheckIfPlayerWon(destinationNode);
             TurnEventSystem.currentInstance.NextTurn();
+
         }
-        
+
 
 
     }
     private void CheckIfPlayerWon(Node destNode) {
-        if(destNode.Id == WIN_BLOCK_ID) {
+        if (destNode.Id == WIN_BLOCK_ID) {
             GameController.Game.Win();
         }
     }
-    
+
 }

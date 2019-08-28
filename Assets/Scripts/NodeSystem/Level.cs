@@ -60,6 +60,12 @@ public class Level {
             dest.NodeMember.NodeObjectMoved(dest);
         }
     }
+    public bool CanMoveObject(Node node, Node dest) {
+        if (!node.HasSamePosition(dest) && dest.NodeMember == null) {
+            return true;
+        }
+        return false;
+    }
 
     public void SetNode(int x, int y, int z, int type) {
         if (IsInLevelBounds(x, y, z)) {
