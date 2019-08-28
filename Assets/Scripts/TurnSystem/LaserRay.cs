@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class LaserRay : MonoBehaviour
 {
+
+
     public float speed;
     public Vector3 endPoint_1;
     public Vector3 endPoint_2;
@@ -67,16 +69,27 @@ public class LaserRay : MonoBehaviour
 
     private void FixedUpdate()
     {
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, rayendPos, out hit))
+        if(GameController.Game.SmoothGraphics.AnimationCount == 0)
         {
-            if (hit.collider.gameObject.tag == "LaserTrigger")
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, rayendPos, out hit))
             {
-                Debug.Log("u dead");
+                if (hit.collider.gameObject.tag == "LaserTrigger")
+                {
+                    Debug.Log("u dead");
+
+                    //Destroy(transform.GetComponentInParent<Transform>().gameObject);
+                    Destroy(hit.collider.transform.parent.gameObject);
+                    if (hit.collider.gameObject.name == "Cman1")
+                    {
+                        PauseMenu.currentInstance.GameOver();
+                    }
+                }
             }
+
+            Debug.DrawRay(transform.position, rayendPos, Color.blue);
         }
 
-        Debug.DrawRay(transform.position, rayendPos, Color.blue);
     }
 
     private void ChangeDirection(Vector3 endpoint)

@@ -359,6 +359,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 161f7a2e87569124dadc554406a202b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  winWindow: {fileID: 0}
 --- !u!4 &25129824
 Transform:
   m_ObjectHideFlags: 0
@@ -397,6 +398,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 746fb499bb9b7cd439ccf3bdac07299a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ignoreRaycastMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &37417653
 GameObject:
   m_ObjectHideFlags: 0
@@ -3649,27 +3653,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelSerializer: {fileID: 341798182}
-  nodeDataList:
-  - id: 0
-    nodePrefab: {fileID: 0}
-  - id: 1
-    nodePrefab: {fileID: 1262887121042734, guid: 89843090f5c38c24c9500fe9490ba5c4,
-      type: 3}
-  nodeObjectDataList:
-  - id: 0
-    nodePrefab: {fileID: 0}
-  - id: 1
-    nodePrefab: {fileID: 5238763070401807191, guid: 773308f6431a344f0b80e4f1a9691fed,
-      type: 3}
-  - id: 2
-    nodePrefab: {fileID: 337943517186285683, guid: 9c76eeb32c6a14ac59e959e33bfe39a0,
-      type: 3}
-  - id: 3
-    nodePrefab: {fileID: 7928255879371980449, guid: 329ca1a8ffe3240128cd20c675919497,
-      type: 3}
-  - id: 3
-    nodePrefab: {fileID: 7928255879371980449, guid: f8bb82b84767045d2902876f14d062ff,
-      type: 3}
 --- !u!4 &341798185
 Transform:
   m_ObjectHideFlags: 0

@@ -20,29 +20,40 @@ public class SmoothGraphics : MonoBehaviour
         AnimationCount--;
     }
     public IEnumerator MoveSmoothly(Transform obj, Vector3 target, float overTime, NodeMemberGraphic nodeMemberGraphic) {
-        AnimationCount++;
-        nodeMemberGraphic.MoveAnimation();
-        float sqrRemainingDistance = (obj.position - target).sqrMagnitude;
-        while (sqrRemainingDistance > float.Epsilon) {
-            Vector3 newPosition = Vector3.MoveTowards(obj.position, target, 1/overTime * Time.deltaTime);
-            obj.transform.position = newPosition;
-            sqrRemainingDistance = (obj.position - target).sqrMagnitude;
-            yield return null;
+        if (obj.transform != null)
+        {
+            AnimationCount++;
+            nodeMemberGraphic.MoveAnimation();
+            float sqrRemainingDistance = (obj.position - target).sqrMagnitude;
+            while (sqrRemainingDistance > float.Epsilon)
+            {
+                Vector3 newPosition = Vector3.MoveTowards(obj.position, target, 1 / overTime * Time.deltaTime);
+                obj.transform.position = newPosition;
+                sqrRemainingDistance = (obj.position - target).sqrMagnitude;
+                yield return null;
+            }
+
+            obj.transform.position = target;
+            nodeMemberGraphic.StillAnimation();
+            AnimationCount--;
         }
-        
-        obj.transform.position = target;
-        nodeMemberGraphic.StillAnimation();
-        AnimationCount--;
+
     }
     public IEnumerator RotateSmoothly(Transform obj, Quaternion targetRotation, float overTime) {
-        AnimationCount++;
-        float startTime = Time.time;
-        while (Time.time < startTime + overTime) {
-            obj.transform.rotation = Quaternion.Lerp(obj.transform.rotation, targetRotation, (Time.time - startTime) / overTime);
-            yield return null;
+        if (obj.transform != null)
+        {
+            AnimationCount++;
+            float startTime = Time.time;
+            while (Time.time < startTime + overTime)
+            {
+
+                obj.transform.rotation = Quaternion.Lerp(obj.transform.rotation, targetRotation, (Time.time - startTime) / overTime);
+                yield return null;
+            }
+            obj.transform.rotation = targetRotation;
+            AnimationCount--;
         }
-        obj.transform.rotation = targetRotation;
-        AnimationCount--;
+
     }
 }
 

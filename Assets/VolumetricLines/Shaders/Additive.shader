@@ -19,23 +19,25 @@ Shader "VolumetricLine/Additive" {
 		LOD 200
 		
 		Pass {
-			
 			Cull Off
-			ZWrite On
+			ZWrite Off
 			ZTest LEqual
 			Blend One One
             //Blend SrcAlpha OneMinusSrcAlpha
 			Lighting On
+            
 			
 			CGPROGRAM
 				#pragma glsl_no_auto_normalization
 				#pragma vertex vert
-				#pragma fragment frag
+                #pragma fragment frag
 				#pragma multi_compile __ FOV_SCALING_OFF
-				
+
+                
 				#include "_SimpleShader.cginc"
 		    ENDCG 
 		}
 	}
 	FallBack "Diffuse"
+    
 }
