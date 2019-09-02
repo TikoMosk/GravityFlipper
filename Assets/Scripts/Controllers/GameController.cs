@@ -41,7 +41,7 @@ public class GameController : MonoBehaviour {
     }
     public void TestLevel() {
         Time.timeScale = 1f;
-        levelController.LoadLevelFromProject("level1.json");
+        levelController.LoadLevelFromProject("level2.json");
         Debug.Log(cameraController);
         cameraController.ResetCamera();
     }
