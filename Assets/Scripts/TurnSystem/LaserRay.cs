@@ -72,18 +72,19 @@ public class LaserRay : MonoBehaviour
         if(GameController.Game.SmoothGraphics.AnimationCount == 0)
         {
             RaycastHit hit;
-            if (Physics.Raycast(transform.position, rayendPos, out hit))
+            if (Physics.Raycast(transform.position, rayendPos, out hit, rayendPos.magnitude))
             {
-                if (hit.collider.gameObject.tag == "LaserTrigger")
+                if (hit.collider.gameObject.GetComponentInParent<NodeMemberGraphic>() != null)
                 {
                     Debug.Log("u dead");
-
-                    //Destroy(transform.GetComponentInParent<Transform>().gameObject);
                     Destroy(hit.collider.transform.parent.gameObject);
-                    if (hit.collider.gameObject.name == "Cman1")
+                    //Destroy(transform.GetComponentInParent<Transform>().gameObject);
+                    //Destroy(hit.collider.transform.parent.gameObject);
+                    if (hit.collider.gameObject.GetComponentInParent<NodeMemberGraphic>().Node.NodeMember.Id == 1)
                     {
                         PauseMenu.currentInstance.GameOver();
                     }
+                    hit.collider.gameObject.GetComponentInParent<NodeMemberGraphic>().Node.NodeMember = null;
                 }
             }
 

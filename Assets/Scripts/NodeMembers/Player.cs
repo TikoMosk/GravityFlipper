@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour {
+public class Player : MonoBehaviour
+{
     private const int WIN_BLOCK_ID = 3;
     Node previousClickedNode = null;
     Node.Direction previousDirection = Node.Direction.UP;
@@ -16,11 +17,14 @@ public class Player : MonoBehaviour {
     public Node.Direction Facing { get => facing; }
     public Node.Direction UpDirection { get => upDirection; }
 
-    private void Start() {
-        if (GetComponent<NodeMemberGraphic>() != null) {
+    private void Start()
+    {
+        if (GetComponent<NodeMemberGraphic>() != null)
+        {
             graphic = GetComponent<NodeMemberGraphic>();
         }
-        else {
+        else
+        {
             Debug.LogError("Can not find nodeMemberGraphic attached");
         }
         facing = graphic.Node.NodeMember.Facing;
@@ -29,10 +33,12 @@ public class Player : MonoBehaviour {
         previousDirection = upDirection;
         created = true;
     }
-    public void Move(Node n, Node.Direction dir) {
+    public void Move(Node n, Node.Direction dir)
+    {
         Node playerNode = GameController.Game.CurrentLevel.GetNode(transform.position);
         playerMember = playerNode.NodeMember;
-        if (GameController.Game.CurrentLevel.GetNodeInTheDirection(n, dir) == null) {
+        if (GameController.Game.CurrentLevel.GetNodeInTheDirection(n, dir) == null)
+        {
             return;
         }
         Node destinationNode = GameController.Game.CurrentLevel.GetNodeInTheDirection(n, dir);
@@ -41,14 +47,19 @@ public class Player : MonoBehaviour {
 
 
         Vector3 forwardVector = Vector3.zero;
-        if (previousClickedNode == null) {
+        if (previousClickedNode == null)
+        {
             previousClickedNode = GameController.Game.CurrentLevel.GetNodeInTheDirection(playerNode, Node.Direction.DOWN);
         }
-        if (GameController.Game.LevelController.Level.GetNodeDistance(playerNode, destinationNode) <= 1 && GameController.Game.CurrentLevel.CanMoveObject(playerNode, destinationNode)) {
-            if (GameController.Game.LevelController.Level.GetNodeDistance(previousClickedNode, n) < 3) {
+        if (GameController.Game.LevelController.Level.GetNodeDistance(playerNode, destinationNode) <= 1 && GameController.Game.CurrentLevel.CanMoveObject(playerNode, destinationNode))
+        {
+            if (GameController.Game.LevelController.Level.GetNodeDistance(previousClickedNode, n) < 3)
+            {
                 playerMember.UpDirection = dir;
-                if (!playerNode.HasSamePosition(destinationNode) && GameController.Game.LevelController.Level.GetNodeDistance(playerNode, destinationNode) <= 1) {
-                    if (GameController.Game.LevelController.Level.GetNodeDistance(previousClickedNode, n) < 3) {
+                if (!playerNode.HasSamePosition(destinationNode) && GameController.Game.LevelController.Level.GetNodeDistance(playerNode, destinationNode) <= 1)
+                {
+                    if (GameController.Game.LevelController.Level.GetNodeDistance(previousClickedNode, n) < 3)
+                    {
                         forwardVector = destinationNode.GetPosition() - playerNode.GetPosition();
                         playerMember.Facing = Dir.GetDirectionByVector(forwardVector);
                         GameController.Game.CurrentLevel.MoveObject(playerNode, destinationNode);
@@ -56,14 +67,15 @@ public class Player : MonoBehaviour {
                     }
 
                 }
-
-                else if (GameController.Game.LevelController.Level.GetNodeDistance(previousClickedNode, n) != 0) {
+                else if (GameController.Game.LevelController.Level.GetNodeDistance(previousClickedNode, n) != 0)
+                {
                     playerMember.Facing = previousDirection;
                     GameController.Game.CameraController.UpdateGravity(Dir.GetVectorByDirection(playerMember.Facing), Dir.GetVectorByDirection(dir));
                     playerNode.NodeMember.NodeObjectMoved.Invoke(playerNode);
 
                 }
-                if (GameController.Game.LevelController.Level.GetNodeDistance(previousClickedNode, n) != 0) {
+                if (GameController.Game.LevelController.Level.GetNodeDistance(previousClickedNode, n) != 0)
+                {
                     TurnEventSystem.currentInstance.NextTurn();
                 }
                 previousClickedNode = n;
@@ -72,9 +84,11 @@ public class Player : MonoBehaviour {
             }
 
         }
-        else if (GameController.Game.LevelController.Level.GetNodeDistance(playerNode, destinationNode) == 2 && GameController.Game.LevelController.Level.GetNodeDistance(previousClickedNode, n) <= 1) {
+        else if (GameController.Game.LevelController.Level.GetNodeDistance(playerNode, destinationNode) == 2 && GameController.Game.LevelController.Level.GetNodeDistance(previousClickedNode, n) <= 1)
+        {
             playerMember.UpDirection = dir;
             playerMember.Facing = Dir.Opposite(previousDirection);
+            GameController.Game.CurrentLevel.MoveObject(playerNode, destinationNode);
             GameController.Game.CameraController.UpdateGravity(-Dir.GetVectorByDirection(playerMember.Facing), Dir.GetVectorByDirection(dir));
             previousClickedNode = n;
             previousDirection = dir;
@@ -86,8 +100,10 @@ public class Player : MonoBehaviour {
 
 
     }
-    private void CheckIfPlayerWon(Node destNode) {
-        if (destNode.Id == WIN_BLOCK_ID) {
+    private void CheckIfPlayerWon(Node destNode)
+    {
+        if (destNode.Id == WIN_BLOCK_ID)
+        {
             GameController.Game.Win();
         }
     }

@@ -57,7 +57,7 @@ public class NodeFactory : MonoBehaviour{
             ));
         nodeDetailsList.Add(new NodeDetails(
             3,
-            true,
+            false,
             "Win Node",
             "Place this, wherever you want the player to reach to pass the level",
             "WinBlock",

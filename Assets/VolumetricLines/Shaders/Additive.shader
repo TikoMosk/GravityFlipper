@@ -24,7 +24,7 @@ Shader "VolumetricLine/Additive" {
 			ZTest LEqual
 			Blend One One
             //Blend SrcAlpha OneMinusSrcAlpha
-			Lighting On
+			Lighting Off
             
 			
 			CGPROGRAM

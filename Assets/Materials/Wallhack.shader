@@ -2,7 +2,7 @@
  {
   Properties
      { 
-         _Color ("Main Color", Color) = (0,0,1,1)
+         _Color ("Main Color", Color) = (0,191,255,1)
          _MainTex ("Texture", 2D) = "white" {}
      }
 
@@ -10,6 +10,16 @@
      {
          SubShader
          {
+         Tags
+         {
+            "DisableBatching"="True"
+            "RenderType"="Transparent"
+            "Queue"="Transparent"
+            "IgnoreProjector"="True"
+            "ForceNoShadowCasting"="True"
+            "PreviewType"="Plane"
+         }
+         
              Pass
              {
                  ZWrite Off
