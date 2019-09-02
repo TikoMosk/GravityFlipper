@@ -19,6 +19,7 @@ public class CameraController : MonoBehaviour {
     private bool playerExists;
 
     public Vector3 UpVector { get => upVector; set => upVector = value; }
+    public Node.Direction ForwardDirection { get => forwardDirection;  }
 
     private void Awake() {
         GameController.Game.LevelController.RegisterToLevelCreated(PlayerExists);
@@ -100,11 +101,11 @@ public class CameraController : MonoBehaviour {
 
     }
     public void UpdateGravity(Vector3 playerForward, Vector3 playerUp) {
-        Vector3 forwardVec = Dir.GetVectorByDirection(forwardDirection);
+        Vector3 forwardVec = Dir.GetVectorByDirection(ForwardDirection);
         bool minus = false;
         bool cross = false;
 
-        if (forwardDirection == Dir.GetDirectionByVector(-playerUp)) {
+        if (ForwardDirection == Dir.GetDirectionByVector(-playerUp)) {
             cross = true;
             minus = false;
         }

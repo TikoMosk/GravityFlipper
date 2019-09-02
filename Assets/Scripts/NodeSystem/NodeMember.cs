@@ -24,13 +24,21 @@ public class NodeMember
 
     private Node locationNode;
 
-    public Node.Direction Facing { get { return facing; } set => facing = value; }
-    public Node.Direction UpDirection { get => upDirection; set => upDirection = value; }
+    public Node.Direction Facing { get { return facing; } set { facing = value; } }
+    public Node.Direction UpDirection { get => upDirection; set { upDirection = value; } }
     public Node LocationNode { get => locationNode; set => locationNode = value; }
 
     public NodeMember(int id)
     {
         this.id = id;
+    }
+    public void SetRotation(Node.Direction forward, Node.Direction up) {
+        facing = forward;
+        upDirection = up;
+        if(nodeObjectMoved != null) {
+            nodeObjectMoved.Invoke(locationNode);
+        }
+        
     }
     public void SetPosition(int x, int y, int z) {
         this.x = x;
