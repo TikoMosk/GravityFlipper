@@ -18,10 +18,10 @@ public class ToggleButton : MonoBehaviour
         
 
         if (tOn) {
-            t.image.color = selectedColor;
+            GetComponent<Image>().color = selectedColor;
         }
         else {
-            t.image.color = normalColor;
+            GetComponent<Image>().color = normalColor;
         }
     }
     public void ToggleWindow(Window window) {

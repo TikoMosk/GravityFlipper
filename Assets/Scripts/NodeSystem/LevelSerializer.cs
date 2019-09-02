@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class LevelSerializer : MonoBehaviour {
     private string path;
+    Level level;
 
     IEnumerator GetRequest(string url) {
         using (UnityWebRequest webRequest = UnityWebRequest.Get(url)) {
@@ -18,10 +19,16 @@ public class LevelSerializer : MonoBehaviour {
                 Debug.Log("error");
             }
             else {
-                //levelData = JsonUtility.FromJson<LevelData>(webRequest.downloadHandler.text);
-                Debug.Log(webRequest.downloadHandler.text);
+                Debug.Log(webRequest.downloadHandler.text.Replace("\\",""));
+                LevelData levelData = JsonUtility.FromJson<LevelData>(webRequest.downloadHandler.text);
+                level = DeserializeLevel(levelData);
+                //Debug.Log(webRequest.downloadHandler.text);
             }
         }
+    }
+    public void LoadDevLevel(int levelNumber) {
+        string serverURL = "localhost:5000/levels/";
+        StartCoroutine(GetRequest(serverURL + levelNumber.ToString()));
     }
     public Level LoadLevelLocal(string path) {
         string result = null;

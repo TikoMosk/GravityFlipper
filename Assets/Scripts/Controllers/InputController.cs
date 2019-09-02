@@ -15,7 +15,7 @@ public class InputController : MonoBehaviour {
     Vector3 inputPreviousPos;
     bool isDragging;
     bool overUI;
-    public LayerMask ignoreRaycastMask;
+    public LayerMask gizmoMask;
     float tracker = 0;
 
     private void Update() {
@@ -27,7 +27,7 @@ public class InputController : MonoBehaviour {
 
 
             if (Input.touchCount > 0) {
-                
+
                 if (Input.GetTouch(0).phase == TouchPhase.Began) {
                     if (IsPointerOverUI()) {
                         overUI = true;
@@ -62,7 +62,7 @@ public class InputController : MonoBehaviour {
                     else if (Input.GetTouch(0).phase == TouchPhase.Ended && !overUI) {
 
                         if (!isDragging) {
-                            
+
                             Click();
 
                         }
@@ -77,7 +77,7 @@ public class InputController : MonoBehaviour {
                 }
                 if (Input.GetMouseButton(0)) {
                     inputPosDelta = Input.mousePosition - inputPreviousPos;
-                    if (inputPosDelta.magnitude > 7) {
+                    if (inputPosDelta.magnitude > 2) {
                         GameController.Game.CameraController.RotateAround(inputPosDelta.x * 0.025f);
                         isDragging = true;
                     }
@@ -100,7 +100,7 @@ public class InputController : MonoBehaviour {
             }
         }
 
-       
+
 
 
     }
@@ -131,14 +131,25 @@ public class InputController : MonoBehaviour {
             ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         }
-        if (Physics.Raycast(ray, out hit)) {
+        if (Physics.Raycast(ray, out hit, gizmoMask)) {
+            if (GameController.Game.CurrentGameState is LevelEditorMode) {
+                if (hit.collider.gameObject.GetComponent<Gizmo>() != null) {
+                    GameController.Game.LevelDesignController.RotateBlock(hit.collider.gameObject.GetComponent<Gizmo>().plus);
+                    
+                }
+            }
+            Debug.Log("HIT");
+        }
+        else if (Physics.Raycast(ray, out hit)) {
             if (hit.collider.gameObject.GetComponent<NodeGraphic>() != null) {
                 hit.collider.gameObject.GetComponent<NodeGraphic>().GetClicked(Dir.GetDirectionByVector(hit.normal));
             }
             else if (hit.collider.gameObject.GetComponent<NodeMemberGraphic>() != null) {
                 hit.collider.gameObject.GetComponent<NodeMemberGraphic>().GetClicked(Dir.GetDirectionByVector(hit.normal));
             }
+
         }
+        
     }
 
 

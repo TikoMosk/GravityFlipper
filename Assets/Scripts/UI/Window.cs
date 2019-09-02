@@ -10,14 +10,16 @@ public class Window : MonoBehaviour {
     public ToggleButton firstToggleButton;
 
     private void OnEnable() {
-        firstToggle.isOn = true;
+        
     }
     public void Connect(ToggleButton button) {
         connectedToggle = button;
         
     }
     public void Disable () {
-        //connectedToggle.SetOn(false);
+        if (connectedToggle != null) {
+            connectedToggle.SetOn(false);
+        }
         Time.timeScale = 1;
         gameObject.SetActive(false);
     }

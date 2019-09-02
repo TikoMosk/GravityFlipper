@@ -33,14 +33,23 @@ public class LevelController : MonoBehaviour
     public void SaveLevelLocal() {
         levelSerializer.SaveLevelLocal("level1.json", level);
     }
+    public void LoadOfficialLevel(int levelNumber) {
+        levelSerializer.LoadDevLevel(levelNumber);
+    }
     
     public void LoadLevelFromProject(string levelName) {
         //level = levelSerializer.LoadLevelLocal(Application.streamingAssetsPath + "/level1");
+        LaunchLevel(levelSerializer.LoadLevelLocal(levelName));
         
-        level = levelSerializer.LoadLevelLocal(levelName);
+    }
+    public void LaunchLevel(Level level) {
+        this.level = level;
         DestroyLevelGraphics();
         CreateLevelGraphics();
         onLevelCreated.Invoke();
+    }
+    public void LoadDeveloperLevel() {
+        levelSerializer.LoadDevLevel(1);
     }
     public void BuildEmptyLevel() {
         level = new Level(width, height, length);
@@ -99,7 +108,7 @@ public class LevelController : MonoBehaviour
             Level.GetNode(x, y, z).CreateGraphic(node_go);
             Level.GetNode(x, y, z).NodeGraphic.transform.parent = this.transform;
             Level.GetNode(x, y, z).SubscribeToNodeTypeChanged(() => { OnNodeTypeChanged(level.GetNode(x, y, z),node_go); });
-
+            Level.GetNode(x, y, z).SubscribeToNodeRotated(() => { OnNodeRotated(level.GetNode(x, y, z), node_go); });
         }
         else
         {
@@ -137,6 +146,7 @@ public class LevelController : MonoBehaviour
         StartCoroutine(GameController.Game.SmoothGraphics.RotateSmoothly(nodeMemberGraphic.transform, nodeMemberRotation, 0.5f));
         StartCoroutine(GameController.Game.SmoothGraphics.MoveSmoothly(nodeMemberGraphic.transform, dest.GetPosition(),0.5f, nodeMemberGraphic));
         nodeMemberGraphic.Node = dest;
+        dest.NodeMember.LocationNode = dest;
     }
 
     private void OnNodeTypeChanged(Node n, GameObject node_go)
@@ -148,6 +158,9 @@ public class LevelController : MonoBehaviour
             n.ResetNodeTypeChanged();
             CreateNodeGraphics(n.X, n.Y, n.Z);
         }
+    }
+    private void OnNodeRotated(Node n, GameObject node_go) {
+        node_go.transform.rotation = Quaternion.LookRotation(Dir.GetVectorByDirection(n.Facing),Dir.GetVectorByDirection(n.UpDirection));
     }
 
    

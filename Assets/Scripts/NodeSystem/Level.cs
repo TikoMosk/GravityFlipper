@@ -44,8 +44,7 @@ public class Level {
             if (nodeMap[x, y, z].NodeMember == null) {
                 NodeMember nodeMember = new NodeMember(id);
                 nodeMap[x, y, z].SetNodeMember(nodeMember);
-                nodeMember.Facing = facing;
-                nodeMember.UpDirection = upDirection;
+                nodeMember.SetRotation(facing, upDirection);
                 return true;
             }
         }
