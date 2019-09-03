@@ -37,32 +37,7 @@ public class PatrolScript : MonoBehaviour
         }
     }
 
-    public void FixedUpdate()
-    {
-        if (GameController.Game.SmoothGraphics.AnimationCount == 0)
-        {
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position, Vector3.forward, out hit, 1) || 
-            (Physics.Raycast(transform.position, Vector3.back, out hit, 1)))
-            {
-                if (hit.collider.gameObject.GetComponentInParent<NodeMemberGraphic>() != null)
-                {
-                    Debug.Log("u dead");
-                    //Destroy(hit.collider.transform.parent.gameObject);
-                    if (hit.collider.gameObject.GetComponentInParent<NodeMemberGraphic>().Node.NodeMember.Id == 1)
-                    {
 
-                        PauseMenu.currentInstance.GameOver();
-                    }
-                    hit.collider.gameObject.GetComponentInParent<NodeMemberGraphic>().Node.NodeMember = null;
-
-                }
-            }
-
-            Debug.DrawRay(transform.position, Vector3.forward, Color.blue);
-            Debug.DrawRay(transform.position, Vector3.back, Color.blue);
-        }
-    }
 
     public void Check()
     {
@@ -85,6 +60,40 @@ public class PatrolScript : MonoBehaviour
 
         Move();
     }
+
+    public void FixedUpdate()
+    {
+
+        if (GameController.Game.SmoothGraphics.AnimationCount == 0)
+        {
+            RaycastHit hit;
+
+            if (Physics.Raycast(transform.position, Vector3.forward.normalized, out hit, 1) ||
+            (Physics.Raycast(transform.position, Vector3.back, out hit, 1)))
+            {
+                if (hit.collider.gameObject.GetComponentInParent<NodeMemberGraphic>().Node.NodeMember.Id == 1)
+                {
+                    Debug.Log("u dead");
+
+                    //Destroy(hit.collider.transform.parent.gameObject);
+                    //if (hit.collider.gameObject.GetComponentInParent<NodeMemberGraphic>().Node.NodeMember.Id == 1)
+                    //{
+
+                    PauseMenu.currentInstance.GameOver();
+                    //
+                    hit.collider.gameObject.GetComponentInParent<NodeMemberGraphic>().Node.NodeMember = null;
+                    Destroy(hit.collider.transform.parent.gameObject);
+
+                }
+            }
+
+            Debug.DrawRay(transform.position, Vector3.forward.normalized, Color.blue);
+            Debug.DrawRay(transform.position, Vector3.back, Color.blue);
+        }
+
+    }
+
+
 
     private void Move()
     {

@@ -140,7 +140,7 @@ Transform:
   m_Father: {fileID: 2661568343800256882}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7396015874895713189
+--- !u!114 &5869594749696285845
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -149,10 +149,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 6288853723951596525}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2af4342d81088459b8befa1d8f851514, type: 3}
+  m_Script: {fileID: 11500000, guid: 620aaddcc1b3d436bb8aad4dca55cfb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  renderQueuePosition: -1
 --- !u!1001 &6288853723951586549
 PrefabInstance:
   m_ObjectHideFlags: 0
