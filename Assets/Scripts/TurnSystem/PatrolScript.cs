@@ -37,7 +37,7 @@ public class PatrolScript : MonoBehaviour
         }
     }
 
-    public void FixedUpdate()
+    public void Update()
     {
         if (GameController.Game.SmoothGraphics.AnimationCount == 0)
         {
