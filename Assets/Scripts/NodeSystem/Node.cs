@@ -97,6 +97,12 @@ public class Node
         }
         
     }
+    public void ResetNodeRotated() {
+        if (this.nodeRotated != null) {
+            this.nodeRotated = null;
+        }
+
+    }
     public bool HasSamePosition(Node a)
     {
         if(x == a.X && y == a.Y && z == a.Z)

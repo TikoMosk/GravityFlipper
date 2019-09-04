@@ -15,7 +15,6 @@ public class InputController : MonoBehaviour {
     Vector3 inputPreviousPos;
     bool isDragging;
     bool overUI;
-    public LayerMask gizmoMask;
     float tracker = 0;
 
     private void Update() {
@@ -35,6 +34,7 @@ public class InputController : MonoBehaviour {
                     else {
                         overUI = false;
                     }
+
                     touchStart = Input.GetTouch(0).position;
                 }
 
@@ -95,6 +95,7 @@ public class InputController : MonoBehaviour {
 
                     GameController.Game.CameraController.Zoom(-Input.GetAxis("Mouse ScrollWheel") * 5);
                 }
+
                 inputPreviousPos = Input.mousePosition;
 
             }
@@ -131,14 +132,22 @@ public class InputController : MonoBehaviour {
             ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         }
-        if (Physics.Raycast(ray, out hit, gizmoMask)) {
+
+        int layer_mask = LayerMask.GetMask("Gizmo");
+
+        if (Physics.Raycast(ray, out hit,Mathf.Infinity, layer_mask)) {
             if (GameController.Game.CurrentGameState is LevelEditorMode) {
                 if (hit.collider.gameObject.GetComponent<Gizmo>() != null) {
-                    GameController.Game.LevelDesignController.RotateBlock(hit.collider.gameObject.GetComponent<Gizmo>().plus);
-                    
+                    if(hit.collider.gameObject.GetComponent<Gizmo>().gizmoType == Gizmo.GizmoType.Rotate) {
+                        GameController.Game.LevelDesignController.RotateBlock(hit.collider.gameObject.GetComponent<Gizmo>().plus);
+                    }
+                    if (hit.collider.gameObject.GetComponent<Gizmo>().gizmoType == Gizmo.GizmoType.Move) {
+                        GameController.Game.LevelDesignController.MoveBlock(hit.collider.gameObject.transform.right);
+                    }
+
                 }
+                
             }
-            Debug.Log("HIT");
         }
         else if (Physics.Raycast(ray, out hit)) {
             if (hit.collider.gameObject.GetComponent<NodeGraphic>() != null) {
@@ -149,7 +158,8 @@ public class InputController : MonoBehaviour {
             }
 
         }
-        
+
+
     }
 
 

@@ -396,7 +396,7 @@ PrefabInstance:
     - target: {fileID: 5190782982855686961, guid: f82f546d46e444a47884d3a3bdb079ad,
         type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5190782982855686961, guid: f82f546d46e444a47884d3a3bdb079ad,
         type: 3}
@@ -407,7 +407,7 @@ PrefabInstance:
         type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 83016092}
+      objectReference: {fileID: 1399402167}
     - target: {fileID: 5190782982855686961, guid: f82f546d46e444a47884d3a3bdb079ad,
         type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -421,7 +421,7 @@ PrefabInstance:
     - target: {fileID: 5190782982855686961, guid: f82f546d46e444a47884d3a3bdb079ad,
         type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: ToggleWindow
+      value: ChangeRotationStyle
       objectReference: {fileID: 0}
     - target: {fileID: 5190782982855686961, guid: f82f546d46e444a47884d3a3bdb079ad,
         type: 3}
@@ -441,12 +441,12 @@ PrefabInstance:
     - target: {fileID: 5190782982855686961, guid: f82f546d46e444a47884d3a3bdb079ad,
         type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: Window, Assembly-CSharp
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 5190782982855686961, guid: f82f546d46e444a47884d3a3bdb079ad,
         type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5190782982855686961, guid: f82f546d46e444a47884d3a3bdb079ad,
         type: 3}
@@ -458,6 +458,11 @@ PrefabInstance:
       propertyPath: m_Group
       value: 
       objectReference: {fileID: 617652491}
+    - target: {fileID: 5190782982855686961, guid: f82f546d46e444a47884d3a3bdb079ad,
+        type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_IntArgument
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2602515493995093316, guid: f82f546d46e444a47884d3a3bdb079ad,
         type: 3}
       propertyPath: m_Sprite
@@ -3030,9 +3035,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 746fb499bb9b7cd439ccf3bdac07299a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gizmoMask:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!114 &1399402169
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3564,7 +3566,7 @@ PrefabInstance:
     - target: {fileID: 5190782982855686961, guid: f82f546d46e444a47884d3a3bdb079ad,
         type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5190782982855686961, guid: f82f546d46e444a47884d3a3bdb079ad,
         type: 3}
@@ -3575,7 +3577,7 @@ PrefabInstance:
         type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1636350385}
+      objectReference: {fileID: 1399402167}
     - target: {fileID: 5190782982855686961, guid: f82f546d46e444a47884d3a3bdb079ad,
         type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -3589,7 +3591,7 @@ PrefabInstance:
     - target: {fileID: 5190782982855686961, guid: f82f546d46e444a47884d3a3bdb079ad,
         type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: ToggleWindow
+      value: ChangeRotationStyle
       objectReference: {fileID: 0}
     - target: {fileID: 5190782982855686961, guid: f82f546d46e444a47884d3a3bdb079ad,
         type: 3}
@@ -3609,12 +3611,12 @@ PrefabInstance:
     - target: {fileID: 5190782982855686961, guid: f82f546d46e444a47884d3a3bdb079ad,
         type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: Window, Assembly-CSharp
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 5190782982855686961, guid: f82f546d46e444a47884d3a3bdb079ad,
         type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5190782982855686961, guid: f82f546d46e444a47884d3a3bdb079ad,
         type: 3}
@@ -4976,11 +4978,11 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 2114944927, guid: f6f210449327cd441b108a616af07376, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -19.999786
+      value: -19.999756
       objectReference: {fileID: 0}
     - target: {fileID: 2102017483, guid: f6f210449327cd441b108a616af07376, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -19.999786
+      value: -19.999756
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6f210449327cd441b108a616af07376, type: 3}

@@ -59,7 +59,7 @@ public class LevelSerializer : MonoBehaviour {
 
         string filePath = Path.Combine(Application.streamingAssetsPath, path);
         LevelData levelData = SerializeLevel(level);
-        string str = JsonUtility.ToJson(levelData);
+        string str = JsonUtility.ToJson(levelData, true);
         if (Application.platform == RuntimePlatform.Android) {
             WWW reader = new WWW(filePath);
             while (!reader.isDone) {}

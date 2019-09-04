@@ -14,7 +14,6 @@ public class NodePicker : MonoBehaviour
     }
     public void PopulatePanelByCategory(int category) {
         ClearPanel();
-        Debug.Log("POPULATE " + category);
         List<NodeDetails> categorizedList = NodeFactory.Factory.GetNodeDetailsByCategory((NodeFactory.Category)category);
         foreach (NodeDetails details in categorizedList) {
             GameObject cell = Instantiate(nodeCellUI);
