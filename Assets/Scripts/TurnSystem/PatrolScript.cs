@@ -26,13 +26,13 @@ public class PatrolScript : MonoBehaviour
         switch (direction)
         {
             case Direction.X:
-                step = new Vector3(1, 0, 0);
+                step = Vector3.right;
                 break;
             case Direction.Y:
-                step = new Vector3(0, 1, 0);
+                step = Vector3.up;
                 break;
             case Direction.Z:
-                step = new Vector3(0, 0, 1);
+                step = Vector3.forward;
                 break;
         }
     }
@@ -45,8 +45,10 @@ public class PatrolScript : MonoBehaviour
             if (Physics.Raycast(transform.position, Vector3.forward, out hit, 1) || 
             (Physics.Raycast(transform.position, Vector3.back, out hit, 1)))
             {
-                if (hit.collider.gameObject.GetComponentInParent<NodeMemberGraphic>().Node.NodeMember.Id == 1) {
+                if (hit.collider.gameObject.GetComponentInParent<NodeMemberGraphic>().Node.NodeMember.Id == 1)
+                {
                     Debug.Log("u dead");
+                    //Destroy(hit.collider.transform.parent.gameObject);
                     PauseMenu.currentInstance.GameOver();
                     
                     hit.collider.gameObject.GetComponentInParent<NodeMemberGraphic>().Node.NodeMember = null;
