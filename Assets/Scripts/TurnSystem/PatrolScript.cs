@@ -26,18 +26,41 @@ public class PatrolScript : MonoBehaviour
         switch (direction)
         {
             case Direction.X:
-                step = new Vector3(1, 0, 0);
+                step = Vector3.right;
                 break;
             case Direction.Y:
-                step = new Vector3(0, 1, 0);
+                step = Vector3.up;
                 break;
             case Direction.Z:
-                step = new Vector3(0, 0, 1);
+                step = Vector3.forward;
                 break;
         }
     }
 
+    public void Update()
+    {
+        if (GameController.Game.SmoothGraphics.AnimationCount == 0)
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, Vector3.forward, out hit, 1) || 
+            (Physics.Raycast(transform.position, Vector3.back, out hit, 1)))
+            {
+                if (hit.collider.gameObject.GetComponentInParent<NodeMemberGraphic>().Node.NodeMember.Id == 1)
+                {
+                    Debug.Log("u dead");
+                    //Destroy(hit.collider.transform.parent.gameObject);
+                    PauseMenu.currentInstance.GameOver();
+                    
+                    hit.collider.gameObject.GetComponentInParent<NodeMemberGraphic>().Node.NodeMember = null;
+                    Destroy(hit.collider.transform.parent.gameObject);
 
+                }
+            }
+
+            Debug.DrawRay(transform.position, Vector3.forward, Color.blue);
+            Debug.DrawRay(transform.position, Vector3.back, Color.blue);
+        }
+    }
 
     public void Check()
     {
@@ -60,40 +83,6 @@ public class PatrolScript : MonoBehaviour
 
         Move();
     }
-
-    public void FixedUpdate()
-    {
-
-        if (GameController.Game.SmoothGraphics.AnimationCount == 0)
-        {
-            RaycastHit hit;
-
-            if (Physics.Raycast(transform.position, Vector3.forward.normalized, out hit, 1) ||
-            (Physics.Raycast(transform.position, Vector3.back, out hit, 1)))
-            {
-                if (hit.collider.gameObject.GetComponentInParent<NodeMemberGraphic>().Node.NodeMember.Id == 1)
-                {
-                    Debug.Log("u dead");
-
-                    //Destroy(hit.collider.transform.parent.gameObject);
-                    //if (hit.collider.gameObject.GetComponentInParent<NodeMemberGraphic>().Node.NodeMember.Id == 1)
-                    //{
-
-                    PauseMenu.currentInstance.GameOver();
-                    //
-                    hit.collider.gameObject.GetComponentInParent<NodeMemberGraphic>().Node.NodeMember = null;
-                    Destroy(hit.collider.transform.parent.gameObject);
-
-                }
-            }
-
-            Debug.DrawRay(transform.position, Vector3.forward.normalized, Color.blue);
-            Debug.DrawRay(transform.position, Vector3.back, Color.blue);
-        }
-
-    }
-
-
 
     private void Move()
     {

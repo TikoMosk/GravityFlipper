@@ -25,6 +25,7 @@ public class Node
     public NodeMember NodeMember { get { return nodeMember; } set { nodeMember = value; } }
 
     private Action nodeTypeChanged;
+    private Action nodeRotated;
 
     private NodeGraphic nodeGraphic;
     public NodeGraphic NodeGraphic { get => nodeGraphic; set => nodeGraphic = value; }
@@ -43,6 +44,10 @@ public class Node
     public void SetRotation(Node.Direction forward, Node.Direction up) {
         facing = forward;
         upDirection = up;
+        if(nodeRotated != null) {
+            nodeRotated.Invoke();
+        }
+        
     }
     public void SetNodeMember(NodeMember nodeMember) {
         this.nodeMember = nodeMember;
@@ -82,6 +87,9 @@ public class Node
     public void SubscribeToNodeTypeChanged(Action nodeTypeChanged)
     {
         this.nodeTypeChanged += nodeTypeChanged;
+    }
+    public void SubscribeToNodeRotated(Action nodeRotated) {
+        this.nodeRotated += nodeRotated;
     }
     public void ResetNodeTypeChanged() {
         if(this.nodeTypeChanged != null) {

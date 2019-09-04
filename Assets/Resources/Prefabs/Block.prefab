@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 23771711329110332}
   - component: {fileID: -7678287705030500039}
   m_Layer: 0
-  m_Name: ForestBlock01
+  m_Name: Block
   m_TagString: Level
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

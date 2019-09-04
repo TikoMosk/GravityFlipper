@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311947, g: 0.38074005, b: 0.35872722, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2450,7 +2450,7 @@ PrefabInstance:
     - target: {fileID: 2602515494256940141, guid: f82f546d46e444a47884d3a3bdb079ad,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0.0134605
       objectReference: {fileID: 0}
     - target: {fileID: 2602515494256940141, guid: f82f546d46e444a47884d3a3bdb079ad,
         type: 3}
@@ -2465,7 +2465,7 @@ PrefabInstance:
     - target: {fileID: 2602515494256940141, guid: f82f546d46e444a47884d3a3bdb079ad,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.9999094
       objectReference: {fileID: 0}
     - target: {fileID: 2602515494256940141, guid: f82f546d46e444a47884d3a3bdb079ad,
         type: 3}
@@ -2475,7 +2475,7 @@ PrefabInstance:
     - target: {fileID: 2602515494256940141, guid: f82f546d46e444a47884d3a3bdb079ad,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: 1.5430001
       objectReference: {fileID: 0}
     - target: {fileID: 2602515494256940141, guid: f82f546d46e444a47884d3a3bdb079ad,
         type: 3}
@@ -2707,6 +2707,7 @@ GameObject:
   - component: {fileID: 1172187061}
   - component: {fileID: 1172187063}
   - component: {fileID: 1172187062}
+  - component: {fileID: 1172187064}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2745,7 +2746,7 @@ Camera:
   m_GameObject: {fileID: 1172187060}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 2
+  m_ClearFlags: 1
   m_BackGroundColor: {r: 0.38679248, g: 0.38679248, b: 0.38679248, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -2779,6 +2780,15 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!45 &1172187064
+Skybox:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1172187060}
+  m_Enabled: 1
+  m_CustomSkybox: {fileID: 2100000, guid: 014e682b31fd48c4ba8a2d92b02026c5, type: 2}
 --- !u!1 &1218872066
 GameObject:
   m_ObjectHideFlags: 0
@@ -3003,6 +3013,11 @@ MonoBehaviour:
   placeOptionsPanel: {fileID: 2112128779}
   rotateOptionsPanel: {fileID: 617652487}
   nodePickerWindow: {fileID: 1496612694}
+  rotateGizmoPrefab: {fileID: 5526299010146584756, guid: 7e700dbcfda41534588a0f27096c921a,
+    type: 3}
+  moveGizmoPrefab: {fileID: 2965356509493789718, guid: 36972064db57cd44bac12df17b234f34,
+    type: 3}
+  worldSpaceCanvas: {fileID: 2123335787}
 --- !u!114 &1399402168
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3015,9 +3030,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 746fb499bb9b7cd439ccf3bdac07299a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ignoreRaycastMask:
+  gizmoMask:
     serializedVersion: 2
-    m_Bits: 32
+    m_Bits: 0
 --- !u!114 &1399402169
 MonoBehaviour:
   m_ObjectHideFlags: 0
