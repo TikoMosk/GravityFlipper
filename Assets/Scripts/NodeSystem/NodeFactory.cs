@@ -64,7 +64,15 @@ public class NodeFactory : MonoBehaviour{
             "winIcon",
             Category.Miscellaneous
             ));
-
+        nodeDetailsList.Add(new NodeDetails(
+            4,
+            false,
+            "Weak Block",
+            "",
+            "Weak Block",
+            "",
+            Category.Miscellaneous
+            ));
 
         //NODEMEMBERS
         nodeMemberDetailsList.Add(new NodeDetails(
@@ -112,7 +120,16 @@ public class NodeFactory : MonoBehaviour{
             "",
             Category.Miscellaneous
             ));
-        
+        nodeMemberDetailsList.Add(new NodeDetails(
+           5,
+           true,
+           "Moving Laser",
+           "",
+           "LaserCubeMoving",
+           "",
+           Category.FunctioningBlock
+           ));
+
     }
 
     public List<NodeDetails> GetNodeDetailsByCategory(Category category) {

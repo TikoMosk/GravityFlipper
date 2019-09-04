@@ -7,7 +7,7 @@ using UnityEngine;
 public class LaserRay : MonoBehaviour
 {
 
-
+    public bool isStatic;
     public float speed;
     public Vector3 endPoint_1;
     public Vector3 endPoint_2;
@@ -20,7 +20,8 @@ public class LaserRay : MonoBehaviour
 
     private void Start()
     {
-        EventController.currentInstance.Register(Check);
+        //if (!isStatic)
+            EventController.currentInstance.Register(Check);
 
         vl = GetComponentInChildren<VolumetricLineBehavior>();
         endObject.transform.position = endPoint_1;
@@ -69,7 +70,7 @@ public class LaserRay : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(GameController.Game.SmoothGraphics.AnimationCount == 0)
+        if (GameController.Game.SmoothGraphics.AnimationCount == 0)
         {
             RaycastHit hit;
             if (Physics.Raycast(transform.position, rayendPos, out hit, rayendPos.magnitude))
