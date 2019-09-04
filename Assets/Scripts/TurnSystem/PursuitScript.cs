@@ -8,6 +8,7 @@ public class PursuitScript : MonoBehaviour
 
     private Node currentNode;
     private Node destNode;
+    private Vector3 nextPlatform;
 
     private void Start()
     {
@@ -51,9 +52,14 @@ public class PursuitScript : MonoBehaviour
         else
         {
             UpdateCurrentNode();
-            // && !state.IsPlayerNear()
+
+            nextPlatform = destNode.GetPosition() - Vector3.up;
+
             if (Vector3.Distance(currentNode.GetPosition(), destNode.GetPosition()) > 1.0f
-                || transform.GetChild(6).position == destNode.GetPosition())
+                || transform.GetChild(6).position == destNode.GetPosition()
+                || destNode == null
+                || destNode.Id != 0
+                || GameController.Game.CurrentLevel.GetNode(nextPlatform).Id == 4)
             {
                 Debug.Log("EndPursuit");
                 state.EndPursuit();
