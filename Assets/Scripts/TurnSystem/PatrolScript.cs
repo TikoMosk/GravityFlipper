@@ -45,16 +45,12 @@ public class PatrolScript : MonoBehaviour
             if (Physics.Raycast(transform.position, Vector3.forward, out hit, 1) || 
             (Physics.Raycast(transform.position, Vector3.back, out hit, 1)))
             {
-                if (hit.collider.gameObject.GetComponentInParent<NodeMemberGraphic>() != null)
-                {
+                if (hit.collider.gameObject.GetComponentInParent<NodeMemberGraphic>().Node.NodeMember.Id == 1) {
                     Debug.Log("u dead");
-                    //Destroy(hit.collider.transform.parent.gameObject);
-                    if (hit.collider.gameObject.GetComponentInParent<NodeMemberGraphic>().Node.NodeMember.Id == 1)
-                    {
-
-                        PauseMenu.currentInstance.GameOver();
-                    }
+                    PauseMenu.currentInstance.GameOver();
+                    
                     hit.collider.gameObject.GetComponentInParent<NodeMemberGraphic>().Node.NodeMember = null;
+                    Destroy(hit.collider.transform.parent.gameObject);
 
                 }
             }
