@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class CameraController : MonoBehaviour {
     public GameObject swipeIcon;
@@ -17,10 +18,17 @@ public class CameraController : MonoBehaviour {
 
     Node.Direction forwardDirection;
     private bool playerExists;
+    private Action onGravityChanged;
 
     public Vector3 UpVector { get => upVector; set => upVector = value; }
     public Node.Direction ForwardDirection { get => forwardDirection;  }
 
+    public void RegisterToGravityChange(Action onGravityChange) {
+        onGravityChanged += onGravityChange;
+    }
+    public void UnRegisterFromGravityChange(Action onGravityChange) {
+        onGravityChanged -= onGravityChange;
+    }
     private void Awake() {
         GameController.Game.LevelController.RegisterToLevelCreated(PlayerExists);
     }
@@ -122,7 +130,7 @@ public class CameraController : MonoBehaviour {
         cameraRotation = Quaternion.LookRotation(playerForward, playerUp);
         UpVector = playerUp;
         StartCoroutine(GameController.Game.SmoothGraphics.RotateSmoothly(cameraObject.transform, cameraRotation, 1f));
-
+        onGravityChanged.Invoke();
     }
     private Node.Direction GetForwardDirection(Vector3 vector) {
         Node.Direction result = Node.Direction.UP;

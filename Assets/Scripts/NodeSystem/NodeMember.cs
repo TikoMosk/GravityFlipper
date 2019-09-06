@@ -31,7 +31,6 @@ public class NodeMember
     public NodeMember(int id)
     {
         this.id = id;
-        Debug.Log("////" + Facing + " : " + UpDirection + " : " + Id);
     }
     public void SetRotation(Node.Direction forward, Node.Direction up) {
         facing = forward;

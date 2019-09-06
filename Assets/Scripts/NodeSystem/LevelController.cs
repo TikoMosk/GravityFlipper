@@ -11,6 +11,7 @@ public class LevelController : MonoBehaviour
 
     public LevelSerializer levelSerializer;
     private Action onLevelCreated;
+    NodeFactory factory;
     int width = 10;
     int height = 10 ;
     int length = 10;
@@ -21,7 +22,10 @@ public class LevelController : MonoBehaviour
         public int id;
         public GameObject nodePrefab;
     }
-    
+    private void Awake() {
+        factory = FindObjectOfType<NodeFactory>();
+    }
+
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.S))
@@ -29,6 +33,11 @@ public class LevelController : MonoBehaviour
             SaveLevelLocal();
         }
         
+    }
+    public void ResizeLevel(int width, int height, int length) {
+        this.width = width;
+        this.height = height;
+        this.length = length;
     }
     public void SaveLevelLocal() {
         levelSerializer.SaveLevelLocal("level1.json", level);
@@ -101,10 +110,10 @@ public class LevelController : MonoBehaviour
     // Creates the NodeGraphic for the node at x,y,z
     private void CreateNodeGraphics(int x, int y, int z)
     {
-        if (NodeFactory.Factory.GetNodePrefabById(Level.GetNode(x, y, z).Id) != null)
+        if (factory.GetNodePrefabById(Level.GetNode(x, y, z).Id) != null)
         {
             Quaternion nodeRotation = Quaternion.LookRotation(Dir.GetVectorByDirection(level.GetNode(x, y, z).Facing), Dir.GetVectorByDirection(level.GetNode(x, y, z).UpDirection));
-            GameObject node_go = Instantiate(NodeFactory.Factory.GetNodePrefabById(Level.GetNode(x, y, z).Id), Level.GetNode(x, y, z).GetPosition(), nodeRotation);
+            GameObject node_go = Instantiate(factory.GetNodePrefabById(Level.GetNode(x, y, z).Id), Level.GetNode(x, y, z).GetPosition(), nodeRotation);
             Level.GetNode(x, y, z).CreateGraphic(node_go);
             Level.GetNode(x, y, z).NodeGraphic.transform.parent = this.transform;
             Level.GetNode(x, y, z).SubscribeToNodeTypeChanged(() => { OnNodeTypeChanged(level.GetNode(x, y, z),node_go); });
@@ -122,12 +131,11 @@ public class LevelController : MonoBehaviour
     {
         if (Level.GetNode(x, y, z).NodeMember != null)
         {
-            if (NodeFactory.Factory.GetNodeMemberPrefabById(Level.GetNode(x, y, z).NodeMember.Id) != null)
+            if (factory.GetNodeMemberPrefabById(Level.GetNode(x, y, z).NodeMember.Id) != null)
             {
                 
                 NodeMember nodeObject = Level.GetNode(x, y, z).NodeMember;
-                GameObject nodeObject_GameObject = Instantiate(NodeFactory.Factory.GetNodeMemberPrefabById(nodeObject.Id), Level.GetNode(x,y,z).GetPosition(), Quaternion.identity);
-                Debug.Log(nodeObject.Facing + " : " + nodeObject.UpDirection + " : " + nodeObject.Id);
+                GameObject nodeObject_GameObject = Instantiate(factory.GetNodeMemberPrefabById(nodeObject.Id), Level.GetNode(x,y,z).GetPosition(), Quaternion.identity);
                 
                 nodeObject_GameObject.transform.parent = this.transform;
                 NodeMemberGraphic nodeObjectGraphic= nodeObject.CreateMoveableObjectGraphic(nodeObject_GameObject);
