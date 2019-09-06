@@ -71,7 +71,16 @@ public class NodeFactory : MonoBehaviour{
             "",
             "Weak Block",
             "",
-            Category.Miscellaneous
+            Category.FunctioningBlock
+            ));
+        nodeDetailsList.Add(new NodeDetails(
+            5,
+            false,
+            "Spike",
+            "",
+            "Spike",
+            "",
+            Category.FunctioningBlock
             ));
 
         //NODEMEMBERS
