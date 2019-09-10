@@ -29,10 +29,8 @@ public class TurnEventSystem : MonoBehaviour
 
     public void NextTurn()
     {
-
         OnPlayerMoveEvent?.Invoke();
         turnCount++;
-
     }
     
 
