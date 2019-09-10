@@ -27,6 +27,8 @@ public class Player : MonoBehaviour {
         upDirection = graphic.Node.NodeMember.UpDirection;
         previousClickedNode = GameController.Game.CurrentLevel.GetNodeInTheDirection(graphic.Node, Dir.Opposite(upDirection));
         previousDirection = upDirection;
+        playerMember = graphic.Node.NodeMember;
+        playerMember.SubscribeToNodeObjectDestroyed(OnKilled);
         created = true;
     }
     public void Move(Node n, Node.Direction dir) {
@@ -90,6 +92,9 @@ public class Player : MonoBehaviour {
         if (destNode.Id == WIN_BLOCK_ID) {
             GameController.Game.Win();
         }
+    }
+    private void OnKilled() {
+        PauseMenu.currentInstance.GameOver();
     }
 
 }

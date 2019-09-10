@@ -22,7 +22,7 @@ public class NodeMemberGraphic : MonoBehaviour
     }
     private void ColliderUpdate() {
        
-        if (GetComponent<Collider>() != null) {
+        if (GetComponent<Collider>() != null && node.NodeMember.Walkthrough) {
             Collider col = GetComponent<Collider>();
             if (GameController.Game.CurrentGameState is LevelEditorMode) {
                 col.enabled = true;

@@ -3359,7 +3359,7 @@ MonoBehaviour:
     category: 5
   - id: 1
     nodeMember: 1
-    notSolid: 0
+    notSolid: 1
     name: Player
     description: 
     prefab: {fileID: 5238763070401807191, guid: 773308f6431a344f0b80e4f1a9691fed,
@@ -5688,6 +5688,42 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 446110032, guid: 48fba16a7915ab94b894d3de37205292, type: 3}
+      propertyPath: m_ContentType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 446110032, guid: 48fba16a7915ab94b894d3de37205292, type: 3}
+      propertyPath: m_KeyboardType
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 446110032, guid: 48fba16a7915ab94b894d3de37205292, type: 3}
+      propertyPath: m_CharacterValidation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1118398888, guid: 48fba16a7915ab94b894d3de37205292, type: 3}
+      propertyPath: m_ContentType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1118398888, guid: 48fba16a7915ab94b894d3de37205292, type: 3}
+      propertyPath: m_KeyboardType
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1118398888, guid: 48fba16a7915ab94b894d3de37205292, type: 3}
+      propertyPath: m_CharacterValidation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2016253956, guid: 48fba16a7915ab94b894d3de37205292, type: 3}
+      propertyPath: m_ContentType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2016253956, guid: 48fba16a7915ab94b894d3de37205292, type: 3}
+      propertyPath: m_KeyboardType
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2016253956, guid: 48fba16a7915ab94b894d3de37205292, type: 3}
+      propertyPath: m_CharacterValidation
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5899559438556963538, guid: 48fba16a7915ab94b894d3de37205292,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5811,42 +5847,6 @@ PrefabInstance:
     - target: {fileID: 446110030, guid: 48fba16a7915ab94b894d3de37205292, type: 3}
       propertyPath: m_Name
       value: Width
-      objectReference: {fileID: 0}
-    - target: {fileID: 446110032, guid: 48fba16a7915ab94b894d3de37205292, type: 3}
-      propertyPath: m_ContentType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 446110032, guid: 48fba16a7915ab94b894d3de37205292, type: 3}
-      propertyPath: m_KeyboardType
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 446110032, guid: 48fba16a7915ab94b894d3de37205292, type: 3}
-      propertyPath: m_CharacterValidation
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2016253956, guid: 48fba16a7915ab94b894d3de37205292, type: 3}
-      propertyPath: m_ContentType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2016253956, guid: 48fba16a7915ab94b894d3de37205292, type: 3}
-      propertyPath: m_KeyboardType
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 2016253956, guid: 48fba16a7915ab94b894d3de37205292, type: 3}
-      propertyPath: m_CharacterValidation
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1118398888, guid: 48fba16a7915ab94b894d3de37205292, type: 3}
-      propertyPath: m_ContentType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1118398888, guid: 48fba16a7915ab94b894d3de37205292, type: 3}
-      propertyPath: m_KeyboardType
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1118398888, guid: 48fba16a7915ab94b894d3de37205292, type: 3}
-      propertyPath: m_CharacterValidation
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1106578525, guid: 48fba16a7915ab94b894d3de37205292, type: 3}
       propertyPath: m_Name

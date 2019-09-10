@@ -33,7 +33,6 @@ public class CameraController : MonoBehaviour {
         GameController.Game.LevelController.RegisterToLevelCreated(PlayerExists);
     }
     public void ResetCamera() {
-        cameraObject.transform.rotation = Quaternion.LookRotation(Vector3.forward, Vector3.up);
         StartCoroutine(ResetCameraToPlayerDirection());
     }
     IEnumerator ResetCameraToPlayerDirection() {
@@ -129,8 +128,12 @@ public class CameraController : MonoBehaviour {
         }
         cameraRotation = Quaternion.LookRotation(playerForward, playerUp);
         UpVector = playerUp;
+        if (onGravityChanged != null) {
+            onGravityChanged.Invoke();
+        }
         StartCoroutine(GameController.Game.SmoothGraphics.RotateSmoothly(cameraObject.transform, cameraRotation, 1f));
-        onGravityChanged.Invoke();
+        
+        
     }
     private Node.Direction GetForwardDirection(Vector3 vector) {
         Node.Direction result = Node.Direction.UP;
