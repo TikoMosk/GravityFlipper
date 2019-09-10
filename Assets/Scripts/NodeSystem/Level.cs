@@ -29,6 +29,27 @@ public class Level
         this.height = height;
         this.length = length;
     }
+    public void ResizeLevel(int width, int height, int length) {
+        this.width = width;
+        this.height = height;
+        this.length = length;
+        Node[,,] newMap = new Node[width, height, length];
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                for (int z = 0; z < length; z++) {
+                    if (x < nodeMap.GetLength(0) && y < nodeMap.GetLength(1) && z < nodeMap.GetLength(2)) {
+                        newMap[x, y, z] = nodeMap[x, y, z];
+                    }
+                    else {
+                        newMap[x, y, z] = new Node(this, x, y, z, 0);
+                    }
+                    
+                }
+            }
+        }
+        nodeMap = newMap;
+        GameController.Game.LevelController.LaunchLevel(this);
+    }
     public void InitializeLevel()
     {
         nodeMap = new Node[width, length, height];
@@ -137,6 +158,9 @@ public class Level
     {
         int distance = Mathf.Abs(b.X - a.X) + Mathf.Abs(b.Y - a.Y) + Mathf.Abs(b.Z - a.Z);
         return distance;
+    }
+    public void DestroyNodeMember(Node a) {
+        a.NodeMember = null;
     }
 
     private bool IsInLevelBounds(int x, int y, int z)
