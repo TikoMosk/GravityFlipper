@@ -55,7 +55,9 @@ public class LevelController : MonoBehaviour
         this.level = level;
         DestroyLevelGraphics();
         CreateLevelGraphics();
+        
         onLevelCreated.Invoke();
+        GameController.Game.CameraController.ResetCamera();
     }
     public void LoadDeveloperLevel() {
         levelSerializer.LoadDevLevel(1);
@@ -136,7 +138,9 @@ public class LevelController : MonoBehaviour
                 
                 NodeMember nodeObject = Level.GetNode(x, y, z).NodeMember;
                 GameObject nodeObject_GameObject = Instantiate(factory.GetNodeMemberPrefabById(nodeObject.Id), Level.GetNode(x,y,z).GetPosition(), Quaternion.identity);
-                
+                Level.GetNode(x, y, z).NodeMember.Walkthrough = factory.GetNodeDetailsById(level.GetNode(x, y, z).NodeMember.Id,true).notSolid;
+
+
                 nodeObject_GameObject.transform.parent = this.transform;
                 NodeMemberGraphic nodeObjectGraphic= nodeObject.CreateMoveableObjectGraphic(nodeObject_GameObject);
                 nodeObject.NodeObjectGraphic.Node = Level.GetNode(x,y,z);
@@ -162,7 +166,10 @@ public class LevelController : MonoBehaviour
     private void OnNodeTypeChanged(Node n, GameObject node_go)
     {
         if(n.Id == 0 ) {
-            Destroy(node_go);
+            if(node_go != null) {
+                Destroy(node_go);
+            }
+            
         }
         else {
             n.ResetNodeTypeChanged();

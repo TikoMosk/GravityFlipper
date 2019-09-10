@@ -15,10 +15,13 @@ public class NodeMember
     public int Id { get => id; set => id = value; }
 
     private Action<Node> nodeObjectMoved;
+    private Action nodeObjectDestroyed;
     public NodeMemberGraphic NodeObjectGraphic { get => nodeObjectGraphic; set => nodeObjectGraphic = value; }
     public Action<Node> NodeObjectMoved { get => nodeObjectMoved; set => nodeObjectMoved = value; }
 
     private NodeMemberGraphic nodeObjectGraphic;
+    private bool walkthrough;
+
     protected Node.Direction facing = Node.Direction.FORWARD;
     protected Node.Direction upDirection = Node.Direction.UP;
 
@@ -27,10 +30,19 @@ public class NodeMember
     public Node.Direction Facing { get => facing; set { facing = value; } }
     public Node.Direction UpDirection { get => upDirection; set { upDirection = value; } }
     public Node LocationNode { get => locationNode; set => locationNode = value; }
+    public bool Walkthrough { get => walkthrough; set => walkthrough = value; }
 
     public NodeMember(int id)
     {
         this.id = id;
+    }
+    public void Destroy() {
+        if (nodeObjectDestroyed != null) {
+            nodeObjectDestroyed.Invoke();
+        }
+        locationNode.DestroyNodeMember();
+        
+        
     }
     public void SetRotation(Node.Direction forward, Node.Direction up) {
         facing = forward;
@@ -49,6 +61,9 @@ public class NodeMember
     public void SubscribeToMoveableObjectMoved(Action<Node> objectMoved)
     {
         NodeObjectMoved += objectMoved;
+    }
+    public void SubscribeToNodeObjectDestroyed(Action dead) {
+        nodeObjectDestroyed += dead;
     }
 
     public NodeMemberGraphic CreateMoveableObjectGraphic(GameObject nodeObject_GameObject)

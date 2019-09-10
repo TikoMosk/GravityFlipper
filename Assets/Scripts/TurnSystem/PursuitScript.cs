@@ -17,7 +17,6 @@ public class PursuitScript : MonoBehaviour
         state = new IdleState();
         state.enemy = this.gameObject;
         UpdateCurrentNode();
-        Debug.Log(gameObject.name);
     }
 
     public void ChangeState(EnemySpiderState newState)

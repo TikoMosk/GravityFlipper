@@ -3376,7 +3376,7 @@ MonoBehaviour:
     category: 5
   - id: 1
     nodeMember: 1
-    notSolid: 0
+    notSolid: 1
     name: Player
     description: 
     prefab: {fileID: 5238763070401807191, guid: 773308f6431a344f0b80e4f1a9691fed,

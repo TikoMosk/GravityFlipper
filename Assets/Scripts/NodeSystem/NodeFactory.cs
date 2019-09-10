@@ -19,6 +19,15 @@ public class NodeFactory : MonoBehaviour {
         return returnList;
     }
 
+    public NodeDetails GetNodeDetailsById(int id, bool nodeMember) {
+        if (nodeMember) {
+            return nodeMemberDetailsList[id];
+        }
+        else {
+            return nodeDetailsList[id];
+        }
+    }
+
     public GameObject GetNodePrefabById(int id) {
         if (id >= 0 && id < nodeDetailsList.Count) {
             GameObject prefab = nodeDetailsList[id].prefab;
