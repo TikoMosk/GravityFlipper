@@ -13,9 +13,21 @@ public class PlayMode : GameState
     }
     public void OnNodeClick(Node n, Node.Direction dir)
     {
-        GameController.Game.CurrentLevel.Player.Move(n,dir);
+        if (n.NodeGraphic.GetComponent<Lever>() != null) 
+        {
+            n.NodeGraphic.GetComponent<Lever>().TurnTheLever();
+
+        }
+
+        else
+        {
+            GameController.Game.CurrentLevel.Player.Move(n, dir);
+        }
+
+
     }
     public void Update() {
+
         GameController.Game.CameraController.CameraPositionPlayMode();
     }
 }

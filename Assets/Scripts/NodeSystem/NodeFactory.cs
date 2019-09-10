@@ -82,6 +82,15 @@ public class NodeFactory : MonoBehaviour{
             "",
             Category.FunctioningBlock
             ));
+        nodeDetailsList.Add(new NodeDetails(
+            6,
+            false,
+            "Lever",
+            "",
+            "Lever",
+            "",
+            Category.FunctioningBlock
+            ));
 
         //NODEMEMBERS
         nodeMemberDetailsList.Add(new NodeDetails(

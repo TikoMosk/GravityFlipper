@@ -37,12 +37,12 @@ public class GameController : MonoBehaviour {
     }
     private void Start() {
         SetGameModeBasedOnScene();
-        Time.timeScale = 1f;
+        Time.timeScale = 1f;      
+
     }
     public void TestLevel() {
         Time.timeScale = 1f;
         levelController.LoadLevelFromProject("level2.json");
-        Debug.Log(cameraController);
         cameraController.ResetCamera();
     }
     private void Update() {
@@ -68,9 +68,7 @@ public class GameController : MonoBehaviour {
         else {
             CurrentGameState = new MenuMode();
         }
-        if (onGameStateChanged != null) {
-            onGameStateChanged.Invoke();
-        }
+
     }
     public void ChangeGameState(String stateName) {
         Time.timeScale = 1f;
@@ -87,7 +85,6 @@ public class GameController : MonoBehaviour {
         if (onGameStateChanged != null) {
             onGameStateChanged.Invoke();
         }
-
 
     }
     public void ChangeScene(string s) {
@@ -137,6 +134,9 @@ public class GameController : MonoBehaviour {
     }
     public void RegisterForGameStateChanged(Action gameStateChanged) {
         this.onGameStateChanged += gameStateChanged;
+    }
+    public void UnRegisterForGameStateChanged(Action gameStateChanged) {
+        this.onGameStateChanged -= gameStateChanged;
     }
 
 

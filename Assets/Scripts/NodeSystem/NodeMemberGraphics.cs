@@ -21,16 +21,19 @@ public class NodeMemberGraphic : MonoBehaviour
         ColliderUpdate();
     }
     private void ColliderUpdate() {
+       
         if (GetComponent<Collider>() != null) {
             Collider col = GetComponent<Collider>();
             if (GameController.Game.CurrentGameState is LevelEditorMode) {
                 col.enabled = true;
             }
             else {
-
                 col.enabled = false;
             }
         }
+    }
+    private void OnDestroy() {
+        GameController.Game.UnRegisterForGameStateChanged(ColliderUpdate);
     }
     public void MoveAnimation() {
         if(animator != null) {

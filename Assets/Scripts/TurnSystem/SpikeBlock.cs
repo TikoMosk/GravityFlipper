@@ -1,18 +1,20 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using VolumetricLines;
 using UnityEngine;
 
 public class SpikeBlock : MonoBehaviour
 {
     private bool isOpen;
+    Collider collider;
+
     private void Start()
     {
-        EventController.currentInstance.Register(Change);
+        //EventController.currentInstance.Register(AwakeSpikes);
+        collider = GetComponent<Collider>();
     }
 
-    private void Update()
+    /*private void Update()
     {
         if(isOpen)
         {
@@ -21,7 +23,7 @@ public class SpikeBlock : MonoBehaviour
             if (GameController.Game.SmoothGraphics.AnimationCount == 0)
             {
                 RaycastHit hit;
-                if (Physics.Raycast(transform.position, Vector3.up, out hit, 1))
+                if (Physics.Raycast(transform.position, end, out hit, 1))
                 {
                     if (hit.collider.gameObject.GetComponentInParent<NodeMemberGraphic>() != null)
                     {
@@ -42,11 +44,69 @@ public class SpikeBlock : MonoBehaviour
         }
 
 
+    } */
+
+    public void AwakeSpikes()
+    {
+        collider.enabled = false;
+        GetComponentInChildren<Animator>().SetBool("Enabled", true);
+        if(IsPlayerNear())
+        {
+
+            StartCoroutine(DestroyAfterAnimation());
+        }
+
+
     }
 
-    private void Change()
+    public void CloseSpikes()
+    {
+        collider.enabled = true;
+        GetComponentInChildren<Animator>().SetBool("Enabled", false);
+        if(IsPlayerNear())
+        {
+
+            StartCoroutine(DestroyAfterAnimation());
+        }
+    }
+
+    IEnumerator DestroyAfterAnimation()
+    {
+        while (GameController.Game.SmoothGraphics.AnimationCount > 0)
+        {
+            yield return null;
+        }
+        PauseMenu.currentInstance.GameOver();
+        GetComponentInParent<NodeMemberGraphic>().Node.NodeMember = null;
+    }
+
+    public bool IsPlayerNear()
+    {
+        Transform[] sides = GetComponentsInChildren<Transform>();
+        Node nextNode;
+        foreach (Transform side in sides)
+        {
+            if (side.gameObject.tag == "Side")
+            {
+                nextNode = GameController.Game.CurrentLevel.GetNode(side.position);
+                if (nextNode != null && nextNode.NodeMember != null)
+                {
+                    if (nextNode.NodeMember.Id == 1)
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
+
+
+    /*private void Change()
     {
         isOpen = !isOpen;
         GetComponentInChildren<Animator>().SetBool("Enabled", false);
-    }
+    }*/
 }

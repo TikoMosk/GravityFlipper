@@ -127,10 +127,12 @@ public class LevelController : MonoBehaviour
                 
                 NodeMember nodeObject = Level.GetNode(x, y, z).NodeMember;
                 GameObject nodeObject_GameObject = Instantiate(NodeFactory.Factory.GetNodeMemberPrefabById(nodeObject.Id), Level.GetNode(x,y,z).GetPosition(), Quaternion.identity);
-                nodeObject_GameObject.transform.rotation = Quaternion.LookRotation(Dir.GetVectorByDirection(nodeObject.Facing), Dir.GetVectorByDirection(nodeObject.UpDirection));
+                Debug.Log(nodeObject.Facing + " : " + nodeObject.UpDirection + " : " + nodeObject.Id);
+                
                 nodeObject_GameObject.transform.parent = this.transform;
                 NodeMemberGraphic nodeObjectGraphic= nodeObject.CreateMoveableObjectGraphic(nodeObject_GameObject);
                 nodeObject.NodeObjectGraphic.Node = Level.GetNode(x,y,z);
+                nodeObject.NodeObjectGraphic.transform.rotation = Quaternion.LookRotation(Dir.GetVectorByDirection(nodeObject.Facing), Dir.GetVectorByDirection(nodeObject.UpDirection));
                 nodeObject.LocationNode = Level.GetNode(x, y, z);
                 nodeObject.SubscribeToMoveableObjectMoved((node) => { OnNodeMemberMoved(node, nodeObjectGraphic); });
                 if (Level.GetNode(x, y, z).NodeMember.Id == 1) {
@@ -156,18 +158,19 @@ public class LevelController : MonoBehaviour
         }
         else {
             n.ResetNodeTypeChanged();
+            n.ResetNodeRotated();
             CreateNodeGraphics(n.X, n.Y, n.Z);
         }
     }
     private void OnNodeRotated(Node n, GameObject node_go) {
-        node_go.transform.rotation = Quaternion.LookRotation(Dir.GetVectorByDirection(n.Facing),Dir.GetVectorByDirection(n.UpDirection));
+        Quaternion nodeRot = Quaternion.LookRotation(Dir.GetVectorByDirection(n.Facing),Dir.GetVectorByDirection(n.UpDirection));
+        StartCoroutine(GameController.Game.SmoothGraphics.RotateSmoothly(node_go.transform, nodeRot, 0.5f));
     }
 
    
 
     public void RegisterToLevelCreated(Action onLevelCreated)
     {
-
         this.onLevelCreated += onLevelCreated;
     }
 

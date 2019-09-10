@@ -18,6 +18,7 @@ public class LevelDesignController : MonoBehaviour {
     private bool placeNodeMember;
     private bool isNodeMember;
     private int rotateVertical;
+    Quaternion rotation;
     Node selectedNode;
 
 
@@ -27,6 +28,9 @@ public class LevelDesignController : MonoBehaviour {
     public int BlockId { get => blockId; set => blockId = value; }
     public bool PlaceNodeMember { get => placeNodeMember; set => placeNodeMember = value; }
 
+    private void Start() {
+        GameController.Game.LevelController.RegisterToLevelCreated(DeleteGizmos);
+    }
     public void SetTool(int toolNumber) {
         if (tool == (Tool)toolNumber) {
             tool = Tool.None;
@@ -107,11 +111,29 @@ public class LevelDesignController : MonoBehaviour {
         if(isNodeMember) {
             NodeMember sNodeMember = selectedNode.NodeMember;
             sNodeMember.SetRotation(Dir.GetDirectionByVector(Quaternion.Euler(0, degrees, 0) * Dir.GetVectorByDirection(sNodeMember.Facing)),sNodeMember.UpDirection);
+            
         }
         else {
             selectedNode.SetRotation(Dir.GetDirectionByVector(Quaternion.Euler(0, degrees, 0) * Dir.GetVectorByDirection(selectedNode.Facing)), selectedNode.UpDirection);
         }
-        
+    }
+    public void MoveBlock(Vector3 dir) {
+        Node destNode = GameController.Game.CurrentLevel.GetNodeInTheDirection(selectedNode,Dir.GetDirectionByVector(dir));
+        if(destNode == null) {
+            return;
+        }
+        if (isNodeMember) {
+            NodeMember sNodeMember = selectedNode.NodeMember;
+            GameController.Game.CurrentLevel.MoveObject(selectedNode, destNode);
+
+        }
+        else {
+            /*Node a = selectedNode;
+            selectedNode.SetNodeType(0);*/
+
+        }
+        selectedNode = destNode;
+        moveGizmo.transform.position = selectedNode.GetPosition();
     }
     public void ChangeRotationStyle(int style) {
         if (rotateVertical != style) {
@@ -142,14 +164,17 @@ public class LevelDesignController : MonoBehaviour {
             GameController.Game.ChangeGameState("TestMode");
         }
         if (mode != 0) {
-            if (rotateGizmo != null) {
-                Destroy(rotateGizmo);
-            }
-            if (moveGizmo != null) {
-                Destroy(moveGizmo);
-            }
+            DeleteGizmos();
         }
 
+    }
+    private void DeleteGizmos() {
+        if (rotateGizmo != null) {
+            Destroy(rotateGizmo);
+        }
+        if (moveGizmo != null) {
+            Destroy(moveGizmo);
+        }
     }
     public void ToggleToolOptions() {
         placeOptionsPanel.SetActive(tool == Tool.Place);
