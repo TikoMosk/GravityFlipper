@@ -19,7 +19,7 @@ public class Movinglaser : MonoBehaviour
 
     void Start()
     {
-        EventController.currentInstance.Register(Move);
+        EventController.currentInstance.Register(MoveToDestNode);
 
         switch (direction)
         {
@@ -39,15 +39,22 @@ public class Movinglaser : MonoBehaviour
             step = -step;
         }
 
-        currentNode = GameController.Game.CurrentLevel.GetNode(gameObject.transform.position);
-        Debug.Log("curre" + currentNode.GetPosition());
-
-        destNode = GameController.Game.CurrentLevel.GetNode(gameObject.transform.position + step);
-        Debug.Log("dest" + destNode.GetPosition());
+        currentNode = GameController.Game.CurrentLevel.GetNode(transform.position);
+        destNode = GameController.Game.CurrentLevel.GetNode(transform.position + step);
     }
 
-    private void Move()
+    private void MoveToDestNode()
     {
+        Debug.Log("MoveToDestNode");
         GameController.Game.CurrentLevel.MoveObject(currentNode, destNode);
+        UpdateState();
+    }
+
+    private void UpdateState()
+    {
+        currentNode = destNode;
+        step = -step;
+        Debug.Log("step = " + step);
+        destNode = GameController.Game.CurrentLevel.GetNode(transform.position + step);
     }
 }

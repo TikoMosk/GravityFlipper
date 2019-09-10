@@ -24,6 +24,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: LaserCube
       objectReference: {fileID: 0}
+    - target: {fileID: 6288853723953384445, guid: 8228e68d8ebfd4734916da9e8de6cea6,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6288853723945486323, guid: 8228e68d8ebfd4734916da9e8de6cea6,
+        type: 3}
+      propertyPath: m_endPos.z
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6288853723954588953, guid: 8228e68d8ebfd4734916da9e8de6cea6,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2661568343800256882, guid: 8228e68d8ebfd4734916da9e8de6cea6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -78,21 +93,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6288853723953384445, guid: 8228e68d8ebfd4734916da9e8de6cea6,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6288853723954588953, guid: 8228e68d8ebfd4734916da9e8de6cea6,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6288853723945486323, guid: 8228e68d8ebfd4734916da9e8de6cea6,
-        type: 3}
-      propertyPath: m_endPos.z
-      value: -3
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -7809576604233929540, guid: 8228e68d8ebfd4734916da9e8de6cea6, type: 3}

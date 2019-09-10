@@ -1,14 +1,7 @@
 ﻿<Properties StartupConfiguration="{EB2208B8-2EA9-6054-617B-C009E9C4DA96}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/VolumetricLines/Shaders/Additive.shader">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/LevelDesigner/PlayMode.cs">
     <Files>
-      <File FileName="Assets/Scripts/TurnSystem/PatrolScript.cs" Line="69" Column="9" />
-      <File FileName="Assets/Movinglaser.cs" Line="45" Column="97" />
-      <File FileName="Assets/Scripts/TurnSystem/PursuitScript.cs" Line="62" Column="82" />
-      <File FileName="Assets/Scripts/TurnSystem/WeakBlock.cs" Line="20" Column="15" />
-      <File FileName="Assets/LaserStattic.cs" Line="33" Column="66" />
-      <File FileName="Assets/Scripts/NodeSystem/Level.cs" Line="69" Column="1" />
-      <File FileName="Assets/Scripts/NodeSystem/NodeFactory.cs" Line="72" Column="19" />
-      <File FileName="Assets/VolumetricLines/Shaders/Additive.shader" Line="24" Column="16" />
+      <File FileName="Assets/Scripts/LevelDesigner/PlayMode.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -18,14 +11,17 @@
               <Node name="Materials" expanded="True" />
               <Node name="Scripts" expanded="True">
                 <Node name="Controllers" expanded="True" />
+                <Node name="LevelDesigner" expanded="True">
+                  <Node name="PlayMode.cs" selected="True" />
+                </Node>
+                <Node name="NodeMembers" expanded="True" />
+                <Node name="Nodes" expanded="True" />
                 <Node name="NodeSystem" expanded="True" />
                 <Node name="TurnSystem" expanded="True" />
                 <Node name="UI" expanded="True" />
               </Node>
               <Node name="VolumetricLines" expanded="True">
-                <Node name="Shaders" expanded="True">
-                  <Node name="Additive.shader" selected="True" />
-                </Node>
+                <Node name="Shaders" expanded="True" />
               </Node>
             </Node>
           </Node>
@@ -35,7 +31,7 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="6a5baaa6-c45e-4070-af39-9231f025dfe6" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="3309804c-6526-4f2f-adb2-bb2c932a6d90" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
