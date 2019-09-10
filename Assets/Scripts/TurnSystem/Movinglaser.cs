@@ -46,7 +46,6 @@ public class Movinglaser : MonoBehaviour
         if(GameController.Game.CurrentLevel.GetNodeInTheDirection(currentNode, Dir.GetDirectionByVector(step)) != null) {
             destNode = GameController.Game.CurrentLevel.GetNodeInTheDirection(currentNode, Dir.GetDirectionByVector(step));
         }
-        Debug.Log("dest" + destNode.GetPosition());
     }
 
     private void Move()
