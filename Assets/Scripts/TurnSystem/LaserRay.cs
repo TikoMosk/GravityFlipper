@@ -115,5 +115,6 @@ public class LaserRay : MonoBehaviour
     private void UpdateLaser()
     {
         vl.EndPos = endObject.transform.position;
+        
     }
 }

@@ -7,6 +7,11 @@ public class NodePicker : MonoBehaviour
 {
     public GameObject panel;
     public GameObject nodeCellUI;
+    public Sprite defaultIcon;
+    NodeFactory factory;
+    private void Start() {
+        factory = FindObjectOfType<NodeFactory>();
+    }
     public void ClearPanel() {
         for (int i = 0; i < panel.transform.childCount; i++) {
             Destroy(panel.transform.GetChild(i).gameObject);
@@ -14,13 +19,13 @@ public class NodePicker : MonoBehaviour
     }
     public void PopulatePanelByCategory(int category) {
         ClearPanel();
-        List<NodeDetails> categorizedList = NodeFactory.Factory.GetNodeDetailsByCategory((NodeFactory.Category)category);
+        List<NodeDetails> categorizedList = factory.GetNodeDetailsByCategory((NodeFactory.Category)category);
         foreach (NodeDetails details in categorizedList) {
             GameObject cell = Instantiate(nodeCellUI);
             cell.transform.SetParent(panel.transform, false);
-            var spr = Resources.Load<Sprite>(details.icon);
+            var spr = details.icon;
             if (spr == null) {
-                spr = Resources.Load<Sprite>(details.icon + "Undefined");
+                spr = defaultIcon;
             }
             cell.GetComponent<NodePickerCell>().SetUp(details.id,details.nodeMember, details.name, details.description, spr);
         }
