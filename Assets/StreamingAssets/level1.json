@@ -366,6 +366,22 @@
         {
             "x": 8,
             "y": 0,
+            "z": 4,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 8,
+            "y": 0,
+            "z": 5,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 8,
+            "y": 0,
             "z": 6,
             "id": 1,
             "facing": "3",
@@ -430,12 +446,12 @@
             "upDirection": "0"
         },
         {
-            "x": 7,
+            "x": 9,
             "y": 1,
             "z": 5,
             "id": 1,
-            "facing": "1",
-            "upDirection": "5"
+            "facing": "",
+            "upDirection": ""
         }
     ]
 }

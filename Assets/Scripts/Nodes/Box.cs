@@ -7,7 +7,7 @@ public class Box : MonoBehaviour
     Node locationNode;
     Node n;
     private void Start() {
-        GameController.Game.CameraController.RegisterToGravityChange(Fall);
+        //GameController.Game.CameraController.RegisterToGravityChange(Fall);
     }
     private void Fall() {
         locationNode = GetComponent<NodeGraphic>().Node;
