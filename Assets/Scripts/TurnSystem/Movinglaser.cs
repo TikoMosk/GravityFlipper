@@ -45,7 +45,6 @@ public class Movinglaser : MonoBehaviour
 
     private void MoveToDestNode()
     {
-        Debug.Log("MoveToDestNode");
         GameController.Game.CurrentLevel.MoveObject(currentNode, destNode);
         UpdateState();
     }
@@ -54,7 +53,6 @@ public class Movinglaser : MonoBehaviour
     {
         currentNode = destNode;
         step = -step;
-        Debug.Log("step = " + step);
-        destNode = GameController.Game.CurrentLevel.GetNode(transform.position + step);
+        destNode = GameController.Game.CurrentLevel.GetNode(currentNode.GetPosition() + step);
     }
 }
