@@ -216,8 +216,8 @@
             "y": 0,
             "z": 5,
             "id": 3,
-            "facing": "",
-            "upDirection": ""
+            "facing": "3",
+            "upDirection": "0"
         },
         {
             "x": 7,
@@ -232,8 +232,8 @@
             "y": 0,
             "z": 2,
             "id": 3,
-            "facing": "",
-            "upDirection": ""
+            "facing": "3",
+            "upDirection": "0"
         },
         {
             "x": 8,
@@ -248,16 +248,16 @@
             "y": 0,
             "z": 4,
             "id": 3,
-            "facing": "",
-            "upDirection": ""
+            "facing": "3",
+            "upDirection": "0"
         },
         {
             "x": 9,
             "y": 0,
             "z": 2,
             "id": 3,
-            "facing": "",
-            "upDirection": ""
+            "facing": "3",
+            "upDirection": "0"
         },
         {
             "x": 9,
@@ -272,8 +272,8 @@
             "y": 0,
             "z": 4,
             "id": 3,
-            "facing": "",
-            "upDirection": ""
+            "facing": "3",
+            "upDirection": "0"
         }
     ],
     "nodeMemberDataList": [
@@ -282,7 +282,7 @@
             "y": 1,
             "z": 4,
             "id": 5,
-            "facing": "3",
+            "facing": "5",
             "upDirection": "0"
         },
         {
@@ -298,6 +298,22 @@
             "y": 9,
             "z": 5,
             "id": 4,
+            "facing": "3",
+            "upDirection": "0"
+        },
+        {
+            "x": 6,
+            "y": 1,
+            "z": 5,
+            "id": 3,
+            "facing": "3",
+            "upDirection": "0"
+        },
+        {
+            "x": 7,
+            "y": 1,
+            "z": 3,
+            "id": 6,
             "facing": "3",
             "upDirection": "0"
         },

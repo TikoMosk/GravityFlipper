@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Lever : MonoBehaviour
 {
-    public bool pushed;
-    public ILeverFriend friend;
+    internal bool pushed;
+    public MonoBehaviour friend;
 
     public void TurnTheLever()
     {
@@ -17,17 +17,24 @@ public class Lever : MonoBehaviour
                 child.GetComponentsInChildren<Animator>()[0].SetBool("Enabled", true);
                 Debug.Log("Hi");
                 pushed = true;
-                friend.Invoke();
+                if (friend is ILeverFriend)
+                {
+                    Debug.Log("Friend");
+                    ((ILeverFriend)friend).Invoke();
+                }
             }
             else
             {
                 child.GetComponentsInChildren<Animator>()[0].SetBool("Enabled", false);
                 Debug.Log("Bye");
                 pushed = false;
-                friend.Invoke();
+                if (friend is ILeverFriend)
+                {
+                    Debug.Log("Friend");
+                    ((ILeverFriend)friend).Invoke();
+                }
             }
         }
-
     }
 
     public bool IsPlayerNear()
@@ -50,5 +57,10 @@ public class Lever : MonoBehaviour
         }
 
         return false;
+    }
+
+    private void OnMouseDown()
+    {
+        this.TurnTheLever();
     }
 }

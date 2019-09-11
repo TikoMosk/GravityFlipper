@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: 1
-  negative: 1
+  negative: 0
 --- !u!1001 &245463661953295140
 PrefabInstance:
   m_ObjectHideFlags: 0
