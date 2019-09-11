@@ -63,7 +63,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pushed: 0
-  spike: {fileID: 0}
+  friend: {fileID: 0}
+  child: {fileID: 9191719106095060257}
 --- !u!1 &1026456205461352339
 GameObject:
   m_ObjectHideFlags: 0

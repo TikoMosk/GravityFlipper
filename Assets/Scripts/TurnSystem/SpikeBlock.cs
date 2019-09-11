@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpikeBlock : MonoBehaviour
+public class SpikeBlock : MonoBehaviour, ILeverFriend
 {
     private bool isOpen;
     Collider collider;
@@ -52,11 +52,9 @@ public class SpikeBlock : MonoBehaviour
         GetComponentInChildren<Animator>().SetBool("Enabled", true);
         if(IsPlayerNear())
         {
-
             StartCoroutine(DestroyAfterAnimation());
         }
-
-
+        isOpen = true;
     }
 
     public void CloseSpikes()
@@ -65,9 +63,9 @@ public class SpikeBlock : MonoBehaviour
         GetComponentInChildren<Animator>().SetBool("Enabled", false);
         if(IsPlayerNear())
         {
-
             StartCoroutine(DestroyAfterAnimation());
         }
+        isOpen = false;
     }
 
     IEnumerator DestroyAfterAnimation()
@@ -100,6 +98,12 @@ public class SpikeBlock : MonoBehaviour
         }
 
         return false;
+    }
+
+    public void Invoke()
+    {
+        if (isOpen) CloseSpikes();
+        else        AwakeSpikes();
     }
 
 
