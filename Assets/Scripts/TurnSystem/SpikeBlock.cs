@@ -52,11 +52,9 @@ public class SpikeBlock : MonoBehaviour, ILeverFriend
         GetComponentInChildren<Animator>().SetBool("Enabled", true);
         if(IsPlayerNear())
         {
-
             StartCoroutine(DestroyAfterAnimation());
         }
-
-
+        isOpen = true;
     }
 
     public void CloseSpikes()
@@ -65,9 +63,9 @@ public class SpikeBlock : MonoBehaviour, ILeverFriend
         GetComponentInChildren<Animator>().SetBool("Enabled", false);
         if(IsPlayerNear())
         {
-
             StartCoroutine(DestroyAfterAnimation());
         }
+        isOpen = false;
     }
 
     IEnumerator DestroyAfterAnimation()
@@ -104,7 +102,8 @@ public class SpikeBlock : MonoBehaviour, ILeverFriend
 
     public void Invoke()
     {
-        AwakeSpikes();
+        if (isOpen) CloseSpikes();
+        else        AwakeSpikes();
     }
 
 

@@ -4,36 +4,19 @@ using UnityEngine;
 
 public class Lever : MonoBehaviour
 {
-    internal bool pushed;
+    public bool pushed;
     public MonoBehaviour friend;
+    public GameObject child;
 
     public void TurnTheLever()
     {
         if (IsPlayerNear())
         {
-            GameObject child = GetComponentInChildren<Transform>().gameObject;
-            if (!pushed)
-            {
-                child.GetComponentsInChildren<Animator>()[0].SetBool("Enabled", true);
-                Debug.Log("Hi");
-                pushed = true;
-                if (friend is ILeverFriend)
-                {
-                    Debug.Log("Friend");
-                    ((ILeverFriend)friend).Invoke();
-                }
-            }
-            else
-            {
-                child.GetComponentsInChildren<Animator>()[0].SetBool("Enabled", false);
-                Debug.Log("Bye");
-                pushed = false;
-                if (friend is ILeverFriend)
-                {
-                    Debug.Log("Friend");
-                    ((ILeverFriend)friend).Invoke();
-                }
-            }
+            pushed = !pushed;
+            child.GetComponent<Animator>().SetBool("Enabled", pushed);
+
+            if (friend is ILeverFriend)
+                ((ILeverFriend)friend).Invoke();
         }
     }
 

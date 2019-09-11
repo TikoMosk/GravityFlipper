@@ -349,6 +349,15 @@ MonoBehaviour:
     prefab: {fileID: 140189548194257191, guid: b33c2361c8bdf47f8993759240519584, type: 3}
     icon: {fileID: 0}
     category: 2
+  - id: 7
+    nodeMember: 1
+    notSolid: 0
+    name: Spikes
+    description: 
+    prefab: {fileID: 3320046191820536306, guid: 1066ac40237754a198d61570eb5bc02d,
+      type: 3}
+    icon: {fileID: 0}
+    category: 2
 --- !u!1 &92187858
 GameObject:
   m_ObjectHideFlags: 0
