@@ -11,6 +11,11 @@ public class PlayMode : GameState {
     public void SetInputs(Vector3 camMovementVec) {
     }
     public void OnNodeClick(Node n, Node.Direction dir) {
+        if (n.NodeGraphic.GetComponent<Lever>() != null)
+        {
+            n.NodeGraphic.GetComponent<Lever>().TurnTheLever();
+        }
+        else
         GameController.Game.CurrentLevel.Player.Move(n, dir);
 
     }
