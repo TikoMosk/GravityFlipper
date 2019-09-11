@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using VolumetricLines;
 using UnityEngine;
 
-public class LaserRay : MonoBehaviour
+public class LaserRay : MonoBehaviour, ILeverFriend
 {
 
     public bool isStatic;
@@ -116,5 +116,10 @@ public class LaserRay : MonoBehaviour
     {
         vl.EndPos = endObject.transform.position;
         
+    }
+
+    public void Invoke()
+    {
+        Check();
     }
 }

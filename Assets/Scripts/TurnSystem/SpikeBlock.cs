@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpikeBlock : MonoBehaviour
+public class SpikeBlock : MonoBehaviour, ILeverFriend
 {
     private bool isOpen;
     Collider collider;
@@ -100,6 +100,11 @@ public class SpikeBlock : MonoBehaviour
         }
 
         return false;
+    }
+
+    public void Invoke()
+    {
+        AwakeSpikes();
     }
 
 

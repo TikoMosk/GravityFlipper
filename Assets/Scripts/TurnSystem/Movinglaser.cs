@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Movinglaser : MonoBehaviour
+public class Movinglaser : MonoBehaviour, ILeverFriend
 {
     private Vector3 step;
     private Node currentNode;
@@ -19,8 +19,6 @@ public class Movinglaser : MonoBehaviour
 
     void Start()
     {
-        EventController.currentInstance.Register(MoveToDestNode);
-
         switch (direction)
         {
             case Direction.X:
@@ -54,5 +52,10 @@ public class Movinglaser : MonoBehaviour
         currentNode = destNode;
         step = -step;
         destNode = GameController.Game.CurrentLevel.GetNode(currentNode.GetPosition() + step);
+    }
+
+    public void Invoke()
+    {
+        MoveToDestNode();
     }
 }
