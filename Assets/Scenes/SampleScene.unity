@@ -279,6 +279,31 @@ MonoBehaviour:
       type: 3}
     icon: {fileID: 0}
     category: 2
+  - id: 6
+    nodeMember: 0
+    notSolid: 0
+    name: Spike
+    description: 
+    prefab: {fileID: 3320046191820536306, guid: 1066ac40237754a198d61570eb5bc02d,
+      type: 3}
+    icon: {fileID: 0}
+    category: 2
+  - id: 7
+    nodeMember: 0
+    notSolid: 0
+    name: Lever
+    description: 
+    prefab: {fileID: 140189548194257191, guid: b33c2361c8bdf47f8993759240519584, type: 3}
+    icon: {fileID: 0}
+    category: 2
+  - id: 8
+    nodeMember: 0
+    notSolid: 0
+    name: PressurePad
+    description: 
+    prefab: {fileID: 320885344418203025, guid: a4d0a14d0335a4cb0bb4ffed20f8a51d, type: 3}
+    icon: {fileID: 0}
+    category: 2
   nodeMemberDetailsList:
   - id: 0
     nodeMember: 1
