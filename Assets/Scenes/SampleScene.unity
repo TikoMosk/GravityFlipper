@@ -255,22 +255,13 @@ MonoBehaviour:
   - id: 2
     nodeMember: 0
     notSolid: 0
-    name: Laser
-    description: 
-    prefab: {fileID: 3031102304311863571, guid: ee78bf8bbf690420cbe0ddeac8af7354,
-      type: 3}
-    icon: {fileID: 0}
-    category: 2
-  - id: 3
-    nodeMember: 0
-    notSolid: 0
     name: Win Node
     description: 
     prefab: {fileID: 4694279471156317093, guid: 6d0b56d0988074787bfc0b897879d984,
       type: 3}
     icon: {fileID: 21300000, guid: 4c252de8807b59c499a6547acd1aab88, type: 3}
     category: 4
-  - id: 4
+  - id: 3
     nodeMember: 0
     notSolid: 0
     name: Weak Block
@@ -279,7 +270,7 @@ MonoBehaviour:
       type: 3}
     icon: {fileID: 0}
     category: 2
-  - id: 5
+  - id: 4
     nodeMember: 0
     notSolid: 0
     name: Box
@@ -355,6 +346,23 @@ MonoBehaviour:
     name: Spikes
     description: 
     prefab: {fileID: 3320046191820536306, guid: 1066ac40237754a198d61570eb5bc02d,
+      type: 3}
+    icon: {fileID: 0}
+    category: 2
+  - id: 8
+    nodeMember: 1
+    notSolid: 0
+    name: RotatingLaser
+    description: 
+    prefab: {fileID: 544911279223743345, guid: 8228e68d8ebfd4734916da9e8de6cea6, type: 3}
+    icon: {fileID: 0}
+    category: 2
+  - id: 9
+    nodeMember: 1
+    notSolid: 0
+    name: Laser
+    description: 
+    prefab: {fileID: 3031102304311863571, guid: ee78bf8bbf690420cbe0ddeac8af7354,
       type: 3}
     icon: {fileID: 0}
     category: 2

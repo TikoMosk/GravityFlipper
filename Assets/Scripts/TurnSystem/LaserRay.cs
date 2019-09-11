@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class LaserRay : MonoBehaviour, ILeverFriend
 {
-
     public bool isStatic;
     public float speed;
     public Vector3 endPoint_1;
@@ -20,10 +19,14 @@ public class LaserRay : MonoBehaviour, ILeverFriend
 
     private void Start()
     {
-        //if (!isStatic)
-            EventController.currentInstance.Register(Check);
-
         vl = GetComponentInChildren<VolumetricLineBehavior>();
+
+        if (!isStatic)
+            EventController.currentInstance.Register(Check);
+        else
+            return;
+       
+        
         endObject.transform.position = endPoint_1;
         currentPos = endPoint_1;
         rayendPos = endPoint_1;
@@ -40,6 +43,11 @@ public class LaserRay : MonoBehaviour, ILeverFriend
 
     private void Update()
     {
+        if (isStatic)
+        {
+            return;
+        }
+
         if (isMoving)
         {
             if (_in)
@@ -115,7 +123,6 @@ public class LaserRay : MonoBehaviour, ILeverFriend
     private void UpdateLaser()
     {
         vl.EndPos = endObject.transform.position;
-        
     }
 
     public void Invoke()

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &116317823130783622
+--- !u!114 &-7540497417289569414
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9,9 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 3031102304311863571}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ddaefff14d3c46c2996f05202e10172, type: 3}
+  m_Script: {fileID: 11500000, guid: 44cabee0b024b4e0089dcc4e6804f5a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isStatic: 1
+  speed: 0
+  endPoint_1: {x: 0, y: 0, z: 0}
+  endPoint_2: {x: 0, y: 0, z: 0}
+  endObject: {fileID: 0}
 --- !u!1001 &3287428268061117026
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -93,6 +98,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6288853723951596525, guid: 8228e68d8ebfd4734916da9e8de6cea6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -7809576604233929540, guid: 8228e68d8ebfd4734916da9e8de6cea6, type: 3}
