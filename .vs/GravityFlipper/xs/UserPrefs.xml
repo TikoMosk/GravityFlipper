@@ -1,12 +1,8 @@
 ﻿<Properties StartupConfiguration="{EB2208B8-2EA9-6054-617B-C009E9C4DA96}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/TurnSystem/PatrolScript.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/TurnSystem/PressurePad.cs">
     <Files>
-      <File FileName="Assets/Scripts/LevelDesigner/PlayMode.cs" Line="24" Column="11" />
-      <File FileName="Assets/Scripts/Controllers/GameController.cs" Line="101" Column="23" />
-      <File FileName="Assets/Scripts/NodeSystem/NodeFactory.cs" Line="37" Column="1" />
-      <File FileName="Assets/Scripts/TurnSystem/Movinglaser.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/TurnSystem/Laser.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/TurnSystem/PatrolScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/TurnSystem/PressurePad.cs" Line="21" Column="47" />
+      <File FileName="Assets/Scripts/NodeSystem/NodeMemberGraphics.cs" Line="44" Column="26" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -18,7 +14,7 @@
                 <Node name="LevelDesigner" expanded="True" />
                 <Node name="NodeSystem" expanded="True" />
                 <Node name="TurnSystem" expanded="True">
-                  <Node name="PatrolScript.cs" selected="True" />
+                  <Node name="PressurePad.cs" selected="True" />
                 </Node>
               </Node>
             </Node>
@@ -29,7 +25,7 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="61924485-006d-4cca-9549-dff11f89ad79" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="ef5b2c44-4982-4abc-816a-50fa35e529b2" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
