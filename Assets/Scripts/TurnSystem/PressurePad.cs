@@ -9,47 +9,60 @@ public class PressurePad : MonoBehaviour
     public MonoBehaviour friend;
     public GameObject child;
 
-    private void Start()
+    private void OnPreCull()
     {
         EventController.currentInstance.Register(Check);
+    }
+    private void Start()
+    {
+        
     }
 
     private void Check()
     {
-        if (IsPlayerNear())
+        if (IsSmthOn())
         {
-            Debug.Log("PlayerNear pressure pad");
-            pushed = true;
-            
-            if (friend is ILeverFriend)
-                ((ILeverFriend)friend).Invoke();
+            if (!pushed)
+            {
+                pushed = true;
+
+                InvokeFriend();
+            }
         }
         else
         {
+            if (pushed)
+                InvokeFriend();
+
             pushed = false;
         }
 
         child.GetComponent<Animator>().SetBool("Enabled", pushed);
     }
 
-    private bool IsPlayerNear()
+    private void InvokeFriend()
     {
-        Transform[] sides = GetComponentsInChildren<Transform>();
+        if (friend is ILeverFriend)
+            ((ILeverFriend)friend).Invoke();
+    }
+
+    private bool IsSmthOn()
+    {
         Node nextNode;
-        foreach (Transform side in sides)
+        Transform side = GetComponentsInChildren<Transform>()[3];
+
+        if (side.gameObject.tag == "Side")
         {
-            if (side.gameObject.tag == "Side")
+            nextNode = GameController.Game.CurrentLevel.GetNode(side.position);
+            if (nextNode != null && nextNode.NodeMember != null)
             {
-                nextNode = GameController.Game.CurrentLevel.GetNode(side.position);
-                if (nextNode != null && nextNode.NodeMember != null)
+                if (nextNode.NodeMember.Id != 0)
                 {
-                    if (nextNode.NodeMember.Id == 1)
-                    {
-                        return true;
-                    }
+                    return true;
                 }
             }
         }
+
 
         return false;
     }

@@ -53,11 +53,14 @@ public class NodeMember
        
 
     }
-    public void SetPosition(int x, int y, int z) {
+
+    public void SetPosition(int x, int y, int z)
+    {
         this.x = x;
         this.y = y;
         this.z = z;
     }
+
     public void SubscribeToMoveableObjectMoved(Action<Node> objectMoved)
     {
         NodeObjectMoved += objectMoved;
