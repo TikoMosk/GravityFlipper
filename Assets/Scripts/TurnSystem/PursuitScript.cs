@@ -41,9 +41,7 @@ public class PursuitScript : MonoBehaviour
         {
             if (state.IsPlayerNear())
             {
-                Debug.Log("Player near");
                 ChangeState(new PursuitState());
-                Debug.Log("Start pursuit");
                 state.StartPursuit();
                 UpdateDestNode();
             }
@@ -68,11 +66,14 @@ public class PursuitScript : MonoBehaviour
             else
             {
                 state.Chase(currentNode, destNode);
+                Debug.Log(destNode.GetPosition());
+                Debug.Log(destNode.NodeMember.Id);
                 currentNode = destNode;
                 UpdateDestNode();
             }
         }
     }
+
     private void OnDestroy()
     {
         EventController.currentInstance.Remove(Check);

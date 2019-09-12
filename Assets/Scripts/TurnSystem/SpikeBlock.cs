@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class SpikeBlock : MonoBehaviour, ILeverFriend
 {
-    private bool isOpen;
+    public bool isOpen;
     Collider collider;
 
     private void Start()
