@@ -5,13 +5,18 @@ using UnityEngine;
 
 public class SpikeBlock : MonoBehaviour, ILeverFriend
 {
-    private bool isOpen;
+    public bool isOpen;
     Collider collider;
 
     private void Start()
     {
-        //EventController.currentInstance.Register(AwakeSpikes);
         collider = GetComponent<Collider>();
+        //EventController.currentInstance.Register(AwakeSpikes);
+        if (isOpen == true)
+        {
+            AwakeSpikes();
+        }
+
     }
 
     /*private void Update()
