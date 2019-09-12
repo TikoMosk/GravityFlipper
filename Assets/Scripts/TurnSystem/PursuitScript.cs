@@ -10,10 +10,13 @@ public class PursuitScript : MonoBehaviour
     private Node destNode;
     private Vector3 nextPlatform;
 
-    private void Start()
+    private void Awake()
     {
         EventController.currentInstance.Register(Check);
+    }
 
+    private void Start()
+    {
         state = new IdleState();
         state.enemy = this.gameObject;
         UpdateCurrentNode();

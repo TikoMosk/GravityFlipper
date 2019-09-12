@@ -9,13 +9,9 @@ public class PressurePad : MonoBehaviour
     public MonoBehaviour friend;
     public GameObject child;
 
-    private void OnPreCull()
-    {
-        EventController.currentInstance.Register(Check);
-    }
     private void Start()
     {
-        
+        EventController.currentInstance.Register(Check);
     }
 
     private void Check()
