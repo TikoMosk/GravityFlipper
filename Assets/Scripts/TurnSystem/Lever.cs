@@ -5,33 +5,20 @@ using UnityEngine;
 public class Lever : MonoBehaviour
 {
     public bool pushed;
-    public SpikeBlock spike;
-
+    public MonoBehaviour friend;
+    public GameObject child;
 
     public void TurnTheLever()
     {
         if (IsPlayerNear())
         {
-            GameObject child = GetComponentInChildren<Transform>().gameObject;
-            if (!pushed)
-            {
-                child.GetComponentsInChildren<Animator>()[0].SetBool("Enabled", true);
-                Debug.Log("Hi");
-                pushed = true;
-                spike.AwakeSpikes();
-            }
+            pushed = !pushed;
+            child.GetComponent<Animator>().SetBool("Enabled", pushed);
 
-            else
-            {
-                child.GetComponentsInChildren<Animator>()[0].SetBool("Enabled", false);
-                Debug.Log("Bye");
-                pushed = false;
-                spike.CloseSpikes();
-            }
+            if (friend is ILeverFriend)
+                ((ILeverFriend)friend).Invoke();
         }
-
     }
-
 
     public bool IsPlayerNear()
     {
@@ -53,5 +40,10 @@ public class Lever : MonoBehaviour
         }
 
         return false;
+    }
+
+    private void OnMouseDown()
+    {
+        this.TurnTheLever();
     }
 }

@@ -10,10 +10,13 @@ public class PursuitScript : MonoBehaviour
     private Node destNode;
     private Vector3 nextPlatform;
 
-    private void Start()
+    private void Awake()
     {
         EventController.currentInstance.Register(Check);
+    }
 
+    private void Start()
+    {
         state = new IdleState();
         state.enemy = this.gameObject;
         UpdateCurrentNode();
@@ -41,9 +44,7 @@ public class PursuitScript : MonoBehaviour
         {
             if (state.IsPlayerNear())
             {
-                Debug.Log("Player near");
                 ChangeState(new PursuitState());
-                Debug.Log("Start pursuit");
                 state.StartPursuit();
                 UpdateDestNode();
             }
@@ -60,7 +61,6 @@ public class PursuitScript : MonoBehaviour
                 || destNode.Id != 0
                 || GameController.Game.CurrentLevel.GetNode(nextPlatform).Id == 4)
             {
-                Debug.Log("EndPursuit");
                 state.EndPursuit();
                 ChangeState(new IdleState());
                 return;
@@ -73,6 +73,7 @@ public class PursuitScript : MonoBehaviour
             }
         }
     }
+
     private void OnDestroy()
     {
         EventController.currentInstance.Remove(Check);

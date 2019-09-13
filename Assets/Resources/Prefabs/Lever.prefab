@@ -63,7 +63,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pushed: 0
-  spike: {fileID: 0}
+  friend: {fileID: 0}
+  child: {fileID: 9191719106095060257}
 --- !u!1 &1026456205461352339
 GameObject:
   m_ObjectHideFlags: 0
@@ -243,7 +244,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -2322909715820737869, guid: 157d03e57609740868658c65665f3ec1, type: 3}
+  - {fileID: 5661968311977064024, guid: 157d03e57609740868658c65665f3ec1, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -353,7 +354,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 1797658001885015379, guid: 157d03e57609740868658c65665f3ec1, type: 3}
-  - {fileID: 5661968311977064024, guid: 157d03e57609740868658c65665f3ec1, type: 3}
+  - {fileID: 2100000, guid: 4b2efe4dcd0c348afbf378d42e98c7dc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

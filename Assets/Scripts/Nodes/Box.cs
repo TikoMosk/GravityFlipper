@@ -9,7 +9,7 @@ public class Box : MonoBehaviour
     int nodeCount;
     bool isGoingToDie = false;
     private void Start() {
-        GameController.Game.CameraController.RegisterToGravityChange(Fall);
+        //GameController.Game.CameraController.RegisterToGravityChange(Fall);
     }
     private void Fall() {
         locationNode = GetComponent<NodeGraphic>().Node;

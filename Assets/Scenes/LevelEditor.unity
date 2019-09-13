@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311947, g: 0.38074005, b: 0.35872722, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -701,6 +701,21 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5169727297888996691, guid: be2ac10e91133a24facd0c5d76954bd2,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.7924528
+      objectReference: {fileID: 0}
+    - target: {fileID: 5169727297888996691, guid: be2ac10e91133a24facd0c5d76954bd2,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.3999644
+      objectReference: {fileID: 0}
+    - target: {fileID: 5169727297888996691, guid: be2ac10e91133a24facd0c5d76954bd2,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.43411535
+      objectReference: {fileID: 0}
     - target: {fileID: 5169727297888996693, guid: be2ac10e91133a24facd0c5d76954bd2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -805,21 +820,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5169727297888996691, guid: be2ac10e91133a24facd0c5d76954bd2,
-        type: 3}
-      propertyPath: m_Color.r
-      value: 0.7924528
-      objectReference: {fileID: 0}
-    - target: {fileID: 5169727297888996691, guid: be2ac10e91133a24facd0c5d76954bd2,
-        type: 3}
-      propertyPath: m_Color.g
-      value: 0.3999644
-      objectReference: {fileID: 0}
-    - target: {fileID: 5169727297888996691, guid: be2ac10e91133a24facd0c5d76954bd2,
-        type: 3}
-      propertyPath: m_Color.b
-      value: 0.43411535
       objectReference: {fileID: 0}
     - target: {fileID: 5169727298755478652, guid: be2ac10e91133a24facd0c5d76954bd2,
         type: 3}
@@ -1672,6 +1672,16 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5169727297888996691, guid: be2ac10e91133a24facd0c5d76954bd2,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.69803923
+      objectReference: {fileID: 0}
+    - target: {fileID: 5169727297888996691, guid: be2ac10e91133a24facd0c5d76954bd2,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.42719617
+      objectReference: {fileID: 0}
     - target: {fileID: 5169727297888996693, guid: be2ac10e91133a24facd0c5d76954bd2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1776,16 +1786,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5169727297888996691, guid: be2ac10e91133a24facd0c5d76954bd2,
-        type: 3}
-      propertyPath: m_Color.g
-      value: 0.69803923
-      objectReference: {fileID: 0}
-    - target: {fileID: 5169727297888996691, guid: be2ac10e91133a24facd0c5d76954bd2,
-        type: 3}
-      propertyPath: m_Color.b
-      value: 0.42719617
       objectReference: {fileID: 0}
     - target: {fileID: 5169727298755478652, guid: be2ac10e91133a24facd0c5d76954bd2,
         type: 3}
@@ -3298,7 +3298,7 @@ MonoBehaviour:
   nodeDetailsList:
   - id: 0
     nodeMember: 0
-    notSolid: 1
+    notSolid: 0
     name: Air
     description: 
     prefab: {fileID: 0}
@@ -3315,22 +3315,13 @@ MonoBehaviour:
   - id: 2
     nodeMember: 0
     notSolid: 0
-    name: Laser
-    description: 
-    prefab: {fileID: 3031102304311863571, guid: ee78bf8bbf690420cbe0ddeac8af7354,
-      type: 3}
-    icon: {fileID: 0}
-    category: 2
-  - id: 3
-    nodeMember: 0
-    notSolid: 1
     name: Win Node
     description: 
     prefab: {fileID: 4694279471156317093, guid: 6d0b56d0988074787bfc0b897879d984,
       type: 3}
     icon: {fileID: 21300000, guid: 4c252de8807b59c499a6547acd1aab88, type: 3}
     category: 4
-  - id: 4
+  - id: 3
     nodeMember: 0
     notSolid: 0
     name: Weak Block
@@ -3339,12 +3330,46 @@ MonoBehaviour:
       type: 3}
     icon: {fileID: 0}
     category: 2
-  - id: 5
+  - id: 4
     nodeMember: 0
     notSolid: 0
     name: Box
     description: 
     prefab: {fileID: 4694279471156317093, guid: 64cd717f8e9c21d4d838ac00217f04f4,
+      type: 3}
+    icon: {fileID: 0}
+    category: 2
+  - id: 5
+    nodeMember: 0
+    notSolid: 0
+    name: Spike
+    description: 
+    prefab: {fileID: 3320046191820536306, guid: 1066ac40237754a198d61570eb5bc02d,
+      type: 3}
+    icon: {fileID: 0}
+    category: 2
+  - id: 6
+    nodeMember: 0
+    notSolid: 0
+    name: Lever
+    description: 
+    prefab: {fileID: 140189548194257191, guid: b33c2361c8bdf47f8993759240519584, type: 3}
+    icon: {fileID: 0}
+    category: 2
+  - id: 7
+    nodeMember: 0
+    notSolid: 0
+    name: PressurePad
+    description: 
+    prefab: {fileID: 320885344418203025, guid: a4d0a14d0335a4cb0bb4ffed20f8a51d, type: 3}
+    icon: {fileID: 0}
+    category: 2
+  - id: 8
+    nodeMember: 0
+    notSolid: 0
+    name: MovingBlock
+    description: 
+    prefab: {fileID: 6579708977595957042, guid: 8d009cd761a8842d984805a281ded3d1,
       type: 3}
     icon: {fileID: 0}
     category: 2
@@ -3359,7 +3384,7 @@ MonoBehaviour:
     category: 5
   - id: 1
     nodeMember: 1
-    notSolid: 1
+    notSolid: 0
     name: Player
     description: 
     prefab: {fileID: 5238763070401807191, guid: 773308f6431a344f0b80e4f1a9691fed,
@@ -3398,6 +3423,40 @@ MonoBehaviour:
     name: Moving Laser
     description: 
     prefab: {fileID: 2988328130615069239, guid: 33ced4b704af0432a90e3fa3d2dac8dd,
+      type: 3}
+    icon: {fileID: 0}
+    category: 2
+  - id: 6
+    nodeMember: 1
+    notSolid: 0
+    name: Lever
+    description: 
+    prefab: {fileID: 140189548194257191, guid: b33c2361c8bdf47f8993759240519584, type: 3}
+    icon: {fileID: 0}
+    category: 2
+  - id: 7
+    nodeMember: 1
+    notSolid: 0
+    name: Spikes
+    description: 
+    prefab: {fileID: 3320046191820536306, guid: 1066ac40237754a198d61570eb5bc02d,
+      type: 3}
+    icon: {fileID: 0}
+    category: 2
+  - id: 8
+    nodeMember: 1
+    notSolid: 0
+    name: RotatingLaser
+    description: 
+    prefab: {fileID: 544911279223743345, guid: 8228e68d8ebfd4734916da9e8de6cea6, type: 3}
+    icon: {fileID: 0}
+    category: 2
+  - id: 9
+    nodeMember: 1
+    notSolid: 0
+    name: Laser
+    description: 
+    prefab: {fileID: 3031102304311863571, guid: ee78bf8bbf690420cbe0ddeac8af7354,
       type: 3}
     icon: {fileID: 0}
     category: 2
