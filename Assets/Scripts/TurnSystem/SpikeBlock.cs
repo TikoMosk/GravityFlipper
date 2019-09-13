@@ -12,6 +12,11 @@ public class SpikeBlock : MonoBehaviour, ILeverFriend
     {
         //EventController.currentInstance.Register(AwakeSpikes);
         collider = GetComponent<Collider>();
+
+        if (isOpen)
+        {
+            AwakeSpikes();
+        }
     }
 
     /*private void Update()
@@ -45,6 +50,7 @@ public class SpikeBlock : MonoBehaviour, ILeverFriend
 
 
     } */
+
 
     public void AwakeSpikes()
     {

@@ -61,7 +61,6 @@ public class PursuitScript : MonoBehaviour
                 || destNode.Id != 0
                 || GameController.Game.CurrentLevel.GetNode(nextPlatform).Id == 4)
             {
-                Debug.Log("EndPursuit");
                 state.EndPursuit();
                 ChangeState(new IdleState());
                 return;
@@ -69,8 +68,6 @@ public class PursuitScript : MonoBehaviour
             else
             {
                 state.Chase(currentNode, destNode);
-                Debug.Log(destNode.GetPosition());
-                Debug.Log(destNode.NodeMember.Id);
                 currentNode = destNode;
                 UpdateDestNode();
             }
