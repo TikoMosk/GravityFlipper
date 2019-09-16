@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Movinglaser : MonoBehaviour, ILeverFriend
+public class MovingBlock : MonoBehaviour, ILeverFriend
 {
     private Vector3 step;
     private Node currentNode;
@@ -17,7 +17,7 @@ public class Movinglaser : MonoBehaviour, ILeverFriend
     public Direction direction;
     public bool negative;
 
-    void Start()
+    private void Start()
     {
         switch (direction)
         {

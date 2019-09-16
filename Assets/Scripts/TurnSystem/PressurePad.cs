@@ -21,7 +21,6 @@ public class PressurePad : MonoBehaviour
             if (!pushed)
             {
                 pushed = true;
-
                 InvokeFriend();
             }
         }
