@@ -16,7 +16,10 @@ public class Lever : MonoBehaviour
             child.GetComponent<Animator>().SetBool("Enabled", pushed);
 
             if (friend is ILeverFriend)
+            {
                 ((ILeverFriend)friend).Invoke();
+            }
+
         }
     }
 
@@ -41,9 +44,7 @@ public class Lever : MonoBehaviour
 
         return false;
     }
-    private void ConnectTo(ILeverFriend friend) {
-        friend.Invoke();
-    }
+
     private void OnMouseDown()
     {
         this.TurnTheLever();

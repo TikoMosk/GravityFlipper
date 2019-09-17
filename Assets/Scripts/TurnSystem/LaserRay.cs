@@ -17,10 +17,18 @@ public class LaserRay : MonoBehaviour, ILeverFriend
     private bool flag;
     private Vector3 rayendPos;
 
-    private void Start()
+    private void Awake()
     {
         vl = GetComponentInChildren<VolumetricLineBehavior>();
 
+        endObject.transform.position = endPoint_1;
+        currentPos = endPoint_1;
+        rayendPos = endPoint_1;
+        UpdateLaser();
+    }
+
+    private void Start()
+    {
         if (!isStatic)
             EventController.currentInstance.Register(Check);
         else
