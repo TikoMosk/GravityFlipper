@@ -508,14 +508,6 @@
             "upDirection": ""
         },
         {
-            "x": 5,
-            "y": 5,
-            "z": 5,
-            "id": 10,
-            "facing": "",
-            "upDirection": ""
-        },
-        {
             "x": 6,
             "y": 0,
             "z": 0,
@@ -837,6 +829,14 @@
         }
     ],
     "nodeMemberDataList": [
+        {
+            "x": 2,
+            "y": 1,
+            "z": 7,
+            "id": 4,
+            "facing": "1",
+            "upDirection": "0"
+        },
         {
             "x": 5,
             "y": 1,

@@ -6,38 +6,48 @@ using VolumetricLines;
 public class LaserVolumetric : MonoBehaviour
 {
     public Vector3 endPos;
+    private Vector3 dir;
     private VolumetricLineBehavior vl;
+    NodeMemberGraphic graphic;
 
     private void Awake()
     {
         vl = GetComponentInChildren<VolumetricLineBehavior>();
-        vl.EndPos = endPos;
+        
     }
 
     //todo
     private void FixedUpdate()
     {
-        if (GameController.Game.SmoothGraphics.AnimationCount == 0)
+        if(GetComponent<NodeMemberGraphic>() != null)
         {
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position, vl.EndPos, out hit, vl.EndPos.magnitude))
+            graphic = GetComponent<NodeMemberGraphic>();
+            dir = Dir.GetVectorByDirection(graphic.Node.Facing);
+            if (GameController.Game.SmoothGraphics.AnimationCount == 0)
             {
-                if (hit.collider.gameObject.GetComponentInParent<NodeMemberGraphic>() != null)
+                RaycastHit hit;
+                vl.EndPos = dir * 100f;
+                if (Physics.Raycast(transform.position, dir, out hit, 50f))
                 {
-                    Debug.Log("u dead");
-                    Destroy(hit.collider.transform.parent.gameObject);
-                    //Destroy(transform.GetComponentInParent<Transform>().gameObject);
-                    //Destroy(hit.collider.transform.parent.gameObject);
-                    if (hit.collider.gameObject.GetComponentInParent<NodeMemberGraphic>().Node.NodeMember.Id == 1)
+                    vl.EndPos = hit.point;
+                    if (hit.collider.gameObject.GetComponentInParent<NodeMemberGraphic>() != null)
                     {
-                        PauseMenu.currentInstance.GameOver();
+                        Debug.Log("u dead");
+                        Destroy(hit.collider.transform.parent.gameObject);
+                        //Destroy(transform.GetComponentInParent<Transform>().gameObject);
+                        //Destroy(hit.collider.transform.parent.gameObject);
+                        if (hit.collider.gameObject.GetComponentInParent<NodeMemberGraphic>().Node.NodeMember.Id == 1)
+                        {
+                            PauseMenu.currentInstance.GameOver();
+                        }
+                        hit.collider.gameObject.GetComponentInParent<NodeMemberGraphic>().Node.NodeMember = null;
                     }
-                    hit.collider.gameObject.GetComponentInParent<NodeMemberGraphic>().Node.NodeMember = null;
                 }
-            }
 
-            Debug.DrawRay(transform.position, vl.EndPos, Color.blue);
+                Debug.DrawRay(transform.position, dir, Color.blue);
+            }
         }
+        
 
     }
 

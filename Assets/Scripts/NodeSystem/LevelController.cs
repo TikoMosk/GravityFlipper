@@ -98,7 +98,7 @@ public class LevelController : MonoBehaviour {
             GameObject node_go = Instantiate(factory.GetNodePrefabById(Level.GetNode(x, y, z).Id), Level.GetNode(x, y, z).GetPosition(), nodeRotation);
             Level.GetNode(x, y, z).CreateGraphic(node_go);
             Level.GetNode(x, y, z).NodeGraphic.transform.parent = this.transform;
-
+            Level.GetNode(x, y, z).NodeGraphic.Node = Level.GetNode(x, y, z);
             Level.GetNode(x, y, z).SubscribeToNodeTypeChanged(() => { OnNodeTypeChanged(level.GetNode(x, y, z), node_go); });
             Level.GetNode(x, y, z).SubscribeToNodeRotated(() => { OnNodeRotated(level.GetNode(x, y, z), node_go); });
         }
