@@ -11,12 +11,16 @@ public class LevelDesignController : MonoBehaviour {
     public GameObject connectorOptionsPanel;
     public GameObject nodePickerWindow;
     public GameObject rotateGizmoPrefab;
+    public GameObject connectorToggleIcon;
+    public GameObject connectorReceiverIcon;
+    public Text connectToolText;
     private GameObject rotateGizmo;
     public GameObject moveGizmoPrefab;
     private GameObject moveGizmo;
     public Canvas worldSpaceCanvas;
     int blockId = 1;
     private bool placeNodeMember;
+    private bool connectState;
     private bool isNodeMember;
     private int rotateVertical;
     Quaternion rotation;
@@ -51,7 +55,9 @@ public class LevelDesignController : MonoBehaviour {
                 Destroy(rotateGizmo);
             }
         }
-
+        if(tool == Tool.Connector) {
+            connectState = false;
+        }
 
         ToggleToolOptions();
     }
@@ -103,14 +109,27 @@ public class LevelDesignController : MonoBehaviour {
 
         }
         if (tool == Tool.Connector) {
-            if (connectNode == null) {
+            GameObject c = GameObject.Find("WorldSpaceCanvas");
+            if (n.NodeGraphic.GetComponent<NodeToggler>() != null && connectState == false) {
                 connectNode = n;
+                connectState = true;
             }
-            else if (connectNode.NodeGraphic.GetComponent<Lever>() != null) {
-                
-                if(n.NodeGraphic.GetComponent<MonoBehaviour>() is ILeverFriend) {
-                    connectNode.NodeGraphic.GetComponent<Lever>().friend = n.NodeGraphic.GetComponent<MonoBehaviour>();
+            else if (n.NodeGraphic.GetComponent<NodeToggleReceiver>() != null && connectState == true) {
+                if (connectNode != null) {
+                    connectNode.NodeGraphic.GetComponent<NodeToggler>().ConnectNode(n);
+                    GameObject ic1 = Instantiate(connectorToggleIcon, c.transform);
+                    GameObject ic2 = Instantiate(connectorReceiverIcon, c.transform);
+                    ic1.transform.position = connectNode.GetPosition();
+                    ic2.transform.position = n.GetPosition();
+                    connectState = false;
                 }
+                
+            }
+            if (connectState == false) {
+                connectToolText.text = "Select the node that is your toggler";
+            }
+            else if (connectState == true) {
+                connectToolText.text = "Select the node that is going to get triggered";
             }
         }
 

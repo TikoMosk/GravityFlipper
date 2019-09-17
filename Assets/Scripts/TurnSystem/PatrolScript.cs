@@ -50,7 +50,6 @@ public class PatrolScript : MonoBehaviour
             step = -step;
             destination = transform.position + step;
 
-            Debug.Log(nextPlatform);
         }
 
         destNode = GameController.Game.CurrentLevel.GetNode(destination);

@@ -5,9 +5,10 @@ using UnityEngine.EventSystems;
 
 public class SmoothGraphics : MonoBehaviour {
     int animationCount = 0;
-    bool isMoveCoroutineWorking = false;
+    bool isPlayerMoving = false;
 
     public int AnimationCount { get => animationCount; set => animationCount = value; }
+    public bool IsPlayerMoving { get => isPlayerMoving; set => isPlayerMoving = value; }
 
     public IEnumerator MoveSmoothly(Transform obj, Vector3 target, float overTime) {
         AnimationCount++;
@@ -20,10 +21,12 @@ public class SmoothGraphics : MonoBehaviour {
         AnimationCount--;
     }
     public IEnumerator MoveSmoothly(Transform obj, Vector3 target, float overTime, NodeMemberGraphic nodeMemberGraphic) {
-        while(isMoveCoroutineWorking) {
+        while(IsPlayerMoving) {
             yield return null;
         }
-        isMoveCoroutineWorking = true;
+        if(nodeMemberGraphic.Node.NodeMember.Id == 1) {
+            IsPlayerMoving = true;
+        }
         if (obj.transform != null) {
             AnimationCount++;
             nodeMemberGraphic.MoveAnimation();
@@ -34,7 +37,7 @@ public class SmoothGraphics : MonoBehaviour {
                 sqrRemainingDistance = (obj.position - target).sqrMagnitude;
                 yield return null;
             }
-            isMoveCoroutineWorking = false;
+            IsPlayerMoving = false;
             obj.transform.position = target;
             nodeMemberGraphic.StillAnimation();
             AnimationCount--;

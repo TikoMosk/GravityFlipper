@@ -98,7 +98,7 @@ public class LevelController : MonoBehaviour {
             GameObject node_go = Instantiate(factory.GetNodePrefabById(Level.GetNode(x, y, z).Id), Level.GetNode(x, y, z).GetPosition(), nodeRotation);
             Level.GetNode(x, y, z).CreateGraphic(node_go);
             Level.GetNode(x, y, z).NodeGraphic.transform.parent = this.transform;
-
+            Level.GetNode(x, y, z).NodeGraphic.Node = Level.GetNode(x, y, z);
             Level.GetNode(x, y, z).SubscribeToNodeTypeChanged(() => { OnNodeTypeChanged(level.GetNode(x, y, z), node_go); });
             Level.GetNode(x, y, z).SubscribeToNodeRotated(() => { OnNodeRotated(level.GetNode(x, y, z), node_go); });
         }
@@ -134,10 +134,11 @@ public class LevelController : MonoBehaviour {
         Quaternion nodeMemberRotation = Quaternion.LookRotation(Dir.GetVectorByDirection(dest.NodeMember.Facing), Dir.GetVectorByDirection(dest.NodeMember.UpDirection));
         //nodeMemberGraphic.transform.rotation = nodeMemberRotation;
         //nodeMemberGraphic.transform.position = dest.GetPosition();
-        StartCoroutine(GameController.Game.SmoothGraphics.RotateSmoothly(nodeMemberGraphic.transform, nodeMemberRotation, 0.5f));
-        StartCoroutine(GameController.Game.SmoothGraphics.MoveSmoothly(nodeMemberGraphic.transform, dest.GetPosition(), 0.5f, nodeMemberGraphic));
         nodeMemberGraphic.Node = dest;
         dest.NodeMember.LocationNode = dest;
+        StartCoroutine(GameController.Game.SmoothGraphics.RotateSmoothly(nodeMemberGraphic.transform, nodeMemberRotation, 0.5f));
+        StartCoroutine(GameController.Game.SmoothGraphics.MoveSmoothly(nodeMemberGraphic.transform, dest.GetPosition(), 0.5f, nodeMemberGraphic));
+       
     }
 
     private void OnNodeTypeChanged(Node n, GameObject node_go) {
