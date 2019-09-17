@@ -22,7 +22,7 @@ public class NodeGraphic : MonoBehaviour
         this.onClick += onClick;
     }
     private void ColliderUpdate() {
-        if (GetComponent<Collider>() != null) {
+        if (GetComponent<Collider>() != null && !(GameController.Game.CurrentGameState is MenuMode)) {
             Collider col = GetComponent<Collider>();
             if (GameController.Game.CurrentGameState is LevelEditorMode) {
                 col.enabled = true;

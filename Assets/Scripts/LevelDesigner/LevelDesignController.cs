@@ -8,6 +8,7 @@ public class LevelDesignController : MonoBehaviour {
     public GameObject playModePanel;
     public GameObject placeOptionsPanel;
     public GameObject rotateOptionsPanel;
+    public GameObject connectorOptionsPanel;
     public GameObject nodePickerWindow;
     public GameObject rotateGizmoPrefab;
     private GameObject rotateGizmo;
@@ -192,6 +193,7 @@ public class LevelDesignController : MonoBehaviour {
     public void ToggleToolOptions() {
         placeOptionsPanel.SetActive(tool == Tool.Place);
         rotateOptionsPanel.SetActive(tool == Tool.Rotate);
+        connectorOptionsPanel.SetActive(tool == Tool.Connector);
     }
     public void ToggleNodePicker() {
         nodePickerWindow.SetActive(!nodePickerWindow.activeSelf);

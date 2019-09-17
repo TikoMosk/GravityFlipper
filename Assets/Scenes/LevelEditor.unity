@@ -3566,6 +3566,7 @@ MonoBehaviour:
   playModePanel: {fileID: 336468881}
   placeOptionsPanel: {fileID: 2112128779}
   rotateOptionsPanel: {fileID: 617652487}
+  connectorOptionsPanel: {fileID: 29844694}
   nodePickerWindow: {fileID: 1496612694}
   rotateGizmoPrefab: {fileID: 5526299010146584756, guid: 7e700dbcfda41534588a0f27096c921a,
     type: 3}
