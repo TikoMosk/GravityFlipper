@@ -173,13 +173,8 @@ public class NodeMemberData {
         this.y = y;
         this.z = z;
         id = nm.Id;
-
-        if (!(nm.Facing == Node.Direction.FORWARD && nm.UpDirection == Node.Direction.UP)) {
-            facing = ((int)nm.Facing).ToString();
-            upDirection = ((int)nm.UpDirection).ToString();
-        }
-        //TODO: DIRECTIONS
-        //direction = nm.direction;
+        facing = ((int)nm.Facing).ToString();
+        upDirection = ((int)nm.UpDirection).ToString();
     }
 }
 [System.Serializable]

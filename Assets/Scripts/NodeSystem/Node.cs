@@ -26,9 +26,11 @@ public class Node
 
     private Action nodeTypeChanged;
     private Action nodeRotated;
+    private bool colliderActive;
 
     private NodeGraphic nodeGraphic;
     public NodeGraphic NodeGraphic { get => nodeGraphic; set => nodeGraphic = value; }
+    public bool ColliderActive { get => colliderActive; set => colliderActive = value; }
 
     public Node(Level level, int x, int y, int z, int type) {
         this.level = level;

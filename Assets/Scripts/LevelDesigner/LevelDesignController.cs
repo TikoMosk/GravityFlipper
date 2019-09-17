@@ -20,10 +20,12 @@ public class LevelDesignController : MonoBehaviour {
     private int rotateVertical;
     Quaternion rotation;
     Node selectedNode;
+    Node connectNode;
 
 
-    enum Tool { None, Place, Remove, Move, Rotate };
+    enum Tool { None, Place, Remove, Move, Rotate, Connector };
     private Tool tool;
+    private bool selectState;
 
     public int BlockId { get => blockId; set => blockId = value; }
     public bool PlaceNodeMember { get => placeNodeMember; set => placeNodeMember = value; }
@@ -48,7 +50,7 @@ public class LevelDesignController : MonoBehaviour {
                 Destroy(rotateGizmo);
             }
         }
-        
+
 
         ToggleToolOptions();
     }
@@ -67,7 +69,7 @@ public class LevelDesignController : MonoBehaviour {
 
             }
         }
-        if(n.NodeMember != null && n.NodeMember.Id != 0) {
+        if (n.NodeMember != null && n.NodeMember.Id != 0) {
             isNodeMember = true;
         }
         else {
@@ -99,27 +101,38 @@ public class LevelDesignController : MonoBehaviour {
             }
 
         }
-        
+        if (tool == Tool.Connector) {
+            if (connectNode == null) {
+                connectNode = n;
+            }
+            else if (connectNode.NodeGraphic.GetComponent<Lever>() != null) {
+                
+                if(n.NodeGraphic.GetComponent<MonoBehaviour>() is ILeverFriend) {
+                    connectNode.NodeGraphic.GetComponent<Lever>().friend = n.NodeGraphic.GetComponent<MonoBehaviour>();
+                }
+            }
+        }
+
 
 
     }
     public void RotateBlock(bool plus) {
         int degrees = 90;
-        if(!plus) {
+        if (!plus) {
             degrees = -90;
         }
-        if(isNodeMember) {
+        if (isNodeMember) {
             NodeMember sNodeMember = selectedNode.NodeMember;
-            sNodeMember.SetRotation(Dir.GetDirectionByVector(Quaternion.Euler(0, degrees, 0) * Dir.GetVectorByDirection(sNodeMember.Facing)),sNodeMember.UpDirection);
-            
+            sNodeMember.SetRotation(Dir.GetDirectionByVector(Quaternion.Euler(0, degrees, 0) * Dir.GetVectorByDirection(sNodeMember.Facing)), sNodeMember.UpDirection);
+
         }
         else {
             selectedNode.SetRotation(Dir.GetDirectionByVector(Quaternion.Euler(0, degrees, 0) * Dir.GetVectorByDirection(selectedNode.Facing)), selectedNode.UpDirection);
         }
     }
     public void MoveBlock(Vector3 dir) {
-        Node destNode = GameController.Game.CurrentLevel.GetNodeInTheDirection(selectedNode,Dir.GetDirectionByVector(dir));
-        if(destNode == null) {
+        Node destNode = GameController.Game.CurrentLevel.GetNodeInTheDirection(selectedNode, Dir.GetDirectionByVector(dir));
+        if (destNode == null) {
             return;
         }
         if (isNodeMember) {

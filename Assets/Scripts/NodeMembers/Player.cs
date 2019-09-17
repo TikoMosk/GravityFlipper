@@ -74,6 +74,7 @@ public class Player : MonoBehaviour {
 
         }
         else if (GameController.Game.LevelController.Level.GetNodeDistance(playerNode, destinationNode) == 2 && GameController.Game.LevelController.Level.GetNodeDistance(previousClickedNode, n) <= 1) {
+            Debug.Log("MOVES DOWN");
             playerMember.UpDirection = dir;
             playerMember.Facing = Dir.Opposite(previousDirection);
             GameController.Game.CurrentLevel.MoveObject(playerNode, destinationNode);

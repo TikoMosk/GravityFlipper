@@ -41,7 +41,9 @@ public class Lever : MonoBehaviour
 
         return false;
     }
-
+    private void ConnectTo(ILeverFriend friend) {
+        friend.Invoke();
+    }
     private void OnMouseDown()
     {
         this.TurnTheLever();

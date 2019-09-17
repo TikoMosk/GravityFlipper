@@ -38,6 +38,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MovingBlock Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 8f059788f09129548819124918076d2e, type: 3}
+      propertyPath: m_TagString
+      value: Level
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 8f059788f09129548819124918076d2e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

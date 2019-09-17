@@ -6,12 +6,12 @@ using UnityEngine;
 public class SpikeBlock : MonoBehaviour, ILeverFriend
 {
     public bool isOpen;
-    Collider collider;
+    Collider col;
 
     private void Start()
     {
         //EventController.currentInstance.Register(AwakeSpikes);
-        collider = GetComponent<Collider>();
+        col = GetComponent<Collider>();
 
         if (isOpen)
         {
@@ -54,7 +54,7 @@ public class SpikeBlock : MonoBehaviour, ILeverFriend
 
     public void AwakeSpikes()
     {
-        collider.enabled = false;
+        col.enabled = false;
         GetComponentInChildren<Animator>().SetBool("Enabled", true);
         if(IsPlayerNear())
         {
@@ -65,7 +65,7 @@ public class SpikeBlock : MonoBehaviour, ILeverFriend
 
     public void CloseSpikes()
     {
-        collider.enabled = true;
+        col.enabled = true;
         GetComponentInChildren<Animator>().SetBool("Enabled", false);
         if(IsPlayerNear())
         {

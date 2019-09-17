@@ -26,14 +26,6 @@ public class LevelController : MonoBehaviour
         factory = FindObjectOfType<NodeFactory>();
     }
 
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.S))
-        {
-            SaveLevelLocal();
-        }
-        
-    }
     public void ResizeLevel(int width, int height, int length) {
         this.width = width;
         this.height = height;
@@ -75,7 +67,7 @@ public class LevelController : MonoBehaviour
             }
         }
         level.AddNodeMember(5, 1, 5, 1,Node.Direction.FORWARD,Node.Direction.UP);
-        level.AddNodeMember(5, 5, 5, 4, Node.Direction.FORWARD, Node.Direction.UP);
+        level.SetNode(5, 5, 5,10);
         DestroyLevelGraphics();
         CreateLevelGraphics();
         onLevelCreated.Invoke();
@@ -114,10 +106,12 @@ public class LevelController : MonoBehaviour
     {
         if (factory.GetNodePrefabById(Level.GetNode(x, y, z).Id) != null)
         {
+            Level.GetNode(x, y, z).ColliderActive = factory.GetNodeDetailsById(level.GetNode(x, y, z).Id, false).colliderActive;
             Quaternion nodeRotation = Quaternion.LookRotation(Dir.GetVectorByDirection(level.GetNode(x, y, z).Facing), Dir.GetVectorByDirection(level.GetNode(x, y, z).UpDirection));
             GameObject node_go = Instantiate(factory.GetNodePrefabById(Level.GetNode(x, y, z).Id), Level.GetNode(x, y, z).GetPosition(), nodeRotation);
             Level.GetNode(x, y, z).CreateGraphic(node_go);
             Level.GetNode(x, y, z).NodeGraphic.transform.parent = this.transform;
+            
             Level.GetNode(x, y, z).SubscribeToNodeTypeChanged(() => { OnNodeTypeChanged(level.GetNode(x, y, z),node_go); });
             Level.GetNode(x, y, z).SubscribeToNodeRotated(() => { OnNodeRotated(level.GetNode(x, y, z), node_go); });
         }
@@ -138,7 +132,7 @@ public class LevelController : MonoBehaviour
                 
                 NodeMember nodeObject = Level.GetNode(x, y, z).NodeMember;
                 GameObject nodeObject_GameObject = Instantiate(factory.GetNodeMemberPrefabById(nodeObject.Id), Level.GetNode(x,y,z).GetPosition(), Quaternion.identity);
-                Level.GetNode(x, y, z).NodeMember.Walkthrough = factory.GetNodeDetailsById(level.GetNode(x, y, z).NodeMember.Id,true).notSolid;
+                Level.GetNode(x, y, z).NodeMember.ColliderActive = factory.GetNodeDetailsById(level.GetNode(x, y, z).NodeMember.Id,true).colliderActive;
 
 
                 nodeObject_GameObject.transform.parent = this.transform;
