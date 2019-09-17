@@ -1581,7 +1581,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: 17.199219, y: 0}
-  m_SizeDelta: {x: 314.49, y: 30}
+  m_SizeDelta: {x: 765.4, y: 30}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &474467105
 MonoBehaviour:
@@ -1616,7 +1616,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Select the interactable node
+  m_Text: Select the node that is your toggler
 --- !u!222 &474467106
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2090,7 +2090,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 474467104}
-  - {fileID: 1067751768}
   m_Father: {fileID: 29844695}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3059,85 +3058,6 @@ MonoBehaviour:
   widthField: {fileID: 446110032}
   heightField: {fileID: 2016253956}
   lengthField: {fileID: 1118398888}
---- !u!1 &1067751767
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1067751768}
-  - component: {fileID: 1067751770}
-  - component: {fileID: 1067751769}
-  m_Layer: 5
-  m_Name: Text (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &1067751768
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1067751767}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 658592033}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 17.199219, y: 0.000030517578}
-  m_SizeDelta: {x: 314.49, y: 30}
-  m_Pivot: {x: 0, y: 0.5}
---- !u!114 &1067751769
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1067751767}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 21
-    m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 10
-    m_MaxSize: 40
-    m_Alignment: 3
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: Select the node to trigger
---- !u!222 &1067751770
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1067751767}
-  m_CullTransparentMesh: 0
 --- !u!114 &1093869953 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2602515494256940139, guid: f82f546d46e444a47884d3a3bdb079ad,
@@ -3570,6 +3490,11 @@ MonoBehaviour:
   nodePickerWindow: {fileID: 1496612694}
   rotateGizmoPrefab: {fileID: 5526299010146584756, guid: 7e700dbcfda41534588a0f27096c921a,
     type: 3}
+  connectorToggleIcon: {fileID: 5915605124988282798, guid: 0ded1da8cb08a4b4ebd7970b6e18f4b1,
+    type: 3}
+  connectorReceiverIcon: {fileID: 6482654848051522266, guid: ac037a295e9780a44b20de5d0f3e91fb,
+    type: 3}
+  connectToolText: {fileID: 474467105}
   moveGizmoPrefab: {fileID: 5053253916148343647, guid: d97791ebe8247a442a469bc964c8cf3c,
     type: 3}
   worldSpaceCanvas: {fileID: 2123335787}

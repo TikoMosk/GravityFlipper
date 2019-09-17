@@ -22,83 +22,79 @@ public class InputController : MonoBehaviour {
         Vector3 cameraObjMovementVector = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
         GameController.Game.CurrentGameState.SetInputs(cameraObjMovementVector);
 
-        if (GameController.Game.SmoothGraphics.AnimationCount == 0) {
+        if (Input.touchCount > 0) {
 
-
-            if (Input.touchCount > 0) {
-
-                if (Input.GetTouch(0).phase == TouchPhase.Began) {
-                    if (IsPointerOverUI()) {
-                        overUI = true;
-                    }
-                    else {
-                        overUI = false;
-                    }
-
-                    touchStart = Input.GetTouch(0).position;
+            if (Input.GetTouch(0).phase == TouchPhase.Began) {
+                if (IsPointerOverUI()) {
+                    overUI = true;
+                }
+                else {
+                    overUI = false;
                 }
 
-                if (Input.touchCount == 2) {
-                    Touch touchZero = Input.GetTouch(0);
-                    Touch touchOne = Input.GetTouch(1);
+                touchStart = Input.GetTouch(0).position;
+            }
 
-                    Vector2 touchZeroPrevPos = touchZero.position - touchZero.deltaPosition;
-                    Vector2 touchOnePrevPos = touchOne.position - touchOne.deltaPosition;
+            if (Input.touchCount == 2) {
+                Touch touchZero = Input.GetTouch(0);
+                Touch touchOne = Input.GetTouch(1);
 
-                    float prevMagnitude = (touchZeroPrevPos - touchOnePrevPos).magnitude;
-                    float currentMagnitude = (touchZero.position - touchOne.position).magnitude;
+                Vector2 touchZeroPrevPos = touchZero.position - touchZero.deltaPosition;
+                Vector2 touchOnePrevPos = touchOne.position - touchOne.deltaPosition;
 
-                    float difference = prevMagnitude - currentMagnitude;
+                float prevMagnitude = (touchZeroPrevPos - touchOnePrevPos).magnitude;
+                float currentMagnitude = (touchZero.position - touchOne.position).magnitude;
 
-                    GameController.Game.CameraController.Zoom(difference * 0.005f);
+                float difference = prevMagnitude - currentMagnitude;
+
+                GameController.Game.CameraController.Zoom(difference * 0.005f);
+                isDragging = true;
+            }
+            else if (Input.touchCount == 1) {
+                if (Input.GetTouch(0).phase == TouchPhase.Moved && !overUI) {
+                    inputPosDelta = Input.GetTouch(0).deltaPosition;
+                    GameController.Game.CameraController.RotateAround(inputPosDelta.x * 0.025f);
                     isDragging = true;
                 }
-                else if (Input.touchCount == 1) {
-                    if (Input.GetTouch(0).phase == TouchPhase.Moved && !overUI) {
-                        inputPosDelta = Input.GetTouch(0).deltaPosition;
-                        GameController.Game.CameraController.RotateAround(inputPosDelta.x * 0.025f);
-                        isDragging = true;
-                    }
-                    else if (Input.GetTouch(0).phase == TouchPhase.Ended && !overUI) {
+                else if (Input.GetTouch(0).phase == TouchPhase.Ended && !overUI) {
 
-                        if (!isDragging) {
+                    if (!isDragging && GameController.Game.SmoothGraphics.AnimationCount == 0) {
 
-                            Click();
-
-                        }
-                        isDragging = false;
-                    }
-                }
-
-            }
-            else {
-                if (IsPointerOverUI()) {
-                    return;
-                }
-                if (Input.GetMouseButton(0)) {
-                    inputPosDelta = Input.mousePosition - inputPreviousPos;
-                    if (inputPosDelta.magnitude > 2) {
-                        GameController.Game.CameraController.RotateAround(inputPosDelta.x * 0.025f);
-                        isDragging = true;
-                    }
-                }
-                else if (Input.GetMouseButtonUp(0)) {
-                    if (!isDragging) {
                         Click();
 
                     }
                     isDragging = false;
+                }
+            }
+
+        }
+        else {
+            if (IsPointerOverUI()) {
+                return;
+            }
+            if (Input.GetMouseButton(0)) {
+                inputPosDelta = Input.mousePosition - inputPreviousPos;
+                if (inputPosDelta.magnitude > 2) {
+                    GameController.Game.CameraController.RotateAround(inputPosDelta.x * 0.025f);
+                    isDragging = true;
+                }
+            }
+            else if (Input.GetMouseButtonUp(0)) {
+                if (!isDragging && GameController.Game.SmoothGraphics.AnimationCount == 0) {
+                    Click();
 
                 }
-
-                if (Input.GetAxis("Mouse ScrollWheel") != 0) {
-
-                    GameController.Game.CameraController.Zoom(-Input.GetAxis("Mouse ScrollWheel") * 5);
-                }
-
-                inputPreviousPos = Input.mousePosition;
+                isDragging = false;
 
             }
+
+            if (Input.GetAxis("Mouse ScrollWheel") != 0) {
+
+                GameController.Game.CameraController.Zoom(-Input.GetAxis("Mouse ScrollWheel") * 5);
+            }
+
+            inputPreviousPos = Input.mousePosition;
+
         }
 
 
@@ -135,10 +131,10 @@ public class InputController : MonoBehaviour {
 
         int layer_mask = LayerMask.GetMask("Gizmo");
 
-        if (Physics.Raycast(ray, out hit,Mathf.Infinity, layer_mask)) {
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, layer_mask)) {
             if (GameController.Game.CurrentGameState is LevelEditorMode) {
                 if (hit.collider.gameObject.GetComponent<Gizmo>() != null) {
-                    if(hit.collider.gameObject.GetComponent<Gizmo>().gizmoType == Gizmo.GizmoType.Rotate) {
+                    if (hit.collider.gameObject.GetComponent<Gizmo>().gizmoType == Gizmo.GizmoType.Rotate) {
                         GameController.Game.LevelDesignController.RotateBlock(hit.collider.gameObject.GetComponent<Gizmo>().plus);
                     }
                     if (hit.collider.gameObject.GetComponent<Gizmo>().gizmoType == Gizmo.GizmoType.Move) {
@@ -146,7 +142,7 @@ public class InputController : MonoBehaviour {
                     }
 
                 }
-                
+
             }
         }
         else if (Physics.Raycast(ray, out hit)) {

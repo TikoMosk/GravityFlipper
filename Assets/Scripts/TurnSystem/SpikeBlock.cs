@@ -17,8 +17,11 @@ public class SpikeBlock : MonoBehaviour, ILeverFriend
         {
             AwakeSpikes();
         }
+        GetComponent<NodeToggleReceiver>().RegisterToToggleReceiver(Invoke);
     }
-
+    void OnDestroy() {
+        GetComponent<NodeToggleReceiver>().UnRegisterToToggleReceiver(Invoke);
+    }
     /*private void Update()
     {
         if(isOpen)

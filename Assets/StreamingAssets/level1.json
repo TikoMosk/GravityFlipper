@@ -485,30 +485,6 @@
         },
         {
             "x": 5,
-            "y": 1,
-            "z": 3,
-            "id": 1,
-            "facing": "",
-            "upDirection": ""
-        },
-        {
-            "x": 5,
-            "y": 1,
-            "z": 4,
-            "id": 1,
-            "facing": "",
-            "upDirection": ""
-        },
-        {
-            "x": 5,
-            "y": 2,
-            "z": 3,
-            "id": 1,
-            "facing": "",
-            "upDirection": ""
-        },
-        {
-            "x": 5,
             "y": 5,
             "z": 5,
             "id": 10,
@@ -676,6 +652,14 @@
             "upDirection": ""
         },
         {
+            "x": 7,
+            "y": 1,
+            "z": 7,
+            "id": 6,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
             "x": 8,
             "y": 0,
             "z": 0,
@@ -752,6 +736,14 @@
             "y": 0,
             "z": 9,
             "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 8,
+            "y": 1,
+            "z": 4,
+            "id": 5,
             "facing": "",
             "upDirection": ""
         },
@@ -838,19 +830,11 @@
     ],
     "nodeMemberDataList": [
         {
-            "x": 6,
-            "y": 1,
-            "z": 6,
-            "id": 1,
-            "facing": "4",
-            "upDirection": "0"
-        },
-        {
-            "x": 7,
+            "x": 5,
             "y": 1,
             "z": 5,
-            "id": 4,
-            "facing": "4",
+            "id": 1,
+            "facing": "1",
             "upDirection": "0"
         }
     ]
