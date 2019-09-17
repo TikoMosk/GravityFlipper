@@ -6,6 +6,38 @@
         {
             "x": 0,
             "y": 0,
+            "z": 0,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 0,
+            "y": 0,
+            "z": 1,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 0,
+            "y": 0,
+            "z": 2,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 0,
+            "y": 0,
+            "z": 3,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 0,
+            "y": 0,
             "z": 4,
             "id": 1,
             "facing": "",
@@ -13,9 +45,73 @@
         },
         {
             "x": 0,
-            "y": 1,
-            "z": 4,
-            "id": 2,
+            "y": 0,
+            "z": 5,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 0,
+            "y": 0,
+            "z": 6,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 0,
+            "y": 0,
+            "z": 7,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 0,
+            "y": 0,
+            "z": 8,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 0,
+            "y": 0,
+            "z": 9,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 1,
+            "y": 0,
+            "z": 0,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 1,
+            "y": 0,
+            "z": 1,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 1,
+            "y": 0,
+            "z": 2,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 1,
+            "y": 0,
+            "z": 3,
+            "id": 1,
             "facing": "",
             "upDirection": ""
         },
@@ -30,6 +126,22 @@
         {
             "x": 1,
             "y": 0,
+            "z": 5,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 1,
+            "y": 0,
+            "z": 6,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 1,
+            "y": 0,
             "z": 7,
             "id": 1,
             "facing": "",
@@ -37,8 +149,48 @@
         },
         {
             "x": 1,
-            "y": 1,
-            "z": 7,
+            "y": 0,
+            "z": 8,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 1,
+            "y": 0,
+            "z": 9,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 2,
+            "y": 0,
+            "z": 0,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 2,
+            "y": 0,
+            "z": 1,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 2,
+            "y": 0,
+            "z": 2,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 2,
+            "y": 0,
+            "z": 3,
             "id": 1,
             "facing": "",
             "upDirection": ""
@@ -52,9 +204,129 @@
             "upDirection": ""
         },
         {
+            "x": 2,
+            "y": 0,
+            "z": 5,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 2,
+            "y": 0,
+            "z": 6,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 2,
+            "y": 0,
+            "z": 7,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 2,
+            "y": 0,
+            "z": 8,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 2,
+            "y": 0,
+            "z": 9,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 3,
+            "y": 0,
+            "z": 0,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 3,
+            "y": 0,
+            "z": 1,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 3,
+            "y": 0,
+            "z": 2,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 3,
+            "y": 0,
+            "z": 3,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
             "x": 3,
             "y": 0,
             "z": 4,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 3,
+            "y": 0,
+            "z": 5,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 3,
+            "y": 0,
+            "z": 6,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 3,
+            "y": 0,
+            "z": 7,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 3,
+            "y": 0,
+            "z": 8,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 3,
+            "y": 0,
+            "z": 9,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 4,
+            "y": 0,
+            "z": 0,
             "id": 1,
             "facing": "",
             "upDirection": ""
@@ -71,7 +343,7 @@
             "x": 4,
             "y": 0,
             "z": 2,
-            "id": 7,
+            "id": 1,
             "facing": "",
             "upDirection": ""
         },
@@ -94,6 +366,22 @@
         {
             "x": 4,
             "y": 0,
+            "z": 5,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 4,
+            "y": 0,
+            "z": 6,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 4,
+            "y": 0,
             "z": 7,
             "id": 1,
             "facing": "",
@@ -108,6 +396,22 @@
             "upDirection": ""
         },
         {
+            "x": 4,
+            "y": 0,
+            "z": 9,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 5,
+            "y": 0,
+            "z": 0,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
             "x": 5,
             "y": 0,
             "z": 1,
@@ -118,8 +422,104 @@
         {
             "x": 5,
             "y": 0,
+            "z": 2,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 5,
+            "y": 0,
+            "z": 3,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 5,
+            "y": 0,
             "z": 4,
-            "id": 5,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 5,
+            "y": 0,
+            "z": 5,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 5,
+            "y": 0,
+            "z": 6,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 5,
+            "y": 0,
+            "z": 7,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 5,
+            "y": 0,
+            "z": 8,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 5,
+            "y": 0,
+            "z": 9,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 5,
+            "y": 1,
+            "z": 3,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 5,
+            "y": 1,
+            "z": 4,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 5,
+            "y": 2,
+            "z": 3,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 5,
+            "y": 5,
+            "z": 5,
+            "id": 10,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 6,
+            "y": 0,
+            "z": 0,
+            "id": 1,
             "facing": "",
             "upDirection": ""
         },
@@ -127,6 +527,22 @@
             "x": 6,
             "y": 0,
             "z": 1,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 6,
+            "y": 0,
+            "z": 2,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 6,
+            "y": 0,
+            "z": 3,
             "id": 1,
             "facing": "",
             "upDirection": ""
@@ -173,9 +589,41 @@
         },
         {
             "x": 6,
-            "y": 1,
-            "z": 8,
-            "id": 6,
+            "y": 0,
+            "z": 9,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 7,
+            "y": 0,
+            "z": 0,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 7,
+            "y": 0,
+            "z": 1,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 7,
+            "y": 0,
+            "z": 2,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 7,
+            "y": 0,
+            "z": 3,
+            "id": 1,
             "facing": "",
             "upDirection": ""
         },
@@ -184,58 +632,218 @@
             "y": 0,
             "z": 4,
             "id": 1,
-            "facing": "3",
-            "upDirection": "0"
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 7,
+            "y": 0,
+            "z": 5,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 7,
+            "y": 0,
+            "z": 6,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 7,
+            "y": 0,
+            "z": 7,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 7,
+            "y": 0,
+            "z": 8,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 7,
+            "y": 0,
+            "z": 9,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 8,
+            "y": 0,
+            "z": 0,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 8,
+            "y": 0,
+            "z": 1,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 8,
+            "y": 0,
+            "z": 2,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 8,
+            "y": 0,
+            "z": 3,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 8,
+            "y": 0,
+            "z": 4,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 8,
+            "y": 0,
+            "z": 5,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 8,
+            "y": 0,
+            "z": 6,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 8,
+            "y": 0,
+            "z": 7,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 8,
+            "y": 0,
+            "z": 8,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 8,
+            "y": 0,
+            "z": 9,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 9,
+            "y": 0,
+            "z": 0,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 9,
+            "y": 0,
+            "z": 1,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 9,
+            "y": 0,
+            "z": 2,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 9,
+            "y": 0,
+            "z": 3,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 9,
+            "y": 0,
+            "z": 4,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 9,
+            "y": 0,
+            "z": 5,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 9,
+            "y": 0,
+            "z": 6,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 9,
+            "y": 0,
+            "z": 7,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 9,
+            "y": 0,
+            "z": 8,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 9,
+            "y": 0,
+            "z": 9,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
         }
     ],
     "nodeMemberDataList": [
         {
-            "x": 0,
-            "y": 9,
-            "z": 5,
-            "id": 4,
-            "facing": "3",
-            "upDirection": "0"
-        },
-        {
-            "x": 1,
-            "y": 1,
-            "z": 6,
-            "id": 8,
-            "facing": "3",
-            "upDirection": "0"
-        },
-        {
-            "x": 4,
-            "y": 1,
-            "z": 8,
-            "id": 6,
-            "facing": "",
-            "upDirection": ""
-        },
-        {
             "x": 5,
-            "y": 0,
-            "z": 7,
-            "id": 7,
-            "facing": "3",
-            "upDirection": "0"
-        },
-        {
-            "x": 6,
             "y": 1,
-            "z": 1,
-            "id": 2,
-            "facing": "",
-            "upDirection": ""
-        },
-        {
-            "x": 7,
-            "y": 1,
-            "z": 4,
+            "z": 5,
             "id": 1,
-            "facing": "",
-            "upDirection": ""
+            "facing": "1",
+            "upDirection": "0"
         }
     ]
 }

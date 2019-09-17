@@ -16,7 +16,10 @@ public class Lever : MonoBehaviour
             child.GetComponent<Animator>().SetBool("Enabled", pushed);
 
             if (friend is ILeverFriend)
+            {
                 ((ILeverFriend)friend).Invoke();
+            }
+
         }
     }
 

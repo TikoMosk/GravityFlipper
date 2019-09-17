@@ -53,7 +53,7 @@ public class NodeFactory : MonoBehaviour {
 public class NodeDetails {
     public int id;
     public bool nodeMember;
-    public bool notSolid;
+    public bool colliderActive = true;
     public string name;
     public string description;
     public GameObject prefab;

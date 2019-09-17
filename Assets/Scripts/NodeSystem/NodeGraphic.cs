@@ -14,7 +14,28 @@ public class NodeGraphic : MonoBehaviour
     {
         onClick?.Invoke(dir);
     }
+    private void Start() {
+        GameController.Game.RegisterForGameStateChanged(ColliderUpdate);
+        ColliderUpdate();
+    }
     public void RegisterToClick(Action<Node.Direction> onClick) {
         this.onClick += onClick;
+    }
+    private void ColliderUpdate() {
+        if (GetComponent<Collider>() != null && !(GameController.Game.CurrentGameState is MenuMode)) {
+            Collider col = GetComponent<Collider>();
+            if (GameController.Game.CurrentGameState is LevelEditorMode) {
+                col.enabled = true;
+            }
+            else if (node.ColliderActive == false) {
+                col.enabled = false;
+            }
+            else if (node.ColliderActive == true) {
+                col.enabled = true;
+            }
+        }
+    }
+    private void OnDestroy() {
+        GameController.Game.UnRegisterForGameStateChanged(ColliderUpdate);
     }
 }

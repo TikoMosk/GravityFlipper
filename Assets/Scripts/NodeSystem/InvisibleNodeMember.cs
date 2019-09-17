@@ -10,6 +10,7 @@ public class InvisibleNodeMember : MonoBehaviour {
     private GameObject canv;
     private GameObject icon;
     private void Start() {
+        GameController.Game.RegisterForGameStateChanged(UpdateVisibility);
         if (GameObject.Find("WorldSpaceCanvas") != null) {
             canv = GameObject.Find("WorldSpaceCanvas");
             icon = Instantiate(iconPrefab, canv.transform);
@@ -18,7 +19,16 @@ public class InvisibleNodeMember : MonoBehaviour {
             icon.SetActive(true);
         }
     }
+    private void UpdateVisibility() {
+        if(GameController.Game.CurrentGameState is TestMode) {
+            icon.SetActive(false);
+        }
+        else if (GameController.Game.CurrentGameState is LevelEditorMode) {
+            icon.SetActive(true);
+        }
+    }
     private void OnDestroy() {
+        GameController.Game.UnRegisterForGameStateChanged(UpdateVisibility);
         Destroy(icon);
     }
     private void Update() {

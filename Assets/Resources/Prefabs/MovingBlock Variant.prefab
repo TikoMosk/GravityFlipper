@@ -25,8 +25,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edb7fa7eb861f495e86374a9ced4b6b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  direction: 1
-  negative: 1
+  direction: 0
+  negative: 0
 --- !u!1001 &6579708977596053906
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -37,6 +37,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 8f059788f09129548819124918076d2e, type: 3}
       propertyPath: m_Name
       value: MovingBlock Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 8f059788f09129548819124918076d2e, type: 3}
+      propertyPath: m_TagString
+      value: Level
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 8f059788f09129548819124918076d2e, type: 3}
       propertyPath: m_LocalPosition.x

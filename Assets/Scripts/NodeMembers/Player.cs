@@ -74,14 +74,23 @@ public class Player : MonoBehaviour {
 
         }
         else if (GameController.Game.LevelController.Level.GetNodeDistance(playerNode, destinationNode) == 2 && GameController.Game.LevelController.Level.GetNodeDistance(previousClickedNode, n) <= 1) {
-            playerMember.UpDirection = dir;
-            playerMember.Facing = Dir.Opposite(previousDirection);
-            GameController.Game.CurrentLevel.MoveObject(playerNode, destinationNode);
-            GameController.Game.CameraController.UpdateGravity(-Dir.GetVectorByDirection(playerMember.Facing), Dir.GetVectorByDirection(dir));
-            previousClickedNode = n;
-            previousDirection = dir;
-            CheckIfPlayerWon(destinationNode);
-            TurnEventSystem.currentInstance.NextTurn();
+            Debug.Log("MOVES DOWN");
+            if(GameController.Game.LevelController.Level.GetNodeInTheDirection(destinationNode,playerMember.UpDirection).Id == 0) {
+                Node intermediateNode = GameController.Game.LevelController.Level.GetNodeInTheDirection(destinationNode, playerMember.UpDirection);
+                
+                GameController.Game.CurrentLevel.MoveObject(playerNode, intermediateNode);
+                playerMember.UpDirection = dir;
+                playerMember.Facing = Dir.Opposite(previousDirection);
+                GameController.Game.CurrentLevel.MoveObject(intermediateNode, destinationNode);
+                
+                GameController.Game.CameraController.UpdateGravity(-Dir.GetVectorByDirection(playerMember.Facing), Dir.GetVectorByDirection(dir));
+                
+                previousClickedNode = n;
+                previousDirection = dir;
+                CheckIfPlayerWon(destinationNode);
+                TurnEventSystem.currentInstance.NextTurn();
+            }
+            
 
         }
 

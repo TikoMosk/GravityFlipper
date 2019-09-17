@@ -25,17 +25,19 @@ public class NodeMemberGraphic : MonoBehaviour
     }
     private void ColliderUpdate()
     {
-
-        if (GetComponent<Collider>() != null && node.NodeMember.Walkthrough)
+        if (GetComponent<Collider>() != null)
         {
             Collider col = GetComponent<Collider>();
             if (GameController.Game.CurrentGameState is LevelEditorMode)
             {
                 col.enabled = true;
             }
-            else
+            else if(node.NodeMember.ColliderActive == false)
             {
                 col.enabled = false;
+            }
+            else if(node.NodeMember.ColliderActive == true) {
+                col.enabled = true;
             }
         }
     }
