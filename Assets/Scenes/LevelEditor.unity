@@ -3364,15 +3364,6 @@ MonoBehaviour:
     prefab: {fileID: 320885344418203025, guid: a4d0a14d0335a4cb0bb4ffed20f8a51d, type: 3}
     icon: {fileID: 0}
     category: 2
-  - id: 8
-    nodeMember: 0
-    notSolid: 0
-    name: MovingBlock
-    description: 
-    prefab: {fileID: 6579708977595957042, guid: 8d009cd761a8842d984805a281ded3d1,
-      type: 3}
-    icon: {fileID: 0}
-    category: 2
   nodeMemberDetailsList:
   - id: 0
     nodeMember: 1
@@ -3422,7 +3413,7 @@ MonoBehaviour:
     notSolid: 0
     name: Moving Laser
     description: 
-    prefab: {fileID: 2988328130615069239, guid: 33ced4b704af0432a90e3fa3d2dac8dd,
+    prefab: {fileID: 6533336011544593372, guid: 41b2c2aa26935493da247c734250a11b,
       type: 3}
     icon: {fileID: 0}
     category: 2
@@ -3457,6 +3448,15 @@ MonoBehaviour:
     name: Laser
     description: 
     prefab: {fileID: 3031102304311863571, guid: ee78bf8bbf690420cbe0ddeac8af7354,
+      type: 3}
+    icon: {fileID: 0}
+    category: 2
+  - id: 10
+    nodeMember: 1
+    notSolid: 0
+    name: MovingBlock
+    description: 
+    prefab: {fileID: 6579708977595957042, guid: 8d009cd761a8842d984805a281ded3d1,
       type: 3}
     icon: {fileID: 0}
     category: 2

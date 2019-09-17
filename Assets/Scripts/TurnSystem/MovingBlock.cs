@@ -49,9 +49,9 @@ public class MovingBlock : MonoBehaviour, ILeverFriend
 
     private void UpdateState()
     {
+        Node temp = currentNode;
         currentNode = destNode;
-        step = -step;
-        destNode = GameController.Game.CurrentLevel.GetNode(currentNode.GetPosition() + step);
+        destNode = temp;
     }
 
     public void Invoke()
