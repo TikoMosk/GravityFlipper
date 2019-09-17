@@ -22,17 +22,16 @@ public class LaserVolumetric : MonoBehaviour
         if(GetComponent<NodeMemberGraphic>() != null)
         {
             graphic = GetComponent<NodeMemberGraphic>();
-            dir = Dir.GetVectorByDirection(graphic.Node.Facing);
+            dir = Dir.GetVectorByDirection(graphic.Node.NodeMember.Facing);
             if (GameController.Game.SmoothGraphics.AnimationCount == 0)
             {
                 RaycastHit hit;
-                vl.EndPos = dir * 100f;
+                vl.EndPos = transform.InverseTransformPoint(transform.position + dir) * 50;
                 if (Physics.Raycast(transform.position, dir, out hit, 50f))
                 {
-                    vl.EndPos = hit.point;
+                    vl.EndPos = transform.InverseTransformPoint(hit.point); ;
                     if (hit.collider.gameObject.GetComponentInParent<NodeMemberGraphic>() != null)
                     {
-                        Debug.Log("u dead");
                         Destroy(hit.collider.transform.parent.gameObject);
                         //Destroy(transform.GetComponentInParent<Transform>().gameObject);
                         //Destroy(hit.collider.transform.parent.gameObject);
