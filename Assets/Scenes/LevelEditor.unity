@@ -3786,7 +3786,7 @@ MonoBehaviour:
     colliderActive: 1
     name: Moving Laser
     description: 
-    prefab: {fileID: 2988328130615069239, guid: 33ced4b704af0432a90e3fa3d2dac8dd,
+    prefab: {fileID: 8797690601998793987, guid: aa50de473ef3d49219936c7ef121c050,
       type: 3}
     icon: {fileID: 0}
     category: 2
@@ -3796,6 +3796,15 @@ MonoBehaviour:
     name: RotatingLaser
     description: 
     prefab: {fileID: 544911279223743345, guid: 8228e68d8ebfd4734916da9e8de6cea6, type: 3}
+    icon: {fileID: 0}
+    category: 2
+  - id: 6
+    nodeMember: 1
+    colliderActive: 1
+    name: Moving Block
+    description: 
+    prefab: {fileID: 6579708977595957042, guid: 8d009cd761a8842d984805a281ded3d1,
+      type: 3}
     icon: {fileID: 0}
     category: 2
 --- !u!1001 &1403270734
