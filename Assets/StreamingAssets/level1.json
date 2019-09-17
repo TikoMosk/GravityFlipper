@@ -838,11 +838,19 @@
     ],
     "nodeMemberDataList": [
         {
-            "x": 5,
+            "x": 6,
+            "y": 1,
+            "z": 6,
+            "id": 1,
+            "facing": "4",
+            "upDirection": "0"
+        },
+        {
+            "x": 7,
             "y": 1,
             "z": 5,
-            "id": 1,
-            "facing": "1",
+            "id": 4,
+            "facing": "4",
             "upDirection": "0"
         }
     ]
