@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edb7fa7eb861f495e86374a9ced4b6b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  direction: 0
-  negative: 0
+  direction: 1
+  negative: 1
 --- !u!1001 &245463661953295140
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -81,6 +81,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7540497417289569414, guid: ee78bf8bbf690420cbe0ddeac8af7354,
+        type: 3}
+      propertyPath: isStatic
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7540497417289569414, guid: ee78bf8bbf690420cbe0ddeac8af7354,
+        type: 3}
+      propertyPath: endObject
+      value: 
+      objectReference: {fileID: 8037669229646876425}
+    - target: {fileID: -7540497417289569414, guid: ee78bf8bbf690420cbe0ddeac8af7354,
+        type: 3}
+      propertyPath: endPoint_1.x
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: -7540497417289569414, guid: ee78bf8bbf690420cbe0ddeac8af7354,
+        type: 3}
+      propertyPath: endPoint_2.x
+      value: -2
+      objectReference: {fileID: 0}
     - target: {fileID: 8852165589699789215, guid: ee78bf8bbf690420cbe0ddeac8af7354,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -97,6 +117,12 @@ PrefabInstance:
 --- !u!1 &2988328130615069239 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3031102304311863571, guid: ee78bf8bbf690420cbe0ddeac8af7354,
+    type: 3}
+  m_PrefabInstance: {fileID: 245463661953295140}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8037669229646876425 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7846262801349651501, guid: ee78bf8bbf690420cbe0ddeac8af7354,
     type: 3}
   m_PrefabInstance: {fileID: 245463661953295140}
   m_PrefabAsset: {fileID: 0}

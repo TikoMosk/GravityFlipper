@@ -108,8 +108,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isStatic: 0
   speed: 2
-  endPoint_1: {x: 0, y: 0, z: -2.5}
-  endPoint_2: {x: 0, y: -1, z: 0}
+  endPoint_1: {x: -2, y: 0, z: 0}
+  endPoint_2: {x: 0.1, y: 0, z: 0}
   endObject: {fileID: 4718871796962747983}
 --- !u!1 &4718871796962747983
 GameObject:
