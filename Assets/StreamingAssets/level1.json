@@ -127,7 +127,7 @@
             "x": 3,
             "y": 0,
             "z": 7,
-            "id": 7,
+            "id": 1,
             "facing": "",
             "upDirection": ""
         },
@@ -143,6 +143,14 @@
             "x": 3,
             "y": 1,
             "z": 1,
+            "id": 6,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 3,
+            "y": 1,
+            "z": 7,
             "id": 6,
             "facing": "",
             "upDirection": ""
@@ -174,14 +182,6 @@
         {
             "x": 6,
             "y": 0,
-            "z": 3,
-            "id": 1,
-            "facing": "",
-            "upDirection": ""
-        },
-        {
-            "x": 6,
-            "y": 0,
             "z": 5,
             "id": 1,
             "facing": "",
@@ -198,21 +198,13 @@
         {
             "x": 7,
             "y": 0,
-            "z": 5,
+            "z": 4,
             "id": 1,
             "facing": "",
             "upDirection": ""
         },
         {
-            "x": 8,
-            "y": 0,
-            "z": 3,
-            "id": 1,
-            "facing": "",
-            "upDirection": ""
-        },
-        {
-            "x": 8,
+            "x": 7,
             "y": 0,
             "z": 5,
             "id": 1,
@@ -220,9 +212,33 @@
             "upDirection": ""
         },
         {
-            "x": 9,
+            "x": 7,
             "y": 0,
-            "z": 3,
+            "z": 6,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 7,
+            "y": 0,
+            "z": 7,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 7,
+            "y": 1,
+            "z": 7,
+            "id": 1,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 8,
+            "y": 0,
+            "z": 5,
             "id": 1,
             "facing": "",
             "upDirection": ""
@@ -266,7 +282,7 @@
             "y": 1,
             "z": 3,
             "id": 4,
-            "facing": "3",
+            "facing": "1",
             "upDirection": "0"
         }
     ]

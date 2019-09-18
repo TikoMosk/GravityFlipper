@@ -6,18 +6,18 @@ using UnityEngine.UI;
 
 public class LevelLoader : MonoBehaviour
 {
-    public void LoadLevel(int sceneIndex)
+    public void LoadLevel(string s)
     {
-        LoadAsynchronously(sceneIndex);
+        LoadAsynchronously(s);
     }
 
-    IEnumerator LoadAsynchronously(int sceneIndex)
+    IEnumerator LoadAsynchronously(string s)
     {
-        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
+        AsyncOperation operation = SceneManager.LoadSceneAsync(s);
 
         while(!operation.isDone)
         {
-            float progress = Mathf.Clamp01(sceneIndex);
+            //float progress = Mathf.Clamp01(s);
 
 
             yield return null;
