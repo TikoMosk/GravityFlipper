@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4010829844681173812}
   - component: {fileID: -1673869463064247317}
   - component: {fileID: 2924452144397693049}
+  - component: {fileID: 257336992220637401}
   m_Layer: 0
   m_Name: Lever
   m_TagString: Level
@@ -63,6 +64,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   child: {fileID: 9191719106095060257}
+--- !u!114 &257336992220637401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 140189548194257191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3e5c0c947b49465394d1cd50b4a6900, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1026456205461352339
 GameObject:
   m_ObjectHideFlags: 0

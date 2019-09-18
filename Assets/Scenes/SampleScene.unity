@@ -297,7 +297,7 @@ MonoBehaviour:
     description: 
     prefab: {fileID: 140189548194257191, guid: b33c2361c8bdf47f8993759240519584, type: 3}
     icon: {fileID: 0}
-    category: 2
+    category: 3
   - id: 7
     nodeMember: 0
     colliderActive: 1
@@ -308,15 +308,6 @@ MonoBehaviour:
     category: 3
   - id: 8
     nodeMember: 0
-    colliderActive: 1
-    name: MovingBlock
-    description: 
-    prefab: {fileID: 6579708977595957042, guid: 8d009cd761a8842d984805a281ded3d1,
-      type: 3}
-    icon: {fileID: 0}
-    category: 2
-  - id: 9
-    nodeMember: 0
     colliderActive: 0
     name: Laser
     description: 
@@ -324,7 +315,7 @@ MonoBehaviour:
       type: 3}
     icon: {fileID: 0}
     category: 2
-  - id: 10
+  - id: 9
     nodeMember: 0
     colliderActive: 0
     name: Light Source
@@ -380,7 +371,7 @@ MonoBehaviour:
   - id: 5
     nodeMember: 1
     colliderActive: 1
-    name: RotatingLaser
+    name: Rotating Laser
     description: 
     prefab: {fileID: 544911279223743345, guid: 8228e68d8ebfd4734916da9e8de6cea6, type: 3}
     icon: {fileID: 0}

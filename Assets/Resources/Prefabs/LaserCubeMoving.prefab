@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2386359967116977952}
   - component: {fileID: -6293889124710183713}
   - component: {fileID: -1621031863298585262}
+  - component: {fileID: 7224827379483680886}
   m_Layer: 0
   m_Name: LaserCubeMoving
   m_TagString: Untagged
@@ -121,6 +122,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   endPos: {x: 5, y: 0, z: 0}
+--- !u!114 &7224827379483680886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8797690601998793987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 104635b6c85edd24bbdd0a0c4e858b9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8973462521659116476
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -26,7 +26,8 @@ public class LevelDesignController : MonoBehaviour {
     Quaternion rotation;
     Node selectedNode;
     Node connectNode;
-
+    private List<GameObject> worldCanvasObjects;
+    private NodeToggler toggler;
 
     enum Tool { None, Place, Remove, Move, Rotate, Connector };
     private Tool tool;
@@ -37,6 +38,7 @@ public class LevelDesignController : MonoBehaviour {
 
     private void Start() {
         GameController.Game.LevelController.RegisterToLevelCreated(DeleteGizmos);
+        worldCanvasObjects = new List<GameObject>();
     }
     public void SetTool(int toolNumber) {
         if (tool == (Tool)toolNumber) {
@@ -55,8 +57,16 @@ public class LevelDesignController : MonoBehaviour {
                 Destroy(rotateGizmo);
             }
         }
-        if(tool == Tool.Connector) {
+        if (tool == Tool.Connector) {
             connectState = false;
+            foreach (GameObject g in worldCanvasObjects) {
+                g.SetActive(true);
+            }
+        }
+        if (tool != Tool.Connector) {
+            foreach (GameObject g in worldCanvasObjects) {
+                g.SetActive(false);
+            }
         }
 
         ToggleToolOptions();
@@ -64,7 +74,7 @@ public class LevelDesignController : MonoBehaviour {
     public void OnNodeClick(Node n, Node.Direction dir) {
         if (tool == Tool.Place) {
             Node placeNode = GameController.Game.CurrentLevel.GetNodeInTheDirection(n, dir);
-            if (placeNode != null) {
+            if (placeNode != null && placeNode.Id == 0 && placeNode.NodeMember == null) {
                 if (placeNodeMember) {
 
                     GameController.Game.LevelController.Level.AddNodeMember(placeNode.X, placeNode.Y, placeNode.Z, blockId, Node.Direction.FORWARD, Node.Direction.UP);
@@ -110,31 +120,50 @@ public class LevelDesignController : MonoBehaviour {
         }
         if (tool == Tool.Connector) {
             GameObject c = GameObject.Find("WorldSpaceCanvas");
-            if (n.NodeGraphic.GetComponent<NodeToggler>() != null && connectState == false) {
-                connectNode = n;
-                connectState = true;
+            if(connectState == false) {
+                
+                if (n.NodeMember != null && n.NodeMember.NodeObjectGraphic.GetComponent<NodeToggler>() != null) {
+                    toggler = n.NodeMember.NodeObjectGraphic.GetComponent<NodeToggler>();
+                    connectState = true;
+                    Debug.Log("1");
+                }
+                else if(n.NodeGraphic != null && n.NodeGraphic.GetComponent<NodeToggler>() != null){
+                    toggler = n.NodeGraphic.GetComponent<NodeToggler>();
+                    connectState = true;
+                    
+                }
             }
-            else if (n.NodeGraphic.GetComponent<NodeToggleReceiver>() != null && connectState == true) {
-                if (connectNode != null) {
-                    connectNode.NodeGraphic.GetComponent<NodeToggler>().ConnectNode(n);
-                    GameObject ic1 = Instantiate(connectorToggleIcon, c.transform);
-                    GameObject ic2 = Instantiate(connectorReceiverIcon, c.transform);
-                    ic1.transform.position = connectNode.GetPosition();
-                    ic2.transform.position = n.GetPosition();
-                    connectState = false;
+            else {
+                if (toggler != null) {
+                    if (toggler.CheckIfSameConnectedNode(n)) {
+                        toggler.ConnectNode(n);
+                        GameObject ic1 = Instantiate(connectorToggleIcon, c.transform);
+                        GameObject ic2 = Instantiate(connectorReceiverIcon, c.transform);
+                        Material mat = Instantiate(ic1.GetComponent<Image>().material);
+                        Color32 col = new Color32((byte)Random.Range(0, 255), (byte)Random.Range(0, 255), (byte)Random.Range(0, 255), 255);
+                        mat.SetColor("_MainColor", col);
+                        ic1.transform.position = toggler.GetPos(); 
+                        ic2.transform.position = toggler.GetConnectNodePosition();
+                        ic1.GetComponent<Image>().material = mat;
+                        ic2.GetComponent<Image>().material = mat;
+                        connectState = false;
+                        worldCanvasObjects.Add(ic1);
+                        worldCanvasObjects.Add(ic2);
+                    }
+                    else {
+                        connectState = false;
+                    }
+
                 }
                 
-            }
-            if (connectState == false) {
+            } 
+            if(connectState == false) {
                 connectToolText.text = "Select the node that is your toggler";
             }
-            else if (connectState == true) {
+            else {
                 connectToolText.text = "Select the node that is going to get triggered";
             }
         }
-
-
-
     }
     public void RotateBlock(bool plus) {
         int degrees = 90;
@@ -156,17 +185,28 @@ public class LevelDesignController : MonoBehaviour {
             return;
         }
         if (isNodeMember) {
-            NodeMember sNodeMember = selectedNode.NodeMember;
-            GameController.Game.CurrentLevel.MoveObject(selectedNode, destNode);
+            if(destNode.Id == 0 && selectedNode.Id == 0) {
+                NodeMember sNodeMember = selectedNode.NodeMember;
+                sNodeMember.LocationNode = destNode;
+                GameController.Game.CurrentLevel.MoveMemberNoAnimation(selectedNode, destNode);
+                selectedNode = destNode;
+                moveGizmo.transform.position = selectedNode.GetPosition();
+            }
 
         }
         else {
-            /*Node a = selectedNode;
-            selectedNode.SetNodeType(0);*/
-
+            if(destNode.NodeMember == null) {
+                int selectedNodeId = selectedNode.Id;
+                int destNodeId = destNode.Id;
+                selectedNode.SetNodeType(0);
+                destNode.SetNodeType(0);
+                selectedNode.SetNodeType(destNodeId);
+                destNode.SetNodeType(selectedNodeId);
+                selectedNode = destNode;
+                moveGizmo.transform.position = selectedNode.GetPosition();
+            }
         }
-        selectedNode = destNode;
-        moveGizmo.transform.position = selectedNode.GetPosition();
+        
     }
     public void ChangeRotationStyle(int style) {
         if (rotateVertical != style) {
