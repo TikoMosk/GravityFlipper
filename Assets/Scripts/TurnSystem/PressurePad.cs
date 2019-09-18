@@ -5,60 +5,41 @@ using UnityEngine;
 
 public class PressurePad : MonoBehaviour
 {
-    public bool pushed;
-    public MonoBehaviour friend;
-    public GameObject child;
-
+    private bool pushed;
+    private bool previousPushed;
+    Node currentNode;
     private void Start()
     {
         EventController.currentInstance.Register(Check);
+        currentNode = GameController.Game.CurrentLevel.GetNode(transform.position);
     }
-
+    private void OnDestroy() {
+        EventController.currentInstance.Remove(Check);
+    }
     private void Check()
     {
-        if (IsSmthOn())
-        {
-            if (!pushed)
-            {
-                pushed = true;
-                InvokeFriend();
-            }
+        if (IsSmthOn()) {
+            pushed = true;
         }
-        else
-        {
-            if (pushed)
-                InvokeFriend();
-
+        else {
             pushed = false;
         }
-
-        child.GetComponent<Animator>().SetBool("Enabled", pushed);
+        if(pushed != previousPushed) {
+            InvokeFriend();
+        }
+        previousPushed = pushed;
     }
 
     private void InvokeFriend()
     {
-        if (friend is ILeverFriend)
-            ((ILeverFriend)friend).Invoke();
+        GetComponent<NodeToggler>().Toggle();
     }
 
     private bool IsSmthOn()
     {
-        Node nextNode;
-        Transform side = GetComponentsInChildren<Transform>()[3];
-
-        if (side.gameObject.tag == "Side")
-        {
-            nextNode = GameController.Game.CurrentLevel.GetNode(side.position);
-            if (nextNode != null && nextNode.NodeMember != null)
-            {
-                if (nextNode.NodeMember.Id != 0)
-                {
-                    return true;
-                }
-            }
+        if(GameController.Game.CurrentLevel.GetNodeInTheDirection(currentNode,currentNode.UpDirection).NodeMember != null) {
+            return true;
         }
-
-
         return false;
     }
 }

@@ -65,7 +65,7 @@ public class LevelController : MonoBehaviour {
             }
         }
         level.AddNodeMember(5, 1, 5, 1, Node.Direction.FORWARD, Node.Direction.UP);
-        level.SetNode(5, 5, 5, 10);
+        level.SetNode(5, 5, 5, factory.GetIdByName("Light Source"));
         DestroyLevelGraphics();
         CreateLevelGraphics();
         onLevelCreated.Invoke();

@@ -18,7 +18,18 @@ public class NodeFactory : MonoBehaviour {
         List<NodeDetails> returnList = categorizedNodeList.Union(categorizedNodeMemberList).ToList<NodeDetails>();
         return returnList;
     }
-
+    public int GetIdByName(string name) {
+        var nodeDet = nodeDetailsList.Where(x => x.name == name);
+        var nodeMemberDet = nodeMemberDetailsList.Where(x => x.name == name);
+        List<NodeDetails> foundList = nodeDet.Union(nodeMemberDet).ToList<NodeDetails>();
+        if(foundList.Count > 0) {
+            return foundList[0].id;
+        }
+        else {
+            Debug.Log("No such Node or NodeMember found with given name " + name);
+            return -1;
+        }
+    }
     public NodeDetails GetNodeDetailsById(int id, bool nodeMember) {
         if (nodeMember) {
             return nodeMemberDetailsList[id];
