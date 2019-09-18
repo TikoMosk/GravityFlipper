@@ -84,13 +84,19 @@ public class Level
 
     public void MoveObject(Node node, Node dest)
     {
-        if (!node.HasSamePosition(dest) && dest.NodeMember == null)
-        {
+        MoveMemberLogically(node, dest);
+        dest.NodeMember.NodeObjectMoved(dest);
+    }
+    public void MoveMemberLogically(Node node, Node dest) {
+        if (!node.HasSamePosition(dest) && dest.NodeMember == null) {
             dest.NodeMember = node.NodeMember;
             dest.NodeMember.SetPosition(dest.X, dest.Y, dest.Z);
             node.NodeMember = null;
-            dest.NodeMember.NodeObjectMoved(dest);
         }
+    }
+    public void MoveMemberNoAnimation(Node node, Node dest) {
+        MoveMemberLogically(node, dest);
+        dest.NodeMember.NodeObjectGraphic.transform.position = dest.GetPosition();
     }
     public bool CanMoveObject(Node node, Node dest)
     {

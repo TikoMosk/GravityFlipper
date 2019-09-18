@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
@@ -30,6 +31,9 @@ public class GameController : MonoBehaviour
     private GameState gameState;
 
     public GameObject winWindow;
+    public GameObject loadingScreen;
+
+    public Slider slider;
 
     private void Awake()
     {
@@ -104,6 +108,7 @@ public class GameController : MonoBehaviour
         }
 
     }
+
     public void ChangeScene(string s)
     {
         try
@@ -117,7 +122,43 @@ public class GameController : MonoBehaviour
         }
 
         SceneManager.LoadScene(s);
+
     }
+
+    public void ChangeSceneLoading(string s)
+    {
+        try
+        {
+            SceneManager.GetSceneByName(s);
+        }
+        catch
+        {
+            Debug.LogError("Scene by the name " + s + " does not exist");
+            return;
+        }
+
+        StartCoroutine(LoadAsynchronously(s));
+
+    }
+
+    IEnumerator LoadAsynchronously(string s)
+    {
+        AsyncOperation operation = SceneManager.LoadSceneAsync(s);
+
+        loadingScreen.SetActive(true);
+
+        while (!operation.isDone)
+        {
+            float progress = Mathf.Clamp01(operation.progress / .9f);
+
+            slider.value = progress;
+
+            //progressText.text = progress * 100f + "%";
+
+            yield return null;
+        }
+    }
+
     public void ClickNode(Node n, Node.Direction dir)
     {
         CurrentGameState.OnNodeClick(n, dir);
