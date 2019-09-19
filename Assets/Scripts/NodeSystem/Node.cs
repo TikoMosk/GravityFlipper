@@ -27,10 +27,12 @@ public class Node
     private Action nodeTypeChanged;
     private Action nodeRotated;
     private bool colliderActive;
+    private bool walkable;
 
     private NodeGraphic nodeGraphic;
     public NodeGraphic NodeGraphic { get => nodeGraphic; set => nodeGraphic = value; }
     public bool ColliderActive { get => colliderActive; set => colliderActive = value; }
+    public bool Walkable { get => walkable; set => walkable = value; }
 
     public Node(Level level, int x, int y, int z, int type) {
         this.level = level;

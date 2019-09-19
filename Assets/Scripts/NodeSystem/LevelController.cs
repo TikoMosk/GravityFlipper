@@ -41,6 +41,9 @@ public class LevelController : MonoBehaviour {
         LaunchLevel(levelSerializer.LoadLevelLocal(levelName));
 
     }
+    public void LoadLevelFromServer(int levelId) {
+        LaunchLevel(levelSerializer.LoadLevelFromServer(levelId));
+    }
     public void LaunchLevel(Level level) {
         this.level = level;
         DestroyLevelGraphics();
@@ -92,8 +95,10 @@ public class LevelController : MonoBehaviour {
     }
     // Creates the NodeGraphic for the node at x,y,z
     private void CreateNodeGraphics(int x, int y, int z) {
+        NodeDetails nodeDetail = factory.GetNodeDetailsById(level.GetNode(x, y, z).Id, false);
+        Level.GetNode(x, y, z).Walkable = nodeDetail.walkable;
         if (factory.GetNodePrefabById(Level.GetNode(x, y, z).Id) != null) {
-            Level.GetNode(x, y, z).ColliderActive = factory.GetNodeDetailsById(level.GetNode(x, y, z).Id, false).colliderActive;
+            Level.GetNode(x, y, z).ColliderActive = nodeDetail.colliderActive;
             Quaternion nodeRotation = Quaternion.LookRotation(Dir.GetVectorByDirection(level.GetNode(x, y, z).Facing), Dir.GetVectorByDirection(level.GetNode(x, y, z).UpDirection));
             GameObject node_go = Instantiate(factory.GetNodePrefabById(Level.GetNode(x, y, z).Id), Level.GetNode(x, y, z).GetPosition(), nodeRotation);
             Level.GetNode(x, y, z).CreateGraphic(node_go);

@@ -230,6 +230,9 @@ public class LevelDesignController : MonoBehaviour {
             levelEditorPanel.SetActive(true);
             playModePanel.SetActive(false);
             GameController.Game.ChangeGameState("LevelEditorMode");
+            foreach (GameObject g in worldCanvasObjects) {
+                g.SetActive(true);
+            }
         }
         if (mode == 1) {
             levelEditorPanel.SetActive(false);
@@ -242,10 +245,14 @@ public class LevelDesignController : MonoBehaviour {
 
     }
     private void DeleteGizmos() {
+        foreach(GameObject g in worldCanvasObjects) {
+            g.SetActive(false);
+        }
         if (rotateGizmo != null) {
             Destroy(rotateGizmo);
         }
         if (moveGizmo != null) {
+            Debug.Log(moveGizmo);
             Destroy(moveGizmo);
         }
     }

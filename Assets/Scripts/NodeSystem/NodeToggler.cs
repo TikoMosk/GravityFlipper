@@ -36,15 +36,17 @@ public class NodeToggler : MonoBehaviour {
         return transform.position;
     }
     public void Toggle() {
-
-        pushed = !pushed;
-        child.GetComponent<Animator>().SetBool("Enabled", pushed);
-        if (connectedNode != null) {
-            connectedNode.NodeGraphic.GetComponent<NodeToggleReceiver>().Trigger();
+        if(GameController.Game.SmoothGraphics.AnimationCount == 0) {
+            pushed = !pushed;
+            child.GetComponent<Animator>().SetBool("Enabled", pushed);
+            if (connectedNode != null) {
+                connectedNode.NodeGraphic.GetComponent<NodeToggleReceiver>().Trigger();
+            }
+            else if (connectedNodeMember != null) {
+                connectedNodeMember.NodeObjectGraphic.GetComponent<NodeToggleReceiver>().Trigger();
+            }
         }
-        else if (connectedNodeMember != null) {
-            connectedNodeMember.NodeObjectGraphic.GetComponent<NodeToggleReceiver>().Trigger();
-        }
+        
 
     }
     public bool CheckIfSameConnectedNode(Node n) {

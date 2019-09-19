@@ -65,6 +65,7 @@ public class NodeDetails {
     public int id;
     public bool nodeMember;
     public bool colliderActive = true;
+    public bool walkable = true;
     public string name;
     public string description;
     public GameObject prefab;

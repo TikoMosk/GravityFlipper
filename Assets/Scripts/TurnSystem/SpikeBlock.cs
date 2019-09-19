@@ -3,18 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpikeBlock : MonoBehaviour, ILeverFriend
-{
+public class SpikeBlock : MonoBehaviour, ILeverFriend {
     public bool isOpen;
     Collider col;
+    Node currentNode;
 
-    private void Start()
-    {
+    private void Start() {
+        currentNode = GameController.Game.CurrentLevel.GetNode(transform.position);
         //EventController.currentInstance.Register(AwakeSpikes);
         col = GetComponent<Collider>();
 
-        if (isOpen)
-        {
+        if (isOpen) {
             AwakeSpikes();
         }
         GetComponent<NodeToggleReceiver>().RegisterToToggleReceiver(Invoke);
@@ -55,51 +54,40 @@ public class SpikeBlock : MonoBehaviour, ILeverFriend
     } */
 
 
-    public void AwakeSpikes()
-    {
-        col.enabled = false;
+    public void AwakeSpikes() {
         GetComponentInChildren<Animator>().SetBool("Enabled", true);
-        if(IsPlayerNear())
-        {
+        GameController.Game.CurrentLevel.GetNodeInTheDirection(currentNode, currentNode.UpDirection).Walkable = false;
+        if (IsPlayerNear()) {
             StartCoroutine(DestroyAfterAnimation());
         }
         isOpen = true;
     }
 
-    public void CloseSpikes()
-    {
-        col.enabled = true;
+    public void CloseSpikes() {
         GetComponentInChildren<Animator>().SetBool("Enabled", false);
-        if(IsPlayerNear())
-        {
+        GameController.Game.CurrentLevel.GetNodeInTheDirection(currentNode, currentNode.UpDirection).Walkable = true;
+        if (IsPlayerNear()) {
             StartCoroutine(DestroyAfterAnimation());
         }
         isOpen = false;
     }
 
-    IEnumerator DestroyAfterAnimation()
-    {
-        while (GameController.Game.SmoothGraphics.AnimationCount > 0)
-        {
+    IEnumerator DestroyAfterAnimation() {
+        while (GameController.Game.SmoothGraphics.AnimationCount > 0) {
             yield return null;
         }
         PauseMenu.currentInstance.GameOver();
         GetComponentInParent<NodeMemberGraphic>().Node.NodeMember = null;
     }
 
-    public bool IsPlayerNear()
-    {
+    public bool IsPlayerNear() {
         Transform[] sides = GetComponentsInChildren<Transform>();
         Node nextNode;
-        foreach (Transform side in sides)
-        {
-            if (side.gameObject.tag == "Side")
-            {
+        foreach (Transform side in sides) {
+            if (side.gameObject.tag == "Side") {
                 nextNode = GameController.Game.CurrentLevel.GetNode(side.position);
-                if (nextNode != null && nextNode.NodeMember != null)
-                {
-                    if (nextNode.NodeMember.Id == 1)
-                    {
+                if (nextNode != null && nextNode.NodeMember != null) {
+                    if (nextNode.NodeMember.Id == 1) {
                         return true;
                     }
                 }
@@ -109,10 +97,9 @@ public class SpikeBlock : MonoBehaviour, ILeverFriend
         return false;
     }
 
-    public void Invoke()
-    {
+    public void Invoke() {
         if (isOpen) CloseSpikes();
-        else        AwakeSpikes();
+        else AwakeSpikes();
     }
 
 
