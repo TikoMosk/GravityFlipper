@@ -75,17 +75,13 @@ public class LevelSerializer : MonoBehaviour
         {
             Debug.Log(con.error);
         }
-        else
-        {
-            Debug.Log("Download is done.");
-            byte[] results = con.downloadHandler.data;
-        }
 
         if (con.isDone)
         {
             tempLevel = con.downloadHandler.text;
             File.WriteAllText(savePath, tempLevel);
             //LoadLevelLocal(savePath);
+            Debug.Log("Download is done.");
         }
     }
 
@@ -98,15 +94,15 @@ public class LevelSerializer : MonoBehaviour
 
     private void OnGUI()
     {
-        if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 25, 200, 20), "Level-1"))
-        {
-            LoadLevelFromServer(1);
-        }
-
-        if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 50, 200, 20), "Level-2"))
-        {
-            LoadLevelFromServer(2);
-        }
+        //if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 25, 200, 20), "Level-1"))
+        //{
+        //    LoadLevelFromServer(1);
+        //}
+        //
+        //if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 50, 200, 20), "Level-2"))
+        //{
+        //    LoadLevelFromServer(2);
+        //}
     }
 
     public void SaveLevelLocal(string path, Level level)
