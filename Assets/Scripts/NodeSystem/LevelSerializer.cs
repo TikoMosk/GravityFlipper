@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class LevelSerializer : MonoBehaviour
 {
+    private string tempLevel;
     private string path;
     Level level;
 
@@ -31,7 +32,7 @@ public class LevelSerializer : MonoBehaviour
             }
         }
     }
-    
+
     public void LoadDevLevel(int levelNumber)
     {
         string serverURL = "localhost:3000/";
@@ -46,10 +47,10 @@ public class LevelSerializer : MonoBehaviour
 
         if (Application.platform == RuntimePlatform.Android)
         {
-            WWW reader = new WWW(filePath);
+            UnityWebRequest reader = new UnityWebRequest(filePath);
 
             while (!reader.isDone) { }
-            result = reader.text;
+            result = reader.downloadHandler.text;
         }
         else
         {
@@ -62,11 +63,50 @@ public class LevelSerializer : MonoBehaviour
         return level;
     }
 
-    public Level LoadLevelFromServer(int levelID)
+    IEnumerator GetLevelData(int levelid)
     {
-        string savePath = @"/Users/hp/gravityflipper/Assets/StreamingAssets/";
+        string url = @"http://localhost:3000/getData/" + levelid;
+        string savePath = @"/Users/hp/gravityflipper/Assets/StreamingAssets/" + "level" + levelid + ".json";
+
+        UnityWebRequest con = UnityWebRequest.Get(url);
+        yield return con.SendWebRequest();
+
+        if (con.isNetworkError || con.isHttpError)
+        {
+            Debug.Log(con.error);
+        }
+        else
+        {
+            Debug.Log("Download is done.");
+            byte[] results = con.downloadHandler.data;
+        }
+
+        if (con.isDone)
+        {
+            tempLevel = con.downloadHandler.text;
+            File.WriteAllText(savePath, tempLevel);
+            //LoadLevelLocal(savePath);
+        }
+    }
+
+    public Level LoadLevelFromServer(int levelid)
+    {
+        StartCoroutine(GetLevelData(levelid));
 
         return null;
+    }
+
+    private void OnGUI()
+    {
+        if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 25, 200, 20), "Level-1"))
+        {
+            LoadLevelFromServer(1);
+        }
+
+        if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 50, 200, 20), "Level-2"))
+        {
+            LoadLevelFromServer(2);
+        }
     }
 
     public void SaveLevelLocal(string path, Level level)
