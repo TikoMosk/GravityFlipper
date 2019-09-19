@@ -59,17 +59,25 @@ public class LevelDesignController : MonoBehaviour {
         }
         if (tool == Tool.Connector) {
             connectState = false;
-            foreach (GameObject g in worldCanvasObjects) {
-                g.SetActive(true);
-            }
+            UpdateConnectionGraphics();
         }
         if (tool != Tool.Connector) {
-            foreach (GameObject g in worldCanvasObjects) {
-                g.SetActive(false);
-            }
+            DestroyCanvasObjects();
         }
 
         ToggleToolOptions();
+    }
+    public void DestroyCanvasObjects() {
+        GameObject c = GameObject.Find("WorldSpaceCanvas");
+        for (int i = 0; i < c.transform.childCount; i++) {
+            Destroy(c.transform.GetChild(i).gameObject);
+        }
+    }
+    public void SetCanvasObjectsActive(bool active) {
+        GameObject c = GameObject.Find("WorldSpaceCanvas");
+        for (int i = 0; i < c.transform.childCount; i++) {
+           c.transform.GetChild(i).gameObject.SetActive(active);
+        }
     }
     public void OnNodeClick(Node n, Node.Direction dir) {
         if (tool == Tool.Place) {
@@ -119,13 +127,11 @@ public class LevelDesignController : MonoBehaviour {
 
         }
         if (tool == Tool.Connector) {
-            GameObject c = GameObject.Find("WorldSpaceCanvas");
-            if(connectState == false) {
+            if (connectState == false) {
                 
                 if (n.NodeMember != null && n.NodeMember.NodeObjectGraphic.GetComponent<NodeToggler>() != null) {
                     toggler = n.NodeMember.NodeObjectGraphic.GetComponent<NodeToggler>();
                     connectState = true;
-                    Debug.Log("1");
                 }
                 else if(n.NodeGraphic != null && n.NodeGraphic.GetComponent<NodeToggler>() != null){
                     toggler = n.NodeGraphic.GetComponent<NodeToggler>();
@@ -137,18 +143,8 @@ public class LevelDesignController : MonoBehaviour {
                 if (toggler != null) {
                     if (toggler.CheckIfSameConnectedNode(n)) {
                         toggler.ConnectNode(n);
-                        GameObject ic1 = Instantiate(connectorToggleIcon, c.transform);
-                        GameObject ic2 = Instantiate(connectorReceiverIcon, c.transform);
-                        Material mat = Instantiate(ic1.GetComponent<Image>().material);
-                        Color32 col = new Color32((byte)Random.Range(0, 255), (byte)Random.Range(0, 255), (byte)Random.Range(0, 255), 255);
-                        mat.SetColor("_MainColor", col);
-                        ic1.transform.position = toggler.GetPos(); 
-                        ic2.transform.position = toggler.GetConnectNodePosition();
-                        ic1.GetComponent<Image>().material = mat;
-                        ic2.GetComponent<Image>().material = mat;
                         connectState = false;
-                        worldCanvasObjects.Add(ic1);
-                        worldCanvasObjects.Add(ic2);
+                        UpdateConnectionGraphics();
                     }
                     else {
                         connectState = false;
@@ -163,6 +159,25 @@ public class LevelDesignController : MonoBehaviour {
             else {
                 connectToolText.text = "Select the node that is going to get triggered";
             }
+            
+
+        }
+    }
+    private void UpdateConnectionGraphics() {
+        GameObject c = GameObject.Find("WorldSpaceCanvas");
+        for (int i = 0; i < worldCanvasObjects.Count; i++) {
+            Destroy(worldCanvasObjects[i]);
+        }
+        for (int i = 0; i < GameController.Game.CurrentLevel.NodeTogglers.Count; i++) {
+            GameObject ic1 = Instantiate(connectorToggleIcon, c.transform);
+            GameObject ic2 = Instantiate(connectorReceiverIcon, c.transform);
+            Material mat = Instantiate(ic1.GetComponent<Image>().material);
+            Color32 col = new Color32((byte)Random.Range(0, 255), (byte)Random.Range(0, 255), (byte)Random.Range(0, 255), 255);
+            mat.SetColor("_MainColor", col);
+            ic1.transform.position = GameController.Game.CurrentLevel.NodeTogglers[i].GetPos();
+            ic2.transform.position = GameController.Game.CurrentLevel.NodeTogglers[i].GetConnectNodePosition();
+            ic1.GetComponent<Image>().material = mat;
+            ic2.GetComponent<Image>().material = mat;
         }
     }
     public void RotateBlock(bool plus) {
@@ -231,7 +246,9 @@ public class LevelDesignController : MonoBehaviour {
             playModePanel.SetActive(false);
             GameController.Game.ChangeGameState("LevelEditorMode");
             foreach (GameObject g in worldCanvasObjects) {
-                g.SetActive(true);
+                if (g != null) {
+                    g.SetActive(true);
+                }
             }
         }
         if (mode == 1) {
@@ -246,7 +263,10 @@ public class LevelDesignController : MonoBehaviour {
     }
     private void DeleteGizmos() {
         foreach(GameObject g in worldCanvasObjects) {
-            g.SetActive(false);
+            if(g != null) {
+                g.SetActive(false);
+            }
+           
         }
         if (rotateGizmo != null) {
             Destroy(rotateGizmo);

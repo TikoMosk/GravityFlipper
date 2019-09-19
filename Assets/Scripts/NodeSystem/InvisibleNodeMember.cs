@@ -21,10 +21,10 @@ public class InvisibleNodeMember : MonoBehaviour {
     }
     private void UpdateVisibility() {
         if(GameController.Game.CurrentGameState is TestMode) {
-            icon.SetActive(false);
+            GameController.Game.LevelDesignController.SetCanvasObjectsActive(false);
         }
         else if (GameController.Game.CurrentGameState is LevelEditorMode) {
-            icon.SetActive(true);
+            GameController.Game.LevelDesignController.SetCanvasObjectsActive(true);
         }
     }
     private void OnDestroy() {

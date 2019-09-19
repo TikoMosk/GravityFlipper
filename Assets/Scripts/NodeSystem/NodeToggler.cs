@@ -10,6 +10,7 @@ public class NodeToggler : MonoBehaviour {
     public void ConnectNode(Node n) {
         connectedNode = null;
         connectedNodeMember = null;
+        GameController.Game.CurrentLevel.RemoveNodeConnection(this);
         if (n.NodeGraphic != null) {
             if (n.NodeGraphic.GetComponent<NodeToggleReceiver>() != null) {
                 connectedNode = n;
@@ -20,6 +21,10 @@ public class NodeToggler : MonoBehaviour {
                 connectedNodeMember = n.NodeMember;
             }
         }
+        else {
+            return;
+        }
+        GameController.Game.CurrentLevel.AddNodeConnection(this);
     }
     public Vector3 GetConnectNodePosition() {
         if (connectedNode != null) {

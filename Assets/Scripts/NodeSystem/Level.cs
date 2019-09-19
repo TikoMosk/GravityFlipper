@@ -11,8 +11,8 @@ public class Level
     public int Length { get { return length; } }
     public Node[,,] NodeMap { get => nodeMap; }
     public Player Player { get => player; set => player = value; }
-
-
+    public List<NodeToggler> NodeTogglers { get => nodeTogglers;}
+    public List<NodeConnection> NodeConnections { get => nodeConnections; set => nodeConnections = value; }
 
     private Node[,,] nodeMap;
     private int width;
@@ -22,6 +22,8 @@ public class Level
     private Node exitNode;
     private Player player;
     private List<NodeMember> enemies;
+    private List<NodeToggler> nodeTogglers;
+    private List<NodeConnection> nodeConnections;
 
     public Level(int width, int height, int length)
     {
@@ -52,6 +54,8 @@ public class Level
     }
     public void InitializeLevel()
     {
+        nodeTogglers = new List<NodeToggler>();
+        nodeConnections = new List<NodeConnection>();
         nodeMap = new Node[width, length, height];
         for (int x = 0; x < width; x++)
         {
@@ -63,6 +67,18 @@ public class Level
                     nodeMap[x, y, z] = n;
                 }
             }
+        }
+    }
+    public void AddNodeConnection(NodeToggler toggler) {
+
+        NodeTogglers.Add(toggler);
+    }
+    public void ResetNodeConnections() {
+        nodeTogglers = null;
+    }
+    public void RemoveNodeConnection(NodeToggler toggler) {
+        if(NodeTogglers.Contains(toggler)) {
+            NodeTogglers.Remove(toggler);
         }
     }
 

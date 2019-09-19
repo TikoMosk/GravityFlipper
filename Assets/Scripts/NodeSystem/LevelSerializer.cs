@@ -95,18 +95,18 @@ public class LevelSerializer : MonoBehaviour
         return null;
     }
 
-    private void OnGUI()
-    {
-        if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 25, 200, 20), "Level-1"))
-        {
-            LoadLevelFromServer(1);
-        }
+    //private void OnGUI()
+    //{
+    //    if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 25, 200, 20), "Level-1"))
+    //    {
+    //        LoadLevelFromServer(1);
+    //    }
         
-        //if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 50, 200, 20), "Level-2"))
-        //{
-        //    LoadLevelFromServer(2);
-        //}
-    }
+    //    if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 50, 200, 20), "Level-2"))
+    //    {
+    //        LoadLevelFromServer(2);
+    //    }
+    //}
 
     public void SaveLevelLocal(string path, Level level)
     {
@@ -152,6 +152,13 @@ public class LevelSerializer : MonoBehaviour
                 }
             }
         }
+        for (int i = 0; i < level.NodeTogglers.Count; i++) {
+            NodeToggler t = level.NodeTogglers[i];
+            Vector3 tPos = t.GetPos();
+            Vector3 rPos = t.GetConnectNodePosition();
+            NodeConnection connection = new NodeConnection((int)tPos.x, (int)tPos.y, (int)tPos.z, (int)rPos.x, (int)rPos.y, (int)rPos.z);
+            levelData.nodeConnections.Add(connection);
+        }
         return levelData;
     }
 
@@ -189,6 +196,9 @@ public class LevelSerializer : MonoBehaviour
             }
 
             level.AddNodeMember(x, y, z, nodeMemberData.id, facing, upDirection);
+        }
+        for (int i = 0; i < levelData.nodeConnections.Count; i++) {
+            level.NodeConnections.Add(levelData.nodeConnections[i]);
         }
 
         return level;
@@ -270,9 +280,32 @@ public class LevelData
         this.length = length;
         nodeDataList = new List<NodeData>();
         nodeMemberDataList = new List<NodeMemberData>();
+        nodeConnections = new List<NodeConnection>();
     }
     [SerializeField]
     public List<NodeData> nodeDataList;
     [SerializeField]
     public List<NodeMemberData> nodeMemberDataList;
+    [SerializeField]
+    public List<NodeConnection> nodeConnections;
+}
+[System.Serializable]
+public class NodeConnection {
+    [System.Serializable]
+    public struct NodeCoordinate {
+        public int x;
+        public int y;
+        public int z;
+    }
+    public NodeCoordinate toggler;
+    public NodeCoordinate receiver;
+    public NodeConnection(int x1, int y1, int z1, int x2, int y2, int z2) {
+        toggler.x = x1;
+        toggler.y = y1;
+        toggler.z = z1;
+        receiver.x = x2;
+        receiver.y = y2;
+        receiver.z = z2;
+
+    }
 }

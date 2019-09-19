@@ -48,8 +48,10 @@ public class LevelController : MonoBehaviour {
         this.level = level;
         DestroyLevelGraphics();
         CreateLevelGraphics();
-
         onLevelCreated.Invoke();
+        SetUpNodeConnections();
+
+        
         GameController.Game.CameraController.ResetCamera();
     }
     public void LoadDeveloperLevel() {
@@ -92,6 +94,34 @@ public class LevelController : MonoBehaviour {
                 }
             }
         }
+    }
+
+    //Sets the NodeConnections 
+    private void SetUpNodeConnections() {
+        for (int i = 0; i < level.NodeConnections.Count; i++) {
+            NodeConnection.NodeCoordinate tCoord = level.NodeConnections[i].toggler;
+            NodeConnection.NodeCoordinate rCoord = level.NodeConnections[i].receiver;
+            NodeToggler t = GetToggler(tCoord.x, tCoord.y, tCoord.z);
+            if(t != null) {
+               t.ConnectNode(level.GetNode(rCoord.x, rCoord.y, rCoord.z));
+            }
+            level.NodeTogglers.Add(t);
+        }
+    }
+    private NodeToggler GetToggler(int x, int y, int z) {
+        Node n = level.GetNode(x, y, z);
+        NodeToggler t = null;
+        if (n.NodeGraphic != null) {
+            if (n.NodeGraphic.GetComponent<NodeToggler>() != null) {
+                t = n.NodeGraphic.GetComponent<NodeToggler>();
+            }
+        }
+        else if (n.NodeMember != null) {
+            if (n.NodeMember.NodeObjectGraphic.GetComponent<NodeToggler>() != null) {
+                t = n.NodeMember.NodeObjectGraphic.GetComponent<NodeToggler>();
+            }
+        }
+        return t;
     }
     // Creates the NodeGraphic for the node at x,y,z
     private void CreateNodeGraphics(int x, int y, int z) {
