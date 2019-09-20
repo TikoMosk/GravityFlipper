@@ -49,14 +49,26 @@ public class Level
                 }
             }
         }
+        
         nodeMap = newMap;
+        for (int i = 0; i < nodeTogglers.Count; i++) {
+            if (GetNode(nodeTogglers[i].GetPos()) == null || GetNode(nodeTogglers[i].GetConnectNodePosition()) == null) {
+                nodeTogglers.Remove(nodeTogglers[i]);
+            }
+        }
+        for (int i = 0; i < nodeConnections.Count; i++) {
+            if(GetNode(nodeConnections[i].receiver.x, nodeConnections[i].receiver.y, nodeConnections[i].receiver.z) == null || GetNode(nodeConnections[i].toggler.x, nodeConnections[i].toggler.y, nodeConnections[i].toggler.z) == null) {
+                nodeConnections.Remove(nodeConnections[i]);
+            }
+        }
         GameController.Game.LevelController.LaunchLevel(this);
     }
     public void InitializeLevel()
     {
         nodeTogglers = new List<NodeToggler>();
         nodeConnections = new List<NodeConnection>();
-        nodeMap = new Node[width, length, height];
+        nodeMap = new Node[width, height, length];
+
         for (int x = 0; x < width; x++)
         {
             for (int y = 0; y < height; y++)

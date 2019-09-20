@@ -7,6 +7,8 @@ public class NodeToggler : MonoBehaviour {
     private Node connectedNode;
     private NodeMember connectedNodeMember;
     private bool pushed;
+    private Color32 connectionColor = Color.clear;
+    public Color32 ConnectionColor { get => connectionColor; set => connectionColor = value; }
     public void ConnectNode(Node n) {
         connectedNode = null;
         connectedNodeMember = null;
@@ -34,7 +36,7 @@ public class NodeToggler : MonoBehaviour {
             return connectedNodeMember.LocationNode.GetPosition();
         }
         else {
-            return Vector3.zero;
+            return new Vector3(-1,-1,-1);
         }
     }
     public Vector3 GetPos() {

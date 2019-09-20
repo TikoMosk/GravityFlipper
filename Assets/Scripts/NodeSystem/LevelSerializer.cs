@@ -110,6 +110,9 @@ public class LevelSerializer : MonoBehaviour
 
     public void SaveLevelLocal(string path, Level level)
     {
+        if(level == null) {
+            return;
+        }
         string filePath = Path.Combine(Application.streamingAssetsPath, path);
         LevelData levelData = SerializeLevel(level);
         string str = JsonUtility.ToJson(levelData, true);

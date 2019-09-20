@@ -12,7 +12,12 @@ public class NodeGraphic : MonoBehaviour
 
     public void GetClicked(Node.Direction dir)
     {
-        onClick?.Invoke(dir);
+        if(GameController.Game.CurrentGameState is LevelEditorMode) {
+            onClick?.Invoke(dir);
+        }
+        else if(node.CanWalkOnIt) {
+            onClick?.Invoke(dir);
+        }
     }
     private void Start() {
         GameController.Game.RegisterForGameStateChanged(ColliderUpdate);
