@@ -232,12 +232,13 @@ public class LevelDesignController : MonoBehaviour {
             if (isNodeMember) {
                 NodeMember sNodeMember = selectedNode.NodeMember;
                 NodeMemberGraphic sNodeMemberGraphic = sNodeMember.NodeObjectGraphic;
-                sNodeMemberGraphic.transform.Rotate(rotateGizmo.transform.up, degrees);
+                sNodeMemberGraphic.transform.Rotate(rotateGizmo.transform.up, degrees,Space.World);
                 sNodeMember.SetRotation(Dir.GetDirectionByVector(sNodeMemberGraphic.transform.forward), Dir.GetDirectionByVector(sNodeMemberGraphic.transform.up));
             }
             else {
                 NodeGraphic sNodeGraphic = selectedNode.NodeGraphic;
-                sNodeGraphic.transform.Rotate(rotateGizmo.transform.up, degrees);
+                
+                sNodeGraphic.transform.Rotate(rotateGizmo.transform.up, degrees, Space.World);
                 selectedNode.SetRotation(Dir.GetDirectionByVector(sNodeGraphic.transform.forward), Dir.GetDirectionByVector(sNodeGraphic.transform.up));
             }
         }
@@ -259,13 +260,14 @@ public class LevelDesignController : MonoBehaviour {
 
         }
         else {
-            if(destNode.NodeMember == null) {
-                int selectedNodeId = selectedNode.Id;
-                int destNodeId = destNode.Id;
+            if(destNode.NodeMember == null && destNode.Id == 0) {
+                Node selectedNodeTemp = selectedNode;
+                
+                destNode.SetNodeType(selectedNodeTemp.Id);
+                destNode.NodeGraphic = selectedNodeTemp.NodeGraphic;
+                selectedNode.SetRotation(Node.Direction.FORWARD, Node.Direction.UP);
+                destNode.SetRotation(selectedNodeTemp.Facing, selectedNodeTemp.UpDirection);
                 selectedNode.SetNodeType(0);
-                destNode.SetNodeType(0);
-                selectedNode.SetNodeType(destNodeId);
-                destNode.SetNodeType(selectedNodeId);
                 selectedNode = destNode;
                 moveGizmo.transform.position = selectedNode.GetPosition();
             }
@@ -295,7 +297,7 @@ public class LevelDesignController : MonoBehaviour {
             playModePanel.SetActive(false);
             GameController.Game.ChangeGameState("LevelEditorMode");
             UpdateConnectionGraphics();
-            SetTool((int)tool);
+            SetTool((int)Tool.None);
         }
         if (mode == 1) {
             levelEditorPanel.SetActive(false);

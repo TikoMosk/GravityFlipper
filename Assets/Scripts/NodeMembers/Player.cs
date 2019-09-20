@@ -40,7 +40,9 @@ public class Player : MonoBehaviour {
         Node destinationNode = GameController.Game.CurrentLevel.GetNodeInTheDirection(n, dir);
         facing = playerMember.Facing;
         upDirection = playerMember.UpDirection;
-
+        if(!destinationNode.Walkable) {
+            return;
+        }
 
         Vector3 forwardVector = Vector3.zero;
         if (previousClickedNode == null) {

@@ -32,14 +32,14 @@ public class LaserVolumetric : MonoBehaviour
                     vl.EndPos = transform.InverseTransformPoint(hit.point); ;
                     if (hit.collider.gameObject.GetComponentInParent<NodeMemberGraphic>() != null)
                     {
-                        Destroy(hit.collider.gameObject.GetComponentInParent<NodeMemberGraphic>().gameObject);
-                        //Destroy(transform.GetComponentInParent<Transform>().gameObject);
-                        //Destroy(hit.collider.transform.parent.gameObject);
-                        if (hit.collider.gameObject.GetComponentInParent<NodeMemberGraphic>().Node.NodeMember.Id == 1)
-                        {
-                            PauseMenu.currentInstance.GameOver();
+                        if (GameController.Game.LevelController.Factory.isLiving(hit.collider.gameObject.GetComponentInParent<NodeMemberGraphic>().Node.NodeMember.Id)) {
+                            Destroy(hit.collider.gameObject.GetComponentInParent<NodeMemberGraphic>().gameObject);
+                            if (hit.collider.gameObject.GetComponentInParent<NodeMemberGraphic>().Node.NodeMember.Id == 1) {
+                                PauseMenu.currentInstance.GameOver();
+                            }
+                            hit.collider.gameObject.GetComponentInParent<NodeMemberGraphic>().Node.NodeMember = null;
                         }
-                        hit.collider.gameObject.GetComponentInParent<NodeMemberGraphic>().Node.NodeMember = null;
+                        
                     }
                 }
 

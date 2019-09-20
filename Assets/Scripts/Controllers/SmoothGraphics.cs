@@ -48,7 +48,6 @@ public class SmoothGraphics : MonoBehaviour {
             AnimationCount++;
             float startTime = Time.time;
             while (Time.time < startTime + overTime) {
-
                 obj.transform.rotation = Quaternion.Lerp(obj.transform.rotation, targetRotation, (Time.time - startTime) / overTime);
                 yield return null;
             }

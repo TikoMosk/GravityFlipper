@@ -16,8 +16,8 @@ public class Node
     public int Id { get { return id; } set { id = value; } }
     private Direction facing = Node.Direction.FORWARD;
     private Direction upDirection = Node.Direction.UP;
-    public Direction Facing { get { return facing; } }
-    public Direction UpDirection { get { return upDirection; } }
+    public Direction Facing { get { return facing; } set { facing = value; } }
+    public Direction UpDirection { get { return upDirection; } set { upDirection = value; } }
 
     public enum Direction { UP, FORWARD, DOWN , LEFT, RIGHT , BACK };
 

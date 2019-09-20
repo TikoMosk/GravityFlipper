@@ -7,6 +7,7 @@ public class LevelController : MonoBehaviour {
 
     private Level level;
     public Level Level { get => level; set => level = value; }
+    public NodeFactory Factory { get => factory; set => factory = value; }
 
     public LevelSerializer levelSerializer;
     private Action onLevelCreated;
@@ -21,7 +22,7 @@ public class LevelController : MonoBehaviour {
         public GameObject nodePrefab;
     }
     private void Awake() {
-        factory = FindObjectOfType<NodeFactory>();
+        Factory = FindObjectOfType<NodeFactory>();
     }
 
     public void ResizeLevel(int width, int height, int length) {
@@ -60,9 +61,17 @@ public class LevelController : MonoBehaviour {
     public void BuildEmptyLevel() {
         level = new Level(width, height, length);
         level.InitializeLevel();
-        for (int x = 0; x < width; x++) {
+        int minSize = 5;
+        if(width < minSize || height < minSize || length < minSize) {
+            Debug.Log("LEVEL SIZE TOO SMALL");
+            return;
+        }
+        int centerX = width / 2;
+        int centerY = height / 2;
+        int centerZ = length / 2;
+        for (int x = centerX - minSize / 2; x < centerX + minSize/2 + 1; x++) {
             for (int y = 0; y < height; y++) {
-                for (int z = 0; z < length; z++) {
+                for (int z = centerZ - minSize / 2; z < centerZ + minSize / 2 + 1; z++) {
                     if (y == 0) {
                         level.SetNode(x, y, z, 1);
                     }
@@ -70,7 +79,7 @@ public class LevelController : MonoBehaviour {
             }
         }
         level.AddNodeMember(5, 1, 5, 1, Node.Direction.FORWARD, Node.Direction.UP);
-        level.SetNode(5, 5, 5, factory.GetIdByName("Light Source"));
+        level.SetNode(5, 5, 5, Factory.GetIdByName("Light Source"));
         DestroyLevelGraphics();
         CreateLevelGraphics();
         onLevelCreated.Invoke();
@@ -125,13 +134,13 @@ public class LevelController : MonoBehaviour {
     }
     // Creates the NodeGraphic for the node at x,y,z
     private void CreateNodeGraphics(int x, int y, int z) {
-        NodeDetails nodeDetail = factory.GetNodeDetailsById(level.GetNode(x, y, z).Id, false);
+        NodeDetails nodeDetail = Factory.GetNodeDetailsById(level.GetNode(x, y, z).Id, false);
         Level.GetNode(x, y, z).Walkable = nodeDetail.walkable;
         Level.GetNode(x, y, z).CanWalkOnIt = nodeDetail.canWalkOnIt;
-        if (factory.GetNodePrefabById(Level.GetNode(x, y, z).Id) != null) {
+        if (Factory.GetNodePrefabById(Level.GetNode(x, y, z).Id) != null) {
             Level.GetNode(x, y, z).ColliderActive = nodeDetail.colliderActive;
             Quaternion nodeRotation = Quaternion.LookRotation(Dir.GetVectorByDirection(level.GetNode(x, y, z).Facing), Dir.GetVectorByDirection(level.GetNode(x, y, z).UpDirection));
-            GameObject node_go = Instantiate(factory.GetNodePrefabById(Level.GetNode(x, y, z).Id), Level.GetNode(x, y, z).GetPosition(), nodeRotation);
+            GameObject node_go = Instantiate(Factory.GetNodePrefabById(Level.GetNode(x, y, z).Id), Level.GetNode(x, y, z).GetPosition(), nodeRotation);
             Level.GetNode(x, y, z).CreateGraphic(node_go);
             Level.GetNode(x, y, z).NodeGraphic.transform.parent = this.transform;
             Level.GetNode(x, y, z).NodeGraphic.Node = Level.GetNode(x, y, z);
@@ -147,11 +156,11 @@ public class LevelController : MonoBehaviour {
     // Creates the moveableObject graphic for the node at x,y,z
     public void CreateNodeMemberGraphic(int x, int y, int z) {
         if (Level.GetNode(x, y, z).NodeMember != null) {
-            if (factory.GetNodeMemberPrefabById(Level.GetNode(x, y, z).NodeMember.Id) != null) {
+            if (Factory.GetNodeMemberPrefabById(Level.GetNode(x, y, z).NodeMember.Id) != null) {
 
                 NodeMember nodeObject = Level.GetNode(x, y, z).NodeMember;
-                GameObject nodeObject_GameObject = Instantiate(factory.GetNodeMemberPrefabById(nodeObject.Id), Level.GetNode(x, y, z).GetPosition(), Quaternion.identity);
-                Level.GetNode(x, y, z).NodeMember.ColliderActive = factory.GetNodeDetailsById(level.GetNode(x, y, z).NodeMember.Id, true).colliderActive;
+                GameObject nodeObject_GameObject = Instantiate(Factory.GetNodeMemberPrefabById(nodeObject.Id), Level.GetNode(x, y, z).GetPosition(), Quaternion.identity);
+                Level.GetNode(x, y, z).NodeMember.ColliderActive = Factory.GetNodeDetailsById(level.GetNode(x, y, z).NodeMember.Id, true).colliderActive;
 
 
                 nodeObject_GameObject.transform.parent = this.transform;

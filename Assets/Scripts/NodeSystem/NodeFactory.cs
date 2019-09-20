@@ -30,6 +30,13 @@ public class NodeFactory : MonoBehaviour {
             return -1;
         }
     }
+    public bool isLiving(int id) {
+        NodeDetails det = GetNodeDetailsById(id, true);
+        if(det.category == Category.Living) {
+            return true;
+        }
+        return false;
+    }
     public NodeDetails GetNodeDetailsById(int id, bool nodeMember) {
         if (nodeMember) {
             return nodeMemberDetailsList[id];
