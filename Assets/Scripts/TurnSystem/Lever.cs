@@ -21,7 +21,7 @@ public class Lever : MonoBehaviour
         return false;
     }
     private void OnMouseDown() {
-        if (IsPlayerNear()) {
+        if (IsPlayerNear() && !(GameController.Game.CurrentGameState is LevelEditorMode)) {
             GetComponent<NodeToggler>().Toggle();
         }
     }

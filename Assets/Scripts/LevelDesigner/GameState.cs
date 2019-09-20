@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface GameState 
-{
+public interface IGameState {
 
     void OnNodeClick(Node n, Node.Direction dir);
 

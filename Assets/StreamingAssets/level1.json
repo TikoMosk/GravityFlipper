@@ -248,584 +248,584 @@
             "y": 1,
             "z": 7,
             "id": 6,
-            "facing": "",
-            "upDirection": ""
+            "facing": "4",
+            "upDirection": "0"
         },
         {
             "x": 3,
             "y": 0,
             "z": 0,
             "id": 1,
-            "facing": "",
-            "upDirection": ""
+            "facing": "4",
+            "upDirection": "0"
         },
         {
             "x": 3,
             "y": 0,
             "z": 1,
             "id": 1,
-            "facing": "",
-            "upDirection": ""
+            "facing": "4",
+            "upDirection": "0"
         },
         {
             "x": 3,
             "y": 0,
             "z": 2,
             "id": 1,
-            "facing": "",
-            "upDirection": ""
+            "facing": "4",
+            "upDirection": "0"
         },
         {
             "x": 3,
             "y": 0,
             "z": 3,
             "id": 1,
-            "facing": "",
-            "upDirection": ""
+            "facing": "4",
+            "upDirection": "0"
         },
         {
             "x": 3,
             "y": 0,
             "z": 4,
             "id": 1,
-            "facing": "",
-            "upDirection": ""
+            "facing": "4",
+            "upDirection": "0"
         },
         {
             "x": 3,
             "y": 0,
             "z": 5,
             "id": 1,
-            "facing": "",
-            "upDirection": ""
+            "facing": "4",
+            "upDirection": "0"
         },
         {
             "x": 3,
             "y": 0,
             "z": 6,
             "id": 1,
-            "facing": "",
-            "upDirection": ""
+            "facing": "4",
+            "upDirection": "0"
         },
         {
             "x": 3,
             "y": 0,
             "z": 7,
             "id": 1,
-            "facing": "",
-            "upDirection": ""
+            "facing": "4",
+            "upDirection": "0"
         },
         {
             "x": 3,
             "y": 0,
             "z": 8,
             "id": 1,
-            "facing": "",
-            "upDirection": ""
+            "facing": "4",
+            "upDirection": "0"
         },
         {
             "x": 3,
             "y": 0,
             "z": 9,
             "id": 1,
-            "facing": "",
-            "upDirection": ""
+            "facing": "4",
+            "upDirection": "0"
         },
         {
             "x": 4,
             "y": 0,
             "z": 0,
             "id": 1,
-            "facing": "",
-            "upDirection": ""
+            "facing": "4",
+            "upDirection": "0"
         },
         {
             "x": 4,
             "y": 0,
             "z": 1,
             "id": 1,
-            "facing": "",
-            "upDirection": ""
+            "facing": "4",
+            "upDirection": "0"
         },
         {
             "x": 4,
             "y": 0,
             "z": 2,
             "id": 1,
-            "facing": "",
-            "upDirection": ""
+            "facing": "4",
+            "upDirection": "0"
         },
         {
             "x": 4,
             "y": 0,
             "z": 3,
             "id": 1,
-            "facing": "",
-            "upDirection": ""
+            "facing": "4",
+            "upDirection": "0"
         },
         {
             "x": 4,
             "y": 0,
             "z": 4,
             "id": 1,
-            "facing": "",
-            "upDirection": ""
+            "facing": "4",
+            "upDirection": "0"
         },
         {
             "x": 4,
             "y": 0,
             "z": 5,
             "id": 1,
-            "facing": "",
-            "upDirection": ""
+            "facing": "4",
+            "upDirection": "0"
         },
         {
             "x": 4,
             "y": 0,
             "z": 6,
             "id": 1,
-            "facing": "",
-            "upDirection": ""
+            "facing": "4",
+            "upDirection": "0"
         },
         {
             "x": 4,
             "y": 0,
             "z": 7,
             "id": 1,
-            "facing": "",
-            "upDirection": ""
+            "facing": "4",
+            "upDirection": "0"
         },
         {
             "x": 4,
             "y": 0,
             "z": 8,
             "id": 1,
-            "facing": "",
-            "upDirection": ""
+            "facing": "4",
+            "upDirection": "0"
         },
         {
             "x": 4,
             "y": 0,
             "z": 9,
             "id": 1,
-            "facing": "",
-            "upDirection": ""
+            "facing": "4",
+            "upDirection": "0"
         },
         {
-            "x": 4,
-            "y": 1,
+            "x": 5,
+            "y": 0,
+            "z": 0,
+            "id": 1,
+            "facing": "4",
+            "upDirection": "0"
+        },
+        {
+            "x": 5,
+            "y": 0,
+            "z": 1,
+            "id": 1,
+            "facing": "4",
+            "upDirection": "0"
+        },
+        {
+            "x": 5,
+            "y": 0,
+            "z": 2,
+            "id": 1,
+            "facing": "4",
+            "upDirection": "0"
+        },
+        {
+            "x": 5,
+            "y": 0,
+            "z": 3,
+            "id": 1,
+            "facing": "4",
+            "upDirection": "0"
+        },
+        {
+            "x": 5,
+            "y": 0,
             "z": 4,
+            "id": 1,
+            "facing": "4",
+            "upDirection": "0"
+        },
+        {
+            "x": 5,
+            "y": 0,
+            "z": 5,
+            "id": 1,
+            "facing": "4",
+            "upDirection": "0"
+        },
+        {
+            "x": 5,
+            "y": 0,
+            "z": 6,
+            "id": 1,
+            "facing": "4",
+            "upDirection": "0"
+        },
+        {
+            "x": 5,
+            "y": 0,
+            "z": 7,
+            "id": 1,
+            "facing": "4",
+            "upDirection": "0"
+        },
+        {
+            "x": 5,
+            "y": 0,
+            "z": 8,
+            "id": 1,
+            "facing": "4",
+            "upDirection": "0"
+        },
+        {
+            "x": 5,
+            "y": 0,
+            "z": 9,
+            "id": 1,
+            "facing": "4",
+            "upDirection": "0"
+        },
+        {
+            "x": 5,
+            "y": 3,
+            "z": 5,
             "id": 5,
-            "facing": "",
-            "upDirection": ""
-        },
-        {
-            "x": 5,
-            "y": 0,
-            "z": 0,
-            "id": 1,
-            "facing": "",
-            "upDirection": ""
-        },
-        {
-            "x": 5,
-            "y": 0,
-            "z": 1,
-            "id": 1,
-            "facing": "",
-            "upDirection": ""
-        },
-        {
-            "x": 5,
-            "y": 0,
-            "z": 2,
-            "id": 1,
-            "facing": "",
-            "upDirection": ""
-        },
-        {
-            "x": 5,
-            "y": 0,
-            "z": 3,
-            "id": 1,
-            "facing": "",
-            "upDirection": ""
-        },
-        {
-            "x": 5,
-            "y": 0,
-            "z": 4,
-            "id": 1,
-            "facing": "",
-            "upDirection": ""
-        },
-        {
-            "x": 5,
-            "y": 0,
-            "z": 5,
-            "id": 1,
-            "facing": "",
-            "upDirection": ""
-        },
-        {
-            "x": 5,
-            "y": 0,
-            "z": 6,
-            "id": 1,
-            "facing": "",
-            "upDirection": ""
-        },
-        {
-            "x": 5,
-            "y": 0,
-            "z": 7,
-            "id": 1,
-            "facing": "",
-            "upDirection": ""
-        },
-        {
-            "x": 5,
-            "y": 0,
-            "z": 8,
-            "id": 1,
-            "facing": "",
-            "upDirection": ""
-        },
-        {
-            "x": 5,
-            "y": 0,
-            "z": 9,
-            "id": 1,
-            "facing": "",
-            "upDirection": ""
+            "facing": "4",
+            "upDirection": "0"
         },
         {
             "x": 5,
             "y": 5,
             "z": 5,
             "id": 9,
-            "facing": "",
-            "upDirection": ""
+            "facing": "4",
+            "upDirection": "0"
         },
         {
             "x": 6,
             "y": 0,
             "z": 0,
             "id": 1,
-            "facing": "",
-            "upDirection": ""
+            "facing": "4",
+            "upDirection": "0"
         },
         {
             "x": 6,
             "y": 0,
             "z": 1,
             "id": 1,
-            "facing": "",
-            "upDirection": ""
+            "facing": "4",
+            "upDirection": "0"
         },
         {
             "x": 6,
             "y": 0,
             "z": 2,
             "id": 1,
-            "facing": "",
-            "upDirection": ""
+            "facing": "4",
+            "upDirection": "0"
         },
         {
             "x": 6,
             "y": 0,
             "z": 3,
             "id": 1,
-            "facing": "",
-            "upDirection": ""
+            "facing": "4",
+            "upDirection": "0"
         },
         {
             "x": 6,
             "y": 0,
             "z": 4,
             "id": 1,
-            "facing": "",
-            "upDirection": ""
+            "facing": "4",
+            "upDirection": "0"
         },
         {
             "x": 6,
             "y": 0,
             "z": 5,
             "id": 1,
-            "facing": "",
-            "upDirection": ""
+            "facing": "4",
+            "upDirection": "0"
         },
         {
             "x": 6,
             "y": 0,
             "z": 6,
             "id": 1,
-            "facing": "",
-            "upDirection": ""
+            "facing": "4",
+            "upDirection": "0"
         },
         {
             "x": 6,
             "y": 0,
             "z": 7,
             "id": 1,
-            "facing": "",
-            "upDirection": ""
+            "facing": "4",
+            "upDirection": "0"
         },
         {
             "x": 6,
             "y": 0,
             "z": 8,
             "id": 1,
-            "facing": "",
-            "upDirection": ""
+            "facing": "4",
+            "upDirection": "0"
         },
         {
             "x": 6,
             "y": 0,
             "z": 9,
             "id": 1,
-            "facing": "",
-            "upDirection": ""
+            "facing": "4",
+            "upDirection": "0"
         },
         {
             "x": 7,
             "y": 0,
             "z": 0,
             "id": 1,
-            "facing": "",
-            "upDirection": ""
+            "facing": "4",
+            "upDirection": "0"
         },
         {
             "x": 7,
             "y": 0,
             "z": 1,
             "id": 1,
-            "facing": "",
-            "upDirection": ""
+            "facing": "4",
+            "upDirection": "0"
         },
         {
             "x": 7,
             "y": 0,
             "z": 2,
             "id": 1,
-            "facing": "",
-            "upDirection": ""
+            "facing": "4",
+            "upDirection": "0"
         },
         {
             "x": 7,
             "y": 0,
             "z": 3,
             "id": 1,
-            "facing": "",
-            "upDirection": ""
+            "facing": "4",
+            "upDirection": "0"
         },
         {
             "x": 7,
             "y": 0,
             "z": 4,
             "id": 1,
-            "facing": "",
-            "upDirection": ""
+            "facing": "4",
+            "upDirection": "0"
         },
         {
             "x": 7,
             "y": 0,
             "z": 5,
             "id": 1,
-            "facing": "",
-            "upDirection": ""
+            "facing": "4",
+            "upDirection": "0"
         },
         {
             "x": 7,
             "y": 0,
             "z": 6,
             "id": 1,
-            "facing": "",
-            "upDirection": ""
+            "facing": "4",
+            "upDirection": "0"
         },
         {
             "x": 7,
             "y": 0,
             "z": 7,
             "id": 1,
-            "facing": "",
-            "upDirection": ""
+            "facing": "4",
+            "upDirection": "0"
         },
         {
             "x": 7,
             "y": 0,
             "z": 8,
             "id": 1,
-            "facing": "",
-            "upDirection": ""
+            "facing": "4",
+            "upDirection": "0"
         },
         {
             "x": 7,
             "y": 0,
             "z": 9,
             "id": 1,
-            "facing": "",
-            "upDirection": ""
+            "facing": "4",
+            "upDirection": "0"
         },
         {
             "x": 8,
             "y": 0,
             "z": 0,
             "id": 1,
-            "facing": "",
-            "upDirection": ""
+            "facing": "4",
+            "upDirection": "0"
         },
         {
             "x": 8,
             "y": 0,
             "z": 1,
             "id": 1,
-            "facing": "",
-            "upDirection": ""
+            "facing": "4",
+            "upDirection": "0"
         },
         {
             "x": 8,
             "y": 0,
             "z": 2,
             "id": 1,
-            "facing": "",
-            "upDirection": ""
+            "facing": "4",
+            "upDirection": "0"
         },
         {
             "x": 8,
             "y": 0,
             "z": 3,
             "id": 1,
-            "facing": "",
-            "upDirection": ""
+            "facing": "4",
+            "upDirection": "0"
         },
         {
             "x": 8,
             "y": 0,
             "z": 4,
             "id": 1,
-            "facing": "",
-            "upDirection": ""
+            "facing": "4",
+            "upDirection": "0"
         },
         {
             "x": 8,
             "y": 0,
             "z": 5,
             "id": 1,
-            "facing": "",
-            "upDirection": ""
+            "facing": "4",
+            "upDirection": "0"
         },
         {
             "x": 8,
             "y": 0,
             "z": 6,
             "id": 1,
-            "facing": "",
-            "upDirection": ""
+            "facing": "4",
+            "upDirection": "0"
         },
         {
             "x": 8,
             "y": 0,
             "z": 7,
             "id": 1,
-            "facing": "",
-            "upDirection": ""
+            "facing": "4",
+            "upDirection": "0"
         },
         {
             "x": 8,
             "y": 0,
             "z": 8,
             "id": 1,
-            "facing": "",
-            "upDirection": ""
+            "facing": "4",
+            "upDirection": "0"
         },
         {
             "x": 8,
             "y": 0,
             "z": 9,
             "id": 1,
-            "facing": "",
-            "upDirection": ""
+            "facing": "4",
+            "upDirection": "0"
         },
         {
             "x": 9,
             "y": 0,
             "z": 0,
             "id": 1,
-            "facing": "",
-            "upDirection": ""
+            "facing": "4",
+            "upDirection": "0"
         },
         {
             "x": 9,
             "y": 0,
             "z": 1,
             "id": 1,
-            "facing": "",
-            "upDirection": ""
+            "facing": "4",
+            "upDirection": "0"
         },
         {
             "x": 9,
             "y": 0,
             "z": 2,
             "id": 1,
-            "facing": "",
-            "upDirection": ""
+            "facing": "4",
+            "upDirection": "0"
         },
         {
             "x": 9,
             "y": 0,
             "z": 3,
             "id": 1,
-            "facing": "",
-            "upDirection": ""
+            "facing": "4",
+            "upDirection": "0"
         },
         {
             "x": 9,
             "y": 0,
             "z": 4,
             "id": 1,
-            "facing": "",
-            "upDirection": ""
+            "facing": "4",
+            "upDirection": "0"
         },
         {
             "x": 9,
             "y": 0,
             "z": 5,
             "id": 1,
-            "facing": "",
-            "upDirection": ""
+            "facing": "4",
+            "upDirection": "0"
         },
         {
             "x": 9,
             "y": 0,
             "z": 6,
             "id": 1,
-            "facing": "",
-            "upDirection": ""
+            "facing": "4",
+            "upDirection": "0"
         },
         {
             "x": 9,
             "y": 0,
             "z": 7,
             "id": 1,
-            "facing": "",
-            "upDirection": ""
+            "facing": "4",
+            "upDirection": "0"
         },
         {
             "x": 9,
             "y": 0,
             "z": 8,
             "id": 1,
-            "facing": "",
-            "upDirection": ""
+            "facing": "4",
+            "upDirection": "0"
         },
         {
             "x": 9,
             "y": 0,
             "z": 9,
             "id": 1,
-            "facing": "",
-            "upDirection": ""
+            "facing": "4",
+            "upDirection": "0"
         }
     ],
     "nodeMemberDataList": [
@@ -834,6 +834,14 @@
             "y": 1,
             "z": 6,
             "id": 1,
+            "facing": "3",
+            "upDirection": "0"
+        },
+        {
+            "x": 8,
+            "y": 1,
+            "z": 6,
+            "id": 6,
             "facing": "1",
             "upDirection": "0"
         }
@@ -846,21 +854,9 @@
                 "z": 7
             },
             "receiver": {
-                "x": 4,
-                "y": 1,
-                "z": 4
-            }
-        },
-        {
-            "toggler": {
-                "x": 2,
-                "y": 1,
-                "z": 7
-            },
-            "receiver": {
-                "x": 4,
-                "y": 1,
-                "z": 4
+                "x": 5,
+                "y": 3,
+                "z": 5
             }
         }
     ]

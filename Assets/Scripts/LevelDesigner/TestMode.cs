@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestMode : GameState
+public class TestMode : IGameState
 {
     public TestMode() {
         Time.timeScale = 1f;
