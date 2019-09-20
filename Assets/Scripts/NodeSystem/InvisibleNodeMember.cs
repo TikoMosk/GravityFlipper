@@ -14,6 +14,7 @@ public class InvisibleNodeMember : MonoBehaviour {
         if (GameObject.Find("WorldSpaceCanvas") != null) {
             canv = GameObject.Find("WorldSpaceCanvas");
             icon = Instantiate(iconPrefab, canv.transform);
+            icon.name = "invisible";
             icon.GetComponent<Image>().sprite = iconSprite;
 
             icon.SetActive(true);

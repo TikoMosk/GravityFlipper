@@ -38,7 +38,9 @@ public class CameraController : MonoBehaviour
     }
     public void ResetCamera()
     {
-        StartCoroutine(ResetCameraToPlayerDirection());
+        if (GameController.Game.CurrentLevel.Player != null) {
+            StartCoroutine(ResetCameraToPlayerDirection());
+        }
     }
     IEnumerator ResetCameraToPlayerDirection()
     {
@@ -61,7 +63,7 @@ public class CameraController : MonoBehaviour
     }
     public void CameraPositionPlayMode()
     {
-        if (playerExists)
+        if (playerExists && GameController.Game.CurrentLevel.Player != null && GameController.Game.CurrentLevel.Player.Graphic != null)
         {
             cameraObject.transform.position = GameController.Game.CurrentLevel.Player.Graphic.transform.position;
         }

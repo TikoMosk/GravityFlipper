@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelEditorMode : GameState
+public class LevelEditorMode : IGameState
 {
     Vector3 inputVector;
 

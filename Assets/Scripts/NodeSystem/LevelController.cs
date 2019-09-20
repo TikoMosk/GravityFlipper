@@ -25,9 +25,9 @@ public class LevelController : MonoBehaviour {
     }
 
     public void ResizeLevel(int width, int height, int length) {
-        this.width = width;
+        /*this.width = width;
         this.height = height;
-        this.length = length;
+        this.length = length;*/
     }
     public void SaveLevelLocal() {
         levelSerializer.SaveLevelLocal("level1.json", level);
@@ -127,6 +127,7 @@ public class LevelController : MonoBehaviour {
     private void CreateNodeGraphics(int x, int y, int z) {
         NodeDetails nodeDetail = factory.GetNodeDetailsById(level.GetNode(x, y, z).Id, false);
         Level.GetNode(x, y, z).Walkable = nodeDetail.walkable;
+        Level.GetNode(x, y, z).CanWalkOnIt = nodeDetail.canWalkOnIt;
         if (factory.GetNodePrefabById(Level.GetNode(x, y, z).Id) != null) {
             Level.GetNode(x, y, z).ColliderActive = nodeDetail.colliderActive;
             Quaternion nodeRotation = Quaternion.LookRotation(Dir.GetVectorByDirection(level.GetNode(x, y, z).Facing), Dir.GetVectorByDirection(level.GetNode(x, y, z).UpDirection));

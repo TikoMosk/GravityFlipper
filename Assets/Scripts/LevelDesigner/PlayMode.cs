@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayMode : GameState
+public class PlayMode : IGameState
 {
     public PlayMode()
     {

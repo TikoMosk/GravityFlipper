@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MenuMode : GameState {
+public class MenuMode : IGameState {
     public MenuMode() {
     }
     public void SetInputs(Vector3 camMovementVec) {

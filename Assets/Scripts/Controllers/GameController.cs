@@ -23,12 +23,12 @@ public class GameController : MonoBehaviour
     public SmoothGraphics SmoothGraphics { get { return smoothGraphics; } }
     public CameraController CameraController { get { return cameraController; } }
 
-    public GameState CurrentGameState { get => gameState; set => gameState = value; }
+    public IGameState CurrentGameState { get => gameState; set => gameState = value; }
 
     private Action onNextTurn;
     private Action onGameStateChanged;
 
-    private GameState gameState;
+    private IGameState gameState;
 
     public GameObject winWindow;
     public GameObject loadingScreen;
