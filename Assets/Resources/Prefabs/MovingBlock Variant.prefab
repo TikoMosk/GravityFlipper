@@ -25,8 +25,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edb7fa7eb861f495e86374a9ced4b6b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  direction: 0
-  negative: 0
+  direction: 1
+  negative: 1
 --- !u!114 &8252168148646553379
 MonoBehaviour:
   m_ObjectHideFlags: 0

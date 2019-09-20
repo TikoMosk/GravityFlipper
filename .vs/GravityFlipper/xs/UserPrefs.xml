@@ -1,7 +1,7 @@
 ﻿<Properties StartupConfiguration="{EB2208B8-2EA9-6054-617B-C009E9C4DA96}|">
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/NodeSystem/LevelSerializer.cs">
     <Files>
-      <File FileName="Assets/Scripts/NodeSystem/LevelSerializer.cs" Line="82" Column="13" />
+      <File FileName="Assets/Scripts/NodeSystem/LevelSerializer.cs" Line="101" Column="49" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">

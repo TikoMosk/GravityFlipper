@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class LevelSerializer : MonoBehaviour
 {
     private string tempLevel;
-    private string path;
+    private string usr = "";
     Level level;
 
     IEnumerator GetRequest(string url)
@@ -63,6 +63,36 @@ public class LevelSerializer : MonoBehaviour
         return level;
     }
 
+    IEnumerator InsertNewUser(string username)
+    {
+        string deviceInfo = SystemInfo.deviceUniqueIdentifier;
+        string url = @"http://localhost:3000/newUser";
+
+        var userData = new Dictionary<string, string>
+        {
+            { "user", username },
+            { "device", deviceInfo }
+        };
+
+        UnityWebRequest con = UnityWebRequest.Post(url, userData);
+        yield return con.SendWebRequest();
+
+        if (con.isNetworkError || con.isHttpError)
+        {
+            Debug.Log(con.error);
+        }
+        else if(con.isDone)
+        {
+            Debug.Log(con.url);
+            Debug.Log("Done.");
+        }
+    }
+
+    private void UploadNewUser(string username)
+    {
+        StartCoroutine(InsertNewUser(username));
+    }
+
     IEnumerator GetLevelData(int levelid)
     {
         string url = @"http://localhost:3000/getData/" + levelid;
@@ -95,18 +125,46 @@ public class LevelSerializer : MonoBehaviour
         return null;
     }
 
-    //private void OnGUI()
-    //{
-    //    if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 25, 200, 20), "Level-1"))
-    //    {
-    //        LoadLevelFromServer(1);
-    //    }
-        
-    //    if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 50, 200, 20), "Level-2"))
-    //    {
-    //        LoadLevelFromServer(2);
-    //    }
-    //}
+
+    private void OnGUI()
+    {
+        usr = GUI.TextField(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 100, 200, 20), usr, 12);
+
+        if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 25, 200, 20), "Username: " + usr))
+        {
+            StartCoroutine(InsertNewUser(usr));
+        }
+    }
+
+
+    IEnumerator SaveLevelData(int levelid, string path)
+    {
+        string url = @"http://localhost:3000/setData";
+
+        var levelData = new Dictionary<string, string>
+        {
+            { "levelid", levelid.ToString() },
+            { "path", path }
+        };
+
+        UnityWebRequest con = UnityWebRequest.Post(url, levelData);
+        yield return con.SendWebRequest();
+
+        if (con.isNetworkError || con.isHttpError)
+        {
+            Debug.Log(con.error);
+        }
+        else if (con.isDone)
+        {
+            Debug.Log(con.url);
+            Debug.Log("Done.");
+        }
+    }
+
+    public void SaveLevel(int levelid, string path)
+    {
+        StartCoroutine(SaveLevelData(levelid, path));
+    }
 
     public void SaveLevelLocal(string path, Level level)
     {
@@ -155,7 +213,8 @@ public class LevelSerializer : MonoBehaviour
                 }
             }
         }
-        for (int i = 0; i < level.NodeTogglers.Count; i++) {
+        for (int i = 0; i < level.NodeTogglers.Count; i++)
+        {
             NodeToggler t = level.NodeTogglers[i];
             Vector3 tPos = t.GetPos();
             Vector3 rPos = t.GetConnectNodePosition();
@@ -200,7 +259,8 @@ public class LevelSerializer : MonoBehaviour
 
             level.AddNodeMember(x, y, z, nodeMemberData.id, facing, upDirection);
         }
-        for (int i = 0; i < levelData.nodeConnections.Count; i++) {
+        for (int i = 0; i < levelData.nodeConnections.Count; i++)
+        {
             level.NodeConnections.Add(levelData.nodeConnections[i]);
         }
 
@@ -293,16 +353,19 @@ public class LevelData
     public List<NodeConnection> nodeConnections;
 }
 [System.Serializable]
-public class NodeConnection {
+public class NodeConnection
+{
     [System.Serializable]
-    public struct NodeCoordinate {
+    public struct NodeCoordinate
+    {
         public int x;
         public int y;
         public int z;
     }
     public NodeCoordinate toggler;
     public NodeCoordinate receiver;
-    public NodeConnection(int x1, int y1, int z1, int x2, int y2, int z2) {
+    public NodeConnection(int x1, int y1, int z1, int x2, int y2, int z2)
+    {
         toggler.x = x1;
         toggler.y = y1;
         toggler.z = z1;
