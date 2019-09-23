@@ -152,17 +152,17 @@ public class LevelSerializer : MonoBehaviour
 
     private void OnGUI()
     {
-        usr = GUI.TextField(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 100, 200, 20), usr, 12);
-
-        if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 25, 200, 20), "Username: " + usr))
-        {
-            UploadNewUser(usr);
-        }
-
-        if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 + 25, 200, 20), "UpdateUserLevels"))
-        {
-            UnlockLevels(17);
-        }
+        //usr = GUI.TextField(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 100, 200, 20), usr, 12);
+        //
+        //if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 25, 200, 20), "Username: " + usr))
+        //{
+        //    UploadNewUser(usr);
+        //}
+        //
+        //if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 + 50, 200, 20), "UpdateUserLevels"))
+        //{
+        //    UnlockLevels(15);
+        //}
     }
 
 
