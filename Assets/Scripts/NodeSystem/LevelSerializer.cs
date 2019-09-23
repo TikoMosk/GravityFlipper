@@ -74,21 +74,20 @@ public class LevelSerializer : MonoBehaviour
             { "device", deviceInfo }
         };
 
-        UnityWebRequest con = UnityWebRequest.Post(url, userData);
-        yield return con.SendWebRequest();
+        UnityWebRequest request = UnityWebRequest.Post(url, userData);
+        yield return request.SendWebRequest();
 
-        if (con.isNetworkError || con.isHttpError)
+        if (request.isNetworkError || request.isHttpError)
         {
-            Debug.Log(con.error);
+            Debug.Log(request.error);
         }
-        else if(con.isDone)
+        else if(request.isDone)
         {
-            Debug.Log(con.url);
+            Debug.Log(request.url);
             Debug.Log("Done.");
         }
     }
-
-    private void UploadNewUser(string username)
+    public void UploadNewUser(string username)
     {
         StartCoroutine(InsertNewUser(username));
     }
@@ -109,20 +108,45 @@ public class LevelSerializer : MonoBehaviour
         if (con.isDone)
         {
             tempLevel = con.downloadHandler.text;
-
             File.WriteAllText(savePath, tempLevel);
-
             tempLevel = null;
-            //LoadLevelLocal(savePath);
             Debug.Log("Download is done.");
         }
     }
-
     public Level LoadLevelFromServer(int levelid)
     {
         StartCoroutine(GetLevelData(levelid));
 
         return null;
+    }
+
+    IEnumerator UpdateUserLevels(int levelid)
+    {
+        string deviceInfo = SystemInfo.deviceUniqueIdentifier;
+        string url = @"http://localhost:3000/updateUserLevels";
+
+        var userData = new Dictionary<string, string>
+        {
+            { "levelid", levelid.ToString() },
+            { "device", deviceInfo }
+        };
+
+        UnityWebRequest request = UnityWebRequest.Post(url, userData);
+        yield return request.SendWebRequest();
+
+        if (request.isNetworkError || request.isHttpError)
+        {
+            Debug.Log(request.error);
+        }
+        else if (request.isDone)
+        {
+            Debug.Log(request.url);
+            Debug.Log("Done.");
+        }
+    }
+    public void UnlockLevels(int levelid)
+    {
+        StartCoroutine(UpdateUserLevels(levelid));
     }
 
 
@@ -132,7 +156,12 @@ public class LevelSerializer : MonoBehaviour
 
         if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 25, 200, 20), "Username: " + usr))
         {
-            StartCoroutine(InsertNewUser(usr));
+            UploadNewUser(usr);
+        }
+
+        if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 + 25, 200, 20), "UpdateUserLevels"))
+        {
+            UnlockLevels(17);
         }
     }
 
