@@ -111,7 +111,6 @@ public class MainMenu : MonoBehaviour
             aboutMenuUI.SetActive(false);
         }
 
-
     }
 
     public void OpenURL()
