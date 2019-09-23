@@ -3692,6 +3692,16 @@ MonoBehaviour:
     prefab: {fileID: 26214858199094090, guid: c4cd80c57c4ed474fbc33f24295c4a6d, type: 3}
     icon: {fileID: 21300000, guid: d60a1410e5db34043a8d7b6a98891968, type: 3}
     category: 4
+  - id: 10
+    nodeMember: 0
+    colliderActive: 1
+    walkable: 0
+    canWalkOnIt: 1
+    name: Unwalkable
+    description: Illuminates the scene
+    prefab: {fileID: 1262887121042734, guid: 15bd8294bd3f7c74d99b91dc502236af, type: 3}
+    icon: {fileID: 21300000, guid: d60a1410e5db34043a8d7b6a98891968, type: 3}
+    category: 4
   nodeMemberDetailsList:
   - id: 0
     nodeMember: 1
