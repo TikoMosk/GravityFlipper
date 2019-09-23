@@ -1,7 +1,7 @@
 ﻿<Properties StartupConfiguration="{EB2208B8-2EA9-6054-617B-C009E9C4DA96}|">
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/NodeSystem/LevelSerializer.cs">
     <Files>
-      <File FileName="Assets/Scripts/NodeSystem/LevelSerializer.cs" Line="101" Column="49" />
+      <File FileName="Assets/Scripts/NodeSystem/LevelSerializer.cs" Line="116" Column="50" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -23,7 +23,7 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="f74ea27c-3d8c-4d66-aef5-a1509aa167e1" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="3e2a0f23-7d93-45b9-b5da-78a211ea85ad" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
