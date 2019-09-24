@@ -6,6 +6,6 @@ public class Invisible : MonoBehaviour
 {
     private void Awake()
     {
-        //gameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
 }
