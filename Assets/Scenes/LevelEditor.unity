@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311947, g: 0.38074005, b: 0.35872722, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3692,6 +3692,16 @@ MonoBehaviour:
     prefab: {fileID: 26214858199094090, guid: c4cd80c57c4ed474fbc33f24295c4a6d, type: 3}
     icon: {fileID: 21300000, guid: d60a1410e5db34043a8d7b6a98891968, type: 3}
     category: 4
+  - id: 10
+    nodeMember: 0
+    colliderActive: 1
+    walkable: 1
+    canWalkOnIt: 1
+    name: BlockVariant
+    description: Illuminates the scene
+    prefab: {fileID: 43333802314482046, guid: 4c86820e3366d48dfac2c5e6d4fac88b, type: 3}
+    icon: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+    category: 0
   nodeMemberDetailsList:
   - id: 0
     nodeMember: 1

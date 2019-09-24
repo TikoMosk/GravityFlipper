@@ -41,6 +41,7 @@ public class LevelSerializer : MonoBehaviour
 
     public Level LoadLevelLocal(string path)
     {
+        Debug.Log("Local load");
         string result = null;
 
         string filePath = Path.Combine(Application.streamingAssetsPath, path);
