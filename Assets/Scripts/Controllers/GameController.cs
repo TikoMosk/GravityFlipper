@@ -164,9 +164,7 @@ public class GameController : MonoBehaviour
     }
     public void Win()
     {
-
         StartCoroutine(WaitForAnimationEnd());
-
     }
     IEnumerator WaitForAnimationEnd()
     {

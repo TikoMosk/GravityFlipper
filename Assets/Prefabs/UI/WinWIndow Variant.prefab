@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 2395963108515720639, guid: fe23eb30a4fc82f41b7c4454ad4f8f13,
         type: 3}
       propertyPath: m_Name
-      value: WinWIndow
+      value: WinWIndow Variant
       objectReference: {fileID: 0}
     - target: {fileID: 2395963108515720638, guid: fe23eb30a4fc82f41b7c4454ad4f8f13,
         type: 3}
