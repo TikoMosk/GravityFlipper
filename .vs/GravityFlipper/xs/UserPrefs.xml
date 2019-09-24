@@ -1,11 +1,7 @@
 ﻿<Properties StartupConfiguration="{EB2208B8-2EA9-6054-617B-C009E9C4DA96}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/NodeMembers/Player.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/NodeSystem/LevelSerializer.cs">
     <Files>
-      <File FileName="Assets/Scripts/NodeSystem/LevelSerializer.cs" Line="65" Column="6" />
-      <File FileName="Assets/ButtonSelector.cs" Line="11" Column="9" />
-      <File FileName="Assets/Invisible.cs" Line="9" Column="9" />
-      <File FileName="Assets/Scripts/Controllers/GameController.cs" Line="165" Column="19" />
-      <File FileName="Assets/Scripts/NodeMembers/Player.cs" Line="101" Column="32" />
+      <File FileName="Assets/Scripts/NodeSystem/LevelSerializer.cs" Line="181" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -14,10 +10,10 @@
             <Node name="Assets" expanded="True">
               <Node name="Scripts" expanded="True">
                 <Node name="Controllers" expanded="True" />
-                <Node name="NodeMembers" expanded="True">
-                  <Node name="Player.cs" selected="True" />
+                <Node name="NodeMembers" expanded="True" />
+                <Node name="NodeSystem" expanded="True">
+                  <Node name="LevelSerializer.cs" selected="True" />
                 </Node>
-                <Node name="NodeSystem" expanded="True" />
                 <Node name="TurnSystem" expanded="True" />
                 <Node name="UI" expanded="True" />
               </Node>

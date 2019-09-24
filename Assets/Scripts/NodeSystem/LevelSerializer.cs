@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class LevelSerializer : MonoBehaviour
 {
     private string tempLevel;
+    private string tempUsername;
     private string usr = "";
     Level level;
 
@@ -88,7 +89,7 @@ public class LevelSerializer : MonoBehaviour
             Debug.Log("Done.");
         }
     }
-    public void UploadNewUser(string username)
+    private void UploadNewUser(string username)
     {
         StartCoroutine(InsertNewUser(username));
     }
@@ -178,26 +179,46 @@ public class LevelSerializer : MonoBehaviour
         StartCoroutine(SaveLevelData(levelid, path));
     }
 
+    IEnumerator TryAddUsername(string username)
+    {
+        string url = @"http://localhost:3000/checkUsername/" + username;
 
-    //private void OnGUI()
-    //{
-    //    usr = GUI.TextField(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 100, 200, 20), usr, 12);
-    //
-    //    if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 25, 200, 20), "Username: " + usr))
-    //    {
-    //        UploadNewUser(usr);
-    //    }
-    //
-    //    if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 + 50, 200, 20), "UpdateUserLevels"))
-    //    {
-    //        UnlockLevels(15);
-    //    }
-    //
-    //    if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 + 75, 200, 20), "SaveJsonInDB"))
-    //    {
-    //        SaveLevelInDB(6, @"/Users/hp/gravityflipper/Assets/StreamingAssets/level6.json");
-    //    }
-    //}
+        UnityWebRequest request = UnityWebRequest.Get(url);
+        yield return request.SendWebRequest();
+
+        if (request.isNetworkError || request.isHttpError)
+        {
+            Debug.Log(request.error);
+        }
+
+        if (request.isDone)
+        {
+            tempUsername = request.downloadHandler.text;
+            if (tempUsername == "[]")
+            {
+                UploadNewUser(username);
+            }
+
+            Debug.Log(tempUsername);
+            Debug.Log("Download is done.");
+        }
+    }
+
+
+    private void OnGUI()
+    {
+        usr = GUI.TextField(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 100, 200, 20), usr, 12);
+    
+        if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 25, 200, 20), "Username: " + usr))
+        {
+            UploadNewUser(usr);
+        }
+    
+        if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 + 75, 200, 20), "use"))
+        {
+            StartCoroutine(TryAddUsername(usr));
+        }
+    }
 
 
     public void SaveLevelLocal(string path, Level level)
