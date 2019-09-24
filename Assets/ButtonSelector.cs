@@ -7,7 +7,9 @@ public class ButtonSelector : MonoBehaviour
 {
     public void OnClick()
     {
-        Debug.Log(numberOfLevels());
+        string path = "level" + numberOfLevels() + ".json";
+        
+        //GameController.Game.LevelController.LoadLevelFromProject(path);
     }
 
     public int numberOfLevels()
