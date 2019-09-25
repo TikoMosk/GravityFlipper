@@ -13,27 +13,36 @@ public class LevelDownloader : MonoBehaviour
 
     private LevelSerializer serializer;
 
-    private void Awake() {
+    private void Awake()
+    {
+        Debug.Log("kanchuma");
         DontDestroyOnLoad(this);
-        if (instance != null && instance != this) {
+        if (instance != null && instance != this)
+        {
             Destroy(this);
         }
-        else {
+        else
+        {
             instance = this;
         }
+
         serializer = FindObjectOfType<LevelSerializer>();
         DownloadLevels();
-
     }
-    void DownloadLevels() {
+
+    void DownloadLevels()
+    {
 
         LevelSelector selector = FindObjectOfType<LevelSelector>();
-        for (int i = 0; i < 2; i++) {
+        for (int i = 1; i < 3; i++)
+        {
             serializer.LoadLevelFromServer(i);
         }
         selector.AmountOfButtons(2);
     }
-    public void LoadLevel() {
+
+    public void LoadLevel()
+    {
         GameController.Game.ChangeScene("SampleScene");
     }
 }

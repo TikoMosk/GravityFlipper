@@ -45,7 +45,7 @@ public class LevelSerializer : MonoBehaviour
 
     public Level LoadLevelLocal(string path)
     {
-        Debug.Log("Local load");
+        
         string result = null;
 
         string filePath = Path.Combine(Application.streamingAssetsPath, path);
@@ -59,9 +59,12 @@ public class LevelSerializer : MonoBehaviour
         }
         else
         {
-
             result = File.ReadAllText(filePath);
-
+            if (result != null || result != "")
+            {
+                
+                Debug.Log(result);
+            }
         }
         LevelData levelData = JsonUtility.FromJson<LevelData>(result);
         Level level = DeserializeLevel(levelData);
@@ -113,6 +116,8 @@ public class LevelSerializer : MonoBehaviour
         if (con.isDone)
         {
             tempLevel = con.downloadHandler.text;
+            tempLevel = tempLevel.Remove(0, 29);
+            tempLevel = tempLevel.Remove(tempLevel.Length - 3, 3);
             File.WriteAllText(savePath, tempLevel);
             tempLevel = null;
             Debug.Log("Download is done.");

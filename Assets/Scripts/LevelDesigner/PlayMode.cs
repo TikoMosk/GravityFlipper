@@ -9,6 +9,7 @@ public class PlayMode : IGameState
         Time.timeScale = 1f;
         string path = "level" + LevelDownloader.Instance.LevelId + ".json";
         GameController.Game.LevelController.LoadLevelFromProject(path);
+        Debug.Log("AAAA");
         GameController.Game.CameraController.ResetCamera();
     }
 
@@ -29,5 +30,10 @@ public class PlayMode : IGameState
     public void Update()
     {
         GameController.Game.CameraController.CameraPositionPlayMode();
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            string path = "level" + LevelDownloader.Instance.LevelId + ".json";
+            GameController.Game.LevelController.LoadLevelFromProject(path);
+        }
     }
 }
