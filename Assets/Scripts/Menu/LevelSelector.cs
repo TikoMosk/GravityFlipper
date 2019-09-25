@@ -11,7 +11,7 @@ public class LevelSelector : MonoBehaviour
 
     public void Start()
     {
-        AmountOfButtons(10);
+        AmountOfButtons(12);
     }
 
     public void AmountOfButtons(int amount)

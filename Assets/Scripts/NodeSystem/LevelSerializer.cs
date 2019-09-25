@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class LevelSerializer : MonoBehaviour
 {
     private string tempLevel;
+    private string tempUsername;
     private string usr = "";
     Level level;
 
@@ -41,6 +42,7 @@ public class LevelSerializer : MonoBehaviour
 
     public Level LoadLevelLocal(string path)
     {
+        Debug.Log("Local load");
         string result = null;
 
         string filePath = Path.Combine(Application.streamingAssetsPath, path);
@@ -87,7 +89,7 @@ public class LevelSerializer : MonoBehaviour
             Debug.Log("Done.");
         }
     }
-    public void UploadNewUser(string username)
+    private void UploadNewUser(string username)
     {
         StartCoroutine(InsertNewUser(username));
     }
@@ -177,6 +179,47 @@ public class LevelSerializer : MonoBehaviour
         StartCoroutine(SaveLevelData(levelid, path));
     }
 
+    IEnumerator TryAddUsername(string username)
+    {
+        //todo
+        string url = @"http://localhost:3000/checkUsername/" + username;
+
+        UnityWebRequest request = UnityWebRequest.Get(url);
+        yield return request.SendWebRequest();
+
+        if (request.isNetworkError || request.isHttpError)
+        {
+            Debug.Log(request.error);
+        }
+
+        if (request.isDone)
+        {
+            tempUsername = request.downloadHandler.text;
+
+            Debug.Log(tempUsername);
+            Debug.Log("Download is done.");
+        }
+    }
+
+    IEnumerator GetUserLevels(string deviceid)
+    {
+        string url = @"http://localhost:3000/getLevelsCount/" + deviceid;
+
+        UnityWebRequest request = UnityWebRequest.Get(url);
+        yield return request.SendWebRequest();
+
+        if (request.isNetworkError || request.isHttpError)
+        {
+            Debug.Log(request.error);
+        }
+
+        if (request.isDone)
+        {
+            string s = request.downloadHandler.text;
+
+            Debug.Log(s);
+        }
+    }
 
     //private void OnGUI()
     //{
@@ -185,16 +228,6 @@ public class LevelSerializer : MonoBehaviour
     //    if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 25, 200, 20), "Username: " + usr))
     //    {
     //        UploadNewUser(usr);
-    //    }
-    //
-    //    if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 + 50, 200, 20), "UpdateUserLevels"))
-    //    {
-    //        UnlockLevels(15);
-    //    }
-    //
-    //    if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 + 75, 200, 20), "SaveJsonInDB"))
-    //    {
-    //        SaveLevelInDB(6, @"/Users/hp/gravityflipper/Assets/StreamingAssets/level6.json");
     //    }
     //}
 

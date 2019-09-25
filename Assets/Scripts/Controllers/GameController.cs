@@ -108,6 +108,11 @@ public class GameController : MonoBehaviour
 
     }
 
+    public void LoadCurrentScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
     public void ChangeScene(string s)
     {
         try
@@ -164,9 +169,7 @@ public class GameController : MonoBehaviour
     }
     public void Win()
     {
-
         StartCoroutine(WaitForAnimationEnd());
-
     }
     IEnumerator WaitForAnimationEnd()
     {
