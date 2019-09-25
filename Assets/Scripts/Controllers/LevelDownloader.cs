@@ -11,6 +11,8 @@ public class LevelDownloader : MonoBehaviour
     public static LevelDownloader Instance { get => instance; set => instance = value; }
     public int LevelId { get => levelId; set => levelId = value; }
 
+    private LevelSerializer serializer;
+
     private void Awake() {
         DontDestroyOnLoad(this);
         if (instance != null && instance != this) {
@@ -19,9 +21,19 @@ public class LevelDownloader : MonoBehaviour
         else {
             instance = this;
         }
+        serializer = FindObjectOfType<LevelSerializer>();
+        DownloadLevels();
+
     }
-    public void DownloadAndLoad() {
-        string path = "level" + levelId + ".json";
+    void DownloadLevels() {
+
+        LevelSelector selector = FindObjectOfType<LevelSelector>();
+        for (int i = 0; i < 2; i++) {
+            serializer.LoadLevelFromServer(i);
+        }
+        selector.AmountOfButtons(2);
+    }
+    public void LoadLevel() {
         GameController.Game.ChangeScene("SampleScene");
     }
 }

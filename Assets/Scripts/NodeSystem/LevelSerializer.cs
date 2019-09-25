@@ -12,7 +12,6 @@ public class LevelSerializer : MonoBehaviour
     private int levelsCount = 0;
     private string usr = "";
     private bool ret;
-    private bool get;
 
     Level level;
 
@@ -250,24 +249,23 @@ public class LevelSerializer : MonoBehaviour
     public int GetLevelsCount()
     {
         StartCoroutine(GetCount());
-
         return levelsCount;
     }
 
-    private void OnGUI()
-    {
-        usr = GUI.TextField(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 100, 200, 20), usr, 12);
+    //private void OnGUI()
+    //{
+    //    usr = GUI.TextField(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 100, 200, 20), usr, 12);
 
-        if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 25, 200, 20), "Username: " + usr))
-        {
-            UploadNewUser(usr);
-        }
+    //    if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 25, 200, 20), "Username: " + usr))
+    //    {
+    //        UploadNewUser(usr);
+    //    }
 
-        if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 50, 200, 20), "get"))
-        {
-            GetLevelsCount();
-        }
-    }
+    //    if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 50, 200, 20), "get"))
+    //    {
+    //        GetLevelsCount();
+    //    }
+    //}
 
 
     public void SaveLevelLocal(string path, Level level)

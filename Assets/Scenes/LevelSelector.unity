@@ -133,6 +133,7 @@ GameObject:
   - component: {fileID: 25129826}
   - component: {fileID: 25129825}
   - component: {fileID: 25129827}
+  - component: {fileID: 25129828}
   m_Layer: 0
   m_Name: '*GameController'
   m_TagString: Untagged
@@ -208,6 +209,18 @@ MonoBehaviour:
   buttonPrefab: {fileID: 953014669073670761, guid: 65c34d6f42fb54fa78b0812f3ce96047,
     type: 3}
   panelToAttachButtonsTo: {fileID: 604265447}
+--- !u!114 &25129828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 25129822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b301a2e5d79fc4949aec4159bb86579f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &151133877
 GameObject:
   m_ObjectHideFlags: 0
