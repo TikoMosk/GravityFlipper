@@ -234,10 +234,12 @@ public class LevelSerializer : MonoBehaviour
 
     public void SaveLevelLocal(string path, Level level)
     {
+        
         if(level == null) {
             return;
         }
         string filePath = Path.Combine(Application.streamingAssetsPath, path);
+        Debug.Log("Saving to path : " + filePath);
         LevelData levelData = SerializeLevel(level);
         string str = JsonUtility.ToJson(levelData, true);
         if (Application.platform == RuntimePlatform.Android)
