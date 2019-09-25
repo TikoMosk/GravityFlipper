@@ -8,7 +8,11 @@ using UnityEngine.UI;
 public class LevelSerializer : MonoBehaviour
 {
     private string tempLevel;
+    private string tempUsername;
+    private int levelsCount = 0;
     private string usr = "";
+    private bool ret;
+
     Level level;
 
     IEnumerator GetRequest(string url)
@@ -41,7 +45,7 @@ public class LevelSerializer : MonoBehaviour
 
     public Level LoadLevelLocal(string path)
     {
-        Debug.Log("Local load");
+        
         string result = null;
 
         string filePath = Path.Combine(Application.streamingAssetsPath, path);
@@ -55,9 +59,12 @@ public class LevelSerializer : MonoBehaviour
         }
         else
         {
-
             result = File.ReadAllText(filePath);
-
+            if (result != null || result != "")
+            {
+                
+                Debug.Log(result);
+            }
         }
         LevelData levelData = JsonUtility.FromJson<LevelData>(result);
         Level level = DeserializeLevel(levelData);
@@ -82,13 +89,13 @@ public class LevelSerializer : MonoBehaviour
         {
             Debug.Log(request.error);
         }
-        else if(request.isDone)
+        else if (request.isDone)
         {
             Debug.Log(request.url);
             Debug.Log("Done.");
         }
     }
-    public void UploadNewUser(string username)
+    private void UploadNewUser(string username)
     {
         StartCoroutine(InsertNewUser(username));
     }
@@ -109,6 +116,13 @@ public class LevelSerializer : MonoBehaviour
         if (con.isDone)
         {
             tempLevel = con.downloadHandler.text;
+            if (tempLevel != null || tempLevel != "")
+            {
+                Debug.Log(tempLevel);
+            }
+            
+            tempLevel = tempLevel.Remove(0, 15);
+            tempLevel = tempLevel.Remove(tempLevel.Length - 2, 2);
             File.WriteAllText(savePath, tempLevel);
             tempLevel = null;
             Debug.Log("Download is done.");
@@ -178,31 +192,96 @@ public class LevelSerializer : MonoBehaviour
         StartCoroutine(SaveLevelData(levelid, path));
     }
 
+    IEnumerator TryAddUsername(string username)
+    {
+        //todo
+        string url = @"http://localhost:3000/checkUsername/" + username;
+
+        UnityWebRequest request = UnityWebRequest.Get(url);
+        yield return request.SendWebRequest();
+
+        if (request.isNetworkError || request.isHttpError)
+        {
+            Debug.Log(request.error);
+        }
+
+        if (request.isDone)
+        {
+            tempUsername = request.downloadHandler.text;
+
+            Debug.Log(tempUsername);
+            Debug.Log("Download is done.");
+        }
+    }
+
+    IEnumerator GetUserLevels(string deviceid)
+    {
+        string url = @"http://localhost:3000/getLevelsCount/" + deviceid;
+
+        UnityWebRequest request = UnityWebRequest.Get(url);
+        yield return request.SendWebRequest();
+
+        if (request.isNetworkError || request.isHttpError)
+        {
+            Debug.Log(request.error);
+        }
+
+        if (request.isDone)
+        {
+            string s = request.downloadHandler.text;
+
+            Debug.Log(s);
+        }
+    }
+
+    IEnumerator GetCount()
+    {
+        ret = true;
+        string url = @"http://localhost:3000/getLevelsCount/";
+
+        UnityWebRequest request = UnityWebRequest.Get(url);
+        yield return request.SendWebRequest();
+
+        if (request.isNetworkError || request.isHttpError)
+        {
+            Debug.Log(request.error);
+        }
+
+        if (request.isDone)
+        {
+            int.TryParse(request.downloadHandler.text, out levelsCount);
+            ret = false;
+            Debug.Log(levelsCount);
+        }
+
+    }
+
+    public int GetLevelsCount()
+    {
+        StartCoroutine(GetCount());
+        return levelsCount;
+    }
 
     //private void OnGUI()
     //{
     //    usr = GUI.TextField(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 100, 200, 20), usr, 12);
-    //
+
     //    if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 25, 200, 20), "Username: " + usr))
     //    {
     //        UploadNewUser(usr);
     //    }
-    //
-    //    if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 + 50, 200, 20), "UpdateUserLevels"))
+
+    //    if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 50, 200, 20), "get"))
     //    {
-    //        UnlockLevels(15);
-    //    }
-    //
-    //    if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 + 75, 200, 20), "SaveJsonInDB"))
-    //    {
-    //        SaveLevelInDB(6, @"/Users/hp/gravityflipper/Assets/StreamingAssets/level6.json");
+    //        GetLevelsCount();
     //    }
     //}
 
 
     public void SaveLevelLocal(string path, Level level)
     {
-        if(level == null) {
+        if (level == null)
+        {
             return;
         }
         string filePath = Path.Combine(Application.streamingAssetsPath, path);

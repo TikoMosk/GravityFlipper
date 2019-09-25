@@ -5,11 +5,11 @@ using UnityEngine.UI;
 
 public class ButtonSelector : MonoBehaviour
 {
+
     public void OnClick()
     {
-        string path = "level" + numberOfLevels() + ".json";
-        
-        //GameController.Game.LevelController.LoadLevelFromProject(path);
+        LevelDownloader.Instance.LevelId = numberOfLevels();
+        GameController.Game.ChangeScene("SampleScene");
     }
 
     public int numberOfLevels()

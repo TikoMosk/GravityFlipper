@@ -17,6 +17,7 @@ public class GameController : MonoBehaviour
     private SmoothGraphics smoothGraphics;
     private LevelController levelController;
     private CameraController cameraController;
+    private string levelPath;
 
     public LevelController LevelController { get { return levelController; } }
     public LevelDesignController LevelDesignController { get { return levelDesignController; } }
@@ -24,6 +25,7 @@ public class GameController : MonoBehaviour
     public CameraController CameraController { get { return cameraController; } }
 
     public IGameState CurrentGameState { get => gameState; set => gameState = value; }
+    public string LevelPath { get => levelPath; set => levelPath = value; }
 
     private Action onNextTurn;
     private Action onGameStateChanged;
@@ -35,6 +37,7 @@ public class GameController : MonoBehaviour
 
     public Slider slider;
 
+    
     private void Awake()
     {
         SetUpSingleton();
@@ -50,8 +53,11 @@ public class GameController : MonoBehaviour
     public void TestLevel()
     {
         Time.timeScale = 1f;
-        levelController.LoadLevelFromProject("level2.json");
+        levelController.LoadLevelFromProject("testLevel.json");
         cameraController.ResetCamera();
+    }
+    private void LoadLevel() {
+        levelController.LoadLevelFromProject(levelPath);
     }
     private void Update()
     {

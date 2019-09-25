@@ -117,7 +117,6 @@ public class Player : MonoBehaviour
     {
         if (destNode.Id == WIN_BLOCK_ID)
         {
-            
             GameController.Game.Win();
         }
     }

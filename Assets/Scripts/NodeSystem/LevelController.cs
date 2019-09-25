@@ -31,7 +31,7 @@ public class LevelController : MonoBehaviour {
         this.length = length;*/
     }
     public void SaveLevelLocal() {
-        levelSerializer.SaveLevelLocal("level1.json", level);
+        levelSerializer.SaveLevelLocal("savedLevel.json", level);
     }
     public void LoadOfficialLevel(int levelNumber) {
         levelSerializer.LoadDevLevel(levelNumber);
