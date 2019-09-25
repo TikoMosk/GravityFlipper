@@ -181,6 +181,7 @@ public class LevelSerializer : MonoBehaviour
 
     IEnumerator TryAddUsername(string username)
     {
+        //todo
         string url = @"http://localhost:3000/checkUsername/" + username;
 
         UnityWebRequest request = UnityWebRequest.Get(url);
@@ -194,31 +195,41 @@ public class LevelSerializer : MonoBehaviour
         if (request.isDone)
         {
             tempUsername = request.downloadHandler.text;
-            if (tempUsername == "[]")
-            {
-                UploadNewUser(username);
-            }
 
             Debug.Log(tempUsername);
             Debug.Log("Download is done.");
         }
     }
 
-
-    private void OnGUI()
+    IEnumerator GetUserLevels(string deviceid)
     {
-        usr = GUI.TextField(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 100, 200, 20), usr, 12);
-    
-        if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 25, 200, 20), "Username: " + usr))
+        string url = @"http://localhost:3000/getLevelsCount/" + deviceid;
+
+        UnityWebRequest request = UnityWebRequest.Get(url);
+        yield return request.SendWebRequest();
+
+        if (request.isNetworkError || request.isHttpError)
         {
-            UploadNewUser(usr);
+            Debug.Log(request.error);
         }
-    
-        if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 + 75, 200, 20), "use"))
+
+        if (request.isDone)
         {
-            StartCoroutine(TryAddUsername(usr));
+            string s = request.downloadHandler.text;
+
+            Debug.Log(s);
         }
     }
+
+    //private void OnGUI()
+    //{
+    //    usr = GUI.TextField(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 100, 200, 20), usr, 12);
+    //
+    //    if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 25, 200, 20), "Username: " + usr))
+    //    {
+    //        UploadNewUser(usr);
+    //    }
+    //}
 
 
     public void SaveLevelLocal(string path, Level level)
