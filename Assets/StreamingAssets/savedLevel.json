@@ -4,90 +4,10 @@
     "length": 10,
     "nodeDataList": [
         {
-            "x": 3,
-            "y": 0,
-            "z": 3,
-            "id": 1,
-            "facing": "",
-            "upDirection": ""
-        },
-        {
-            "x": 3,
-            "y": 0,
-            "z": 4,
-            "id": 1,
-            "facing": "",
-            "upDirection": ""
-        },
-        {
-            "x": 3,
-            "y": 0,
-            "z": 5,
-            "id": 1,
-            "facing": "",
-            "upDirection": ""
-        },
-        {
-            "x": 3,
-            "y": 0,
-            "z": 6,
-            "id": 1,
-            "facing": "",
-            "upDirection": ""
-        },
-        {
-            "x": 3,
-            "y": 0,
-            "z": 7,
-            "id": 1,
-            "facing": "",
-            "upDirection": ""
-        },
-        {
-            "x": 4,
-            "y": 0,
-            "z": 3,
-            "id": 1,
-            "facing": "",
-            "upDirection": ""
-        },
-        {
-            "x": 4,
-            "y": 0,
-            "z": 4,
-            "id": 1,
-            "facing": "",
-            "upDirection": ""
-        },
-        {
             "x": 4,
             "y": 0,
             "z": 5,
-            "id": 1,
-            "facing": "",
-            "upDirection": ""
-        },
-        {
-            "x": 4,
-            "y": 0,
-            "z": 6,
-            "id": 1,
-            "facing": "",
-            "upDirection": ""
-        },
-        {
-            "x": 4,
-            "y": 0,
-            "z": 7,
-            "id": 1,
-            "facing": "",
-            "upDirection": ""
-        },
-        {
-            "x": 5,
-            "y": 0,
-            "z": 3,
-            "id": 1,
+            "id": 7,
             "facing": "",
             "upDirection": ""
         },
@@ -111,14 +31,6 @@
             "x": 5,
             "y": 0,
             "z": 6,
-            "id": 1,
-            "facing": "",
-            "upDirection": ""
-        },
-        {
-            "x": 5,
-            "y": 0,
-            "z": 7,
             "id": 1,
             "facing": "",
             "upDirection": ""
@@ -128,86 +40,6 @@
             "y": 5,
             "z": 5,
             "id": 9,
-            "facing": "",
-            "upDirection": ""
-        },
-        {
-            "x": 6,
-            "y": 0,
-            "z": 3,
-            "id": 1,
-            "facing": "",
-            "upDirection": ""
-        },
-        {
-            "x": 6,
-            "y": 0,
-            "z": 4,
-            "id": 1,
-            "facing": "",
-            "upDirection": ""
-        },
-        {
-            "x": 6,
-            "y": 0,
-            "z": 5,
-            "id": 1,
-            "facing": "",
-            "upDirection": ""
-        },
-        {
-            "x": 6,
-            "y": 0,
-            "z": 6,
-            "id": 1,
-            "facing": "",
-            "upDirection": ""
-        },
-        {
-            "x": 6,
-            "y": 0,
-            "z": 7,
-            "id": 1,
-            "facing": "",
-            "upDirection": ""
-        },
-        {
-            "x": 7,
-            "y": 0,
-            "z": 3,
-            "id": 1,
-            "facing": "",
-            "upDirection": ""
-        },
-        {
-            "x": 7,
-            "y": 0,
-            "z": 4,
-            "id": 1,
-            "facing": "",
-            "upDirection": ""
-        },
-        {
-            "x": 7,
-            "y": 0,
-            "z": 5,
-            "id": 1,
-            "facing": "",
-            "upDirection": ""
-        },
-        {
-            "x": 7,
-            "y": 0,
-            "z": 6,
-            "id": 1,
-            "facing": "",
-            "upDirection": ""
-        },
-        {
-            "x": 7,
-            "y": 0,
-            "z": 7,
-            "id": 1,
             "facing": "",
             "upDirection": ""
         }
