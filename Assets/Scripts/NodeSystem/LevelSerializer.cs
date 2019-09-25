@@ -9,7 +9,11 @@ public class LevelSerializer : MonoBehaviour
 {
     private string tempLevel;
     private string tempUsername;
+    private int levelsCount = 0;
     private string usr = "";
+    private bool ret;
+    private bool get;
+
     Level level;
 
     IEnumerator GetRequest(string url)
@@ -83,7 +87,7 @@ public class LevelSerializer : MonoBehaviour
         {
             Debug.Log(request.error);
         }
-        else if(request.isDone)
+        else if (request.isDone)
         {
             Debug.Log(request.url);
             Debug.Log("Done.");
@@ -221,20 +225,55 @@ public class LevelSerializer : MonoBehaviour
         }
     }
 
-    //private void OnGUI()
-    //{
-    //    usr = GUI.TextField(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 100, 200, 20), usr, 12);
-    //
-    //    if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 25, 200, 20), "Username: " + usr))
-    //    {
-    //        UploadNewUser(usr);
-    //    }
-    //}
+    IEnumerator GetCount()
+    {
+        ret = true;
+        string url = @"http://localhost:3000/getLevelsCount/";
+
+        UnityWebRequest request = UnityWebRequest.Get(url);
+        yield return request.SendWebRequest();
+
+        if (request.isNetworkError || request.isHttpError)
+        {
+            Debug.Log(request.error);
+        }
+
+        if (request.isDone)
+        {
+            int.TryParse(request.downloadHandler.text, out levelsCount);
+            ret = false;
+            Debug.Log(levelsCount);
+        }
+
+    }
+
+    public int GetLevelsCount()
+    {
+        StartCoroutine(GetCount());
+
+        return levelsCount;
+    }
+
+    private void OnGUI()
+    {
+        usr = GUI.TextField(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 100, 200, 20), usr, 12);
+
+        if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 25, 200, 20), "Username: " + usr))
+        {
+            UploadNewUser(usr);
+        }
+
+        if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 50, 200, 20), "get"))
+        {
+            GetLevelsCount();
+        }
+    }
 
 
     public void SaveLevelLocal(string path, Level level)
     {
-        if(level == null) {
+        if (level == null)
+        {
             return;
         }
         string filePath = Path.Combine(Application.streamingAssetsPath, path);
