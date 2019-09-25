@@ -7,7 +7,8 @@ public class PlayMode : IGameState
     public PlayMode()
     {
         Time.timeScale = 1f;
-        GameController.Game.LevelController.LoadLevelFromProject("level1.json");
+        string path = "level" + LevelDownloader.Instance.LevelId + ".json";
+        GameController.Game.LevelController.LoadLevelFromProject(path);
         GameController.Game.CameraController.ResetCamera();
     }
 
