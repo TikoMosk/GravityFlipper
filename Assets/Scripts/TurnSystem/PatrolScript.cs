@@ -43,9 +43,9 @@ public class PatrolScript : MonoBehaviour
         destination = transform.position + step;
         nextPlatform = destination - Vector3.up;
 
-        if (GameController.Game.CurrentLevel.GetNode(destination) == null
+        if ((GameController.Game.CurrentLevel.GetNode(destination) == null
             || GameController.Game.CurrentLevel.GetNode(destination).Id != 0
-            || GameController.Game.CurrentLevel.GetNode(nextPlatform).Id == 0)
+            || GameController.Game.CurrentLevel.GetNode(nextPlatform).Id == 0))
         {
             step = -step;
             destination = transform.position + step;
@@ -60,7 +60,25 @@ public class PatrolScript : MonoBehaviour
 
     private void Move()
     {
+
+        if (destNode.NodeMember != null && destNode.NodeMember.Id == 1)
+        {
+            GameController.Game.CurrentLevel.MoveObject(currentNode, destNode);
+            StartCoroutine(KillAfterAnim());
+            return;
+        }
+
         GameController.Game.CurrentLevel.MoveObject(currentNode, destNode);
+
+    }
+    IEnumerator KillAfterAnim()
+    {
+        while(GameController.Game.SmoothGraphics.AnimationCount != 0)
+        {
+            yield return null;
+        }
+        PauseMenu.currentInstance.GameOver();
+
     }
 
     private void OnDestroy()

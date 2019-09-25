@@ -118,11 +118,15 @@ public class Level
         }
     }
     public void MoveMemberLogically(Node node, Node dest) {
-        if (!node.HasSamePosition(dest) && dest.NodeMember == null) {
-            dest.NodeMember = node.NodeMember;
-            dest.NodeMember.SetPosition(dest.X, dest.Y, dest.Z);
-            node.NodeMember = null;
-            dest.NodeMember.NodeObjectGraphic.Node = dest;
+        if (!node.HasSamePosition(dest)) {
+            if((dest.NodeMember != null && dest.NodeMember.Id == 1) || dest.NodeMember == null)
+            {
+                dest.NodeMember = node.NodeMember;
+                dest.NodeMember.SetPosition(dest.X, dest.Y, dest.Z);
+                node.NodeMember = null;
+                dest.NodeMember.NodeObjectGraphic.Node = dest;
+            }
+
         }
     }
     public void MoveMemberNoAnimation(Node node, Node dest) {

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.23233402, g: 0.23550433, b: 0.27226305, a: 1}
+  m_IndirectSpecularColor: {r: 0.23225775, g: 0.23537418, b: 0.27221692, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -260,7 +260,7 @@ MonoBehaviour:
     category: 0
   - id: 2
     nodeMember: 0
-    colliderActive: 1
+    colliderActive: 0
     walkable: 1
     canWalkOnIt: 1
     name: Win Node
@@ -424,6 +424,17 @@ MonoBehaviour:
     walkable: 1
     canWalkOnIt: 1
     name: Moving Block
+    description: 
+    prefab: {fileID: 6579708977595957042, guid: 8d009cd761a8842d984805a281ded3d1,
+      type: 3}
+    icon: {fileID: 0}
+    category: 2
+  - id: 7
+    nodeMember: 1
+    colliderActive: 0
+    walkable: 1
+    canWalkOnIt: 1
+    name: Patrol Enemy Z
     description: 
     prefab: {fileID: 6579708977595957042, guid: 8d009cd761a8842d984805a281ded3d1,
       type: 3}
@@ -955,7 +966,7 @@ RectTransform:
   - {fileID: 192146335}
   - {fileID: 1951886136}
   m_Father: {fileID: 2048576638}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -3045,7 +3056,7 @@ RectTransform:
   m_Children:
   - {fileID: 1823213762}
   - {fileID: 653067303}
-  - {fileID: 2048576638}
+  - {fileID: 162079256098273922}
   - {fileID: 2026503444}
   m_Father: {fileID: 0}
   m_RootOrder: 4
@@ -3983,16 +3994,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1732212139}
     m_Modifications:
-    - target: {fileID: 2558037963351013969, guid: 713053c4c2e260a45bd66f53e94530b3,
-        type: 3}
-      propertyPath: m_Name
-      value: WinWIndow
-      objectReference: {fileID: 0}
-    - target: {fileID: 2558037963351013969, guid: 713053c4c2e260a45bd66f53e94530b3,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2558037963351013968, guid: 713053c4c2e260a45bd66f53e94530b3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4098,6 +4099,21 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 2558037963351013969, guid: 713053c4c2e260a45bd66f53e94530b3,
+        type: 3}
+      propertyPath: m_Name
+      value: WinWIndow
+      objectReference: {fileID: 0}
+    - target: {fileID: 2558037963351013969, guid: 713053c4c2e260a45bd66f53e94530b3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2558037961844554723, guid: 713053c4c2e260a45bd66f53e94530b3,
+        type: 3}
+      propertyPath: m_Text
+      value: Win
+      objectReference: {fileID: 0}
     - target: {fileID: 1085584583632206209, guid: 713053c4c2e260a45bd66f53e94530b3,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -4113,10 +4129,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2558037961844554723, guid: 713053c4c2e260a45bd66f53e94530b3,
-        type: 3}
-      propertyPath: m_Text
-      value: Win
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 713053c4c2e260a45bd66f53e94530b3, type: 3}
+--- !u!4 &162079256098273922 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 162079256098273921}
+  m_PrefabAsset: {fileID: 0}

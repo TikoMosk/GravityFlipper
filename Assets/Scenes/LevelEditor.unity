@@ -3995,6 +3995,17 @@ MonoBehaviour:
       type: 3}
     icon: {fileID: 0}
     category: 2
+  - id: 7
+    nodeMember: 1
+    colliderActive: 0
+    walkable: 1
+    canWalkOnIt: 1
+    name: Patrol Enemy Z
+    description: 
+    prefab: {fileID: 6579708977595957042, guid: 8d009cd761a8842d984805a281ded3d1,
+      type: 3}
+    icon: {fileID: 0}
+    category: 2
 --- !u!1001 &1403270734
 PrefabInstance:
   m_ObjectHideFlags: 0
