@@ -8,6 +8,9 @@ public class PressurePad : MonoBehaviour
     private bool pushed;
     private bool previousPushed;
     Node currentNode;
+
+    Animation animation;
+
     private void Start()
     {
         EventController.currentInstance.Register(Check);
