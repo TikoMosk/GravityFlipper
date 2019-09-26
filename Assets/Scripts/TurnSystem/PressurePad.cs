@@ -32,7 +32,6 @@ public class PressurePad : MonoBehaviour
         }
         if (pushed != previousPushed)
         {
-            Debug.Log("HELLO");
             InvokeFriend();
         }
         previousPushed = pushed;
