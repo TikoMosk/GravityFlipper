@@ -34,11 +34,11 @@ public class LevelDownloader : MonoBehaviour
     {
 
         LevelSelector selector = FindObjectOfType<LevelSelector>();
-        for (int i = 1; i < 3; i++)
+        for (int i = 1; i <= 12; i++)
         {
             serializer.LoadLevelFromServer(i);
         }
-        selector.AmountOfButtons(2);
+        selector.AmountOfButtons(12);
     }
 
     public void LoadLevel()

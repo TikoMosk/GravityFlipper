@@ -116,8 +116,13 @@ public class LevelSerializer : MonoBehaviour
         if (con.isDone)
         {
             tempLevel = con.downloadHandler.text;
-            tempLevel = tempLevel.Remove(0, 29);
-            tempLevel = tempLevel.Remove(tempLevel.Length - 3, 3);
+            if (tempLevel != null || tempLevel != "")
+            {
+                Debug.Log(tempLevel);
+            }
+            
+            tempLevel = tempLevel.Remove(0, 15);
+            tempLevel = tempLevel.Remove(tempLevel.Length - 2, 2);
             File.WriteAllText(savePath, tempLevel);
             tempLevel = null;
             Debug.Log("Download is done.");

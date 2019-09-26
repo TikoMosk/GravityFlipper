@@ -567,7 +567,7 @@ GameObject:
   - component: {fileID: -3738759207195618326}
   - component: {fileID: -788598819286647748}
   m_Layer: 0
-  m_Name: EnemySpiderPatrol
+  m_Name: EnemySpiderPatrolX
   m_TagString: Level
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
