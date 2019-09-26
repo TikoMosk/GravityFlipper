@@ -15,7 +15,7 @@ public class PatrolScript : MonoBehaviour
     private bool _active;
     private Vector3 step;
     private Vector3 destination;
-    private Node nextPlatform;
+    private Vector3 nextPlatform;
     private Node currentNode;
     private Node destNode;
 
@@ -41,17 +41,11 @@ public class PatrolScript : MonoBehaviour
     {
         currentNode = GameController.Game.CurrentLevel.GetNode(transform.position);
         destination = transform.position + step;
-        var node = GameController.Game.CurrentLevel.GetNode(destination);
-        var a = -GameController.Game.CameraController.UpVector;
-        nextPlatform = GameController.Game.CurrentLevel.GetNodeInTheDirection(node, Dir.GetDirectionByVector(a));
-
-        Debug.Log("nextplatform" + node.GetPosition());
-        Debug.Log("undernextplatform" + nextPlatform.GetPosition());
-
+        nextPlatform = destination - Vector3.up;
 
         if ((GameController.Game.CurrentLevel.GetNode(destination) == null
-            || node.Id != 0
-            || nextPlatform.Id == 0))
+            || GameController.Game.CurrentLevel.GetNode(destination).Id != 0
+            || GameController.Game.CurrentLevel.GetNode(nextPlatform).Id == 0))
         {
             step = -step;
             destination = transform.position + step;
@@ -69,23 +63,15 @@ public class PatrolScript : MonoBehaviour
 
         if (destNode.NodeMember != null && destNode.NodeMember.Id == 1)
         {
+            destNode.NodeMember.Destroy();
             GameController.Game.CurrentLevel.MoveObject(currentNode, destNode);
-            StartCoroutine(KillAfterAnim());
             return;
         }
 
         GameController.Game.CurrentLevel.MoveObject(currentNode, destNode);
 
     }
-    IEnumerator KillAfterAnim()
-    {
-        while (GameController.Game.SmoothGraphics.AnimationCount != 0)
-        {
-            yield return null;
-        }
-        PauseMenu.currentInstance.GameOver();
 
-    }
 
     private void OnDestroy()
     {
