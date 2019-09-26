@@ -204,7 +204,6 @@ public class LevelDesignController : MonoBehaviour {
             }
             
             mat.SetColor("_MainColor", col);
-            Debug.Log("2");
             ic1.transform.position = GameController.Game.CurrentLevel.NodeTogglers[i].GetPos();
             ic2.transform.position = GameController.Game.CurrentLevel.NodeTogglers[i].GetConnectNodePosition();
             ic1.GetComponent<Image>().material = mat;
