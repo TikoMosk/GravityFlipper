@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class NodeToggler : MonoBehaviour {
     public GameObject child;
+    private Node currentNode;
+
     private Node connectedNode;
     private NodeMember connectedNodeMember;
     private bool pushed;
     private Color32 connectionColor = Color.clear;
     public Color32 ConnectionColor { get => connectionColor; set => connectionColor = value; }
+    public Node CurrentNode { get => currentNode; set => currentNode = value; }
+
     public void ConnectNode(Node n) {
         connectedNode = null;
         connectedNodeMember = null;
@@ -27,6 +31,7 @@ public class NodeToggler : MonoBehaviour {
             return;
         }
         GameController.Game.CurrentLevel.AddNodeConnection(this);
+        currentNode = GameController.Game.CurrentLevel.GetNode(this.transform.position);
     }
     public Vector3 GetConnectNodePosition() {
         if (connectedNode != null) {
@@ -36,26 +41,28 @@ public class NodeToggler : MonoBehaviour {
             return connectedNodeMember.LocationNode.GetPosition();
         }
         else {
-            return new Vector3(-1,-1,-1);
+            return new Vector3(-1, -1, -1);
         }
     }
+
     public Vector3 GetPos() {
         return transform.position;
     }
+
     public void Toggle() {
-        if(GameController.Game.SmoothGraphics.AnimationCount == 0) {
-            pushed = !pushed;
-            child.GetComponent<Animator>().SetBool("Enabled", pushed);
-            if (connectedNode != null) {
-                connectedNode.NodeGraphic.GetComponent<NodeToggleReceiver>().Trigger();
-            }
-            else if (connectedNodeMember != null) {
-                connectedNodeMember.NodeObjectGraphic.GetComponent<NodeToggleReceiver>().Trigger();
-            }
+
+        pushed = !pushed;
+        child.GetComponent<Animator>().SetBool("Enabled", pushed);
+        if (connectedNode != null) {
+            connectedNode.NodeGraphic.GetComponent<NodeToggleReceiver>().Trigger();
         }
-        
+        else if (connectedNodeMember != null) {
+            connectedNodeMember.NodeObjectGraphic.GetComponent<NodeToggleReceiver>().Trigger();
+        }
+
 
     }
+
     public bool CheckIfSameConnectedNode(Node n) {
         if (connectedNode == n) {
             return false;
@@ -63,6 +70,9 @@ public class NodeToggler : MonoBehaviour {
         else {
             return true;
         }
+    }
+    private void OnDestroy() {
+        GameController.Game.CurrentLevel.RemoveNodeConnection(this);
     }
 
 

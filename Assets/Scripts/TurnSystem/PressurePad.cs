@@ -9,25 +9,30 @@ public class PressurePad : MonoBehaviour
     private bool previousPushed;
     Node currentNode;
 
-    Animation animation;
-
     private void Start()
     {
         EventController.currentInstance.Register(Check);
         currentNode = GameController.Game.CurrentLevel.GetNode(transform.position);
     }
-    private void OnDestroy() {
-        EventController.currentInstance.Remove(Check);
+
+    private void OnDestroy()
+    {
+        //EventController.currentInstance.Remove(Check);
     }
+
     private void Check()
     {
-        if (IsSmthOn()) {
+        if (IsSmthOn())
+        {
             pushed = true;
         }
-        else {
+        else
+        {
             pushed = false;
         }
-        if(pushed != previousPushed) {
+        if (pushed != previousPushed)
+        {
+            Debug.Log("HELLO");
             InvokeFriend();
         }
         previousPushed = pushed;
@@ -40,9 +45,12 @@ public class PressurePad : MonoBehaviour
 
     private bool IsSmthOn()
     {
-        if(GameController.Game.CurrentLevel.GetNodeInTheDirection(currentNode,currentNode.UpDirection).NodeMember != null) {
+        if (GameController.Game.CurrentLevel.GetNodeInTheDirection(currentNode, currentNode.UpDirection).NodeMember != null)
+        {
+            Debug.Log(GameController.Game.CurrentLevel.GetNodeInTheDirection(currentNode, currentNode.UpDirection).GetPosition());
             return true;
         }
+
         return false;
     }
 }

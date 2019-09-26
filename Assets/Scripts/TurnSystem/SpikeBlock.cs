@@ -77,7 +77,6 @@ public class SpikeBlock : MonoBehaviour, ILeverFriend {
             yield return null;
         }
         PauseMenu.currentInstance.GameOver();
-        GetComponentInParent<NodeMemberGraphic>().Node.NodeMember = null;
     }
 
     public bool IsPlayerNear() {
