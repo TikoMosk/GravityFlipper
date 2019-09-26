@@ -17,6 +17,7 @@ public class GameController : MonoBehaviour
     private SmoothGraphics smoothGraphics;
     private LevelController levelController;
     private CameraController cameraController;
+    private AudioController audioController;
     private string levelPath;
 
     public LevelController LevelController { get { return levelController; } }
@@ -26,6 +27,7 @@ public class GameController : MonoBehaviour
 
     public IGameState CurrentGameState { get => gameState; set => gameState = value; }
     public string LevelPath { get => levelPath; set => levelPath = value; }
+    public AudioController AudioController { get => audioController;  }
 
     private Action onNextTurn;
     private Action onGameStateChanged;
@@ -195,6 +197,7 @@ public class GameController : MonoBehaviour
         {
             levelController.RegisterToLevelCreated(CurrentLevelActive);
         }
+        audioController = FindObjectOfType<AudioController>();
         levelDesignController = FindObjectOfType<LevelDesignController>();
         smoothGraphics = FindObjectOfType<SmoothGraphics>();
     }

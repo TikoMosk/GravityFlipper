@@ -107,12 +107,14 @@ public class Player : MonoBehaviour {
         }
     }
     public void OnKilled() {
+        GameController.Game.AudioController.PlayDeathSound();
         child.GetComponent<Animator>().SetBool("isDead", true);
         StartCoroutine(KillAfterAnim());
     }
     IEnumerator KillAfterAnim() {
         GameController.Game.SmoothGraphics.AnimationCount = 1;
         yield return new WaitForSeconds(2f);
+        
         PauseMenu.currentInstance.GameOver();
     }
 

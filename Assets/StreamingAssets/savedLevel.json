@@ -86,8 +86,8 @@
         {
             "x": 4,
             "y": 1,
-            "z": 3,
-            "id": 1,
+            "z": 4,
+            "id": 2,
             "facing": "",
             "upDirection": ""
         },
@@ -182,8 +182,16 @@
         {
             "x": 6,
             "y": 1,
+            "z": 4,
+            "id": 6,
+            "facing": "",
+            "upDirection": ""
+        },
+        {
+            "x": 6,
+            "y": 1,
             "z": 6,
-            "id": 5,
+            "id": 8,
             "facing": "",
             "upDirection": ""
         },
@@ -222,7 +230,7 @@
         {
             "x": 7,
             "y": 0,
-            "z": 7,as
+            "z": 7,
             "id": 1,
             "facing": "",
             "upDirection": ""
@@ -236,7 +244,52 @@
             "id": 1,
             "facing": "1",
             "upDirection": "0"
+        },
+        {
+            "x": 7,
+            "y": 1,
+            "z": 7,
+            "id": 3,
+            "facing": "1",
+            "upDirection": "0"
         }
     ],
-    "nodeConnections": []
+    "nodeConnections": [
+        {
+            "toggler": {
+                "x": 6,
+                "y": 1,
+                "z": 4
+            },
+            "receiver": {
+                "x": 6,
+                "y": 1,
+                "z": 6
+            }
+        },
+        {
+            "toggler": {
+                "x": 6,
+                "y": 1,
+                "z": 4
+            },
+            "receiver": {
+                "x": 6,
+                "y": 1,
+                "z": 6
+            }
+        },
+        {
+            "toggler": {
+                "x": 6,
+                "y": 1,
+                "z": 4
+            },
+            "receiver": {
+                "x": 6,
+                "y": 1,
+                "z": 6
+            }
+        }
+    ]
 }
