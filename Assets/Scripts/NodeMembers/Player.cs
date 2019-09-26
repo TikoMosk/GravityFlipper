@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public GameObject child;
+    public bool isDead;
+
     private const int WIN_BLOCK_ID = 2;
     Node previousClickedNode = null;
     Node.Direction previousDirection = Node.Direction.UP;
@@ -120,8 +123,9 @@ public class Player : MonoBehaviour
             GameController.Game.Win();
         }
     }
-    private void OnKilled()
+    public void OnKilled()
     {
+        child.GetComponent<Animator>().SetBool("Enabled", isDead);
         PauseMenu.currentInstance.GameOver();
     }
 
