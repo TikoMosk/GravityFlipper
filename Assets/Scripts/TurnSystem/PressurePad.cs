@@ -22,7 +22,6 @@ public class PressurePad : MonoBehaviour
 
     private void Check()
     {
-        Debug.Log("check");
         if (IsSmthOn())
         {
             pushed = true;
@@ -33,6 +32,7 @@ public class PressurePad : MonoBehaviour
         }
         if (pushed != previousPushed)
         {
+            Debug.Log("HELLO");
             InvokeFriend();
         }
         previousPushed = pushed;

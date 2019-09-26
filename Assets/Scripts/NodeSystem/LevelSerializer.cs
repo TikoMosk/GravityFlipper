@@ -63,7 +63,6 @@ public class LevelSerializer : MonoBehaviour
             if (result != null || result != "")
             {
                 
-                Debug.Log(result);
             }
         }
         LevelData levelData = JsonUtility.FromJson<LevelData>(result);

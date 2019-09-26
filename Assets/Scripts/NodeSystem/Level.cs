@@ -51,16 +51,8 @@ public class Level
         }
         
         nodeMap = newMap;
-        for (int i = 0; i < nodeTogglers.Count; i++) {
-            if (GetNode(nodeTogglers[i].GetPos()) == null || GetNode(nodeTogglers[i].GetConnectNodePosition()) == null) {
-                nodeTogglers.Remove(nodeTogglers[i]);
-            }
-        }
-        for (int i = 0; i < nodeConnections.Count; i++) {
-            if(GetNode(nodeConnections[i].receiver.x, nodeConnections[i].receiver.y, nodeConnections[i].receiver.z) == null || GetNode(nodeConnections[i].toggler.x, nodeConnections[i].toggler.y, nodeConnections[i].toggler.z) == null) {
-                nodeConnections.Remove(nodeConnections[i]);
-            }
-        }
+        nodeTogglers.Clear();
+        nodeConnections.Clear();
         GameController.Game.LevelController.LaunchLevel(this);
     }
     public void InitializeLevel()
@@ -91,6 +83,12 @@ public class Level
     public void RemoveNodeConnection(NodeToggler toggler) {
         if(NodeTogglers.Contains(toggler)) {
             NodeTogglers.Remove(toggler);
+        }
+        Node n = toggler.CurrentNode;
+        for (int i = 0; i < nodeConnections.Count; i++) {
+            if(nodeConnections[i].toggler.Equals(toggler)) {
+                nodeConnections.Remove(nodeConnections[i]);
+            }
         }
     }
 
