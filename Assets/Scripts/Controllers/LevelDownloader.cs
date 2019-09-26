@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,21 +25,34 @@ public class LevelDownloader : MonoBehaviour
         else
         {
             instance = this;
-        }
-
-        serializer = FindObjectOfType<LevelSerializer>();
-        DownloadLevels();
+        }          
     }
 
-    void DownloadLevels()
+    private void Start()
     {
+        serializer = FindObjectOfType<LevelSerializer>();
+        GetLevelsCountDB(OnLevelCount);
+    }
 
+    private void OnLevelCount(bool success, LevelCount count)
+    {
+        if (success)
+            DownloadLevels(count);
+    }
+
+    private void DownloadLevels(LevelCount count)
+    {
         LevelSelector selector = FindObjectOfType<LevelSelector>();
-        for (int i = 1; i <= 12; i++)
+        for (int i = 1; i <= count.count; i++)
         {
             serializer.LoadLevelFromServer(i);
         }
-        selector.AmountOfButtons(12);
+        selector.AmountOfButtons(count.count);
+    }
+
+    private void GetLevelsCountDB(Action<bool, LevelCount> callback)
+    {
+        serializer.GetLevelsCount(callback);
     }
 
     public void LoadLevel()

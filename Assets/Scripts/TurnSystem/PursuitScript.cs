@@ -53,13 +53,18 @@ public class PursuitScript : MonoBehaviour
         {
             UpdateCurrentNode();
 
-            nextPlatform = destNode.GetPosition() - Vector3.up;
+            var node = destNode;
+            var a = -GameController.Game.CameraController.UpVector;
+            var nextPlatform = GameController.Game.CurrentLevel.GetNodeInTheDirection(node, Dir.GetDirectionByVector(a));
+
+            Debug.Log("nextplatform" + node.GetPosition());
+            Debug.Log("undernextplatform" + nextPlatform.GetPosition());
 
             if (Vector3.Distance(currentNode.GetPosition(), destNode.GetPosition()) > 1.0f
                 || transform.GetChild(6).position == destNode.GetPosition()
                 || destNode == null
                 || destNode.Id != 0
-                || GameController.Game.CurrentLevel.GetNode(nextPlatform).Id == 4)
+                || nextPlatform.Id == 4)
             {
                 state.EndPursuit();
                 ChangeState(new IdleState());

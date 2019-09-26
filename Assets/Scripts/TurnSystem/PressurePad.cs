@@ -22,7 +22,6 @@ public class PressurePad : MonoBehaviour
 
     private void Check()
     {
-        Debug.Log("check");
         if (IsSmthOn())
         {
             pushed = true;

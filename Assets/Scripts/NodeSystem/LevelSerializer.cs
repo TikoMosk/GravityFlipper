@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -9,10 +10,8 @@ public class LevelSerializer : MonoBehaviour
 {
     private string tempLevel;
     private string tempUsername;
-    private int levelsCount = 0;
     private string usr = "";
-    private bool ret;
-
+   
     Level level;
 
     IEnumerator GetRequest(string url)
@@ -45,7 +44,6 @@ public class LevelSerializer : MonoBehaviour
 
     public Level LoadLevelLocal(string path)
     {
-        
         string result = null;
 
         string filePath = Path.Combine(Application.streamingAssetsPath, path);
@@ -62,8 +60,7 @@ public class LevelSerializer : MonoBehaviour
             result = File.ReadAllText(filePath);
             if (result != null || result != "")
             {
-                
-                Debug.Log(result);
+
             }
         }
         LevelData levelData = JsonUtility.FromJson<LevelData>(result);
@@ -95,7 +92,7 @@ public class LevelSerializer : MonoBehaviour
             Debug.Log("Done.");
         }
     }
-    private void UploadNewUser(string username)
+    public void UploadNewUser(string username)
     {
         StartCoroutine(InsertNewUser(username));
     }
@@ -118,9 +115,8 @@ public class LevelSerializer : MonoBehaviour
             tempLevel = con.downloadHandler.text;
             if (tempLevel != null || tempLevel != "")
             {
-                Debug.Log(tempLevel);
             }
-            
+
             tempLevel = tempLevel.Remove(0, 15);
             tempLevel = tempLevel.Remove(tempLevel.Length - 2, 2);
             File.WriteAllText(savePath, tempLevel);
@@ -214,6 +210,85 @@ public class LevelSerializer : MonoBehaviour
         }
     }
 
+    IEnumerator GetDeviceID(string deviceid, Action<bool, DeviceData> callback)
+    {
+        string url = @"http://localhost:3000/checkDevice/" + deviceid;
+
+        UnityWebRequest request = UnityWebRequest.Get(url);
+        yield return request.SendWebRequest();
+
+        if (request.isNetworkError || request.isHttpError)
+        {
+            callback(false, null);
+            Debug.Log(request.error);
+        }
+
+        if (request.isDone)
+        {
+            var result = request.downloadHandler.text.Replace("[", "").Replace("]", "");
+            DeviceData data = JsonUtility.FromJson<DeviceData>(result);
+
+            callback(true, data);
+        }
+    }
+    public void GetDeviceData(Action<bool, DeviceData> deviceDataCallback)
+    {
+        StartCoroutine(GetDeviceID(SystemInfo.deviceUniqueIdentifier, deviceDataCallback));
+    }
+
+    IEnumerator GetUsername(string username, Action<bool, UserData> callback)
+    {
+        string url = @"http://localhost:3000/checkUsername/" + username;
+
+        UnityWebRequest request = UnityWebRequest.Get(url);
+        yield return request.SendWebRequest();
+
+        if (request.isNetworkError || request.isHttpError)
+        {
+            callback(false, null);
+            Debug.Log(request.error);
+        }
+
+        if (request.isDone)
+        {
+            var result = request.downloadHandler.text.Replace("[", "").Replace("]", "");
+            UserData data = JsonUtility.FromJson<UserData>(result);
+            if(data == null) callback(false, null); else callback(true, data);
+        }
+    }
+    public void GetUsername(Action<bool, UserData> userDataCallback)
+    {
+        StartCoroutine(GetUsername(SystemInfo.deviceUniqueIdentifier, userDataCallback));
+    }
+
+    IEnumerator GetCompLevels(string device_id, Action<bool, UserData> callback)
+    {
+        string url = @"http://localhost:3000/getcompLevels/" + device_id;
+
+        UnityWebRequest request = UnityWebRequest.Get(url);
+        yield return request.SendWebRequest();
+
+        if (request.isNetworkError || request.isHttpError)
+        {
+            callback(false, null);
+            Debug.Log(request.error);
+        }
+
+        if (request.isDone)
+        {
+            var result = request.downloadHandler.text.Replace("[", "").Replace("]", "");
+            UserData data = JsonUtility.FromJson<UserData>(result);
+
+            callback(true, data);
+        }
+    }
+    public void GetCompleteLevels(Action<bool, UserData> compLevelCallback)
+    {
+        StartCoroutine(GetCompLevels(SystemInfo.deviceUniqueIdentifier, compLevelCallback));
+    }
+
+
+
     IEnumerator GetUserLevels(string deviceid)
     {
         string url = @"http://localhost:3000/getLevelsCount/" + deviceid;
@@ -234,49 +309,49 @@ public class LevelSerializer : MonoBehaviour
         }
     }
 
-    IEnumerator GetCount()
+    IEnumerator GetCount(Action<bool, LevelCount> callback)
     {
-        ret = true;
         string url = @"http://localhost:3000/getLevelsCount/";
+        int levelsCount;
 
         UnityWebRequest request = UnityWebRequest.Get(url);
         yield return request.SendWebRequest();
 
         if (request.isNetworkError || request.isHttpError)
         {
+            callback(false, null);
             Debug.Log(request.error);
         }
 
         if (request.isDone)
         {
-            int.TryParse(request.downloadHandler.text, out levelsCount);
-            ret = false;
-            Debug.Log(levelsCount);
-        }
+            var result = request.downloadHandler.text.Replace("[", "").Replace("]", "");
+            LevelCount data = JsonUtility.FromJson<LevelCount>(result);
 
+            callback(transform, data);
+           
+        }
     }
 
-    public int GetLevelsCount()
+    public void GetLevelsCount(Action<bool, LevelCount> levelsCountcallback)
     {
-        StartCoroutine(GetCount());
-        return levelsCount;
+        StartCoroutine(GetCount(levelsCountcallback));
     }
 
     //private void OnGUI()
     //{
     //    usr = GUI.TextField(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 100, 200, 20), usr, 12);
-
+    //
     //    if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 25, 200, 20), "Username: " + usr))
     //    {
     //        UploadNewUser(usr);
     //    }
-
+    //
     //    if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 50, 200, 20), "get"))
     //    {
-    //        GetLevelsCount();
+    //        GetDeviceData();
     //    }
     //}
-
 
     public void SaveLevelLocal(string path, Level level)
     {
@@ -379,15 +454,13 @@ public class LevelSerializer : MonoBehaviour
 
         return level;
     }
-
-
 }
-[System.Serializable]
+[Serializable]
 public class Data
 {
 
 }
-[System.Serializable]
+[Serializable]
 public class NodeData
 {
     public int x;
@@ -416,7 +489,7 @@ public class NodeData
     }
 
 }
-[System.Serializable]
+[Serializable]
 public class NodeMemberData
 {
     public int x;
@@ -439,7 +512,7 @@ public class NodeMemberData
         upDirection = ((int)nm.UpDirection).ToString();
     }
 }
-[System.Serializable]
+[Serializable]
 public class LevelData
 {
     public int width = 0;
@@ -465,7 +538,7 @@ public class LevelData
     [SerializeField]
     public List<NodeConnection> nodeConnections;
 }
-[System.Serializable]
+[Serializable]
 public class NodeConnection
 {
     [System.Serializable]
@@ -487,4 +560,19 @@ public class NodeConnection
         receiver.z = z2;
 
     }
+}
+[Serializable]
+public class DeviceData
+{
+    public string device_id;
+}
+[Serializable]
+public class UserData
+{
+    public string username;
+}
+[Serializable]
+public class LevelCount
+{
+    public int count;
 }

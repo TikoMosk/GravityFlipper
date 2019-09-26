@@ -15,7 +15,7 @@ public class PatrolScript : MonoBehaviour
     private bool _active;
     private Vector3 step;
     private Vector3 destination;
-    private Vector3 nextPlatform;
+    private Node nextPlatform;
     private Node currentNode;
     private Node destNode;
 
@@ -41,11 +41,17 @@ public class PatrolScript : MonoBehaviour
     {
         currentNode = GameController.Game.CurrentLevel.GetNode(transform.position);
         destination = transform.position + step;
-        nextPlatform = destination - Vector3.up;
+        var node = GameController.Game.CurrentLevel.GetNode(destination);
+        var a = -GameController.Game.CameraController.UpVector;
+        nextPlatform = GameController.Game.CurrentLevel.GetNodeInTheDirection(node, Dir.GetDirectionByVector(a));
+
+        Debug.Log("nextplatform" + node.GetPosition());
+        Debug.Log("undernextplatform" + nextPlatform.GetPosition());
+
 
         if ((GameController.Game.CurrentLevel.GetNode(destination) == null
-            || GameController.Game.CurrentLevel.GetNode(destination).Id != 0
-            || GameController.Game.CurrentLevel.GetNode(nextPlatform).Id == 0))
+            || node.Id != 0
+            || nextPlatform.Id == 0))
         {
             step = -step;
             destination = transform.position + step;
@@ -73,7 +79,7 @@ public class PatrolScript : MonoBehaviour
     }
     IEnumerator KillAfterAnim()
     {
-        while(GameController.Game.SmoothGraphics.AnimationCount != 0)
+        while (GameController.Game.SmoothGraphics.AnimationCount != 0)
         {
             yield return null;
         }
