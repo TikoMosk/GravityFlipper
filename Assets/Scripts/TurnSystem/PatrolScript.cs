@@ -63,23 +63,15 @@ public class PatrolScript : MonoBehaviour
 
         if (destNode.NodeMember != null && destNode.NodeMember.Id == 1)
         {
+            destNode.NodeMember.Destroy();
             GameController.Game.CurrentLevel.MoveObject(currentNode, destNode);
-            StartCoroutine(KillAfterAnim());
             return;
         }
 
         GameController.Game.CurrentLevel.MoveObject(currentNode, destNode);
 
     }
-    IEnumerator KillAfterAnim()
-    {
-        while(GameController.Game.SmoothGraphics.AnimationCount != 0)
-        {
-            yield return null;
-        }
-        PauseMenu.currentInstance.GameOver();
 
-    }
 
     private void OnDestroy()
     {

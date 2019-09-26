@@ -40,9 +40,6 @@ public class NodeMember
         if (nodeObjectDestroyed != null) {
             nodeObjectDestroyed.Invoke();
         }
-        locationNode.DestroyNodeMember();
-        
-        
     }
     public void SetRotation(Node.Direction forward, Node.Direction up) {
         facing = forward;

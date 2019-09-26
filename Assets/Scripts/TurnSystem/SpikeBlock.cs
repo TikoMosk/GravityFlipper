@@ -58,7 +58,7 @@ public class SpikeBlock : MonoBehaviour, ILeverFriend {
         GetComponentInChildren<Animator>().SetBool("Enabled", true);
         GameController.Game.CurrentLevel.GetNodeInTheDirection(currentNode, currentNode.UpDirection).Walkable = false;
         if (IsPlayerNear()) {
-            StartCoroutine(DestroyAfterAnimation());
+            GameController.Game.CurrentLevel.Player.PlayerMember.Destroy();
         }
         isOpen = true;
     }
@@ -67,16 +67,9 @@ public class SpikeBlock : MonoBehaviour, ILeverFriend {
         GetComponentInChildren<Animator>().SetBool("Enabled", false);
         GameController.Game.CurrentLevel.GetNodeInTheDirection(currentNode, currentNode.UpDirection).Walkable = true;
         if (IsPlayerNear()) {
-            StartCoroutine(DestroyAfterAnimation());
+            GameController.Game.CurrentLevel.Player.PlayerMember.Destroy();
         }
         isOpen = false;
-    }
-
-    IEnumerator DestroyAfterAnimation() {
-        while (GameController.Game.SmoothGraphics.AnimationCount > 0) {
-            yield return null;
-        }
-        PauseMenu.currentInstance.GameOver();
     }
 
     public bool IsPlayerNear() {

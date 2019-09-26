@@ -73,11 +73,14 @@ public class LaserVolumetric : MonoBehaviour {
                     vl.EndPos = transform.InverseTransformPoint(hit.point); ;
                     if (hit.collider.gameObject.GetComponentInParent<NodeMemberGraphic>() != null) {
                         if (GameController.Game.LevelController.Factory.isLiving(hit.collider.gameObject.GetComponentInParent<NodeMemberGraphic>().Node.NodeMember.Id)) {
-                            Destroy(hit.collider.gameObject.GetComponentInParent<NodeMemberGraphic>().gameObject);
+
                             if (hit.collider.gameObject.GetComponentInParent<NodeMemberGraphic>().Node.NodeMember.Id == 1) {
-                                PauseMenu.currentInstance.GameOver();
+                                Debug.Log("VERACI");
+                                hit.collider.gameObject.GetComponentInParent<NodeMemberGraphic>().Node.NodeMember.Destroy();
                             }
-                            hit.collider.gameObject.GetComponentInParent<NodeMemberGraphic>().Node.NodeMember = null;
+                            else {
+                                Destroy(hit.collider.gameObject.GetComponentInParent<NodeMemberGraphic>().gameObject);
+                            }
                         }
 
                     }
