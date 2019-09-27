@@ -24,9 +24,6 @@ public class NodeMemberGraphic : MonoBehaviour
 
         ColliderUpdate();
     }
-    public void Subscribe() {
-        node.NodeMember.SubscribeToNodeObjectDestroyed(Kill);
-    }
     private void Kill() {
         node.NodeMember = null;
         Destroy(this.gameObject);

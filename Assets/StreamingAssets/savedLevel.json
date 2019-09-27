@@ -55,7 +55,7 @@
             "x": 4,
             "y": 0,
             "z": 4,
-            "id": 1,
+            "id": 5,
             "facing": "",
             "upDirection": ""
         },
@@ -95,7 +95,7 @@
             "x": 5,
             "y": 0,
             "z": 4,
-            "id": 1,
+            "id": 7,
             "facing": "",
             "upDirection": ""
         },
@@ -210,6 +210,14 @@
             "id": 1,
             "facing": "",
             "upDirection": ""
+        },
+        {
+            "x": 7,
+            "y": 1,
+            "z": 6,
+            "id": 8,
+            "facing": "3",
+            "upDirection": "0"
         }
     ],
     "nodeMemberDataList": [
@@ -222,5 +230,30 @@
             "upDirection": "0"
         }
     ],
-    "nodeConnections": []
+    "nodeConnections": [
+        {
+            "toggler": {
+                "x": 5,
+                "y": 0,
+                "z": 4
+            },
+            "receiver": {
+                "x": 4,
+                "y": 0,
+                "z": 4
+            }
+        },
+        {
+            "toggler": {
+                "x": 5,
+                "y": 0,
+                "z": 4
+            },
+            "receiver": {
+                "x": 4,
+                "y": 0,
+                "z": 4
+            }
+        }
+    ]
 }
