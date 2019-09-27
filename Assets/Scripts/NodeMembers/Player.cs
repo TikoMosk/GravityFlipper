@@ -107,7 +107,8 @@ public class Player : MonoBehaviour {
         }
     }
     public void OnKilled() {
-        GameController.Game.AudioController.PlayDeathSound();
+        Debug.Log("die");
+        //GameController.Game.AudioController.PlayDeathSound();
         child.GetComponent<Animator>().SetBool("isDead", true);
         StartCoroutine(KillAfterAnim());
     }
