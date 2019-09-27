@@ -12,12 +12,13 @@ public class LevelDownloader : MonoBehaviour
     public static LevelDownloader Instance { get => instance; set => instance = value; }
     public int LevelId { get => levelId; set => levelId = value; }
 
+    private LevelSelector selector;
     private LevelSerializer serializer;
 
     private void Awake()
     {
-        Debug.Log("kanchuma");
         DontDestroyOnLoad(this);
+
         if (instance != null && instance != this)
         {
             Destroy(this);
@@ -31,28 +32,48 @@ public class LevelDownloader : MonoBehaviour
     private void Start()
     {
         serializer = FindObjectOfType<LevelSerializer>();
-        GetLevelsCountDB(OnLevelCount);
+        GetLevelsCountDB(OnLevelCountCallback);
+        GetCompleteLevels(OnCompleteLevelsCallback);
     }
 
-    private void OnLevelCount(bool success, LevelCount count)
+    private void OnLevelCountCallback(bool success, LevelCount count)
     {
         if (success)
             DownloadLevels(count);
     }
 
-    private void DownloadLevels(LevelCount count)
+    private void OnCompleteLevelsCallback(bool success, LevelCount count)
     {
-        LevelSelector selector = FindObjectOfType<LevelSelector>();
-        for (int i = 1; i <= count.count; i++)
+        selector = FindObjectOfType<LevelSelector>();
+        if (success)
         {
-            serializer.LoadLevelFromServer(i);
+            //todo
+            if (count.level_id > 12)
+            {
+                count.level_id = 12;
+            }
+            selector.AmountOfButtons(count.level_id);
         }
-        selector.AmountOfButtons(count.count);
+
     }
 
     private void GetLevelsCountDB(Action<bool, LevelCount> callback)
     {
         serializer.GetLevelsCount(callback);
+    }
+
+    private void GetCompleteLevels(Action<bool, LevelCount> callback)
+    {
+        serializer.GetCompleteLevels(callback);
+    }
+
+    private void DownloadLevels(LevelCount count)
+    {
+        selector = FindObjectOfType<LevelSelector>();
+        for (int i = 1; i <= count.level_id; i++)
+        {
+            serializer.LoadLevelFromServer(i);
+        }
     }
 
     public void LoadLevel()

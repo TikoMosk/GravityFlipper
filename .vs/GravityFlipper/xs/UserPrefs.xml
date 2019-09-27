@@ -1,12 +1,14 @@
 ﻿<Properties StartupConfiguration="{EB2208B8-2EA9-6054-617B-C009E9C4DA96}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/NodeSystem/NodeMember.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/TurnSystem/LaserVolumetric.cs">
     <Files>
-      <File FileName="Assets/Scripts/NodeSystem/LevelSerializer.cs" Line="579" Column="1" IsPinned="True" />
-      <File FileName="Assets/UsernameRegister.cs" Line="18" Column="1" />
-      <File FileName="Assets/Scripts/NodeSystem/UserController.cs" Line="27" Column="36" />
-      <File FileName="Assets/Scripts/Controllers/LevelDownloader.cs" Line="50" Column="45" />
-      <File FileName="Assets/Scripts/TurnSystem/LaserVolumetric.cs" Line="79" Column="119" />
-      <File FileName="Assets/Scripts/NodeSystem/NodeMember.cs" Line="39" Column="17" />
+      <File FileName="Assets/Scripts/NodeSystem/LevelSerializer.cs" Line="231" Column="1" IsPinned="True" />
+      <File FileName="Assets/Scripts/NodeSystem/UserController.cs" Line="38" Column="21" />
+      <File FileName="Assets/UsernameRegister.cs" Line="17" Column="53" />
+      <File FileName="Assets/Scripts/Controllers/LevelDownloader.cs" Line="57" Column="1" />
+      <File FileName="Assets/Scripts/NodeSystem/LevelController.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/TurnSystem/PursuitScript.cs" Line="60" Column="1" />
+      <File FileName="Assets/Scripts/TurnSystem/PressurePad.cs" Line="49" Column="1" />
+      <File FileName="Assets/Scripts/TurnSystem/LaserVolumetric.cs" Line="78" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -17,10 +19,10 @@
                 <Node name="Controllers" expanded="True" />
                 <Node name="LevelDesigner" expanded="True" />
                 <Node name="Menu" expanded="True" />
-                <Node name="NodeSystem" expanded="True">
-                  <Node name="NodeMember.cs" selected="True" />
+                <Node name="NodeSystem" expanded="True" />
+                <Node name="TurnSystem" expanded="True">
+                  <Node name="LaserVolumetric.cs" selected="True" />
                 </Node>
-                <Node name="TurnSystem" expanded="True" />
               </Node>
             </Node>
           </Node>
@@ -32,7 +34,12 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="0ee8f574-34d3-4339-9a4f-551595d50392" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/Users/hp/gravityflipper/Assets/Scripts/NodeSystem/LevelSerializer.cs" relfile="Assets/Scripts/NodeSystem/LevelSerializer.cs" line="61" column="1" />
+      <Breakpoint file="/Users/hp/gravityflipper/Assets/Scripts/NodeSystem/LevelSerializer.cs" relfile="Assets/Scripts/NodeSystem/LevelSerializer.cs" line="55" column="1" />
+      <Breakpoint file="/Users/hp/gravityflipper/Assets/Scripts/NodeSystem/LevelSerializer.cs" relfile="Assets/Scripts/NodeSystem/LevelSerializer.cs" line="50" column="1" />
+      <Breakpoint file="/Users/hp/gravityflipper/Assets/Scripts/NodeSystem/LevelSerializer.cs" relfile="Assets/Scripts/NodeSystem/LevelSerializer.cs" line="53" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />
 </Properties>

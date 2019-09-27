@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.23225775, g: 0.23537418, b: 0.27221692, a: 1}
+  m_IndirectSpecularColor: {r: 0.23233402, g: 0.23550433, b: 0.27226305, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -329,7 +329,7 @@ MonoBehaviour:
     canWalkOnIt: 1
     name: Laser
     description: 
-    prefab: {fileID: 3031102304311863571, guid: ee78bf8bbf690420cbe0ddeac8af7354,
+    prefab: {fileID: 8797690601998793987, guid: b6ba6ad3f2b23ff47aaf3c8892dfefd2,
       type: 3}
     icon: {fileID: 0}
     category: 2
@@ -353,6 +353,17 @@ MonoBehaviour:
     prefab: {fileID: 43333802314482046, guid: 4c86820e3366d48dfac2c5e6d4fac88b, type: 3}
     icon: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
     category: 0
+  - id: 11
+    nodeMember: 0
+    colliderActive: 1
+    walkable: 0
+    canWalkOnIt: 0
+    name: Rotating Laser
+    description: Rotates when toggled
+    prefab: {fileID: 8797690601998793987, guid: 772b1c97334ff40448596e5cb1ffa05c,
+      type: 3}
+    icon: {fileID: 0}
+    category: 2
   nodeMemberDetailsList:
   - id: 0
     nodeMember: 1
@@ -378,7 +389,7 @@ MonoBehaviour:
   - id: 2
     nodeMember: 1
     colliderActive: 0
-    walkable: 1
+    walkable: 0
     canWalkOnIt: 1
     name: Enemy
     description: 
@@ -389,7 +400,7 @@ MonoBehaviour:
   - id: 3
     nodeMember: 1
     colliderActive: 0
-    walkable: 1
+    walkable: 0
     canWalkOnIt: 1
     name: Patrol Enemy
     description: 
@@ -413,7 +424,7 @@ MonoBehaviour:
     colliderActive: 1
     walkable: 1
     canWalkOnIt: 1
-    name: Rotating Laser
+    name: Missing
     description: 
     prefab: {fileID: 544911279223743345, guid: 8228e68d8ebfd4734916da9e8de6cea6, type: 3}
     icon: {fileID: 0}
@@ -432,7 +443,7 @@ MonoBehaviour:
   - id: 7
     nodeMember: 1
     colliderActive: 0
-    walkable: 1
+    walkable: 0
     canWalkOnIt: 1
     name: Patrol Enemy Z
     description: 
@@ -2113,6 +2124,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 4352576274913681736, guid: 2330417ebab364c77a40a9736afbdc95,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3733134867074029593, guid: 2330417ebab364c77a40a9736afbdc95,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -2212,11 +2228,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ChangeSceneLoading
-      objectReference: {fileID: 0}
-    - target: {fileID: 4352576274913681736, guid: 2330417ebab364c77a40a9736afbdc95,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2330417ebab364c77a40a9736afbdc95, type: 3}

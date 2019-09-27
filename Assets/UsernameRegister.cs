@@ -5,10 +5,11 @@ using UnityEngine.UI;
 
 public class UsernameRegister : MonoBehaviour
 {
-    public GameObject usernameField;
-
     private UserController userController;
-    private string newUsername;
+    [SerializeField]
+    private InputField newUsernameInput;
+    [SerializeField]
+    private Text errorText;
 
     private void Start()
     {
@@ -20,17 +21,33 @@ public class UsernameRegister : MonoBehaviour
     {
         if (success)
         {
+            Debug.Log("Device exists.");
             gameObject.SetActive(false);
         }
     }
 
-    public void OnUserExists(bool success)
+    public void SubmitNewUser()
     {
-        newUsername = usernameField.GetComponent<Text>().text;
+        if (string.IsNullOrEmpty(newUsernameInput.text))
+        {
+
+        }
+        else
+        {
+            userController.UserExists(newUsernameInput.text, OnUserExists);
+        }
+    }
+
+    private void OnUserExists(bool success)
+    {
         if (!success)
         {
-            userController.RegisterNewUser(newUsername);
+            userController.RegisterNewUser(newUsernameInput.text);
             gameObject.SetActive(false);
+        }
+        else
+        {
+            errorText.text = "Username is already exists.";
         }
     }
 }

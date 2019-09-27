@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UserController : MonoBehaviour
 {
@@ -34,25 +35,31 @@ public class UserController : MonoBehaviour
                 {
                     this.deviceData = deviceData;
                     callback(true);
+                    
                 }
             }
         });
     }
 
-    public void UserExists(Action<bool> callback)
+    public void UserExists(string username, Action<bool> callback)
     {
-        serializer.GetUsername((success, userData) =>
+        serializer.GetUsername(username, (success, userData) =>
         {
-            if (userData.username != SystemInfo.deviceUniqueIdentifier)
+            if (success)
             {
-                callback(false);
+                if (userData == null)
+                {
+                    callback(false);
+                }
+                else
+                {
+                    callback(true);
+                }
             }
             else
             {
-                this.userData = userData;
                 callback(true);
-            }
-
+            }            
         });
     }
 

@@ -3917,7 +3917,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a6e5135e90a247b0847e4a2da8960ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  usernameField: {fileID: 1100619763}
 --- !u!1 &329017363
 GameObject:
   m_ObjectHideFlags: 0
@@ -6240,6 +6239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b348f7ecda6884713b51f313213bb78b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  usernameField: {fileID: 0}
 --- !u!4 &548163443
 Transform:
   m_ObjectHideFlags: 0
@@ -19958,8 +19958,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 328447409}
-        m_MethodName: OnUserExists
-        m_Mode: 6
+        m_MethodName: SubmitNewUser
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

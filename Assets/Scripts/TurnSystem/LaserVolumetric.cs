@@ -75,7 +75,6 @@ public class LaserVolumetric : MonoBehaviour {
                         if (GameController.Game.LevelController.Factory.isLiving(hit.collider.gameObject.GetComponentInParent<NodeMemberGraphic>().Node.NodeMember.Id)) {
 
                             if (hit.collider.gameObject.GetComponentInParent<NodeMemberGraphic>().Node.NodeMember.Id == 1) {
-                                Debug.Log("VERACI");
                                 hit.collider.gameObject.GetComponentInParent<NodeMemberGraphic>().Node.NodeMember.Destroy();
                             }
                             else {

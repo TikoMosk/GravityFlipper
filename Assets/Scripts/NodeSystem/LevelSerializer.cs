@@ -4,43 +4,11 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.Networking;
-using UnityEngine.UI;
 
 public class LevelSerializer : MonoBehaviour
 {
     private string tempLevel;
     private string tempUsername;
-    private string usr = "";
-   
-    Level level;
-
-    IEnumerator GetRequest(string url)
-    {
-        using (UnityWebRequest webRequest = UnityWebRequest.Get(url))
-        {
-            // Request and wait for the desired page.
-            yield return webRequest.SendWebRequest();
-
-
-            if (webRequest.isNetworkError)
-            {
-                Debug.Log("error");
-            }
-            else
-            {
-                Debug.Log(webRequest.downloadHandler.text.Replace("\\", ""));
-                LevelData levelData = JsonUtility.FromJson<LevelData>(webRequest.downloadHandler.text);
-                level = DeserializeLevel(levelData);
-                //Debug.Log(webRequest.downloadHandler.text);
-            }
-        }
-    }
-
-    public void LoadDevLevel(int levelNumber)
-    {
-        string serverURL = "localhost:3000/";
-        StartCoroutine(GetRequest(serverURL + levelNumber.ToString()));
-    }
 
     public Level LoadLevelLocal(string path)
     {
@@ -85,10 +53,12 @@ public class LevelSerializer : MonoBehaviour
         if (request.isNetworkError || request.isHttpError)
         {
             Debug.Log(request.error);
+            yield break;
         }
-        else if (request.isDone)
+
+        if (request.isDone)
         {
-            Debug.Log(request.url);
+            Debug.Log(request.downloadHandler.text);
             Debug.Log("Done.");
         }
     }
@@ -188,28 +158,6 @@ public class LevelSerializer : MonoBehaviour
         StartCoroutine(SaveLevelData(levelid, path));
     }
 
-    IEnumerator TryAddUsername(string username)
-    {
-        //todo
-        string url = @"http://localhost:3000/checkUsername/" + username;
-
-        UnityWebRequest request = UnityWebRequest.Get(url);
-        yield return request.SendWebRequest();
-
-        if (request.isNetworkError || request.isHttpError)
-        {
-            Debug.Log(request.error);
-        }
-
-        if (request.isDone)
-        {
-            tempUsername = request.downloadHandler.text;
-
-            Debug.Log(tempUsername);
-            Debug.Log("Download is done.");
-        }
-    }
-
     IEnumerator GetDeviceID(string deviceid, Action<bool, DeviceData> callback)
     {
         string url = @"http://localhost:3000/checkDevice/" + deviceid;
@@ -236,7 +184,7 @@ public class LevelSerializer : MonoBehaviour
         StartCoroutine(GetDeviceID(SystemInfo.deviceUniqueIdentifier, deviceDataCallback));
     }
 
-    IEnumerator GetUsername(string username, Action<bool, UserData> callback)
+    IEnumerator GetUsernameDb(string username, Action<bool, UserData> callback)
     {
         string url = @"http://localhost:3000/checkUsername/" + username;
 
@@ -253,15 +201,17 @@ public class LevelSerializer : MonoBehaviour
         {
             var result = request.downloadHandler.text.Replace("[", "").Replace("]", "");
             UserData data = JsonUtility.FromJson<UserData>(result);
-            if(data == null) callback(false, null); else callback(true, data);
+
+
+            if(data == null) callback(true, null); else callback(true, data);
         }
     }
-    public void GetUsername(Action<bool, UserData> userDataCallback)
+    public void GetUsername(string username, Action<bool, UserData> userDataCallback)
     {
-        StartCoroutine(GetUsername(SystemInfo.deviceUniqueIdentifier, userDataCallback));
+        StartCoroutine(GetUsernameDb(username, userDataCallback));
     }
 
-    IEnumerator GetCompLevels(string device_id, Action<bool, UserData> callback)
+    IEnumerator GetCompLevels(string device_id, Action<bool, LevelCount> callback)
     {
         string url = @"http://localhost:3000/getcompLevels/" + device_id;
 
@@ -277,36 +227,14 @@ public class LevelSerializer : MonoBehaviour
         if (request.isDone)
         {
             var result = request.downloadHandler.text.Replace("[", "").Replace("]", "");
-            UserData data = JsonUtility.FromJson<UserData>(result);
+            LevelCount data = JsonUtility.FromJson<LevelCount>(result);
 
             callback(true, data);
         }
     }
-    public void GetCompleteLevels(Action<bool, UserData> compLevelCallback)
+    public void GetCompleteLevels(Action<bool, LevelCount> compLevelCallback)
     {
         StartCoroutine(GetCompLevels(SystemInfo.deviceUniqueIdentifier, compLevelCallback));
-    }
-
-
-
-    IEnumerator GetUserLevels(string deviceid)
-    {
-        string url = @"http://localhost:3000/getLevelsCount/" + deviceid;
-
-        UnityWebRequest request = UnityWebRequest.Get(url);
-        yield return request.SendWebRequest();
-
-        if (request.isNetworkError || request.isHttpError)
-        {
-            Debug.Log(request.error);
-        }
-
-        if (request.isDone)
-        {
-            string s = request.downloadHandler.text;
-
-            Debug.Log(s);
-        }
     }
 
     IEnumerator GetCount(Action<bool, LevelCount> callback)
@@ -332,26 +260,10 @@ public class LevelSerializer : MonoBehaviour
            
         }
     }
-
     public void GetLevelsCount(Action<bool, LevelCount> levelsCountcallback)
     {
         StartCoroutine(GetCount(levelsCountcallback));
     }
-
-    //private void OnGUI()
-    //{
-    //    usr = GUI.TextField(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 100, 200, 20), usr, 12);
-    //
-    //    if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 25, 200, 20), "Username: " + usr))
-    //    {
-    //        UploadNewUser(usr);
-    //    }
-    //
-    //    if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 50, 200, 20), "get"))
-    //    {
-    //        GetDeviceData();
-    //    }
-    //}
 
     public void SaveLevelLocal(string path, Level level)
     {
@@ -574,5 +486,5 @@ public class UserData
 [Serializable]
 public class LevelCount
 {
-    public int count;
+    public int level_id;
 }
