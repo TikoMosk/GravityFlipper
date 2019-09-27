@@ -18,7 +18,15 @@ public class LevelDownloader : MonoBehaviour
     private void Awake()
     {
         DontDestroyOnLoad(this);
+        MakeSingleton();
+        if (FindObjectsOfType(GetType()).Length > 1)
+        {
+            Destroy(gameObject);
+        }
 
+    }
+    private void MakeSingleton()
+    {
         if (instance != null && instance != this)
         {
             Destroy(this);
@@ -26,9 +34,8 @@ public class LevelDownloader : MonoBehaviour
         else
         {
             instance = this;
-        }          
+        }
     }
-
     private void Start()
     {
         serializer = FindObjectOfType<LevelSerializer>();

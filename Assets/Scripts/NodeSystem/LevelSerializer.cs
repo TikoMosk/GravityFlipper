@@ -238,7 +238,6 @@ public class LevelSerializer : MonoBehaviour
             Debug.Log(result);
 
             LevelCount data = JsonUtility.FromJson<LevelCount>(result);
-            Debug.Log(data.count);
 
             callback(true, data);
         }
