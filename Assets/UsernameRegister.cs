@@ -14,7 +14,8 @@ public class UsernameRegister : MonoBehaviour
     private void Start()
     {
         userController = UserController.Instance;
-        userController.DeviceExists(OnDeviceExists);
+        //userController.DeviceExists(OnDeviceExists);
+        gameObject.SetActive(false);
     }
 
     private void OnDeviceExists(bool success)

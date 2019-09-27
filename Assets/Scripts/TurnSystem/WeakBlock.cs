@@ -10,6 +10,9 @@ public class WeakBlock : MonoBehaviour
     {
         EventController.currentInstance.Register(Check);
     }
+    private void OnDestroy() {
+        EventController.currentInstance.Remove(Check);
+    }
 
     private void Check()
     {
