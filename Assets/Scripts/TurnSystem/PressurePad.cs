@@ -17,7 +17,7 @@ public class PressurePad : MonoBehaviour
 
     private void OnDestroy()
     {
-        //EventController.currentInstance.Remove(Check);
+        EventController.currentInstance.Remove(Check);
     }
 
     private void Check()
