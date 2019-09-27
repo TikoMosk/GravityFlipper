@@ -30,7 +30,7 @@ public class LaserVolumetric : MonoBehaviour {
         else {
             isShooting = true;
         }
-        
+
     }
     private void OnDestroy() {
         if (GetComponent<NodeToggleReceiver>() != null && toggleSwitchesState) {
@@ -43,7 +43,10 @@ public class LaserVolumetric : MonoBehaviour {
     public void SwitchLaser() {
         isShooting = !isShooting;
         if (!isShooting) {
-            vl.EndPos = Vector3.zero;
+            vl.gameObject.SetActive(false);
+        }
+        else {
+            vl.gameObject.SetActive(true);
         }
     }
     public void RotateLaser() {
@@ -51,7 +54,7 @@ public class LaserVolumetric : MonoBehaviour {
         Vector3 currentDir = Dir.GetVectorByDirection(n.Facing);
         Quaternion rot = Quaternion.AngleAxis(90, Dir.GetVectorByDirection(n.UpDirection));
         Vector3 changedDir = rot * currentDir;
-        n.SetRotation(Dir.GetDirectionByVector(changedDir),n.UpDirection);
+        n.SetRotation(Dir.GetDirectionByVector(changedDir), n.UpDirection);
     }
 
     //todo
@@ -71,16 +74,9 @@ public class LaserVolumetric : MonoBehaviour {
                 vl.EndPos = transform.InverseTransformPoint(transform.position + dir) * laserLength;
                 if (Physics.Raycast(transform.position, dir, out hit, laserLength)) {
                     vl.EndPos = transform.InverseTransformPoint(hit.point); ;
-                    if (hit.collider.gameObject.GetComponentInParent<NodeMemberGraphic>() != null) {
+                    if (hit.collider.gameObject.GetComponentInParent<NodeMemberGraphic>() != null && hit.collider.gameObject.GetComponentInParent<NodeMemberGraphic>().Node.NodeMember != null) {
                         if (GameController.Game.LevelController.Factory.isLiving(hit.collider.gameObject.GetComponentInParent<NodeMemberGraphic>().Node.NodeMember.Id)) {
-
-                            if (hit.collider.gameObject.GetComponentInParent<NodeMemberGraphic>().Node.NodeMember.Id == 1) {
-                                hit.collider.gameObject.GetComponentInParent<NodeMemberGraphic>().Node.NodeMember.Destroy();
-                            }
-                            else {
-                                hit.collider.gameObject.GetComponentInParent<NodeMemberGraphic>().Node.NodeMember = null;
-                                Destroy(hit.collider.gameObject.GetComponentInParent<NodeMemberGraphic>().gameObject);
-                            }
+                            hit.collider.gameObject.GetComponentInParent<NodeMemberGraphic>().Node.NodeMember.Destroy();
                         }
 
                     }

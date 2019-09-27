@@ -21,7 +21,15 @@ public class NodeMemberGraphic : MonoBehaviour
             animator = gameObject.GetComponent<Animator>();
         }
         GameController.Game.RegisterForGameStateChanged(ColliderUpdate);
+
         ColliderUpdate();
+    }
+    public void Subscribe() {
+        node.NodeMember.SubscribeToNodeObjectDestroyed(Kill);
+    }
+    private void Kill() {
+        node.NodeMember = null;
+        Destroy(this.gameObject);
     }
     private void ColliderUpdate()
     {

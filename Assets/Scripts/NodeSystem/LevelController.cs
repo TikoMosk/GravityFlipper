@@ -161,6 +161,7 @@ public class LevelController : MonoBehaviour {
                 nodeObject_GameObject.transform.parent = this.transform;
                 NodeMemberGraphic nodeObjectGraphic = nodeObject.CreateMoveableObjectGraphic(nodeObject_GameObject);
                 nodeObject.NodeObjectGraphic.Node = Level.GetNode(x, y, z);
+                nodeObject.NodeObjectGraphic.Subscribe();
                 nodeObject.NodeObjectGraphic.transform.rotation = Quaternion.LookRotation(Dir.GetVectorByDirection(nodeObject.Facing), Dir.GetVectorByDirection(nodeObject.UpDirection));
                 nodeObject.LocationNode = Level.GetNode(x, y, z);
                 nodeObject.SubscribeToMoveableObjectMoved((node) => { OnNodeMemberMoved(node, nodeObjectGraphic); });
