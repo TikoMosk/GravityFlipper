@@ -46,7 +46,6 @@ public class PressurePad : MonoBehaviour
     {
         if (GameController.Game.CurrentLevel.GetNodeInTheDirection(currentNode, currentNode.UpDirection).NodeMember != null)
         {
-            Debug.Log(GameController.Game.CurrentLevel.GetNodeInTheDirection(currentNode, currentNode.UpDirection).GetPosition());
             return true;
         }
 

@@ -1,51 +1,17 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.Networking;
-using UnityEngine.UI;
 
 public class LevelSerializer : MonoBehaviour
 {
     private string tempLevel;
     private string tempUsername;
-    private int levelsCount = 0;
-    private string usr = "";
-    private bool ret;
-
-    Level level;
-
-    IEnumerator GetRequest(string url)
-    {
-        using (UnityWebRequest webRequest = UnityWebRequest.Get(url))
-        {
-            // Request and wait for the desired page.
-            yield return webRequest.SendWebRequest();
-
-
-            if (webRequest.isNetworkError)
-            {
-                Debug.Log("error");
-            }
-            else
-            {
-                Debug.Log(webRequest.downloadHandler.text.Replace("\\", ""));
-                LevelData levelData = JsonUtility.FromJson<LevelData>(webRequest.downloadHandler.text);
-                level = DeserializeLevel(levelData);
-                //Debug.Log(webRequest.downloadHandler.text);
-            }
-        }
-    }
-
-    public void LoadDevLevel(int levelNumber)
-    {
-        string serverURL = "localhost:3000/";
-        StartCoroutine(GetRequest(serverURL + levelNumber.ToString()));
-    }
 
     public Level LoadLevelLocal(string path)
     {
-        
         string result = null;
 
         string filePath = Path.Combine(Application.streamingAssetsPath, path);
@@ -62,7 +28,7 @@ public class LevelSerializer : MonoBehaviour
             result = File.ReadAllText(filePath);
             if (result != null || result != "")
             {
-                
+
             }
         }
         LevelData levelData = JsonUtility.FromJson<LevelData>(result);
@@ -87,14 +53,16 @@ public class LevelSerializer : MonoBehaviour
         if (request.isNetworkError || request.isHttpError)
         {
             Debug.Log(request.error);
+            yield break;
         }
-        else if (request.isDone)
+
+        if (request.isDone)
         {
-            Debug.Log(request.url);
+            Debug.Log(request.downloadHandler.text);
             Debug.Log("Done.");
         }
     }
-    private void UploadNewUser(string username)
+    public void UploadNewUser(string username)
     {
         StartCoroutine(InsertNewUser(username));
     }
@@ -117,9 +85,8 @@ public class LevelSerializer : MonoBehaviour
             tempLevel = con.downloadHandler.text;
             if (tempLevel != null || tempLevel != "")
             {
-                Debug.Log(tempLevel);
             }
-            
+
             tempLevel = tempLevel.Remove(0, 15);
             tempLevel = tempLevel.Remove(tempLevel.Length - 2, 2);
             File.WriteAllText(savePath, tempLevel);
@@ -191,9 +158,34 @@ public class LevelSerializer : MonoBehaviour
         StartCoroutine(SaveLevelData(levelid, path));
     }
 
-    IEnumerator TryAddUsername(string username)
+    IEnumerator GetDeviceID(string deviceid, Action<bool, DeviceData> callback)
     {
-        //todo
+        string url = @"http://localhost:3000/checkDevice/" + deviceid;
+
+        UnityWebRequest request = UnityWebRequest.Get(url);
+        yield return request.SendWebRequest();
+
+        if (request.isNetworkError || request.isHttpError)
+        {
+            callback(false, null);
+            Debug.Log(request.error);
+        }
+
+        if (request.isDone)
+        {
+            var result = request.downloadHandler.text.Replace("[", "").Replace("]", "");
+            DeviceData data = JsonUtility.FromJson<DeviceData>(result);
+
+            callback(true, data);
+        }
+    }
+    public void GetDeviceData(Action<bool, DeviceData> deviceDataCallback)
+    {
+        StartCoroutine(GetDeviceID(SystemInfo.deviceUniqueIdentifier, deviceDataCallback));
+    }
+
+    IEnumerator GetUsernameDb(string username, Action<bool, UserData> callback)
+    {
         string url = @"http://localhost:3000/checkUsername/" + username;
 
         UnityWebRequest request = UnityWebRequest.Get(url);
@@ -201,81 +193,77 @@ public class LevelSerializer : MonoBehaviour
 
         if (request.isNetworkError || request.isHttpError)
         {
+            callback(false, null);
             Debug.Log(request.error);
         }
 
         if (request.isDone)
         {
-            tempUsername = request.downloadHandler.text;
+            var result = request.downloadHandler.text.Replace("[", "").Replace("]", "");
+            UserData data = JsonUtility.FromJson<UserData>(result);
 
-            Debug.Log(tempUsername);
-            Debug.Log("Download is done.");
+
+            if(data == null) callback(true, null); else callback(true, data);
         }
     }
-
-    IEnumerator GetUserLevels(string deviceid)
+    public void GetUsername(string username, Action<bool, UserData> userDataCallback)
     {
-        string url = @"http://localhost:3000/getLevelsCount/" + deviceid;
+        StartCoroutine(GetUsernameDb(username, userDataCallback));
+    }
+
+    IEnumerator GetCompLevels(string device_id, Action<bool, LevelCount> callback)
+    {
+        string url = @"http://localhost:3000/getcompLevels/" + device_id;
 
         UnityWebRequest request = UnityWebRequest.Get(url);
         yield return request.SendWebRequest();
 
         if (request.isNetworkError || request.isHttpError)
         {
+            callback(false, null);
             Debug.Log(request.error);
         }
 
         if (request.isDone)
         {
-            string s = request.downloadHandler.text;
+            var result = request.downloadHandler.text.Replace("[", "").Replace("]", "");
+            LevelCount data = JsonUtility.FromJson<LevelCount>(result);
 
-            Debug.Log(s);
+            callback(true, data);
         }
     }
-
-    IEnumerator GetCount()
+    public void GetCompleteLevels(Action<bool, LevelCount> compLevelCallback)
     {
-        ret = true;
+        StartCoroutine(GetCompLevels(SystemInfo.deviceUniqueIdentifier, compLevelCallback));
+    }
+
+    IEnumerator GetCount(Action<bool, LevelCount> callback)
+    {
         string url = @"http://localhost:3000/getLevelsCount/";
+        int levelsCount;
 
         UnityWebRequest request = UnityWebRequest.Get(url);
         yield return request.SendWebRequest();
 
         if (request.isNetworkError || request.isHttpError)
         {
+            callback(false, null);
             Debug.Log(request.error);
         }
 
         if (request.isDone)
         {
-            int.TryParse(request.downloadHandler.text, out levelsCount);
-            ret = false;
-            Debug.Log(levelsCount);
+            var result = request.downloadHandler.text.Replace("[", "").Replace("]", "");
+            LevelCount data = JsonUtility.FromJson<LevelCount>(result);
+
+            callback(transform, data);
+           
         }
-
     }
-
-    public int GetLevelsCount()
+    public void GetLevelsCount(Action<bool, LevelCount> levelsCountcallback)
     {
-        StartCoroutine(GetCount());
-        return levelsCount;
+        StartCoroutine(GetCount(levelsCountcallback));
     }
-
-    //private void OnGUI()
-    //{
-    //    usr = GUI.TextField(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 100, 200, 20), usr, 12);
-
-    //    if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 25, 200, 20), "Username: " + usr))
-    //    {
-    //        UploadNewUser(usr);
-    //    }
-
-    //    if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 50, 200, 20), "get"))
-    //    {
-    //        GetLevelsCount();
-    //    }
-    //}
-
 
     public void SaveLevelLocal(string path, Level level)
     {
@@ -378,15 +366,13 @@ public class LevelSerializer : MonoBehaviour
 
         return level;
     }
-
-
 }
-[System.Serializable]
+[Serializable]
 public class Data
 {
 
 }
-[System.Serializable]
+[Serializable]
 public class NodeData
 {
     public int x;
@@ -415,7 +401,7 @@ public class NodeData
     }
 
 }
-[System.Serializable]
+[Serializable]
 public class NodeMemberData
 {
     public int x;
@@ -438,7 +424,7 @@ public class NodeMemberData
         upDirection = ((int)nm.UpDirection).ToString();
     }
 }
-[System.Serializable]
+[Serializable]
 public class LevelData
 {
     public int width = 0;
@@ -464,7 +450,7 @@ public class LevelData
     [SerializeField]
     public List<NodeConnection> nodeConnections;
 }
-[System.Serializable]
+[Serializable]
 public class NodeConnection
 {
     [System.Serializable]
@@ -486,4 +472,19 @@ public class NodeConnection
         receiver.z = z2;
 
     }
+}
+[Serializable]
+public class DeviceData
+{
+    public string device_id;
+}
+[Serializable]
+public class UserData
+{
+    public string username;
+}
+[Serializable]
+public class LevelCount
+{
+    public int level_id;
 }

@@ -33,9 +33,6 @@ public class LevelController : MonoBehaviour {
     public void SaveLevelLocal() {
         levelSerializer.SaveLevelLocal("savedLevel.json", level);
     }
-    public void LoadOfficialLevel(int levelNumber) {
-        levelSerializer.LoadDevLevel(levelNumber);
-    }
 
     public void LoadLevelFromProject(string levelName) {
         //level = levelSerializer.LoadLevelLocal(Application.streamingAssetsPath + "/level1");
@@ -55,9 +52,7 @@ public class LevelController : MonoBehaviour {
         
         GameController.Game.CameraController.ResetCamera();
     }
-    public void LoadDeveloperLevel() {
-        levelSerializer.LoadDevLevel(1);
-    }
+
     public void BuildEmptyLevel() {
         level = new Level(width, height, length);
         level.InitializeLevel();

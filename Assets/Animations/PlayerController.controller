@@ -92,7 +92,7 @@ AnimatorStateMachine:
     m_Position: {x: 240, y: 30, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4752188291397186518}
-    m_Position: {x: 90, y: 190, z: 0}
+    m_Position: {x: 60, y: 190, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1491951388349988820}
     m_Position: {x: 310, y: 310, z: 0}

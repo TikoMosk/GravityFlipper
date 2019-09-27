@@ -63,7 +63,7 @@ public class GameController : MonoBehaviour
     }
     private void Update()
     {
-        gameState.Update();
+            gameState.Update();
     }
     private void SetUpSingleton()
     {
