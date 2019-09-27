@@ -180,9 +180,7 @@ public class GameController : MonoBehaviour
     {
         StartCoroutine(WaitForAnimationEnd());
         int level_id = LevelDownloader.Instance.LevelId;
-        Debug.Log("level_id = " + level_id);
         int turnsCount = TurnEventSystem.currentInstance.turnCount;
-        Debug.Log("turnsCount = " + turnsCount);
         GameController.Game.LevelController.levelSerializer.UpdateUserLevelData(level_id, turnsCount);
     }
     IEnumerator WaitForAnimationEnd()
