@@ -14,9 +14,14 @@ public class WinNodeIcon : MonoBehaviour
         if(worldSpaceCanvas == null) {
             worldSpaceCanvas = GameObject.Find("WorldSpaceCanvas");
         }
-        icon.transform.parent = worldSpaceCanvas.transform;
-        if (currentNode != null) {
-            icon.transform.position = currentNode.GetPosition();
+        if (icon != null && worldSpaceCanvas != null)
+        {
+            icon.transform.parent = worldSpaceCanvas.transform;
+            if (currentNode != null)
+            {
+                Debug.Log(currentNode.GetPosition());
+                icon.transform.position = currentNode.GetPosition();
+            }
         }
     }
 

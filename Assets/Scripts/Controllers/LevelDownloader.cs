@@ -48,9 +48,7 @@ public class LevelDownloader : MonoBehaviour
         if (success)
         {
             //todo
-            Debug.Log(count.count);
             count.count++;
-            Debug.Log(count.count);
             if (count.count > 12)
             {
                 count.count = 12;
