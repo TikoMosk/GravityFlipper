@@ -37,7 +37,7 @@ public class GameController : MonoBehaviour
 
     public Slider slider;
 
-    
+
     private void Awake()
     {
         SetUpSingleton();
@@ -56,12 +56,13 @@ public class GameController : MonoBehaviour
         levelController.LoadLevelFromProject("testLevel.json");
         cameraController.ResetCamera();
     }
-    private void LoadLevel() {
+    private void LoadLevel()
+    {
         levelController.LoadLevelFromProject(levelPath);
     }
     private void Update()
     {
-            gameState.Update();
+        gameState.Update();
     }
     private void SetUpSingleton()
     {
@@ -176,6 +177,11 @@ public class GameController : MonoBehaviour
     public void Win()
     {
         StartCoroutine(WaitForAnimationEnd());
+        int level_id = LevelDownloader.Instance.LevelId;
+        Debug.Log("level_id = " + level_id);
+        int turnsCount = TurnEventSystem.currentInstance.turnCount;
+        Debug.Log("turnsCount = " + turnsCount);
+        GameController.Game.LevelController.levelSerializer.UpdateUserLevelData(level_id, turnsCount);
     }
     IEnumerator WaitForAnimationEnd()
     {

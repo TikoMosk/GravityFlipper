@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class ButtonSelector : MonoBehaviour
 {
-
     public void OnClick()
     {
         LevelDownloader.Instance.LevelId = numberOfLevels();

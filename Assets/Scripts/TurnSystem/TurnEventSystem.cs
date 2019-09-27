@@ -13,7 +13,7 @@ public class TurnEventSystem : MonoBehaviour
     #endregion
 
     private event Action OnPlayerMoveEvent;
-    protected int turnCount;
+    public int turnCount;
 
     #region Public Methods
 
@@ -33,6 +33,5 @@ public class TurnEventSystem : MonoBehaviour
         turnCount++;
     }
     
-
     #endregion
 }

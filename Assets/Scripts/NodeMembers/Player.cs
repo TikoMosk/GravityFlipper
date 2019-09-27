@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour {
+public class Player : MonoBehaviour
+{
     public GameObject child;
     public bool isDead;
 
@@ -20,11 +21,14 @@ public class Player : MonoBehaviour {
     public Node.Direction UpDirection { get => upDirection; }
     public NodeMember PlayerMember { get => playerMember; set => playerMember = value; }
 
-    private void Start() {
-        if (GetComponent<NodeMemberGraphic>() != null) {
+    private void Start()
+    {
+        if (GetComponent<NodeMemberGraphic>() != null)
+        {
             graphic = GetComponent<NodeMemberGraphic>();
         }
-        else {
+        else
+        {
             Debug.LogError("Can not find nodeMemberGraphic attached");
         }
         facing = graphic.Node.NodeMember.Facing;
@@ -35,28 +39,36 @@ public class Player : MonoBehaviour {
         PlayerMember.SubscribeToNodeObjectDestroyed(OnKilled);
         created = true;
     }
-    public void Move(Node n, Node.Direction dir) {
+    public void Move(Node n, Node.Direction dir)
+    {
         Node playerNode = GameController.Game.CurrentLevel.GetNode(transform.position);
         PlayerMember = playerNode.NodeMember;
-        if (GameController.Game.CurrentLevel.GetNodeInTheDirection(n, dir) == null) {
+        if (GameController.Game.CurrentLevel.GetNodeInTheDirection(n, dir) == null)
+        {
             return;
         }
         Node destinationNode = GameController.Game.CurrentLevel.GetNodeInTheDirection(n, dir);
         facing = PlayerMember.Facing;
         upDirection = PlayerMember.UpDirection;
-        if (!destinationNode.Walkable) {
+        if (!destinationNode.Walkable)
+        {
             return;
         }
 
         Vector3 forwardVector = Vector3.zero;
-        if (previousClickedNode == null) {
+        if (previousClickedNode == null)
+        {
             previousClickedNode = GameController.Game.CurrentLevel.GetNodeInTheDirection(playerNode, Node.Direction.DOWN);
         }
-        if (GameController.Game.LevelController.Level.GetNodeDistance(playerNode, destinationNode) <= 1 && GameController.Game.CurrentLevel.CanMoveObject(playerNode, destinationNode)) {
-            if (GameController.Game.LevelController.Level.GetNodeDistance(previousClickedNode, n) < 3) {
+        if (GameController.Game.LevelController.Level.GetNodeDistance(playerNode, destinationNode) <= 1 && GameController.Game.CurrentLevel.CanMoveObject(playerNode, destinationNode))
+        {
+            if (GameController.Game.LevelController.Level.GetNodeDistance(previousClickedNode, n) < 3)
+            {
                 PlayerMember.UpDirection = dir;
-                if (!playerNode.HasSamePosition(destinationNode) && GameController.Game.LevelController.Level.GetNodeDistance(playerNode, destinationNode) <= 1) {
-                    if (GameController.Game.LevelController.Level.GetNodeDistance(previousClickedNode, n) < 3) {
+                if (!playerNode.HasSamePosition(destinationNode) && GameController.Game.LevelController.Level.GetNodeDistance(playerNode, destinationNode) <= 1)
+                {
+                    if (GameController.Game.LevelController.Level.GetNodeDistance(previousClickedNode, n) < 3)
+                    {
                         forwardVector = destinationNode.GetPosition() - playerNode.GetPosition();
                         PlayerMember.Facing = Dir.GetDirectionByVector(forwardVector);
                         GameController.Game.CurrentLevel.MoveObject(playerNode, destinationNode);
@@ -65,13 +77,15 @@ public class Player : MonoBehaviour {
                     }
 
                 }
-                else if (GameController.Game.LevelController.Level.GetNodeDistance(previousClickedNode, n) != 0) {
+                else if (GameController.Game.LevelController.Level.GetNodeDistance(previousClickedNode, n) != 0)
+                {
                     PlayerMember.Facing = previousDirection;
                     GameController.Game.CameraController.UpdateGravity(Dir.GetVectorByDirection(PlayerMember.Facing), Dir.GetVectorByDirection(dir));
                     playerNode.NodeMember.NodeObjectMoved.Invoke(playerNode);
 
                 }
-                if (GameController.Game.LevelController.Level.GetNodeDistance(previousClickedNode, n) != 0) {
+                if (GameController.Game.LevelController.Level.GetNodeDistance(previousClickedNode, n) != 0)
+                {
                     TurnEventSystem.currentInstance.NextTurn();
                 }
                 previousClickedNode = n;
@@ -80,8 +94,10 @@ public class Player : MonoBehaviour {
             }
 
         }
-        else if (GameController.Game.LevelController.Level.GetNodeDistance(playerNode, destinationNode) == 2 && GameController.Game.LevelController.Level.GetNodeDistance(previousClickedNode, n) <= 1) {
-            if (GameController.Game.LevelController.Level.GetNodeInTheDirection(destinationNode, PlayerMember.UpDirection).Id == 0) {
+        else if (GameController.Game.LevelController.Level.GetNodeDistance(playerNode, destinationNode) == 2 && GameController.Game.LevelController.Level.GetNodeDistance(previousClickedNode, n) <= 1)
+        {
+            if (GameController.Game.LevelController.Level.GetNodeInTheDirection(destinationNode, PlayerMember.UpDirection).Id == 0)
+            {
                 Node intermediateNode = GameController.Game.LevelController.Level.GetNodeInTheDirection(destinationNode, PlayerMember.UpDirection);
 
                 GameController.Game.CurrentLevel.MoveObject(playerNode, intermediateNode);
@@ -101,16 +117,20 @@ public class Player : MonoBehaviour {
 
         }
     }
-    private void CheckIfPlayerWon(Node destNode) {
-        if (destNode.Id == WIN_BLOCK_ID) {
+    private void CheckIfPlayerWon(Node destNode)
+    {
+        if (destNode.Id == WIN_BLOCK_ID)
+        {
             GameController.Game.Win();
         }
     }
-    public void OnKilled() {
+    public void OnKilled()
+    {
         child.GetComponent<Animator>().SetBool("isDead", true);
         StartCoroutine(KillAfterAnim());
     }
-    IEnumerator KillAfterAnim() {
+    IEnumerator KillAfterAnim()
+    {
         GameController.Game.SmoothGraphics.AnimationCount = 1;
         yield return new WaitForSeconds(2f);
         PauseMenu.currentInstance.GameOver();

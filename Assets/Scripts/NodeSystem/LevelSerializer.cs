@@ -10,6 +10,8 @@ public class LevelSerializer : MonoBehaviour
     private string tempLevel;
     private string tempUsername;
 
+    private string adress;
+
     public Level LoadLevelLocal(string path)
     {
         string result = null;
@@ -100,15 +102,21 @@ public class LevelSerializer : MonoBehaviour
         return null;
     }
 
-    IEnumerator UpdateUserLevels(int levelid)
+    IEnumerator UpdateUserLevels(int levelid, int turnsCount)
     {
-        string deviceInfo = SystemInfo.deviceUniqueIdentifier;
+        string deviceid = SystemInfo.deviceUniqueIdentifier;
         string url = @"http://localhost:3000/updateUserLevels";
+
+
+        Debug.Log("levelid = " + levelid);
+        Debug.Log("device = " + deviceid);
+        Debug.Log("turnsCount = " + turnsCount);
 
         var userData = new Dictionary<string, string>
         {
             { "levelid", levelid.ToString() },
-            { "device", deviceInfo }
+            { "device", deviceid },
+            { "minturns", turnsCount.ToString() }
         };
 
         UnityWebRequest request = UnityWebRequest.Post(url, userData);
@@ -124,9 +132,9 @@ public class LevelSerializer : MonoBehaviour
             Debug.Log("Done.");
         }
     }
-    public void UnlockLevels(int levelid)
+    public void UpdateUserLevelData(int levelid, int turnsCount)
     {
-        StartCoroutine(UpdateUserLevels(levelid));
+        StartCoroutine(UpdateUserLevels(levelid, turnsCount));
     }
 
     IEnumerator SaveLevelData(int levelid, string path)
@@ -227,7 +235,10 @@ public class LevelSerializer : MonoBehaviour
         if (request.isDone)
         {
             var result = request.downloadHandler.text.Replace("[", "").Replace("]", "");
+            Debug.Log(result);
+
             LevelCount data = JsonUtility.FromJson<LevelCount>(result);
+            Debug.Log(data.count);
 
             callback(true, data);
         }
@@ -240,7 +251,6 @@ public class LevelSerializer : MonoBehaviour
     IEnumerator GetCount(Action<bool, LevelCount> callback)
     {
         string url = @"http://localhost:3000/getLevelsCount/";
-        int levelsCount;
 
         UnityWebRequest request = UnityWebRequest.Get(url);
         yield return request.SendWebRequest();
@@ -486,5 +496,5 @@ public class UserData
 [Serializable]
 public class LevelCount
 {
-    public int level_id;
+    public int count;
 }

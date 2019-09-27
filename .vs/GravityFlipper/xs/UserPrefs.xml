@@ -1,14 +1,13 @@
 ﻿<Properties StartupConfiguration="{EB2208B8-2EA9-6054-617B-C009E9C4DA96}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/TurnSystem/LaserVolumetric.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/NodeSystem/LevelSerializer.cs">
     <Files>
-      <File FileName="Assets/Scripts/NodeSystem/LevelSerializer.cs" Line="231" Column="1" IsPinned="True" />
-      <File FileName="Assets/Scripts/NodeSystem/UserController.cs" Line="38" Column="21" />
-      <File FileName="Assets/UsernameRegister.cs" Line="17" Column="53" />
-      <File FileName="Assets/Scripts/Controllers/LevelDownloader.cs" Line="57" Column="1" />
-      <File FileName="Assets/Scripts/NodeSystem/LevelController.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/TurnSystem/PursuitScript.cs" Line="60" Column="1" />
-      <File FileName="Assets/Scripts/TurnSystem/PressurePad.cs" Line="49" Column="1" />
-      <File FileName="Assets/Scripts/TurnSystem/LaserVolumetric.cs" Line="78" Column="1" />
+      <File FileName="Assets/Scripts/NodeSystem/LevelSerializer.cs" Line="238" Column="1" IsPinned="True" />
+      <File FileName="Assets/Scripts/NodeSystem/UserController.cs" />
+      <File FileName="Assets/UsernameRegister.cs" />
+      <File FileName="Assets/Scripts/Controllers/LevelDownloader.cs" />
+      <File FileName="Assets/Scripts/TurnSystem/TurnEventSystem.cs" />
+      <File FileName="Assets/Scripts/Controllers/GameController.cs" />
+      <File FileName="Assets/Scripts/Menu/LevelSelector.cs" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -19,10 +18,11 @@
                 <Node name="Controllers" expanded="True" />
                 <Node name="LevelDesigner" expanded="True" />
                 <Node name="Menu" expanded="True" />
-                <Node name="NodeSystem" expanded="True" />
-                <Node name="TurnSystem" expanded="True">
-                  <Node name="LaserVolumetric.cs" selected="True" />
+                <Node name="NodeMembers" expanded="True" />
+                <Node name="NodeSystem" expanded="True">
+                  <Node name="LevelSerializer.cs" selected="True" />
                 </Node>
+                <Node name="TurnSystem" expanded="True" />
               </Node>
             </Node>
           </Node>
@@ -32,13 +32,13 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="0ee8f574-34d3-4339-9a4f-551595d50392" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="bf6f205a-15e2-499c-888c-09e97939056f" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint file="/Users/hp/gravityflipper/Assets/Scripts/NodeSystem/LevelSerializer.cs" relfile="Assets/Scripts/NodeSystem/LevelSerializer.cs" line="61" column="1" />
+      <Breakpoint file="/Users/hp/gravityflipper/Assets/Scripts/NodeSystem/LevelSerializer.cs" relfile="Assets/Scripts/NodeSystem/LevelSerializer.cs" line="63" column="1" />
+      <Breakpoint file="/Users/hp/gravityflipper/Assets/Scripts/NodeSystem/LevelSerializer.cs" relfile="Assets/Scripts/NodeSystem/LevelSerializer.cs" line="57" column="1" />
+      <Breakpoint file="/Users/hp/gravityflipper/Assets/Scripts/NodeSystem/LevelSerializer.cs" relfile="Assets/Scripts/NodeSystem/LevelSerializer.cs" line="52" column="1" />
       <Breakpoint file="/Users/hp/gravityflipper/Assets/Scripts/NodeSystem/LevelSerializer.cs" relfile="Assets/Scripts/NodeSystem/LevelSerializer.cs" line="55" column="1" />
-      <Breakpoint file="/Users/hp/gravityflipper/Assets/Scripts/NodeSystem/LevelSerializer.cs" relfile="Assets/Scripts/NodeSystem/LevelSerializer.cs" line="50" column="1" />
-      <Breakpoint file="/Users/hp/gravityflipper/Assets/Scripts/NodeSystem/LevelSerializer.cs" relfile="Assets/Scripts/NodeSystem/LevelSerializer.cs" line="53" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />

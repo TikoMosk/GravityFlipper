@@ -35,7 +35,6 @@ public class UserController : MonoBehaviour
                 {
                     this.deviceData = deviceData;
                     callback(true);
-                    
                 }
             }
         });

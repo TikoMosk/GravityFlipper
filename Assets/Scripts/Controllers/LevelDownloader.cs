@@ -48,11 +48,14 @@ public class LevelDownloader : MonoBehaviour
         if (success)
         {
             //todo
-            if (count.level_id > 12)
+            Debug.Log(count.count);
+            count.count++;
+            Debug.Log(count.count);
+            if (count.count > 12)
             {
-                count.level_id = 12;
+                count.count = 12;
             }
-            selector.AmountOfButtons(count.level_id);
+            selector.AmountOfButtons(count.count);
         }
 
     }
@@ -70,7 +73,7 @@ public class LevelDownloader : MonoBehaviour
     private void DownloadLevels(LevelCount count)
     {
         selector = FindObjectOfType<LevelSelector>();
-        for (int i = 1; i <= count.level_id; i++)
+        for (int i = 1; i <= count.count; i++)
         {
             serializer.LoadLevelFromServer(i);
         }
