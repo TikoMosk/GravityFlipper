@@ -63,7 +63,7 @@ public class LevelDesignController : MonoBehaviour {
             connectState = false;
             UpdateConnectionGraphics();
             SetConnectionIconsActive(true);
-            
+
         }
         if (tool != Tool.Connector) {
             DestroyConnectionsIcons();
@@ -74,7 +74,7 @@ public class LevelDesignController : MonoBehaviour {
     public void DestroyConnectionsIcons() {
         GameObject c = GameObject.Find("WorldSpaceCanvas");
         for (int i = 0; i < c.transform.childCount; i++) {
-            if (c.transform.GetChild(i).name != "invisible") {
+            if (c.transform.GetChild(i).name != "invisible" && c.transform.GetChild(i).name == "WinIcon") {
                 Destroy(c.transform.GetChild(i).gameObject);
             }
 
@@ -92,7 +92,10 @@ public class LevelDesignController : MonoBehaviour {
     public void SetCanvasObjectsActive(bool active) {
         GameObject c = GameObject.Find("WorldSpaceCanvas");
         for (int i = 0; i < c.transform.childCount; i++) {
-           c.transform.GetChild(i).gameObject.SetActive(active);
+            if (c.transform.GetChild(i).name == "WinIcon") {
+                continue;
+            }
+            c.transform.GetChild(i).gameObject.SetActive(active);
         }
     }
     public void OnNodeClick(Node n, Node.Direction dir) {
@@ -144,21 +147,21 @@ public class LevelDesignController : MonoBehaviour {
         }
         if (tool == Tool.Connector) {
             if (connectState == false) {
-                
+
                 if (n.NodeMember != null && n.NodeMember.NodeObjectGraphic.GetComponent<NodeToggler>() != null) {
                     toggler = n.NodeMember.NodeObjectGraphic.GetComponent<NodeToggler>();
                     connectState = true;
                 }
-                else if(n.NodeGraphic != null && n.NodeGraphic.GetComponent<NodeToggler>() != null){
+                else if (n.NodeGraphic != null && n.NodeGraphic.GetComponent<NodeToggler>() != null) {
                     toggler = n.NodeGraphic.GetComponent<NodeToggler>();
                     connectState = true;
-                    
+
                 }
             }
             else {
                 if (toggler != null) {
                     if (toggler.CheckIfSameConnectedNode(n)) {
-                        
+
                         toggler.ConnectNode(n);
                         connectState = false;
                         UpdateConnectionGraphics();
@@ -168,15 +171,15 @@ public class LevelDesignController : MonoBehaviour {
                     }
 
                 }
-                
-            } 
-            if(connectState == false) {
+
+            }
+            if (connectState == false) {
                 connectToolText.text = "Select the node that is your toggler";
             }
             else {
                 connectToolText.text = "Select the node that is going to get triggered";
             }
-            
+
 
         }
     }
@@ -202,7 +205,7 @@ public class LevelDesignController : MonoBehaviour {
             else {
                 col = GameController.Game.CurrentLevel.NodeTogglers[i].ConnectionColor;
             }
-            
+
             mat.SetColor("_MainColor", col);
             ic1.transform.position = GameController.Game.CurrentLevel.NodeTogglers[i].GetPos();
             ic2.transform.position = GameController.Game.CurrentLevel.NodeTogglers[i].GetConnectNodePosition();
@@ -232,17 +235,17 @@ public class LevelDesignController : MonoBehaviour {
             if (isNodeMember) {
                 NodeMember sNodeMember = selectedNode.NodeMember;
                 NodeMemberGraphic sNodeMemberGraphic = sNodeMember.NodeObjectGraphic;
-                sNodeMemberGraphic.transform.Rotate(rotateGizmo.transform.up, degrees,Space.World);
+                sNodeMemberGraphic.transform.Rotate(rotateGizmo.transform.up, degrees, Space.World);
                 sNodeMember.SetRotation(Dir.GetDirectionByVector(sNodeMemberGraphic.transform.forward), Dir.GetDirectionByVector(sNodeMemberGraphic.transform.up));
             }
             else {
                 NodeGraphic sNodeGraphic = selectedNode.NodeGraphic;
-                
+
                 sNodeGraphic.transform.Rotate(rotateGizmo.transform.up, degrees, Space.World);
                 selectedNode.SetRotation(Dir.GetDirectionByVector(sNodeGraphic.transform.forward), Dir.GetDirectionByVector(sNodeGraphic.transform.up));
             }
         }
-        
+
     }
     public void MoveBlock(Vector3 dir) {
         Node destNode = GameController.Game.CurrentLevel.GetNodeInTheDirection(selectedNode, Dir.GetDirectionByVector(dir));
@@ -250,7 +253,7 @@ public class LevelDesignController : MonoBehaviour {
             return;
         }
         if (isNodeMember) {
-            if(destNode.Id == 0 && selectedNode.Id == 0) {
+            if (destNode.Id == 0 && selectedNode.Id == 0) {
                 NodeMember sNodeMember = selectedNode.NodeMember;
                 sNodeMember.LocationNode = destNode;
                 GameController.Game.CurrentLevel.MoveMemberNoAnimation(selectedNode, destNode);
@@ -260,9 +263,9 @@ public class LevelDesignController : MonoBehaviour {
 
         }
         else {
-            if(destNode.NodeMember == null && destNode.Id == 0) {
+            if (destNode.NodeMember == null && destNode.Id == 0) {
                 Node selectedNodeTemp = selectedNode;
-                
+
                 destNode.SetNodeType(selectedNodeTemp.Id);
                 destNode.NodeGraphic = selectedNodeTemp.NodeGraphic;
                 selectedNode.SetRotation(Node.Direction.FORWARD, Node.Direction.UP);
@@ -272,7 +275,7 @@ public class LevelDesignController : MonoBehaviour {
                 moveGizmo.transform.position = selectedNode.GetPosition();
             }
         }
-        
+
     }
     public void ChangeRotationStyle(int style) {
         if (rotateVertical != style) {

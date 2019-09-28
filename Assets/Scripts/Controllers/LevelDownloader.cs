@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,12 +12,21 @@ public class LevelDownloader : MonoBehaviour
     public static LevelDownloader Instance { get => instance; set => instance = value; }
     public int LevelId { get => levelId; set => levelId = value; }
 
+    private LevelSelector selector;
     private LevelSerializer serializer;
 
     private void Awake()
     {
-        Debug.Log("kanchuma");
         DontDestroyOnLoad(this);
+        MakeSingleton();
+        if (FindObjectsOfType(GetType()).Length > 1)
+        {
+            Destroy(gameObject);
+        }
+
+    }
+    private void MakeSingleton()
+    {
         if (instance != null && instance != this)
         {
             Destroy(this);
@@ -25,20 +35,53 @@ public class LevelDownloader : MonoBehaviour
         {
             instance = this;
         }
-
+    }
+    private void Start()
+    {
         serializer = FindObjectOfType<LevelSerializer>();
-        DownloadLevels();
+        GetLevelsCountDB(OnLevelCountCallback);
+        GetCompleteLevels(OnCompleteLevelsCallback);
     }
 
-    void DownloadLevels()
+    private void OnLevelCountCallback(bool success, LevelCount count)
     {
+        if (success)
+            DownloadLevels(count);
+    }
 
-        LevelSelector selector = FindObjectOfType<LevelSelector>();
-        for (int i = 1; i <= 12; i++)
+    private void OnCompleteLevelsCallback(bool success, LevelCount count)
+    {
+        selector = FindObjectOfType<LevelSelector>();
+        if (success)
+        {
+            //todo
+            count.count++;
+            if (count.count > 12)
+            {
+                count.count = 12;
+            }
+            selector.AmountOfButtons(count.count);
+        }
+
+    }
+
+    private void GetLevelsCountDB(Action<bool, LevelCount> callback)
+    {
+        serializer.GetLevelsCount(callback);
+    }
+
+    private void GetCompleteLevels(Action<bool, LevelCount> callback)
+    {
+        serializer.GetCompleteLevels(callback);
+    }
+
+    private void DownloadLevels(LevelCount count)
+    {
+        selector = FindObjectOfType<LevelSelector>();
+        for (int i = 1; i <= count.count; i++)
         {
             serializer.LoadLevelFromServer(i);
         }
-        selector.AmountOfButtons(12);
     }
 
     public void LoadLevel()
