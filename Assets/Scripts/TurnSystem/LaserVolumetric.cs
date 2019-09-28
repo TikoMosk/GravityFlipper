@@ -80,6 +80,7 @@ public class LaserVolumetric : MonoBehaviour {
                             }
                             else {
                                 Destroy(hit.collider.gameObject.GetComponentInParent<NodeMemberGraphic>().gameObject);
+                                GameController.Game.CurrentLevel.GetNode(hit.collider.gameObject.GetComponentInParent<NodeMemberGraphic>().gameObject.transform.position).NodeMember = null;
                             }
                         }
 

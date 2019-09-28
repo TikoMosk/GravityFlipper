@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311947, g: 0.38074005, b: 0.35872722, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1336,7 +1336,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &337236702
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4129,7 +4129,7 @@ MonoBehaviour:
   - id: 8
     nodeMember: 0
     colliderActive: 0
-    walkable: 1
+    walkable: 0
     canWalkOnIt: 1
     name: Laser
     description: 
@@ -4228,9 +4228,10 @@ MonoBehaviour:
     colliderActive: 1
     walkable: 1
     canWalkOnIt: 1
-    name: Missing
+    name: Moving Block Up
     description: 
-    prefab: {fileID: 544911279223743345, guid: 8228e68d8ebfd4734916da9e8de6cea6, type: 3}
+    prefab: {fileID: 6579708977595957042, guid: 9b0bd437d62e04f10a1d95406c2fce73,
+      type: 3}
     icon: {fileID: 0}
     category: 2
   - id: 6
@@ -4238,7 +4239,7 @@ MonoBehaviour:
     colliderActive: 1
     walkable: 1
     canWalkOnIt: 1
-    name: Moving Block
+    name: Moving Block Down
     description: 
     prefab: {fileID: 6579708977595957042, guid: 8d009cd761a8842d984805a281ded3d1,
       type: 3}
@@ -4694,7 +4695,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 4.789978, y: 0}
   m_SizeDelta: {x: 19.59, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -4848,8 +4849,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1000, y: 700}
+  m_AnchoredPosition: {x: 0.0081673, y: 0}
+  m_SizeDelta: {x: 1233.3, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1568072376
 MonoBehaviour:

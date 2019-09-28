@@ -18,6 +18,7 @@ public class GameController : MonoBehaviour
     private LevelController levelController;
     private CameraController cameraController;
     private string levelPath;
+    private int currentLevelId;
 
     public LevelController LevelController { get { return levelController; } }
     public LevelDesignController LevelDesignController { get { return levelDesignController; } }
@@ -26,6 +27,7 @@ public class GameController : MonoBehaviour
 
     public IGameState CurrentGameState { get => gameState; set => gameState = value; }
     public string LevelPath { get => levelPath; set => levelPath = value; }
+    public int CurrentLevelId { get => currentLevelId; set => currentLevelId = value; }
 
     private Action onNextTurn;
     private Action onGameStateChanged;
@@ -132,6 +134,18 @@ public class GameController : MonoBehaviour
         }
 
         SceneManager.LoadScene(s);
+
+    }
+    private int n;
+    private LevelSerializer serializer;
+    public void LoadLevelJson()
+    {
+        //serializer.LoadLevelFromServer(n);
+        int nextLevelId = LevelDownloader.Instance.LevelId + 1;
+        LevelDownloader.Instance.LevelId = nextLevelId;
+        levelController.LoadLevelFromProject("level" + nextLevelId + ".json");
+        Time.timeScale = 1f;
+        winWindow.SetActive(false);
 
     }
 
